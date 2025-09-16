@@ -9,7 +9,6 @@ use App\Modules\UserManagement\Models\SchoolAdmin;
 use App\Modules\UserManagement\Models\Student;
 use App\Modules\UserManagement\Models\Teacher;
 use App\Modules\UserManagement\Models\TeacherSchoolAssignment;
-use Illuminate\Support\Facades\DB;
 
 class UserService
 {

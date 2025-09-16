@@ -3,13 +3,14 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
 class CreateTeacherRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return auth()->check() && auth()->user()->user_type === 'ministry_admin';
+        return Auth::check() && Auth::user()->user_type === 'ministry_admin';
     }
 
     public function rules(): array

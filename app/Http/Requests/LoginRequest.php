@@ -14,9 +14,9 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'phone'       => 'required_without:national_id,email|string|numeric|digits:11',
-            'national_id' => 'required_without:phone,email|string|numeric|digits:14',
-            'email'       => 'required_without:phone,national_id|email|max:255',
+            'phone'       => 'required_without_all:national_id,email|string|numeric|digits:11',
+            'national_id' => 'required_without_all:phone,email|string|numeric|digits:14',
+            'email'       => 'required_without_all:phone,national_id|email|max:255',
             'password'    => 'required|string|min:8',
         ];
     }
@@ -24,14 +24,14 @@ class LoginRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'phone.required_without' => 'رقم الهاتف مطلوب',
-            'phone.numeric' => 'رقم الهاتف يجب ان يكون 11 رقم',
-            'phone.digits' => 'رقم الهاتف يجب ان يكون 11 رقم',
-            'national_id.required_without' => 'الرقم القومي مطلوب',
-            'email.required_without' => 'البريد الإلكتروني مطلوب',
-            'email.email' => 'يجب أن يكون البريد الإلكتروني صالحاً',
-            'password.required' => 'كلمة المرور مطلوبة',
-            'password.min' => 'كلمة المرور يجب أن تكون 8 أحرف على الأقل',
+            'phone.required_without_all'       => 'رقم الهاتف مطلوب',
+            'phone.numeric'                    => 'رقم الهاتف يجب ان يكون 11 رقم',
+            'phone.digits'                     => 'رقم الهاتف يجب ان يكون 11 رقم',
+            'national_id.required_without_all' => 'الرقم القومي مطلوب',
+            'email.required_without_all'       => 'البريد الإلكتروني مطلوب',
+            'email.email'                      => 'يجب أن يكون البريد الإلكتروني صالحاً',
+            'password.required'                => 'كلمة المرور مطلوبة',
+            'password.min'                     => 'كلمة المرور يجب أن تكون 8 أحرف على الأقل',
         ];
     }
 }

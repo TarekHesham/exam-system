@@ -2,21 +2,18 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Core\Services\AuthService;
-use App\Core\Services\UserService;
+use App\Core\Services\{AuthService, UserService};
 use App\Http\Controllers\Controller;
-use App\Http\Requests\LoginRequest;
-use App\Http\Requests\CreateTeacherRequest;
-use App\Http\Requests\CreateStudentRequest;
-use App\Http\Requests\CreateSchoolAdminRequest;
+use App\Http\Requests\{
+    LoginRequest,
+    CreateTeacherRequest,
+    CreateStudentRequest,
+    CreateSchoolAdminRequest
+};
 use App\Http\Resources\UserResource;
 use App\Core\DTOs\UserDTO;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Http\{Request, JsonResponse};
+use Illuminate\Support\Facades\{Auth, DB, Hash, Log};
 use Illuminate\Validation\UnauthorizedException;
 
 class AuthController extends Controller
@@ -41,24 +38,16 @@ class AuthController extends Controller
             $user = $this->authService->findUserByIdentifier($identifier);
 
             if (!$user || !$user->is_active) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'حساب غير نشط أو غير موجود',
-                    'errors' => ['email' => ['بيانات الدخول غير صحيحة']]
-                ], 401);
+                return $this->errorResponse('حساب غير نشط أو غير موجود', 401);
             }
 
             // Verify password
             if (!Hash::check($credentials['password'], $user->password)) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'بيانات الدخول غير صحيحة',
-                    'errors' => ['email' => ['البريد الإلكتروني أو كلمة المرور غير صحيحة']]
-                ], 401);
+                return $this->errorResponse('بيانات الدخول غير صحيحة', 401);
             }
 
             // Generate access token
-            $tokenResult = $this->authService->createToken($user, $user->user_type);
+            $tokenResult = $this->authService->createToken($user, [$user->user_type]);
 
             // Log successful login
             $this->authService->logActivity($user->id, 'login', [
@@ -66,27 +55,19 @@ class AuthController extends Controller
                 'user_agent' => $request->userAgent()
             ]);
 
-            return response()->json([
-                'success' => true,
-                'message' => 'تم تسجيل الدخول بنجاح',
-                'data' => [
-                    'user' => new UserResource($user),
-                    'access_token' => $tokenResult['token'],
-                    'token_type' => 'Bearer',
-                    'expires_at' => $tokenResult['expires_at']
-                ]
-            ]);
+            return $this->successResponse([
+                'user'         => new UserResource($user),
+                'access_token' => $tokenResult['token'],
+                'token_type'   => 'Bearer',
+                'expires_at'   => $tokenResult['expires_at']
+            ], 'تم تسجيل الدخول بنجاح');
         } catch (\Exception $e) {
             Log::error('Login error: ' . $e->getMessage(), [
                 'email' => $request->email,
-                'ip' => $request->ip()
+                'ip'    => $request->ip()
             ]);
 
-            return response()->json([
-                'success' => false,
-                'message' => 'حدث خطأ أثناء تسجيل الدخول',
-                'errors' => ['server' => ['خطأ في الخادم']]
-            ], 500);
+            return $this->errorResponse('حدث خطأ أثناء تسجيل الدخول', 500);
         }
     }
 
@@ -103,13 +84,13 @@ class AuthController extends Controller
 
         try {
             $userData = UserDTO::fromArray([
-                'name' => $request->name,
-                'email' => $request->email,
-                'phone' => $request->phone,
+                'name'        => $request->name,
+                'email'       => $request->email,
+                'phone'       => $request->phone,
                 'national_id' => $request->national_id,
-                'user_type' => 'teacher',
-                'password' => Hash::make($request->password),
-                'is_active' => $request->get('is_active', true)
+                'user_type'   => 'teacher',
+                'password'    => Hash::make($request->password),
+                'is_active'   => $request->get('is_active', true)
             ]);
 
             // Create user
@@ -117,11 +98,11 @@ class AuthController extends Controller
 
             // Create teacher profile
             $teacher = $this->userService->createTeacherProfile($user->id, [
-                'teacher_code' => $this->generateTeacherCode(),
+                'teacher_code'           => $this->generateTeacherCode(),
                 'subject_specialization' => $request->subject_specialization,
-                'teacher_type' => $request->get('teacher_type', 'regular'),
-                'can_create_exams' => $request->get('can_create_exams', false),
-                'can_correct_essays' => $request->get('can_correct_essays', false)
+                'teacher_type'           => $request->get('teacher_type', 'regular'),
+                'can_create_exams'       => $request->get('can_create_exams', false),
+                'can_correct_essays'     => $request->get('can_correct_essays', false)
             ]);
 
             // Assign to schools if provided
@@ -135,20 +116,16 @@ class AuthController extends Controller
 
             // Log activity
             $this->authService->logActivity(Auth::id(), 'create_teacher', [
-                'teacher_id' => $teacher->id,
+                'teacher_id'   => $teacher->id,
                 'teacher_code' => $teacher->teacher_code
             ]);
 
             DB::commit();
 
-            return response()->json([
-                'success' => true,
-                'message' => 'تم إنشاء حساب المعلم بنجاح',
-                'data' => [
-                    'user' => new UserResource($user->load('teacher')),
-                    'teacher_code' => $teacher->teacher_code
-                ]
-            ], 201);
+            return $this->successResponse([
+                'user' => new UserResource($user->load('teacher')),
+                'teacher_code' => $teacher->teacher_code
+            ], 'تم إنشاء حساب المعلم بنجاح', 201);
         } catch (\Exception $e) {
             DB::rollBack();
             Log::error('Create teacher error: ' . $e->getMessage(), [
@@ -156,11 +133,7 @@ class AuthController extends Controller
                 'created_by' => Auth::id()
             ]);
 
-            return response()->json([
-                'success' => false,
-                'message' => 'حدث خطأ أثناء إنشاء حساب المعلم',
-                'errors' => ['server' => ['خطأ في الخادم']]
-            ], 500);
+            return $this->errorResponse('حدث خطأ أثناء إنشاء حساب المعلم', 500);
         }
     }
 
@@ -225,10 +198,10 @@ class AuthController extends Controller
 
             // Log activity
             $this->authService->logActivity(Auth::id(), 'create_student', [
-                'student_id' => $student->id,
+                'student_id'   => $student->id,
                 'student_code' => $student->student_code,
-                'school_id' => $schoolAdmin->school_id,
-                'school_name' => $schoolAdmin->school->name
+                'school_id'    => $schoolAdmin->school_id,
+                'school_name'  => $schoolAdmin->school->name
             ]);
 
             DB::commit();
@@ -240,7 +213,7 @@ class AuthController extends Controller
                     'user' => new UserResource($newUser->load('student.school')),
                     'student_code' => $student->student_code,
                     'school' => [
-                        'id' => $schoolAdmin->school->id,
+                        'id'   => $schoolAdmin->school->id,
                         'name' => $schoolAdmin->school->name,
                         'code' => $schoolAdmin->school->code
                     ]
@@ -276,13 +249,13 @@ class AuthController extends Controller
 
         try {
             $userData = UserDTO::fromArray([
-                'name' => $request->name,
-                'email' => $request->email,
-                'phone' => $request->phone,
+                'name'        => $request->name,
+                'email'       => $request->email,
+                'phone'       => $request->phone,
                 'national_id' => $request->national_id,
-                'user_type' => 'school_admin',
-                'password' => Hash::make($request->password),
-                'is_active' => $request->get('is_active', true)
+                'user_type'   => 'school_admin',
+                'password'    => Hash::make($request->password),
+                'is_active'   => $request->get('is_active', true)
             ]);
 
             // Create user
@@ -292,39 +265,30 @@ class AuthController extends Controller
             $schoolAdmin = $this->userService->createSchoolAdminProfile($user->id, [
                 'school_id' => $request->school_id,
                 'admin_permissions' => $request->get('admin_permissions', [
-                    'manage_students' => true,
-                    'view_reports' => true,
-                    'manage_exams' => false
+                    'manage_students'         => true,
+                    'view_reports'            => true,
+                    'manage_school_settings'  => false,
+                    'manage_exams'            => false,
                 ])
             ]);
 
             // Log activity
             $this->authService->logActivity(Auth::id(), 'create_school_admin', [
                 'school_admin_id' => $schoolAdmin->id,
-                'school_id' => $request->school_id
+                'school_id'       => $request->school_id
             ]);
 
             DB::commit();
 
-            return response()->json([
-                'success' => true,
-                'message' => 'تم إنشاء حساب مدير المدرسة بنجاح',
-                'data' => [
-                    'user' => new UserResource($user->load('schoolAdmin.school'))
-                ]
-            ], 201);
+            return $this->successResponse(new UserResource($user->load('schoolAdmin.school')), 'تم إنشاء حساب مدير المدرسة بنجاح', 201);
         } catch (\Exception $e) {
             DB::rollBack();
             Log::error('Create school admin error: ' . $e->getMessage(), [
                 'request_data' => $request->all(),
-                'created_by' => Auth::id()
+                'created_by'   => Auth::id()
             ]);
 
-            return response()->json([
-                'success' => false,
-                'message' => 'حدث خطأ أثناء إنشاء حساب مدير المدرسة',
-                'errors' => ['server' => ['خطأ في الخادم']]
-            ], 500);
+            return $this->errorResponse('حدث خطأ أثناء إنشاء حساب مدير المدرسة', 500);
         }
     }
 
