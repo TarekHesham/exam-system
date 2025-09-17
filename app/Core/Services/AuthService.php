@@ -21,11 +21,10 @@ class AuthService
      */
     public function findUserByIdentifier($identifier): ?User
     {
-        return User::whereAny([
-            'phone',
-            'email',
-            'national_id'
-        ], '=', $identifier)->first();
+        return User::where('email', $identifier)
+            ->orWhere('national_id', $identifier)
+            ->orWhere('phone', $identifier)
+            ->first();
     }
 
     /**

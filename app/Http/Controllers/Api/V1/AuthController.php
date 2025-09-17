@@ -27,6 +27,7 @@ class AuthController extends Controller
 
     /**
      * Authenticate user and return access token
+     * @param Request $request
      */
     public function login(LoginRequest $request): JsonResponse
     {
@@ -73,16 +74,11 @@ class AuthController extends Controller
 
     /**
      * Create teacher account (Ministry Admin only)
+     * @param Request $request
      */
     public function createTeacher(CreateTeacherRequest $request): JsonResponse
     {
-        if (Auth::user()->user_type !== 'ministry_admin') {
-            throw new UnauthorizedException('غير مصرح لك بإنشاء حسابات المعلمين');
-        }
-
-        DB::beginTransaction();
-
-        try {
+        return DB::transaction(function () use ($request) {
             $userData = UserDTO::fromArray([
                 'name'        => $request->name,
                 'email'       => $request->email,
@@ -90,7 +86,7 @@ class AuthController extends Controller
                 'national_id' => $request->national_id,
                 'user_type'   => 'teacher',
                 'password'    => Hash::make($request->password),
-                'is_active'   => $request->get('is_active', true)
+                'is_active'   => $request->get('is_active', true),
             ]);
 
             // Create user
@@ -102,7 +98,7 @@ class AuthController extends Controller
                 'subject_specialization' => $request->subject_specialization,
                 'teacher_type'           => $request->get('teacher_type', 'regular'),
                 'can_create_exams'       => $request->get('can_create_exams', false),
-                'can_correct_essays'     => $request->get('can_correct_essays', false)
+                'can_correct_essays'     => $request->get('can_correct_essays', false),
             ]);
 
             // Assign to schools if provided
@@ -117,28 +113,20 @@ class AuthController extends Controller
             // Log activity
             $this->authService->logActivity(Auth::id(), 'create_teacher', [
                 'teacher_id'   => $teacher->id,
-                'teacher_code' => $teacher->teacher_code
+                'teacher_code' => $teacher->teacher_code,
             ]);
-
-            DB::commit();
 
             return $this->successResponse([
                 'user' => new UserResource($user->load('teacher')),
-                'teacher_code' => $teacher->teacher_code
+                'teacher_code' => $teacher->teacher_code,
             ], 'تم إنشاء حساب المعلم بنجاح', 201);
-        } catch (\Exception $e) {
-            DB::rollBack();
-            Log::error('Create teacher error: ' . $e->getMessage(), [
-                'request_data' => $request->all(),
-                'created_by' => Auth::id()
-            ]);
-
-            return $this->errorResponse('حدث خطأ أثناء إنشاء حساب المعلم', 500);
-        }
+        });
     }
+
 
     /**
      * Create student account (School Admin only)
+     * @param Request $request
      */
     public function createStudent(CreateStudentRequest $request): JsonResponse
     {
@@ -238,6 +226,7 @@ class AuthController extends Controller
 
     /**
      * Create school admin account (Ministry Admin only)
+     * @param Request $request
      */
     public function createSchoolAdmin(CreateSchoolAdminRequest $request): JsonResponse
     {
@@ -332,14 +321,15 @@ class AuthController extends Controller
 
     /**
      * Logout user and revoke token
+     * @param Request $request
      */
     public function logout(Request $request): JsonResponse
     {
         try {
             $user = Auth::user();
 
-            // Revoke current token
-            $request->user()->currentAccessToken()->delete();
+            // Revoke current tokens
+            $user->token()->delete();
 
             // Log activity
             $this->authService->logActivity($user->id, 'logout', [

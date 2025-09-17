@@ -72,6 +72,24 @@ return [
             'after_commit' => false,
         ],
 
+        'redis-high' => [ // Critical jobs (exam submission)
+            'driver' => 'redis',
+            'queue' => 'high-priority',
+            'retry_after' => 60,
+        ],
+
+        'redis-normal' => [ // Normal jobs (notifications)
+            'driver' => 'redis',
+            'queue' => 'normal',
+            'retry_after' => 90,
+        ],
+
+        'redis-low' => [ // Low priority (reports, analytics)
+            'driver' => 'redis',
+            'queue' => 'low-priority',
+            'retry_after' => 300,
+        ],
+
     ],
 
     /*

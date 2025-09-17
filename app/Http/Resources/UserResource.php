@@ -59,12 +59,12 @@ class UserResource extends JsonResource
                             'assignment_type' => $assignment->assignment_type,
                             'is_active' => $assignment->is_active,
                         ];
-                    }) ?? [],
+                    })->values()->toArray() ?? [],
                 ];
                 break;
 
             case 'school_admin':
-                $schoolAdmin = $this->schoolAdmin()->active()->first();
+                $schoolAdmin = $this->schoolAdmin;
                 $data['school_admin'] = $schoolAdmin ? [
                     'id' => $schoolAdmin->id,
                     'admin_permissions' => $schoolAdmin->admin_permissions,

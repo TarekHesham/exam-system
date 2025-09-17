@@ -7,8 +7,8 @@ Route::prefix('v1')->middleware(['auth:sanctum'])->group(base_path('routes/v1.ph
 // Health check endpoint
 Route::get('health', function () {
     return response()->json([
-        'status' => 'ok',
+        'status'    => 'ok',
         'timestamp' => now()->toISOString(),
-        'version' => config('app.version', '1.0.0')
+        'version'   => config('app.version', '1.0.0')
     ]);
 });

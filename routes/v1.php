@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\AuthController;
+use App\Http\Controllers\Api\V1\TeacherController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,4 +35,7 @@ Route::middleware('roles:ministry_admin')->prefix('admin')->group(function () {
     // Account creation routes
     Route::post('create-teacher', [AuthController::class, 'createTeacher']);
     Route::post('create-school-admin', [AuthController::class, 'createSchoolAdmin']);
+
+    Route::apiResource('teachers', TeacherController::class)->except('store');
+    Route::patch('teachers/{id}/toggle-status', [TeacherController::class, 'toggleStatus']);
 });

@@ -24,7 +24,7 @@ class UserDTO
             national_id: $data['national_id'],
             user_type: $data['user_type'],
             password: $data['password'],
-            is_active: $data['is_active'] ?? true,
+            is_active: $data['is_active'],
             email_verified_at: $data['email_verified_at'] ?? null
         );
     }
