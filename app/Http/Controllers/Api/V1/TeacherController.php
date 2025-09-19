@@ -43,12 +43,9 @@ class TeacherController extends Controller
      */
     public function show(int $id): JsonResponse
     {
-        $teacher = Teacher::with(['user.teacher.schoolAssignments.school'])
-            ->findOrFail($id);
+        $teacher = Teacher::with(['user.teacher.schoolAssignments.school'])->findOrFail($id);
 
-        return response()->json([
-            'data' => new UserResource($teacher->user),
-        ]);
+        return $this->successResponse(new UserResource($teacher->user), 'Teacher details');
     }
 
     /**
@@ -92,10 +89,10 @@ class TeacherController extends Controller
             ]);
         });
 
-        return response()->json([
-            'message' => 'Teacher updated successfully',
-            'data'    => new UserResource($teacher->user->load('teacher.schoolAssignments.school'))
-        ]);
+        return $this->successResponse(
+            new UserResource($teacher->user->load('teacher.schoolAssignments.school')),
+            'Teacher updated successfully'
+        );
     }
 
     /**
@@ -113,10 +110,10 @@ class TeacherController extends Controller
             'new_status' => $teacher->user->is_active
         ]);
 
-        return response()->json([
-            'message' => 'Teacher status updated successfully',
-            'data'    => new UserResource($teacher->user->load('teacher'))
-        ]);
+        return $this->successResponse(
+            new UserResource($teacher->user->load('teacher')),
+            'Teacher status updated successfully'
+        );
     }
 
     /**
@@ -136,6 +133,6 @@ class TeacherController extends Controller
             ]);
         });
 
-        return response()->json(['message' => 'Teacher deleted successfully']);
+        return $this->successResponse([], 'Teacher deleted successfully');
     }
 }

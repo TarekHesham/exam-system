@@ -1,0 +1,235 @@
+<?php
+
+namespace App\Http\Controllers\Api\V1;
+
+use App\Http\Controllers\Controller;
+use App\Core\Services\{ExamService, ExamSessionService};
+use Illuminate\Http\{Request, JsonResponse};
+use Illuminate\Support\Facades\{Auth, Validator};
+use Carbon\Carbon;
+
+class ExamSessionController extends Controller
+{
+    public function __construct(
+        private ExamSessionService $sessionService,
+        private ExamService $examService
+    ) {}
+
+    public function startSession(Request $request): JsonResponse
+    {
+        $validator = Validator::make($request->all(), [
+            'exam_id' => 'required|exists:exams,id',
+            'qr_code' => 'required|string',
+            'device_info' => 'required|array',
+            'battery_level' => 'required|integer|min:0|max:100',
+            'location' => 'sometimes|array'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'بيانات غير صحيحة',
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+        try {
+            $student = Auth::user()->student;
+            $session = $this->sessionService->startSession(
+                $request->exam_id,
+                $student->id,
+                $request->all()
+            );
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'تم بدء الامتحان بنجاح',
+                'data' => [
+                    'session_id' => $session->id,
+                    'session_token' => $session->session_token,
+                    'exam' => $session->exam->load('subject'),
+                    'time_remaining' => $session->time_remaining_minutes,
+                    'can_pause' => $session->exam->allow_pause ?? false
+                ]
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ], 400);
+        }
+    }
+
+    public function getQuestions(string $sessionId): JsonResponse
+    {
+        try {
+            $session = $this->sessionService->getSession($sessionId);
+            $this->authorizeSession($session);
+
+            $questions = $this->sessionService->getSessionQuestions($session);
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'تم جلب الأسئلة بنجاح',
+                'data' => [
+                    'questions' => $questions,
+                    'total_questions' => $questions->count(),
+                    'total_score' => $questions->sum('points'),
+                    'time_remaining' => $session->time_remaining_minutes
+                ]
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ], 400);
+        }
+    }
+
+    public function saveAnswer(Request $request, string $sessionId, int $questionId): JsonResponse
+    {
+        $validator = Validator::make($request->all(), [
+            'answer_text' => 'sometimes|string',
+            'answer_image' => 'sometimes|string',
+            'answer_data' => 'sometimes|array',
+            'time_spent_seconds' => 'sometimes|integer|min:0'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'بيانات الإجابة غير صحيحة',
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+        try {
+            $session = $this->sessionService->getSession($sessionId);
+            $this->authorizeSession($session);
+
+            $answer = $this->sessionService->saveAnswer(
+                $session,
+                $questionId,
+                $request->all()
+            );
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'تم حفظ الإجابة بنجاح',
+                'data' => [
+                    'answer_id' => $answer->id,
+                    'question_id' => $questionId,
+                    'saved_at' => $answer->answered_at,
+                    'auto_saved' => true
+                ]
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ], 400);
+        }
+    }
+
+    public function submitSession(Request $request, string $sessionId): JsonResponse
+    {
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'final_answers' => 'sometimes|array',
+                'submit_confirmation' => 'required|boolean|accepted'
+            ]
+        );
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'يجب تأكيد إرسال الامتحان',
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+        try {
+            $session = $this->sessionService->getSession($sessionId);
+            $this->authorizeSession($session);
+
+            $result = $this->sessionService->submitSession($session, $request->all());
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'تم إرسال الامتحان بنجاح',
+                'data' => [
+                    'session_id' => $session->id,
+                    'submitted_at' => $session->submitted_at,
+                    'total_questions' => $result['total_questions'],
+                    'answered_questions' => $result['answered_questions'],
+                    'preliminary_score' => $result['preliminary_score'] ?? null,
+                    'needs_manual_correction' => $result['needs_manual_correction'],
+                    'result_available_at' => $result['result_available_at']
+                ]
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ], 400);
+        }
+    }
+
+    public function timeRemaining(string $sessionId): JsonResponse
+    {
+        try {
+            $session = $this->sessionService->getSession($sessionId);
+            $this->authorizeSession($session);
+
+            $timeData = $this->sessionService->getTimeRemaining($session);
+
+            return response()->json([
+                'status' => 'success',
+                'data' => $timeData
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ], 400);
+        }
+    }
+
+    public function heartbeat(Request $request, string $sessionId): JsonResponse
+    {
+        try {
+            $session = $this->sessionService->getSession($sessionId);
+            $this->authorizeSession($session);
+
+            $this->sessionService->updateHeartbeat($session, [
+                'battery_level' => $request->battery_level,
+                'connection_status' => $request->connection_status,
+                'active_apps' => $request->active_apps ?? []
+            ]);
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Heartbeat received',
+                'data' => [
+                    'server_time' => Carbon::now(),
+                    'session_active' => true,
+                    'time_remaining' => $session->time_remaining_minutes
+                ]
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ], 400);
+        }
+    }
+
+    private function authorizeSession($session): void
+    {
+        $currentStudent = Auth::user()->student;
+        if ($session->student_id !== $currentStudent->id) {
+            throw new \Exception('غير مصرح لك بالوصول لهذه الجلسة');
+        }
+    }
+}
