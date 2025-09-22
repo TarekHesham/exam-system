@@ -34,8 +34,6 @@ class CreateExamDTO
             endTime: $data['end_time'],
             durationMinutes: $data['duration_minutes'],
             totalScore: $data['total_score'],
-            allowLateEntry: $data['allow_late_entry'] ?? false,
-            lateEntryLimitMinutes: $data['late_entry_limit_minutes'] ?? 0,
             minimumBatteryPercentage: $data['minimum_battery_percentage'] ?? 20,
             requireVideoRecording: $data['require_video_recording'] ?? false
         );

@@ -2,15 +2,15 @@
 
 namespace App\Core\Services;
 
-use App\Contracts\Repositories\ExamRepositoryInterface;
-use App\Contracts\Services\ExamServiceInterface;
+use App\Core\Contracts\Repositories\ExamRepositoryInterface;
+use App\Core\Contracts\Services\ExamServiceInterface;
 use App\Core\DTOs\{ExamFilterDTO, UpdateExamDTO, CreateExamDTO};
 use App\Modules\Authentication\Models\User;
 use App\Modules\ExamManagement\Models\{Exam, ExamSession};
 use App\Modules\UserManagement\Models\Student;
 use Illuminate\Database\Eloquent\{Collection, ModelNotFoundException};
 use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Facades\{Auth, DB};
+use Illuminate\Support\Facades\{Auth, Cache, DB};
 use InvalidArgumentException;
 use Carbon\Carbon;
 
@@ -35,8 +35,6 @@ class ExamService implements ExamServiceInterface
             'end_time' => $dto->endTime,
             'duration_minutes' => $dto->durationMinutes,
             'total_score' => $dto->totalScore,
-            'allow_late_entry' => $dto->allowLateEntry,
-            'late_entry_limit_minutes' => $dto->lateEntryLimitMinutes,
             'minimum_battery_percentage' => $dto->minimumBatteryPercentage,
             'require_video_recording' => $dto->requireVideoRecording,
             'is_published' => false,
@@ -179,8 +177,7 @@ class ExamService implements ExamServiceInterface
                 'end_time' => $modifications['end_time'] ?? null,
                 'duration_minutes' => $originalExam->duration_minutes,
                 'total_score' => $originalExam->total_score,
-                'allow_late_entry' => $originalExam->allow_late_entry,
-                'late_entry_limit_minutes' => $originalExam->late_entry_limit_minutes,
+
                 'minimum_battery_percentage' => $originalExam->minimum_battery_percentage,
                 'require_video_recording' => $originalExam->require_video_recording,
                 'is_published' => false,
@@ -198,7 +195,6 @@ class ExamService implements ExamServiceInterface
                     'options' => $question->options,
                     'correct_answer' => $question->correct_answer,
                     'points' => $question->points,
-                    'order_number' => $question->order_number,
                     'is_required' => $question->is_required,
                     'help_text' => $question->help_text
                 ]);
@@ -279,6 +275,166 @@ class ExamService implements ExamServiceInterface
             ->exists();
 
         return !$existingSession;
+    }
+
+    public function getCachedExam(int $examId)
+    {
+        return Cache::remember("exam_full_$examId", 3600, function () use ($examId) {
+            return Exam::with([
+                'subject',
+                'sections.questions',
+            ])->findOrFail($examId);
+        });
+    }
+
+    /**
+     * Get cached exam data optimized for student frontend with sections
+     * Returns all sections and questions in one response - frontend handles navigation
+     */
+    public function getCachedExamForStudent(int $examId): array
+    {
+        $cacheKey = "exam_student_data_{$examId}";
+
+        return Cache::remember($cacheKey, 3600, function () use ($examId) {
+            $exam = Exam::with([
+                'subject:id,name,section',
+                'sections' => function ($query) {
+                    $query->select([
+                        'id',
+                        'exam_id',
+                        'code',
+                        'name',
+                        'order_number',
+                        'shuffle_questions'
+                    ])->orderBy('order_number');
+                },
+                'sections.questions' => function ($query) {
+                    $query->select([
+                        'id',
+                        'exam_id',
+                        'section_id',
+                        'question_text',
+                        'question_image',
+                        'question_type',
+                        'options',
+                        'points',
+                        'is_required',
+                        'help_text'
+                    ])->orderBy('id'); // Keep original order - frontend will shuffle if needed
+                }
+            ])->select([
+                'id',
+                'subject_id',
+                'title',
+                'description',
+                'exam_type',
+                'academic_year',
+                'start_time',
+                'end_time',
+                'duration_minutes',
+                'total_score',
+                'minimum_battery_percentage',
+                'require_video_recording'
+            ])->findOrFail($examId);
+
+            $totalQuestions = 0;
+            $sections = $exam->sections->map(function ($section) use (&$totalQuestions) {
+                $questions = $section->questions;
+                $totalQuestions += $questions->count();
+
+                return [
+                    'id' => $section->id,
+                    'code' => $section->code,
+                    'name' => $section->name,
+                    'total_points' => $questions->sum('points'),
+                    'questions' => $questions->map(function ($question) {
+                        return [
+                            'id' => $question->id,
+                            'question_text' => $question->question_text,
+                            'question_image' => $question->question_image,
+                            'question_type' => $question->question_type,
+                            'options' => json_decode($question->options),
+                            'points' => $question->points,
+                            'is_required' => (bool) $question->is_required,
+                            'help_text' => $question->help_text,
+                        ];
+                    })
+                ];
+            });
+
+            return [
+                'id' => $exam->id,
+                'title' => $exam->title,
+                'description' => $exam->description,
+                'exam_type' => $exam->exam_type,
+                'academic_year' => $exam->academic_year,
+                'total_score' => $exam->total_score,
+                'total_questions' => $totalQuestions,
+                'sections_count' => $exam->sections->count(),
+                'sections' => $sections, // All sections with all questions
+                // 'instructions' => $this->getExamInstructions($exam),
+                // 'requirements' => [
+                //     'minimum_battery' => $exam->minimum_battery_percentage,
+                //     'video_recording' => $exam->require_video_recording,
+                // ],
+                'timing' => [
+                    'start_time' => $exam->start_time,
+                    'end_time' => $exam->end_time,
+                    'duration_minutes' => $exam->duration_minutes,
+                    'current_time' => Carbon::now(),
+                ]
+            ];
+        });
+    }
+
+    /**
+     * Get exam instructions for student with sections info
+     */
+    private function getExamInstructions(Exam $exam): array
+    {
+        $sectionsCount = $exam->sections->count();
+        $totalQuestions = $exam->sections->sum(function ($section) {
+            return $section->questions->count();
+        });
+
+        return [
+            'general' => [
+                'اقرأ جميع الأسئلة بعناية قبل البدء',
+                'تأكد من اتصال الإنترنت قبل البدء',
+                'لا تغلق المتصفح أثناء الامتحان',
+                'سيتم حفظ إجاباتك تلقائياً كل 30 ثانية',
+                $sectionsCount > 1 ? "الامتحان مقسم إلى {$sectionsCount} أقسام" : 'الامتحان يحتوي على قسم واحد'
+            ],
+            'technical' => [
+                "مدة الامتحان: {$exam->duration_minutes} دقيقة",
+                "الدرجة الكاملة: {$exam->total_score} درجة",
+                "عدد الأسئلة: {$totalQuestions} سؤال في {$sectionsCount} قسم",
+                $exam->require_video_recording ? 'سيتم تسجيل الفيديو أثناء الامتحان' : null,
+                "الحد الأدنى لشحن البطارية: {$exam->minimum_battery_percentage}%"
+            ],
+            'navigation' => [
+                'يمكنك التنقل بين الأسئلة والأقسام بحرية',
+                'تأكد من الإجابة على جميع الأسئلة المطلوبة',
+                'يمكنك مراجعة إجاباتك قبل التسليم',
+                'الأسئلة قد تكون مرتبة عشوائياً حسب إعداد كل قسم'
+            ],
+            'rules' => [
+                'ممنوع استخدام أي مصادر خارجية',
+                'ممنوع التواصل مع الآخرين',
+                'سيتم رصد أي محاولة غش',
+                'في حالة انقطاع الاتصال، أعد تسجيل الدخول فوراً',
+                'لا تغادر الصفحة أو تفتح تطبيقات أخرى'
+            ]
+        ];
+    }
+
+    /**
+     * Clear exam cache when exam is updated
+     */
+    public function clearExamCache(int $examId): void
+    {
+        Cache::forget("exam_student_data_{$examId}");
+        Cache::forget("exam_full_{$examId}");
     }
 
     private function validateExamTimes(string $startTime, string $endTime, int $durationMinutes): void

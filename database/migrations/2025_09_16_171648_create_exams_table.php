@@ -23,8 +23,6 @@ return new class extends Migration
             $table->dateTime('end_time');
             $table->integer('duration_minutes');
             $table->integer('total_score');
-            $table->boolean('allow_late_entry')->default(false);
-            $table->integer('late_entry_limit_minutes')->nullable();
             $table->integer('minimum_battery_percentage')->nullable();
             $table->boolean('require_video_recording')->default(false);
             $table->boolean('is_published')->default(false);

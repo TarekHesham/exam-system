@@ -27,7 +27,7 @@ class ExamController extends Controller
         $exams = $this->examService->getExams($filters);
 
         return response()->json([
-            'status' => 'success',
+            'status' => true,
             'message' => 'تم جلب قائمة الامتحانات بنجاح',
             'data' => $exams
         ]);
@@ -39,9 +39,9 @@ class ExamController extends Controller
         $exam = $this->examService->createExam($dto);
 
         return response()->json([
-            'status' => 'success',
+            'status' => true,
             'message' => 'تم إنشاء الامتحان بنجاح',
-            'data' => $exam->load(['subject', 'creator'])
+            'data' => $exam->load(['creator'])
         ], 201);
     }
 
@@ -50,7 +50,7 @@ class ExamController extends Controller
         $exam = $this->examService->getExamWithDetails($id);
 
         return response()->json([
-            'status' => 'success',
+            'status' => true,
             'message' => 'تم جلب تفاصيل الامتحان بنجاح',
             'data' => $exam
         ]);
@@ -62,9 +62,9 @@ class ExamController extends Controller
         $exam = $this->examService->updateExam($id, $dto);
 
         return response()->json([
-            'status' => 'success',
+            'status' => true,
             'message' => 'تم تحديث الامتحان بنجاح',
-            'data' => $exam->load(['subject', 'creator'])
+            'data' => $exam->load(['creator'])
         ]);
     }
 
@@ -73,7 +73,7 @@ class ExamController extends Controller
         $this->examService->deleteExam($id);
 
         return response()->json([
-            'status' => 'success',
+            'status' => true,
             'message' => 'تم حذف الامتحان بنجاح'
         ]);
     }
@@ -83,7 +83,7 @@ class ExamController extends Controller
         $exam = $this->examService->publishExam($id);
 
         return response()->json([
-            'status' => 'success',
+            'status' => true,
             'message' => 'تم نشر الامتحان بنجاح',
             'data' => $exam
         ]);
@@ -94,7 +94,7 @@ class ExamController extends Controller
         $exam = $this->examService->unpublishExam($id);
 
         return response()->json([
-            'status' => 'success',
+            'status' => true,
             'message' => 'تم إلغاء نشر الامتحان بنجاح',
             'data' => $exam
         ]);
@@ -105,7 +105,7 @@ class ExamController extends Controller
         $exam = $this->examService->activateExam($id);
 
         return response()->json([
-            'status' => 'success',
+            'status' => true,
             'message' => 'تم تفعيل الامتحان بنجاح',
             'data' => $exam
         ]);
@@ -116,7 +116,7 @@ class ExamController extends Controller
         $exam = $this->examService->deactivateExam($id);
 
         return response()->json([
-            'status' => 'success',
+            'status' => true,
             'message' => 'تم إلغاء تفعيل الامتحان بنجاح',
             'data' => $exam
         ]);
@@ -136,9 +136,9 @@ class ExamController extends Controller
         $exam = $this->examService->duplicateExam($id, $modifications);
 
         return response()->json([
-            'status' => 'success',
+            'status' => true,
             'message' => 'تم نسخ الامتحان بنجاح',
-            'data' => $exam->load(['subject', 'creator', 'questions'])
+            'data' => $exam->load(['creator', 'questions'])
         ], 201);
     }
 
@@ -147,7 +147,7 @@ class ExamController extends Controller
         $statistics = $this->examService->getExamStatistics($id);
 
         return response()->json([
-            'status' => 'success',
+            'status' => true,
             'message' => 'تم جلب إحصائيات الامتحان بنجاح',
             'data' => $statistics
         ]);
@@ -158,7 +158,7 @@ class ExamController extends Controller
         $exams = $this->examService->getUpcomingExams();
 
         return response()->json([
-            'status' => 'success',
+            'status' => true,
             'message' => 'تم جلب الامتحانات القادمة بنجاح',
             'data' => $exams
         ]);
@@ -169,7 +169,7 @@ class ExamController extends Controller
         $exams = $this->examService->getOngoingExams();
 
         return response()->json([
-            'status' => 'success',
+            'status' => true,
             'message' => 'تم جلب الامتحانات الجارية بنجاح',
             'data' => $exams
         ]);
@@ -180,7 +180,7 @@ class ExamController extends Controller
         $exams = $this->examService->getCompletedExams();
 
         return response()->json([
-            'status' => 'success',
+            'status' => true,
             'message' => 'تم جلب الامتحانات المكتملة بنجاح',
             'data' => $exams
         ]);
@@ -192,7 +192,7 @@ class ExamController extends Controller
         $canAccess = $this->examService->canStudentAccessExam($id, $studentId);
 
         return response()->json([
-            'status' => 'success',
+            'status' => true,
             'message' => 'تم فحص صلاحية الوصول للامتحان',
             'data' => [
                 'can_access' => $canAccess,

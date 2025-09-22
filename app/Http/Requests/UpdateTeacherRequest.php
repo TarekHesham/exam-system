@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Modules\UserManagement\Models\Teacher;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
@@ -15,7 +16,9 @@ class UpdateTeacherRequest extends FormRequest
 
     public function rules(): array
     {
-        $userId = $this->route('id');
+        $teacherId = $this->route('teacher');
+        $teacher = Teacher::with('user')->find($teacherId);
+        $userId = $teacher?->user_id;
 
         return [
             'name' => 'sometimes|string|max:255',

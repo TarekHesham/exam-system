@@ -25,8 +25,6 @@ class CreateExamRequest extends FormRequest
             'end_time' => ['required', 'date', 'after:start_time'],
             'duration_minutes' => ['required', 'integer', 'min:1', 'max:480'],
             'total_score' => ['required', 'integer', 'min:1'],
-            'allow_late_entry' => ['boolean'],
-            'late_entry_limit_minutes' => ['integer', 'min:0', 'max:60'],
             'minimum_battery_percentage' => ['integer', 'min:0', 'max:100'],
             'require_video_recording' => ['boolean']
         ];

@@ -2,15 +2,17 @@
 
 namespace App\Core\Services;
 
-
+use App\Exceptions\ExamAccessDeniedException;
 use App\Modules\ExamManagement\Models\{Exam, ExamSession, ExamQuestion, StudentAnswer};
 use App\Modules\Monitoring\Models\ExamMonitoring;
 use App\Modules\Results\Models\ExamResult;
 use App\Modules\UserManagement\Models\Student;
+use App\Modules\UserManagement\Models\Teacher;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\{DB, Cache};
 use Illuminate\Support\Str;
+use Illuminate\Validation\UnauthorizedException;
 use InvalidArgumentException;
 
 class ExamSessionService
@@ -22,13 +24,6 @@ class ExamSessionService
     public function startSession(int $examId, int $studentId, array $sessionData): ExamSession
     {
         return DB::transaction(function () use ($examId, $studentId, $sessionData) {
-            $this->studentExamService->validateQRCode(
-                $sessionData['qr_code'],
-                $examId,
-                $studentId,
-                $sessionData['device_info'] ?? []
-            );
-
             $accessCheck = $this->studentExamService->checkExamAccess($examId, $studentId, $sessionData);
             if (!$accessCheck['can_access']) {
                 throw new InvalidArgumentException('غير مصرح لك بدخول هذا الامتحان');
@@ -37,6 +32,13 @@ class ExamSessionService
             $exam = Exam::findOrFail($examId);
             $student = Student::findOrFail($studentId);
 
+            // Cancel any existing sessions
+            ExamSession::where('student_id', $studentId)
+                ->whereIn('session_status', ['not_started', 'in_progress'])
+                ->where('school_id', $student->school_id)
+                ->update(['session_status' => 'cancelled']);
+
+            // Create a new session
             $session = ExamSession::create([
                 'exam_id' => $examId,
                 'student_id' => $studentId,
@@ -46,7 +48,7 @@ class ExamSessionService
                 'ip_address' => request()->ip(),
                 'device_info' => json_encode($sessionData['device_info'] ?? []),
                 'browser_info' => json_encode($sessionData['browser_info'] ?? []),
-                'session_status' => 'in_progress',
+                'session_status' => 'not_started',
                 'battery_level_at_start' => $sessionData['battery_level'] ?? 100,
                 'video_recorded' => $exam->require_video_recording
             ]);
@@ -67,7 +69,10 @@ class ExamSessionService
                 'last_heartbeat' => Carbon::now()
             ], $exam->duration_minutes * 60 + 300);
 
-            return $session->load(['exam.subject', 'student.user']);
+            return [
+                'status' => true,
+                'message' => "تم السماح للطالب بالدخول للامتحان {$exam->title}",
+            ];
         });
     }
 
@@ -92,7 +97,6 @@ class ExamSessionService
 
         return Cache::remember($cacheKey, 3600, function () use ($session) {
             $questions = ExamQuestion::where('exam_id', $session->exam_id)
-                ->orderBy('order_number')
                 ->get();
 
             return $questions->map(function ($question) use ($session) {
@@ -107,7 +111,6 @@ class ExamSessionService
                     'question_type' => $question->question_type,
                     'options' => $question->options,
                     'points' => $question->points,
-                    'order_number' => $question->order_number,
                     'is_required' => $question->is_required,
                     'help_text' => $question->help_text,
                     'current_answer' => $answer ? [
@@ -165,6 +168,89 @@ class ExamSessionService
 
             return $answer;
         });
+    }
+
+    /**
+     * Teacher creates session for student after QR scan
+     */
+    public function createSessionByTeacher(
+        int $examId,
+        int $studentId,
+        int $teacherId,
+        array $sessionData
+    ): ExamSession {
+        return DB::transaction(function () use ($examId, $studentId, $teacherId, $sessionData) {
+
+            // Verify teacher has permission
+            $this->verifyTeacherPermission($teacherId, $studentId);
+
+            // Check exam access for student
+            $accessCheck = $this->studentExamService->checkExamAccess($examId, $studentId, $sessionData);
+            if (! $accessCheck['can_access']) {
+                $failedMessages = collect($accessCheck['checks'])
+                    ->filter(fn($check) => ! $check['status'])
+                    ->pluck('message')
+                    ->values()
+                    ->toArray();
+
+                throw new ExamAccessDeniedException($failedMessages);
+            }
+
+            $exam = Exam::findOrFail($examId);
+            $student = Student::findOrFail($studentId);
+
+            // Cancel any existing sessions for this student
+            ExamSession::where('student_id', $studentId)
+                ->whereIn('session_status', ['not_started', 'in_progress'])
+                ->where('school_id', $student->school_id)
+                ->update(['session_status' => 'cancelled']);
+
+            // Create new session
+            $session = ExamSession::create([
+                'exam_id' => $examId,
+                'student_id' => $studentId,
+                'school_id' => $student->school_id,
+                'session_token' => Str::uuid(),
+                'created_at' => Carbon::now(),
+                'ip_address' => request()->ip(),
+                'device_info' => json_encode($sessionData['device_info'] ?? []),
+                'browser_info' => json_encode($sessionData['browser_info'] ?? []),
+                'session_status' => 'not_started',
+                'battery_level_at_start' => $sessionData['battery_level'] ?? 100,
+                'video_recorded' => $exam->require_video_recording,
+                'teacher_id' => $teacherId
+            ]);
+
+            // Log session creation by teacher
+            $this->logSessionEvent($session, 'session_created_by_teacher', [
+                'teacher_id' => $teacherId,
+                'exam_id' => $examId,
+                'student_id' => $studentId,
+                'creation_time' => Carbon::now(),
+                'device_info' => $sessionData['device_info'] ?? []
+            ]);
+
+            return $session;
+        });
+    }
+
+    /**
+     * Verify teacher has permission to create session for student
+     */
+    private function verifyTeacherPermission(int $teacherId, int $studentId): void
+    {
+        $teacher = Teacher::findOrFail($teacherId);
+        $student = Student::findOrFail($studentId);
+
+        // Check if teacher is assigned to the same school
+        $hasPermission = $teacher->schoolAssignments()
+            ->where('school_id', $student->school_id)
+            ->where('assignment_type', 'supervision')
+            ->exists();
+
+        if (!$hasPermission) {
+            throw new UnauthorizedException('غير مصرح لك بفتح الامتحان لهذا الطالب');
+        }
     }
 
     public function submitSession(ExamSession $session, array $submitData = []): array

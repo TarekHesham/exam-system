@@ -2,7 +2,7 @@
 
 namespace App\Core\Repositories;
 
-use App\Contracts\Repositories\ExamRepositoryInterface;
+use App\Core\Contracts\Repositories\ExamRepositoryInterface;
 use App\Core\DTOs\ExamFilterDTO;
 use App\Modules\Authentication\Models\User;
 use App\Modules\ExamManagement\Models\Exam;

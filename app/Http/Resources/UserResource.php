@@ -25,18 +25,18 @@ class UserResource extends JsonResource
         // Add type-specific data
         switch ($this->user_type) {
             case 'student':
-                $data['student'] = [
-                    'id' => $this->student?->id,
-                    'student_code' => $this->student?->student_code,
-                    'seat_number' => $this->student?->seat_number,
-                    'academic_year' => $this->student?->academic_year,
-                    'section' => $this->student?->section,
-                    'birth_date' => $this->student?->birth_date,
-                    'gender' => $this->student?->gender,
+                $data += [
+                    'student_id'     => $this->student?->id,
+                    'student_code'   => $this->student?->student_code,
+                    'seat_number'    => $this->student?->seat_number,
+                    'academic_year'  => $this->student?->academic_year,
+                    'section'        => $this->student?->section,
+                    'birth_date'     => $this->student?->birth_date,
+                    'gender'         => $this->student?->gender,
                     'guardian_phone' => $this->student?->guardian_phone,
-                    'is_banned' => $this->student?->is_banned,
+                    'is_banned'      => $this->student?->is_banned,
                     'school' => $this->student?->school ? [
-                        'id' => $this->student->school->id,
+                        'id'   => $this->student->school->id,
                         'name' => $this->student->school->name,
                         'code' => $this->student->school->code,
                         'governorate' => $this->student->school->governorate?->name,
@@ -45,19 +45,19 @@ class UserResource extends JsonResource
                 break;
 
             case 'teacher':
-                $data['teacher'] = [
-                    'id' => $this->teacher?->id,
-                    'teacher_code' => $this->teacher?->teacher_code,
+                $data += [
+                    'teacher_id'             => $this->teacher?->id,
+                    'teacher_code'           => $this->teacher?->teacher_code,
                     'subject_specialization' => $this->teacher?->subject_specialization,
-                    'teacher_type' => $this->teacher?->teacher_type,
-                    'can_create_exams' => $this->teacher?->can_create_exams,
-                    'can_correct_essays' => $this->teacher?->can_correct_essays,
+                    'teacher_type'           => $this->teacher?->teacher_type,
+                    'can_create_exams'       => $this->teacher?->can_create_exams,
+                    'can_correct_essays'     => $this->teacher?->can_correct_essays,
                     'schools' => $this->teacher?->schoolAssignments?->map(function ($assignment) {
                         return [
-                            'id' => $assignment->school->id,
-                            'name' => $assignment->school->name,
+                            'id'              => $assignment->school->id,
+                            'name'            => $assignment->school->name,
                             'assignment_type' => $assignment->assignment_type,
-                            'is_active' => $assignment->is_active,
+                            'is_active'       => $assignment->is_active,
                         ];
                     })->values()->toArray() ?? [],
                 ];
@@ -65,17 +65,17 @@ class UserResource extends JsonResource
 
             case 'school_admin':
                 $schoolAdmin = $this->schoolAdmin;
-                $data['school_admin'] = $schoolAdmin ? [
-                    'id' => $schoolAdmin->id,
+                $data += $schoolAdmin ? [
+                    'school_admin_id'   => $schoolAdmin->id,
                     'admin_permissions' => $schoolAdmin->admin_permissions,
-                    'is_active' => $schoolAdmin->is_active,
-                    'assigned_at' => $schoolAdmin->assigned_at,
+                    'is_active'         => $schoolAdmin->is_active,
+                    'assigned_at'       => $schoolAdmin->assigned_at,
                     'school' => $schoolAdmin->school ? [
-                        'id' => $schoolAdmin->school->id,
-                        'name' => $schoolAdmin->school->name,
-                        'code' => $schoolAdmin->school->code,
-                        'address' => $schoolAdmin->school->address,
-                        'governorate' => $schoolAdmin->school->governorate?->name,
+                        'id'          => $schoolAdmin->school->id,
+                        'name'        => $schoolAdmin->school->name,
+                        'code'        => $schoolAdmin->school->code,
+                        'address'     => $schoolAdmin->school->address,
+                        'governorate' => $schoolAdmin->school?->governorate?->name,
                     ] : null,
                 ] : null;
                 break;

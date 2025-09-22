@@ -4,11 +4,11 @@ namespace App\Core\Services;
 
 use App\Modules\ExamManagement\Models\Exam;
 use App\Modules\ExamManagement\Models\ExamSession;
-use App\Modules\ExamManagement\Models\StudentQrCode;
 use App\Modules\UserManagement\Models\Student;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\UnauthorizedException;
 use InvalidArgumentException;
 
 class StudentExamService
@@ -34,12 +34,12 @@ class StudentExamService
             })
             ->with([
                 'subject:id,name,section,duration_minutes',
-                'creator:id,name'
+                'creator:id,name',
+                'questions.section'
             ])
             ->select([
                 'id',
                 'subject_id',
-                'created_by',
                 'title',
                 'description',
                 'exam_type',
@@ -48,8 +48,6 @@ class StudentExamService
                 'end_time',
                 'duration_minutes',
                 'total_score',
-                'allow_late_entry',
-                'late_entry_limit_minutes',
                 'minimum_battery_percentage',
                 'require_video_recording'
             ])
@@ -69,10 +67,10 @@ class StudentExamService
                     'status' => $this->getExamStatusForStudent($exam),
                     'can_enter' => $this->canStudentEnterExam($exam),
                     'entry_window' => $this->getEntryWindow($exam),
+                    'questions' => $exam->questions,
                     'requirements' => [
                         'minimum_battery' => $exam->minimum_battery_percentage,
                         'video_recording' => $exam->require_video_recording,
-                        'late_entry_allowed' => $exam->allow_late_entry
                     ]
                 ];
             });
@@ -120,9 +118,10 @@ class StudentExamService
 
     public function checkExamAccess(int $examId, int $studentId, array $deviceData = []): array
     {
-        $exam = Exam::with(['subject', 'sessions' => function ($query) use ($studentId) {
-            $query->where('student_id', $studentId);
-        }])->findOrFail($examId);
+        $exam = Exam::with([
+            'subject',
+            'sessions' => fn($q) => $q->where('student_id', $studentId),
+        ])->findOrFail($examId);
 
         $student = Student::with(['user', 'school'])->findOrFail($studentId);
         $now = Carbon::now();
@@ -184,8 +183,6 @@ class StudentExamService
                 'requirements' => [
                     'minimum_battery' => $exam->minimum_battery_percentage,
                     'video_recording' => $exam->require_video_recording,
-                    'late_entry_allowed' => $exam->allow_late_entry,
-                    'late_entry_limit' => $exam->late_entry_limit_minutes
                 ]
             ],
             'student' => [
@@ -198,53 +195,25 @@ class StudentExamService
         ];
     }
 
-    public function generateEntryQR(int $examId, int $studentId): StudentQrCode
+    public function validateQRCode(int $examId, int $studentId): bool
     {
-        $exam = Exam::findOrFail($examId);
         $student = Student::findOrFail($studentId);
 
-        $accessCheck = $this->checkExamAccess($examId, $studentId);
-        if (!$accessCheck['can_access']) {
-            throw new InvalidArgumentException('غير مصرح لك بدخول هذا الامتحان');
+        $teacher = Auth::user()->schoolAssignments()->where('school_id', $student->school_id)->first();
+
+        if (! $teacher || $teacher->assignment_type !== 'supervision') {
+            throw new UnauthorizedException('غير مصرح لك بفتح هذا الامتحان للطالب');
         }
 
-        StudentQrCode::where('student_id', $studentId)
-            ->where('exam_id', $examId)
-            ->where('qr_type', 'entry')
-            ->where('is_used', false)
-            ->update(['is_used' => true]);
-
-        return StudentQrCode::create([
-            'student_id' => $studentId,
-            'exam_id' => $examId,
-            'qr_code' => $this->generateUniqueQRCode(),
-            'qr_type' => 'entry',
-            'is_used' => false,
-            'expires_at' => Carbon::now()->addMinutes(5),
-            'used_at' => null,
-            'used_by_device' => null
-        ]);
-    }
-
-    public function validateQRCode(string $qrCode, int $examId, int $studentId, array $deviceInfo = []): bool
-    {
-        $qrCodeRecord = StudentQrCode::where('qr_code', $qrCode)
-            ->where('exam_id', $examId)
+        $sessionRecord = ExamSession::where('exam_id', $examId)
             ->where('student_id', $studentId)
-            ->where('qr_type', 'entry')
-            ->where('is_used', false)
-            ->where('expires_at', '>', Carbon::now())
+            ->where('school_id', $student->school_id)
+            ->where('session_status', 'in_progress')
             ->first();
 
-        if (!$qrCodeRecord) {
-            throw new InvalidArgumentException('رمز QR غير صالح أو منتهي الصلاحية');
+        if ($sessionRecord) {
+            throw new InvalidArgumentException('هناك جلسة سابقة لهذا الامتحان لهذا الطالب في هذا المدرسة');
         }
-
-        $qrCodeRecord->update([
-            'is_used' => true,
-            'used_at' => Carbon::now(),
-            'used_by_device' => json_encode($deviceInfo)
-        ]);
 
         return true;
     }
@@ -305,8 +274,8 @@ class StudentExamService
             return true;
         }
 
-        if ($status === 'upcoming' && $exam->allow_late_entry) {
-            $lateEntryDeadline = $exam->start_time->addMinutes($exam->late_entry_limit_minutes);
+        if ($status === 'upcoming') {
+            $lateEntryDeadline = $exam->start_time;
             return $now <= $lateEntryDeadline;
         }
 
@@ -318,9 +287,6 @@ class StudentExamService
         return [
             'start_time' => $exam->start_time,
             'end_time' => $exam->end_time,
-            'late_entry_allowed' => $exam->allow_late_entry,
-            'late_entry_deadline' => $exam->allow_late_entry ?
-                $exam->start_time->addMinutes($exam->late_entry_limit_minutes) : null
         ];
     }
 
@@ -328,11 +294,6 @@ class StudentExamService
     {
         if ($now >= $exam->start_time && $now <= $exam->end_time) {
             return true;
-        }
-
-        if ($exam->allow_late_entry && $now < $exam->start_time) {
-            $lateEntryStart = $exam->start_time->subMinutes($exam->late_entry_limit_minutes);
-            return $now >= $lateEntryStart;
         }
 
         return false;
@@ -394,15 +355,6 @@ class StudentExamService
 
         return $appealDeadline && Carbon::now() <= $appealDeadline &&
             !$session->appeals()->exists();
-    }
-
-    private function generateUniqueQRCode(): string
-    {
-        do {
-            $code = 'EXAM_' . strtoupper(Str::random(10));
-        } while (StudentQrCode::where('qr_code', $code)->exists());
-
-        return $code;
     }
 
     private function getExamInstructions(Exam $exam): array

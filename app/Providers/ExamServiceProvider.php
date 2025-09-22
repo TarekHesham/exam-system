@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\Contracts\Repositories\ExamRepositoryInterface;
-use App\Contracts\Services\ExamServiceInterface;
+use App\Core\Contracts\Repositories\ExamRepositoryInterface;
+use App\Core\Contracts\Services\ExamServiceInterface;
 use App\Core\Repositories\ExamRepository;
 use App\Core\Services\ExamService;
 use Illuminate\Support\ServiceProvider;

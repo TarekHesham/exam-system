@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Contracts\Repositories;
+namespace App\Core\Contracts\Repositories;
 
 use App\Core\DTOs\ExamFilterDTO;
 use App\Modules\ExamManagement\Models\Exam;

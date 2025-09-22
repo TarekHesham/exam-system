@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\V1\ExamResultController;
 use App\Http\Controllers\Api\V1\ExamSessionController;
 use App\Http\Controllers\Api\V1\StudentExamController;
 use App\Http\Controllers\Api\V1\TeacherController;
+use App\Http\Controllers\Api\V1\TeacherExamController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,6 +53,13 @@ Route::middleware('roles:student')->prefix('student')->group(function () {
         Route::post('/{sessionId}/report-issue', [ExamSessionController::class, 'reportIssue']);
     });
 
+    Route::get('available-exam', [StudentExamController::class, 'getAvailableExam']);
+
+    // These routes remain from ExamSessionService for answer management
+    Route::post('/exam/save-answer', [StudentExamController::class, 'saveAnswer']);
+    Route::post('/exam/submit', [StudentExamController::class, 'submitExam']);
+    Route::post('/exam/heartbeat', [StudentExamController::class, 'sendHeartbeat']);
+
     // ============================================
     // Appeals System
     // ============================================
@@ -63,10 +71,8 @@ Route::middleware('roles:student')->prefix('student')->group(function () {
 });
 
 Route::middleware('roles:teacher')->prefix('teacher')->group(function () {
-    Route::get('dashboard', fn() => response()->json(['msg' => 'Welcome Teacher']));
-
     // Students
-    Route::post('exams/{id}/check-access', [ExamController::class, 'checkAccess']);
+    Route::post('/scan-qr-create-session', [TeacherExamController::class, 'scanQRAndCreateSession']);
 });
 
 Route::middleware('roles:school_admin')->prefix('admin')->group(function () {
@@ -138,10 +144,6 @@ Route::middleware('roles:ministry_admin')->prefix('admin')->group(function () {
         Route::get('/exams/{examId}', [StudentExamController::class, 'examDetails']);
         Route::post('/exams/{examId}/check-access', [StudentExamController::class, 'checkAccess']);
         Route::post('/exams/{examId}/validate-entry', [StudentExamController::class, 'validateEntry']);
-
-        // QR Code System
-        Route::post('/exams/{examId}/generate-qr', [StudentExamController::class, 'generateQR']);
-        Route::post('/exams/{examId}/scan-qr', [StudentExamController::class, 'scanQR']);
     });
 
     // ============================================

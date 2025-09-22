@@ -21,7 +21,7 @@ class ExamSession extends BaseModel
         'ip_address',
         'device_info',
         'browser_info',
-        'session_status',
+        'session_status', // 'not_started', 'in_progress', 'submitted', 'cancelled', 'expired'
         'battery_level_at_start',
         'video_recorded',
         'video_file_path',

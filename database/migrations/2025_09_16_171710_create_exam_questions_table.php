@@ -14,13 +14,13 @@ return new class extends Migration
         Schema::create('exam_questions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('exam_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('section_id')->nullable()->constrained('exam_sections')->cascadeOnDelete();
             $table->text('question_text');
             $table->text('question_image')->nullable();
             $table->enum('question_type', ['multiple_choice', 'essay', 'true_false', 'fill_blank']);
             $table->json('options')->nullable();
             $table->text('correct_answer')->nullable();
             $table->integer('points');
-            $table->integer('order_number');
             $table->boolean('is_required')->default(true);
             $table->text('help_text')->nullable();
             $table->timestamps();

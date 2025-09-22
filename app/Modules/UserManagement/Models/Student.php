@@ -6,7 +6,6 @@ use App\Core\Models\BaseModel;
 use App\Modules\Appeals\Models\Appeal;
 use App\Modules\Authentication\Models\User;
 use App\Modules\ExamManagement\Models\ExamSession;
-use App\Modules\ExamManagement\Models\StudentQrCode;
 use App\Modules\Results\Models\ExamResult;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -30,8 +29,8 @@ class Student extends BaseModel
 
     protected $casts = [
         'birth_date' => 'date',
-        'is_banned' => 'boolean',
-        'ban_until' => 'datetime',
+        'is_banned'  => 'boolean',
+        'ban_until'  => 'datetime',
     ];
 
     public function user(): BelongsTo
@@ -57,10 +56,5 @@ class Student extends BaseModel
     public function appeals(): HasMany
     {
         return $this->hasMany(Appeal::class);
-    }
-
-    public function qrCodes(): HasMany
-    {
-        return $this->hasMany(StudentQrCode::class);
     }
 }

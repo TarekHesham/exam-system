@@ -16,7 +16,7 @@ class CreateTeacherRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email|max:255',
+            'email' => 'required|email|unique:users,email|max:100',
             'phone' => 'required|string|unique:users,phone|max:20',
             'national_id' => 'required|digits:14|unique:users,national_id',
             'password' => 'required|string|min:8|confirmed',

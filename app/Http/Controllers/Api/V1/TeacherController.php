@@ -62,6 +62,7 @@ class TeacherController extends Controller
                 'name',
                 'email',
                 'phone',
+                'password',
                 'national_id',
                 'is_active'
             ]));

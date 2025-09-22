@@ -23,7 +23,7 @@ class RoleMiddleware
 
         if (! in_array($user->user_type, $roles)) {
             return response()->json([
-                'success' => false,
+                'status' => false,
                 'message' => 'غير مصرح لك بالوصول إلى هذه الصفحة',
                 'errors' => [
                     'authorization' => ['صلاحيات غير كافية']

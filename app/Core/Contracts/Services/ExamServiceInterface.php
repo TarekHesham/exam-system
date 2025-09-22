@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Contracts\Services;
+namespace App\Core\Contracts\Services;
 
 use App\Core\DTOs\{CreateExamDTO, ExamFilterDTO, UpdateExamDTO};
 use App\Modules\ExamManagement\Models\Exam;

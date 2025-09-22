@@ -3,6 +3,8 @@
 namespace App\Modules\ExamManagement\Models;
 
 use App\Core\Models\BaseModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class ExamQuestion extends BaseModel
 {
@@ -14,18 +16,23 @@ class ExamQuestion extends BaseModel
         'options',
         'correct_answer',
         'points',
-        'order_number',
         'is_required',
-        'help_text'
+        'help_text',
+        'section_id',
     ];
 
-    public function exam()
+    public function exam(): BelongsTo
     {
         return $this->belongsTo(Exam::class);
     }
 
-    public function answers()
+    public function answers(): HasMany
     {
         return $this->hasMany(StudentAnswer::class, 'question_id');
+    }
+
+    public function section(): BelongsTo
+    {
+        return $this->belongsTo(ExamSection::class, 'section_id');
     }
 }

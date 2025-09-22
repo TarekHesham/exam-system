@@ -17,7 +17,7 @@ class Teacher extends BaseModel
         'user_id',
         'teacher_code',
         'subject_specialization',
-        'teacher_type',
+        'teacher_type', // 'regular', 'supervisor'
         'can_create_exams',
         'can_correct_essays'
     ];

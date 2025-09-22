@@ -123,7 +123,6 @@ class AuthController extends Controller
         });
     }
 
-
     /**
      * Create student account (School Admin only)
      * @param Request $request
@@ -140,18 +139,18 @@ class AuthController extends Controller
         $schoolAdmin = $user->schoolAdmin()->active()->first();
         if (!$schoolAdmin) {
             return response()->json([
-                'success' => false,
+                'status' => false,
                 'message' => 'لم يتم العثور على بيانات مدير المدرسة أو الحساب غير نشط',
-                'errors' => ['school_admin' => ['بيانات مدير المدرسة غير موجودة']]
+                'errors'  => ['school_admin' => ['بيانات مدير المدرسة غير موجودة']]
             ], 400);
         }
 
         // Check if school admin has permission to create students
         if (!$schoolAdmin->hasPermission('manage_students')) {
             return response()->json([
-                'success' => false,
+                'status' => false,
                 'message' => 'ليس لديك صلاحية لإنشاء حسابات الطلاب',
-                'errors' => ['permission' => ['صلاحية غير كافية']]
+                'errors'  => ['permission' => ['صلاحية غير كافية']]
             ], 403);
         }
 
@@ -159,13 +158,13 @@ class AuthController extends Controller
 
         try {
             $userData = UserDTO::fromArray([
-                'name' => $request->name,
-                'email' => $request->email,
-                'phone' => $request->phone,
+                'name'        => $request->name,
+                'email'       => $request->email,
+                'phone'       => $request->phone,
                 'national_id' => $request->national_id,
-                'user_type' => 'student',
-                'password' => Hash::make($request->password),
-                'is_active' => true
+                'user_type'   => 'student',
+                'password'    => Hash::make($request->password),
+                'is_active'   => true
             ]);
 
             // Create user
@@ -173,15 +172,15 @@ class AuthController extends Controller
 
             // Create student profile
             $student = $this->userService->createStudentProfile($newUser->id, [
-                'school_id' => $schoolAdmin->school_id,
-                'student_code' => $this->generateStudentCode($schoolAdmin->school_id),
-                'seat_number' => $request->seat_number,
-                'academic_year' => $request->academic_year,
-                'section' => $request->section,
-                'birth_date' => $request->birth_date,
-                'gender' => $request->gender,
+                'school_id'      => $schoolAdmin->school_id,
+                'student_code'   => $this->generateStudentCode($schoolAdmin->school_id),
+                'seat_number'    => $request->seat_number,
+                'academic_year'  => $request->academic_year,
+                'section'        => $request->section,
+                'birth_date'     => $request->birth_date,
+                'gender'         => $request->gender,
                 'guardian_phone' => $request->guardian_phone,
-                'is_banned' => false
+                'is_banned'      => false
             ]);
 
             // Log activity
@@ -195,7 +194,7 @@ class AuthController extends Controller
             DB::commit();
 
             return response()->json([
-                'success' => true,
+                'status' => true,
                 'message' => 'تم إنشاء حساب الطالب بنجاح',
                 'data' => [
                     'user' => new UserResource($newUser->load('student.school')),
@@ -210,14 +209,14 @@ class AuthController extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
             Log::error('Create student error: ' . $e->getMessage(), [
-                'request_data' => $request->all(),
-                'created_by' => Auth::id(),
+                'request_data'    => $request->all(),
+                'created_by'      => Auth::id(),
                 'school_admin_id' => $schoolAdmin->id ?? null,
-                'school_id' => $schoolAdmin->school_id ?? null
+                'school_id'       => $schoolAdmin->school_id ?? null
             ]);
 
             return response()->json([
-                'success' => false,
+                'status' => false,
                 'message' => 'حدث خطأ أثناء إنشاء حساب الطالب',
                 'errors' => ['server' => ['خطأ في الخادم']]
             ], 500);
@@ -303,7 +302,7 @@ class AuthController extends Controller
             }
 
             return response()->json([
-                'success' => true,
+                'status' => true,
                 'data' => new UserResource($user)
             ]);
         } catch (\Exception $e) {
@@ -312,7 +311,7 @@ class AuthController extends Controller
             ]);
 
             return response()->json([
-                'success' => false,
+                'status' => false,
                 'message' => 'حدث خطأ أثناء جلب بيانات المستخدم',
                 'errors' => ['server' => ['خطأ في الخادم']]
             ], 500);
@@ -337,7 +336,7 @@ class AuthController extends Controller
             ]);
 
             return response()->json([
-                'success' => true,
+                'status' => true,
                 'message' => 'تم تسجيل الخروج بنجاح'
             ]);
         } catch (\Exception $e) {
@@ -346,7 +345,7 @@ class AuthController extends Controller
             ]);
 
             return response()->json([
-                'success' => false,
+                'status' => false,
                 'message' => 'حدث خطأ أثناء تسجيل الخروج'
             ], 500);
         }

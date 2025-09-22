@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('exam_monitoring', function (Blueprint $table) {
+        Schema::create('exam_monitorings', function (Blueprint $table) {
             $table->id();
             $table->foreignId('session_id')->constrained('exam_sessions')->cascadeOnDelete();
             $table->string('event_type');

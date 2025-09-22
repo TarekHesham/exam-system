@@ -27,8 +27,6 @@ class UpdateExamDTO
             endTime: $data['end_time'] ?? null,
             durationMinutes: $data['duration_minutes'] ?? null,
             totalScore: $data['total_score'] ?? null,
-            allowLateEntry: $data['allow_late_entry'] ?? null,
-            lateEntryLimitMinutes: $data['late_entry_limit_minutes'] ?? null,
             minimumBatteryPercentage: $data['minimum_battery_percentage'] ?? null,
             requireVideoRecording: $data['require_video_recording'] ?? null,
             isPublished: $data['is_published'] ?? null
@@ -44,8 +42,6 @@ class UpdateExamDTO
             'end_time' => $this->endTime,
             'duration_minutes' => $this->durationMinutes,
             'total_score' => $this->totalScore,
-            'allow_late_entry' => $this->allowLateEntry,
-            'late_entry_limit_minutes' => $this->lateEntryLimitMinutes,
             'minimum_battery_percentage' => $this->minimumBatteryPercentage,
             'require_video_recording' => $this->requireVideoRecording,
             'is_published' => $this->isPublished

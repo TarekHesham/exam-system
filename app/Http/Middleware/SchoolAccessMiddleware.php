@@ -27,7 +27,7 @@ class SchoolAccessMiddleware
 
         if (!$schoolId || !$this->authService->canAccessSchool($user, $schoolId)) {
             return response()->json([
-                'success' => false,
+                'status' => false,
                 'message' => 'غير مصرح لك بالوصول إلى بيانات هذه المدرسة',
                 'errors' => ['authorization' => ['وصول غير مسموح للمدرسة']]
             ], 403);

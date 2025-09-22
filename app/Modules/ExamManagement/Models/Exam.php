@@ -5,7 +5,6 @@ namespace App\Modules\ExamManagement\Models;
 use App\Core\Models\BaseModel;
 use App\Modules\Authentication\Models\User;
 use App\Modules\Results\Models\ExamResult;
-use App\Modules\UserManagement\Models\Teacher;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -23,8 +22,6 @@ class Exam extends BaseModel
         'end_time',
         'duration_minutes',
         'total_score',
-        'allow_late_entry',
-        'late_entry_limit_minutes',
         'minimum_battery_percentage',
         'require_video_recording',
         'is_published',
@@ -34,7 +31,6 @@ class Exam extends BaseModel
     protected $casts = [
         'start_time' => 'datetime',
         'end_time' => 'datetime',
-        'allow_late_entry' => 'boolean',
         'require_video_recording' => 'boolean',
         'is_published' => 'boolean',
         'is_active' => 'boolean'
@@ -59,7 +55,7 @@ class Exam extends BaseModel
 
     public function questions(): HasMany
     {
-        return $this->hasMany(ExamQuestion::class)->orderBy('order_number');
+        return $this->hasMany(ExamQuestion::class);
     }
 
     public function sessions(): HasMany
@@ -67,14 +63,14 @@ class Exam extends BaseModel
         return $this->hasMany(ExamSession::class);
     }
 
+    public function sections(): HasMany
+    {
+        return $this->hasMany(ExamSection::class);
+    }
+
     public function results(): HasMany
     {
         return $this->hasMany(ExamResult::class);
-    }
-
-    public function qrCodes(): HasMany
-    {
-        return $this->hasMany(StudentQrCode::class);
     }
 
     // Accessors
@@ -106,8 +102,8 @@ class Exam extends BaseModel
             return true;
         }
 
-        if ($status === 'upcoming' && $this->allow_late_entry) {
-            $lateEntryDeadline = $this->start_time->addMinutes($this->late_entry_limit_minutes);
+        if ($status === 'upcoming') {
+            $lateEntryDeadline = $this->start_time;
             return $now <= $lateEntryDeadline;
         }
 

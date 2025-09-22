@@ -18,8 +18,8 @@ class SchoolAdmin extends BaseModel
 
     protected $casts = [
         'admin_permissions' => 'array',
-        'is_active' => 'boolean',
-        'assigned_at' => 'datetime',
+        'is_active'         => 'boolean',
+        'assigned_at'       => 'datetime',
     ];
 
     public function user(): BelongsTo

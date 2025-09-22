@@ -6,7 +6,18 @@ use App\Core\Models\BaseModel;
 
 class TeacherSchoolAssignment extends BaseModel
 {
-    protected $fillable = ['teacher_id', 'school_id', 'assignment_type', 'is_active', 'assigned_at'];
+    protected $fillable = [
+        'teacher_id',
+        'school_id',
+        'assignment_type', // 'teaching', 'supervision', 'correction'
+        'is_active',
+        'assigned_at'
+    ];
+
+    public $casts = [
+        'assigned_at' => 'datetime',
+        'is_active'   => 'boolean',
+    ];
 
     public function teacher()
     {

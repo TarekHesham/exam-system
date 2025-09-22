@@ -20,8 +20,6 @@ class UpdateExamRequest extends FormRequest
             'end_time' => ['sometimes', 'date', 'after:start_time'],
             'duration_minutes' => ['sometimes', 'integer', 'min:1', 'max:480'],
             'total_score' => ['sometimes', 'integer', 'min:1'],
-            'allow_late_entry' => ['sometimes', 'boolean'],
-            'late_entry_limit_minutes' => ['sometimes', 'integer', 'min:0', 'max:60'],
             'minimum_battery_percentage' => ['sometimes', 'integer', 'min:0', 'max:100'],
             'require_video_recording' => ['sometimes', 'boolean'],
             'is_published' => ['sometimes', 'boolean']

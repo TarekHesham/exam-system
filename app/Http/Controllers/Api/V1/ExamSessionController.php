@@ -18,16 +18,14 @@ class ExamSessionController extends Controller
     public function startSession(Request $request): JsonResponse
     {
         $validator = Validator::make($request->all(), [
-            'exam_id' => 'required|exists:exams,id',
-            'qr_code' => 'required|string',
-            'device_info' => 'required|array',
-            'battery_level' => 'required|integer|min:0|max:100',
-            'location' => 'sometimes|array'
+            'device_info'   => 'sometimes|array',
+            'battery_level' => 'sometimes|integer|min:0|max:100',
+            'location'      => 'sometimes|array'
         ]);
 
         if ($validator->fails()) {
             return response()->json([
-                'status' => 'error',
+                'status' => false,
                 'message' => 'بيانات غير صحيحة',
                 'errors' => $validator->errors()
             ], 422);
@@ -42,90 +40,19 @@ class ExamSessionController extends Controller
             );
 
             return response()->json([
-                'status' => 'success',
+                'status' => true,
                 'message' => 'تم بدء الامتحان بنجاح',
                 'data' => [
                     'session_id' => $session->id,
                     'session_token' => $session->session_token,
-                    'exam' => $session->exam->load('subject'),
+                    'exam' => $session->exam,
                     'time_remaining' => $session->time_remaining_minutes,
                     'can_pause' => $session->exam->allow_pause ?? false
                 ]
             ]);
         } catch (\Exception $e) {
             return response()->json([
-                'status' => 'error',
-                'message' => $e->getMessage()
-            ], 400);
-        }
-    }
-
-    public function getQuestions(string $sessionId): JsonResponse
-    {
-        try {
-            $session = $this->sessionService->getSession($sessionId);
-            $this->authorizeSession($session);
-
-            $questions = $this->sessionService->getSessionQuestions($session);
-
-            return response()->json([
-                'status' => 'success',
-                'message' => 'تم جلب الأسئلة بنجاح',
-                'data' => [
-                    'questions' => $questions,
-                    'total_questions' => $questions->count(),
-                    'total_score' => $questions->sum('points'),
-                    'time_remaining' => $session->time_remaining_minutes
-                ]
-            ]);
-        } catch (\Exception $e) {
-            return response()->json([
-                'status' => 'error',
-                'message' => $e->getMessage()
-            ], 400);
-        }
-    }
-
-    public function saveAnswer(Request $request, string $sessionId, int $questionId): JsonResponse
-    {
-        $validator = Validator::make($request->all(), [
-            'answer_text' => 'sometimes|string',
-            'answer_image' => 'sometimes|string',
-            'answer_data' => 'sometimes|array',
-            'time_spent_seconds' => 'sometimes|integer|min:0'
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'بيانات الإجابة غير صحيحة',
-                'errors' => $validator->errors()
-            ], 422);
-        }
-
-        try {
-            $session = $this->sessionService->getSession($sessionId);
-            $this->authorizeSession($session);
-
-            $answer = $this->sessionService->saveAnswer(
-                $session,
-                $questionId,
-                $request->all()
-            );
-
-            return response()->json([
-                'status' => 'success',
-                'message' => 'تم حفظ الإجابة بنجاح',
-                'data' => [
-                    'answer_id' => $answer->id,
-                    'question_id' => $questionId,
-                    'saved_at' => $answer->answered_at,
-                    'auto_saved' => true
-                ]
-            ]);
-        } catch (\Exception $e) {
-            return response()->json([
-                'status' => 'error',
+                'status' => false,
                 'message' => $e->getMessage()
             ], 400);
         }
@@ -143,7 +70,7 @@ class ExamSessionController extends Controller
 
         if ($validator->fails()) {
             return response()->json([
-                'status' => 'error',
+                'status' => false,
                 'message' => 'يجب تأكيد إرسال الامتحان',
                 'errors' => $validator->errors()
             ], 422);
@@ -156,7 +83,7 @@ class ExamSessionController extends Controller
             $result = $this->sessionService->submitSession($session, $request->all());
 
             return response()->json([
-                'status' => 'success',
+                'status' => true,
                 'message' => 'تم إرسال الامتحان بنجاح',
                 'data' => [
                     'session_id' => $session->id,
@@ -170,7 +97,7 @@ class ExamSessionController extends Controller
             ]);
         } catch (\Exception $e) {
             return response()->json([
-                'status' => 'error',
+                'status' => false,
                 'message' => $e->getMessage()
             ], 400);
         }
@@ -185,12 +112,12 @@ class ExamSessionController extends Controller
             $timeData = $this->sessionService->getTimeRemaining($session);
 
             return response()->json([
-                'status' => 'success',
+                'status' => true,
                 'data' => $timeData
             ]);
         } catch (\Exception $e) {
             return response()->json([
-                'status' => 'error',
+                'status' => false,
                 'message' => $e->getMessage()
             ], 400);
         }
@@ -209,7 +136,7 @@ class ExamSessionController extends Controller
             ]);
 
             return response()->json([
-                'status' => 'success',
+                'status' => true,
                 'message' => 'Heartbeat received',
                 'data' => [
                     'server_time' => Carbon::now(),
@@ -219,7 +146,7 @@ class ExamSessionController extends Controller
             ]);
         } catch (\Exception $e) {
             return response()->json([
-                'status' => 'error',
+                'status' => false,
                 'message' => $e->getMessage()
             ], 400);
         }
