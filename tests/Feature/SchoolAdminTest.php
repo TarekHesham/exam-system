@@ -79,7 +79,7 @@ class SchoolAdminTest extends TestCase
             'password' => 'password123',
             'password_confirmation' => 'password123',
             'academic_year' => 'third',
-            'section' => 'science',
+            'section' => 'scientific',
             'birth_date' => '2005-01-01',
             'gender' => 'male',
             'guardian_phone' => '01111111111'

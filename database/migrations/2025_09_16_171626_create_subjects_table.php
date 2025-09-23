@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('code')->unique();
-            $table->enum('section', ['science', 'literature', 'common']);
+            $table->enum('section', ['scientific', 'literature', 'common']);
             $table->integer('duration_minutes');
             $table->integer('max_score');
             $table->boolean('has_essay_questions')->default(false);

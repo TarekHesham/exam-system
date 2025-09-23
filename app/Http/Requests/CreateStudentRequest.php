@@ -22,7 +22,7 @@ class CreateStudentRequest extends FormRequest
             'password' => 'required|string|min:8|confirmed',
             'seat_number' => 'sometimes|string|max:20',
             'academic_year' => 'required|in:first,second,third',
-            'section' => 'required|in:science,literature',
+            'section' => 'required|in:scientific,literature',
             'birth_date' => 'required|date|before:today',
             'gender' => 'required|in:male,female',
             'guardian_phone' => 'required|string|max:20',

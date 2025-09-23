@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\V1\ExamQuestionController;
 use App\Http\Controllers\Api\V1\ExamResultController;
 use App\Http\Controllers\Api\V1\ExamSessionController;
 use App\Http\Controllers\Api\V1\StudentExamController;
+use App\Http\Controllers\Api\V1\SubjectController;
 use App\Http\Controllers\Api\V1\TeacherController;
 use App\Http\Controllers\Api\V1\TeacherExamController;
 
@@ -169,4 +170,9 @@ Route::middleware('roles:ministry_admin')->prefix('admin')->group(function () {
     Route::post('appeals/{appealId}/review', [AppealController::class, 'review']);
     Route::post('appeals/{appealId}/approve', [AppealController::class, 'approve']);
     Route::post('appeals/{appealId}/reject', [AppealController::class, 'reject']);
+
+    // ============================================
+    // Subject Management
+    // ============================================
+    Route::apiResource('subjects', SubjectController::class);
 });

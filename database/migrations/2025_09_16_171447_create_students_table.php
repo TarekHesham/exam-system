@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('student_code')->unique();
             $table->string('seat_number')->nullable();
             $table->enum('academic_year', ['first', 'second', 'third']);
-            $table->enum('section', ['science', 'literature']);
+            $table->enum('section', ['scientific', 'literature']);
             $table->date('birth_date');
             $table->enum('gender', ['male', 'female']);
             $table->string('guardian_phone')->nullable();
