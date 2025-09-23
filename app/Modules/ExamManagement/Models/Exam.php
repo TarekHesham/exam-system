@@ -5,9 +5,8 @@ namespace App\Modules\ExamManagement\Models;
 use App\Core\Models\BaseModel;
 use App\Modules\Authentication\Models\User;
 use App\Modules\Results\Models\ExamResult;
+use Illuminate\Database\Eloquent\Relations\{BelongsTo, HasMany};
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Exam extends BaseModel
 {
@@ -29,11 +28,11 @@ class Exam extends BaseModel
     ];
 
     protected $casts = [
-        'start_time' => 'datetime',
-        'end_time' => 'datetime',
-        'require_video_recording' => 'boolean',
+        'start_time'   => 'datetime',
+        'end_time'     => 'datetime',
         'is_published' => 'boolean',
-        'is_active' => 'boolean'
+        'is_active'    => 'boolean',
+        'require_video_recording' => 'boolean',
     ];
 
     protected $appends = [

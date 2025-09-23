@@ -28,6 +28,13 @@ class ExamSession extends BaseModel
         'session_notes'
     ];
 
+    protected $casts = [
+        'started_at' => 'datetime',
+        'submitted_at' => 'datetime',
+        'video_recorded' => 'boolean',
+        'battery_level_at_start' => 'integer',
+    ];
+
     public function exam()
     {
         return $this->belongsTo(Exam::class);

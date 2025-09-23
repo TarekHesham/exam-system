@@ -19,6 +19,14 @@ class StudentAnswer extends BaseModel
         'needs_review'
     ];
 
+    protected $casts = [
+        'is_flagged'   => 'boolean',
+        'needs_review' => 'boolean',
+        'answer_data'  => 'array',
+        'answered_at'  => 'datetime',
+        'time_spent_seconds' => 'integer'
+    ];
+
     public function session()
     {
         return $this->belongsTo(ExamSession::class, 'session_id');

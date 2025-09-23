@@ -41,7 +41,7 @@ class UpdateTeacherRequest extends FormRequest
                 Rule::unique('users', 'national_id')->ignore($userId),
             ],
             'password' => 'sometimes|string|min:8|confirmed',
-            'subject_specialization' => 'sometimes|string|max:255',
+            'subject_id' => 'sometimes|string|max:255',
             'teacher_type' => 'sometimes|in:regular,supervisor',
             'can_create_exams' => 'sometimes|boolean',
             'can_correct_essays' => 'sometimes|boolean',

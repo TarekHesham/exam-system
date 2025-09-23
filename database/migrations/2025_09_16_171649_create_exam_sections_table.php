@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('code')->index();
             $table->string('name');
             $table->unsignedInteger('order_number')->default(1);
-            $table->boolean('shuffle_questions')->default(false);
             $table->timestamps();
         });
     }

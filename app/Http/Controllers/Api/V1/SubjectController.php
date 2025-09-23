@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api\V1;
 use App\Core\Contracts\Services\SubjectServiceInterface;
 use App\Core\DTOs\SubjectDTO;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreSubjectRequest;
+use App\Http\Requests\UpdateSubjectRequest;
 use Illuminate\Http\Request;
 
 class SubjectController extends Controller
@@ -25,7 +27,7 @@ class SubjectController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreSubjectRequest $request)
     {
         $dto = new SubjectDTO(...$request->validated());
         $subject = $this->service->store($dto);
@@ -46,8 +48,9 @@ class SubjectController extends Controller
 
     /**
      * Update the specified resource in storage.
+     * @param  Request  $request
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateSubjectRequest $request, string $id)
     {
         $dto = new SubjectDTO(
             $request->input('name', ''),

@@ -16,7 +16,7 @@ class Teacher extends BaseModel
     protected $fillable = [
         'user_id',
         'teacher_code',
-        'subject_specialization',
+        'subject_id',
         'teacher_type', // 'regular', 'supervisor'
         'can_create_exams',
         'can_correct_essays'

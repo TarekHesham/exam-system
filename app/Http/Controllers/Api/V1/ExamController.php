@@ -7,11 +7,11 @@ use App\Core\DTOs\ExamFilterDTO;
 use App\Core\DTOs\UpdateExamDTO;
 use App\Http\Controllers\Controller;
 use App\Core\Services\ExamService;
-use App\Http\Requests\Exam\CreateExamRequest;
-use App\Http\Requests\Exam\UpdateExamRequest;
+use App\Http\Requests\CreateExamRequest;
+use App\Http\Requests\UpdateExamRequest;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\{Auth, DB};
+use Illuminate\Support\Facades\Auth;
 
 class ExamController extends Controller
 {
@@ -27,9 +27,9 @@ class ExamController extends Controller
         $exams = $this->examService->getExams($filters);
 
         return response()->json([
-            'status' => true,
+            'status'  => true,
             'message' => 'تم جلب قائمة الامتحانات بنجاح',
-            'data' => $exams
+            'data'    => $exams
         ]);
     }
 

@@ -11,9 +11,7 @@ class ExamSection extends BaseModel
         'code',
         'name',
         'order_number',
-        'shuffle_questions',
     ];
-
 
     public function exam()
     {

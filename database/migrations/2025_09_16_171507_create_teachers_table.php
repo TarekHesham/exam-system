@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('teachers', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('subject_id')->constrained()->cascadeOnNull();
             $table->string('teacher_code')->unique();
-            $table->string('subject_specialization')->nullable();
             $table->enum('teacher_type', ['regular', 'supervisor']);
             $table->boolean('can_create_exams')->default(false);
             $table->boolean('can_correct_essays')->default(false);

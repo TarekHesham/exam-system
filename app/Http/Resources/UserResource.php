@@ -48,7 +48,7 @@ class UserResource extends JsonResource
                 $data += [
                     'teacher_id'             => $this->teacher?->id,
                     'teacher_code'           => $this->teacher?->teacher_code,
-                    'subject_specialization' => $this->teacher?->subject_specialization,
+                    'subject_id' => $this->teacher?->subject_id,
                     'teacher_type'           => $this->teacher?->teacher_type,
                     'can_create_exams'       => $this->teacher?->can_create_exams,
                     'can_correct_essays'     => $this->teacher?->can_correct_essays,

@@ -69,7 +69,7 @@ class TeacherController extends Controller
 
             // Update teacher profile
             $teacher->update($request->only([
-                'subject_specialization',
+                'subject_id',
                 'teacher_type',
                 'can_create_exams',
                 'can_correct_essays'

@@ -95,7 +95,7 @@ class AuthController extends Controller
             // Create teacher profile
             $teacher = $this->userService->createTeacherProfile($user->id, [
                 'teacher_code'           => $this->generateTeacherCode(),
-                'subject_specialization' => $request->subject_specialization,
+                'subject_id'             => $request->subject_id,
                 'teacher_type'           => $request->get('teacher_type', 'regular'),
                 'can_create_exams'       => $request->get('can_create_exams', false),
                 'can_correct_essays'     => $request->get('can_correct_essays', false),

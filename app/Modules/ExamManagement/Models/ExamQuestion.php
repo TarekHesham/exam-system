@@ -21,6 +21,12 @@ class ExamQuestion extends BaseModel
         'section_id',
     ];
 
+    protected $casts = [
+        'options'     => 'array',
+        'is_required' => 'boolean',
+        'points'      => 'integer',
+    ];
+
     public function exam(): BelongsTo
     {
         return $this->belongsTo(Exam::class);

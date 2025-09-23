@@ -120,19 +120,6 @@ Route::middleware('roles:ministry_admin')->prefix('admin')->group(function () {
     });
 
     // ============================================
-    // Exam Questions Management
-    // ============================================
-    Route::prefix('exams/{examId}/questions')->group(function () {
-        Route::get('/', [ExamQuestionController::class, 'index']);
-        Route::post('/', [ExamQuestionController::class, 'store']);
-        Route::get('/{questionId}', [ExamQuestionController::class, 'show']);
-        Route::put('/{questionId}', [ExamQuestionController::class, 'update']);
-        Route::delete('/{questionId}', [ExamQuestionController::class, 'destroy']);
-        Route::post('/reorder', [ExamQuestionController::class, 'reorder']);
-        Route::post('/import', [ExamQuestionController::class, 'import']);
-    });
-
-    // ============================================
     // Student Exam Access Routes
     // ============================================
     Route::prefix('student')->group(function () {
@@ -175,4 +162,9 @@ Route::middleware('roles:ministry_admin')->prefix('admin')->group(function () {
     // Subject Management
     // ============================================
     Route::apiResource('subjects', SubjectController::class);
+
+    // ============================================
+    // Exam Questions Management
+    // ============================================
+    Route::apiResource('exam-questions', ExamQuestionController::class);
 });
