@@ -81,7 +81,7 @@ Route::middleware('roles:school_admin')->prefix('admin')->group(function () {
     Route::post('create-student', [AuthController::class, 'createStudent']);
 });
 
-Route::middleware('roles:ministry_admin')->prefix('admin')->group(function () {
+Route::middleware('roles:ministry_admin|teacher')->prefix('admin')->group(function () {
     // Account creation routes
     Route::post('create-teacher', [AuthController::class, 'createTeacher']);
     Route::post('create-school-admin', [AuthController::class, 'createSchoolAdmin']);
@@ -100,23 +100,12 @@ Route::middleware('roles:ministry_admin')->prefix('admin')->group(function () {
         Route::get('/', [ExamController::class, 'index']);
         Route::post('/', [ExamController::class, 'store']);
         Route::get('/{id}', [ExamController::class, 'show']);
-        Route::put('/{id}', [ExamController::class, 'update']);
+        Route::put('/{exam}', [ExamController::class, 'update']);
         Route::delete('/{id}', [ExamController::class, 'destroy']);
-
-        // Status Management
-        Route::post('/{id}/publish', [ExamController::class, 'publish']);
-        Route::post('/{id}/unpublish', [ExamController::class, 'unpublish']);
-        Route::post('/{id}/activate', [ExamController::class, 'activate']);
-        Route::post('/{id}/deactivate', [ExamController::class, 'deactivate']);
 
         // Advanced Features
         Route::post('/{id}/duplicate', [ExamController::class, 'duplicate']);
         Route::get('/{id}/statistics', [ExamController::class, 'statistics']);
-
-        // Filter by Status
-        Route::get('/status/upcoming', [ExamController::class, 'upcoming']);
-        Route::get('/status/ongoing', [ExamController::class, 'ongoing']);
-        Route::get('/status/completed', [ExamController::class, 'completed']);
     });
 
     // ============================================
@@ -167,4 +156,5 @@ Route::middleware('roles:ministry_admin')->prefix('admin')->group(function () {
     // Exam Questions Management
     // ============================================
     Route::apiResource('exam-questions', ExamQuestionController::class);
+    Route::get('exams/{id}/questions', [ExamQuestionController::class, 'getExamQuestions']);
 });

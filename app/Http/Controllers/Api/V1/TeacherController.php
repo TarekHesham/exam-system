@@ -27,15 +27,10 @@ class TeacherController extends Controller
         $teachers = Teacher::with(['user.teacher.schoolAssignments.school'])
             ->paginate(15);
 
-        return response()->json([
-            'data' => UserResource::collection($teachers->pluck('user')),
-            'meta' => [
-                'current_page' => $teachers->currentPage(),
-                'last_page'    => $teachers->lastPage(),
-                'per_page'     => $teachers->perPage(),
-                'total'        => $teachers->total(),
-            ],
-        ]);
+        return $this->successResponsePaginate(
+            UserResource::collection($teachers->pluck('user')),
+            $teachers
+        );
     }
 
     /**

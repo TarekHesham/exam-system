@@ -2,21 +2,21 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Core\DTOs\CreateExamDTO;
-use App\Core\DTOs\ExamFilterDTO;
-use App\Core\DTOs\UpdateExamDTO;
+use App\Core\Contracts\Services\ExamServiceInterface;
 use App\Http\Controllers\Controller;
-use App\Core\Services\ExamService;
-use App\Http\Requests\CreateExamRequest;
-use App\Http\Requests\UpdateExamRequest;
-use Illuminate\Http\Request;
-use Illuminate\Http\JsonResponse;
+use App\Core\DTOs\{CreateExamDTO, ExamFilterDTO, UpdateExamDTO};
+use App\Http\Requests\{CreateExamRequest, UpdateExamRequest};
+use App\Http\Resources\ExamResource;
+use App\Modules\ExamManagement\Models\Exam;
+use Exception;
+use Illuminate\Http\{Request, JsonResponse};
 use Illuminate\Support\Facades\Auth;
+use InvalidArgumentException;
 
 class ExamController extends Controller
 {
     public function __construct(
-        private ExamService $examService
+        private ExamServiceInterface $examService
     ) {
         //
     }
@@ -26,23 +26,36 @@ class ExamController extends Controller
         $filters = ExamFilterDTO::fromRequest($request->all());
         $exams = $this->examService->getExams($filters);
 
-        return response()->json([
-            'status'  => true,
-            'message' => 'تم جلب قائمة الامتحانات بنجاح',
-            'data'    => $exams
-        ]);
+        return $this->successResponsePaginate(
+            ExamResource::collection($exams),
+            $exams,
+            'تم جلب الامتحانات بنجاح'
+        );
     }
 
-    public function store(CreateExamRequest $request): JsonResponse
+    public function store(CreateExamRequest $request)
     {
-        $dto = CreateExamDTO::fromArray($request->validated());
-        $exam = $this->examService->createExam($dto);
+        try {
+            $dto = CreateExamDTO::fromRequest($request);
+            $exam = $this->examService->createExam($dto);
 
-        return response()->json([
-            'status' => true,
-            'message' => 'تم إنشاء الامتحان بنجاح',
-            'data' => $exam->load(['creator'])
-        ], 201);
+            return response()->json([
+                'success' => true,
+                'message' => 'تم إنشاء الامتحان بنجاح',
+                'data' => $exam->load(['subject', 'creator'])
+            ], 201);
+        } catch (InvalidArgumentException $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage()
+            ], 422);
+        } catch (Exception $e) {
+            logger($e->getMessage());
+            return response()->json([
+                'success' => false,
+                'message' => 'حدث خطأ أثناء إنشاء الامتحان'
+            ], 500);
+        }
     }
 
     public function show(int $id): JsonResponse
@@ -56,16 +69,31 @@ class ExamController extends Controller
         ]);
     }
 
-    public function update(UpdateExamRequest $request, int $id): JsonResponse
+    public function update(UpdateExamRequest $request, Exam $exam)
     {
-        $dto = UpdateExamDTO::fromArray($request->validated());
-        $exam = $this->examService->updateExam($id, $dto);
+        try {
+            if (!$exam) {
+                return $this->errorResponse('الامتحان غير موجود');
+            }
 
-        return response()->json([
-            'status' => true,
-            'message' => 'تم تحديث الامتحان بنجاح',
-            'data' => $exam->load(['creator'])
-        ]);
+            $dto = UpdateExamDTO::fromRequest($request);
+            $this->examService->updateExam($exam->id, $dto);
+
+            return response()->json([
+                'success' => true,
+                'message' => 'تم تحديث الامتحان بنجاح'
+            ]);
+        } catch (InvalidArgumentException $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage()
+            ], 422);
+        } catch (Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'حدث خطأ أثناء تحديث الامتحان'
+            ], 500);
+        }
     }
 
     public function destroy(int $id): JsonResponse
@@ -75,50 +103,6 @@ class ExamController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'تم حذف الامتحان بنجاح'
-        ]);
-    }
-
-    public function publish(int $id): JsonResponse
-    {
-        $exam = $this->examService->publishExam($id);
-
-        return response()->json([
-            'status' => true,
-            'message' => 'تم نشر الامتحان بنجاح',
-            'data' => $exam
-        ]);
-    }
-
-    public function unpublish(int $id): JsonResponse
-    {
-        $exam = $this->examService->unpublishExam($id);
-
-        return response()->json([
-            'status' => true,
-            'message' => 'تم إلغاء نشر الامتحان بنجاح',
-            'data' => $exam
-        ]);
-    }
-
-    public function activate(int $id): JsonResponse
-    {
-        $exam = $this->examService->activateExam($id);
-
-        return response()->json([
-            'status' => true,
-            'message' => 'تم تفعيل الامتحان بنجاح',
-            'data' => $exam
-        ]);
-    }
-
-    public function deactivate(int $id): JsonResponse
-    {
-        $exam = $this->examService->deactivateExam($id);
-
-        return response()->json([
-            'status' => true,
-            'message' => 'تم إلغاء تفعيل الامتحان بنجاح',
-            'data' => $exam
         ]);
     }
 

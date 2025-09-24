@@ -6,20 +6,21 @@ use App\Exceptions\ExamAccessDeniedException;
 use App\Modules\ExamManagement\Models\{Exam, ExamSession, ExamQuestion, StudentAnswer};
 use App\Modules\Monitoring\Models\ExamMonitoring;
 use App\Modules\Results\Models\ExamResult;
-use App\Modules\UserManagement\Models\Student;
-use App\Modules\UserManagement\Models\Teacher;
-use Carbon\Carbon;
+use App\Modules\UserManagement\Models\{Student, Teacher};
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\{DB, Cache};
 use Illuminate\Support\Str;
 use Illuminate\Validation\UnauthorizedException;
 use InvalidArgumentException;
+use Carbon\Carbon;
 
 class ExamSessionService
 {
     public function __construct(
         private StudentExamService $studentExamService
-    ) {}
+    ) {
+        // 
+    }
 
     public function startSession(int $examId, int $studentId, array $sessionData): ExamSession
     {
@@ -170,6 +171,42 @@ class ExamSessionService
         });
     }
 
+    public function saveAllAnswers(ExamSession $session, array $answers)
+    {
+        return DB::transaction(function () use ($session, $answers) {
+            StudentAnswer::where('session_id', $session->id)->delete();
+
+            $now = Carbon::now();
+            $insertData = [];
+
+            foreach ($answers as $answerData) {
+                $insertData[] = [
+                    'session_id'         => $session->id,
+                    'question_id'        => $answerData['question_id'],
+                    'answer_text'        => $answerData['answer_text'] ?? null,
+                    'answer_image'       => $answerData['answer_image'] ?? null,
+                    'answer_data'        => isset($answerData['answer_data']) ? json_encode($answerData['answer_data']) : null,
+                    'time_spent_seconds' => $answerData['time_spent_seconds'] ?? 0,
+                    'is_flagged'         => false,
+                    'needs_review'       => false,
+                    'answered_at'        => $now,
+                    'created_at'         => $now,
+                    'updated_at'         => $now,
+                ];
+            }
+
+            // bulk insert
+            StudentAnswer::insert($insertData);
+
+            // log
+            $this->logSessionEvent($session, 'bulk_answers_saved', [
+                'answers_count' => count($insertData)
+            ]);
+
+            return collect($insertData);
+        });
+    }
+
     /**
      * Teacher creates session for student after QR scan
      */
@@ -260,13 +297,16 @@ class ExamSessionService
                 throw new InvalidArgumentException('الجلسة غير نشطة أو تم إرسالها مسبقاً');
             }
 
+            // Save answers
+            $this->saveAllAnswers($session, $submitData['answers'] ?? []);
+
+            // Update session
             $session->update([
-                'submitted_at' => Carbon::now(),
+                'submitted_at'   => Carbon::now(),
                 'session_status' => 'submitted',
-                'session_notes' => $submitData['notes'] ?? null
+                'session_notes'  => $submitData['notes'] ?? null
             ]);
 
-            $answers = StudentAnswer::where('session_id', $session->id)->get();
             $totalQuestions = ExamQuestion::where('exam_id', $session->exam_id)->count();
 
             $preliminaryScore = $this->calculatePreliminaryScore($session);
@@ -275,12 +315,13 @@ class ExamSessionService
 
             $result = $this->createExamResult($session, $preliminaryScore, $needsManualCorrection);
 
+            $answersCount = count($submitData['answers'] ?? []);
             $this->logSessionEvent($session, 'session_submitted', [
-                'total_questions' => $totalQuestions,
-                'answered_questions' => $answers->count(),
-                'preliminary_score' => $preliminaryScore,
+                'total_questions'         => $totalQuestions,
+                'answered_questions'      => $answersCount,
+                'preliminary_score'       => $preliminaryScore,
                 'needs_manual_correction' => $needsManualCorrection,
-                'submission_time' => Carbon::now()
+                'submission_time'         => Carbon::now()
             ]);
 
             Cache::forget("exam_session_{$session->id}");
@@ -289,7 +330,7 @@ class ExamSessionService
             return [
                 'session_id' => $session->id,
                 'total_questions' => $totalQuestions,
-                'answered_questions' => $answers->count(),
+                'answered_questions' => $answersCount,
                 'preliminary_score' => $preliminaryScore,
                 'needs_manual_correction' => $needsManualCorrection,
                 'result_available_at' => $needsManualCorrection ? null : Carbon::now(),
@@ -519,14 +560,14 @@ class ExamSessionService
         $percentage = $maxScore > 0 ? round(($preliminaryScore / $maxScore) * 100, 2) : 0;
 
         return ExamResult::create([
-            'session_id' => $session->id,
-            'student_id' => $session->student_id,
-            'exam_id' => $session->exam_id,
-            'total_score' => $needsManualCorrection ? null : $preliminaryScore,
-            'max_possible_score' => $maxScore,
-            'percentage' => $needsManualCorrection ? null : $percentage,
-            'result_status' => $needsManualCorrection ? 'pending' : 'published',
-            'question_scores' => $this->getQuestionScores($session),
+            'session_id'          => $session->id,
+            'student_id'          => $session->student_id,
+            'exam_id'             => $session->exam_id,
+            'total_score'         => $needsManualCorrection ? null : $preliminaryScore,
+            'max_possible_score'  => $maxScore,
+            'percentage'          => $needsManualCorrection ? null : $percentage,
+            'result_status'       => $needsManualCorrection ? 'pending' : 'published',
+            'question_scores'     => $this->getQuestionScores($session),
             'result_published_at' => $needsManualCorrection ? null : Carbon::now()
         ]);
     }

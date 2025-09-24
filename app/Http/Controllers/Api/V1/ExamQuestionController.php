@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Core\Contracts\Services\ExamQuestionServiceInterface;
 use App\Core\DTOs\ExamQuestionData;
-use App\Http\Controllers\Controller;
 use App\Http\Requests\{StoreExamQuestionRequest, UpdateExamQuestionRequest};
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
+use Illuminate\Http\{JsonResponse, Request};
+use App\Http\Controllers\Controller;
+use App\Http\Resources\ExamQuestionResource;
+use App\Http\Resources\ExamSectionWithQuestionsResource;
+use App\Modules\ExamManagement\Models\Exam;
 
 class ExamQuestionController extends Controller
 {
@@ -86,5 +88,51 @@ class ExamQuestionController extends Controller
         }
 
         return $this->successResponse([], 'Question deleted successfully', 200);
+    }
+
+    /**
+     * Get sections (with questions) and unsectioned questions of an exam.
+     */
+    public function getExamQuestions(int $id): JsonResponse
+    {
+        $exam = Exam::with([
+            'sections' => function ($query) {
+                $query->select(['id', 'exam_id', 'code', 'name', 'order_number'])
+                    ->orderBy('order_number');
+            },
+            'sections.questions' => function ($query) {
+                $query->select([
+                    'id',
+                    'exam_id',
+                    'section_id',
+                    'question_text',
+                    'question_image',
+                    'question_type',
+                    'options',
+                    'points',
+                    'is_required',
+                    'help_text'
+                ])->orderBy('id');
+            },
+            'questions' => function ($query) {
+                $query->select([
+                    'id',
+                    'exam_id',
+                    'section_id',
+                    'question_text',
+                    'question_image',
+                    'question_type',
+                    'options',
+                    'points',
+                    'is_required',
+                    'help_text'
+                ])->whereNull('section_id')->orderBy('id');
+            }
+        ])->findOrFail($id);
+
+        return response()->json([
+            'sections' => ExamSectionWithQuestionsResource::collection($exam->sections),
+            'unsectioned_questions' => ExamQuestionResource::collection($exam->questions),
+        ]);
     }
 }

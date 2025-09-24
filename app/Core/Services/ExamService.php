@@ -24,25 +24,15 @@ class ExamService implements ExamServiceInterface
     {
         $this->validateExamTimes($dto->startTime, $dto->endTime, $dto->durationMinutes);
 
-        $examData = [
-            'subject_id' => $dto->subjectId,
-            'created_by' => $dto->createdBy,
-            'title' => $dto->title,
-            'description' => $dto->description,
-            'exam_type' => $dto->examType,
-            'academic_year' => $dto->academicYear,
-            'start_time' => $dto->startTime,
-            'end_time' => $dto->endTime,
-            'duration_minutes' => $dto->durationMinutes,
-            'total_score' => $dto->totalScore,
-            'minimum_battery_percentage' => $dto->minimumBatteryPercentage,
-            'require_video_recording' => $dto->requireVideoRecording,
-            'is_published' => false,
-            'is_active' => true
-        ];
+        return DB::transaction(function () use ($dto) {
+            $exam = $this->examRepository->create($dto->toArray());
 
-        return DB::transaction(function () use ($examData) {
-            return $this->examRepository->create($examData);
+            // activity()
+            //     ->performedOn($exam)
+            //     ->causedBy(Auth::user())
+            //     ->log('created_exam');
+
+            return $exam;
         });
     }
 
@@ -50,22 +40,30 @@ class ExamService implements ExamServiceInterface
     {
         $exam = $this->getExam($examId);
 
+        $this->validateExamCanBeModified($exam);
+
         if ($dto->startTime && $dto->endTime) {
-            $this->validateExamTimes($dto->startTime, $dto->endTime, $dto->durationMinutes ?? $exam->duration_minutes);
+            $this->validateExamTimes(
+                $dto->startTime,
+                $dto->endTime,
+                $dto->durationMinutes ?? $exam->duration_minutes
+            );
         }
 
-        // Check if exam has started
-        if ($exam->start_time <= Carbon::now() && $exam->is_published) {
-            throw new InvalidArgumentException('لا يمكن تعديل الامتحان بعد بدءه');
-        }
-
-        $updateData = array_filter($dto->toArray(), fn($value) => $value !== null);
-
-        DB::transaction(function () use ($exam, $updateData) {
+        return DB::transaction(function () use ($exam, $dto, $examId) {
+            $updateData = $dto->toArray();
             $this->examRepository->update($exam, $updateData);
-        });
 
-        return $this->getExam($examId);
+            $this->clearExamCache($examId);
+
+            // activity()
+            //     ->performedOn($exam)
+            //     ->causedBy(Auth::user())
+            //     ->withProperties(['updated_fields' => array_keys($updateData)])
+            //     ->log('updated_exam');
+
+            return $this->getExam($examId);
+        });
     }
 
     public function deleteExam(int $examId): bool
@@ -80,6 +78,61 @@ class ExamService implements ExamServiceInterface
         return DB::transaction(function () use ($exam) {
             return $this->examRepository->delete($exam);
         });
+    }
+
+    private function validateExamCanBeModified(Exam $exam): void
+    {
+        if ($exam->start_time <= Carbon::now() && $exam->is_published) {
+            throw new InvalidArgumentException('لا يمكن تعديل الامتحان بعد بدءه');
+        }
+    }
+
+    private function validateExamTimes(string $startTime, string $endTime, int $durationMinutes): void
+    {
+        $start = Carbon::parse($startTime);
+        $end = Carbon::parse($endTime);
+
+        if ($start >= $end) {
+            throw new InvalidArgumentException('وقت بداية الامتحان يجب أن يكون قبل وقت النهاية');
+        }
+
+        $diffInMinutes = $start->diffInMinutes($end);
+        if ($diffInMinutes < $durationMinutes) {
+            throw new InvalidArgumentException('مدة الامتحان تتجاوز الوقت المحدد بين البداية والنهاية');
+        }
+
+        if ($start <= Carbon::now()) {
+            throw new InvalidArgumentException('وقت بداية الامتحان يجب أن يكون في المستقبل');
+        }
+    }
+
+    private function validateExamForPublishing(Exam $exam): void
+    {
+        if ($exam->questions()->count() === 0) {
+            throw new InvalidArgumentException('لا يمكن نشر الامتحان بدون أسئلة');
+        }
+
+        $questionsTotal = $exam->questions()->sum('points');
+        if ($exam->total_score != $questionsTotal) {
+            throw new InvalidArgumentException("مجموع درجات الأسئلة ({$questionsTotal}) لا يساوي الدرجة الكلية للامتحان ({$exam->total_score})");
+        }
+
+        if (Carbon::parse($exam->start_time) <= Carbon::now()) {
+            throw new InvalidArgumentException('لا يمكن نشر امتحان بوقت بداية في الماضي');
+        }
+    }
+
+    public function clearExamCache(int $examId): void
+    {
+        $cacheKeys = [
+            "exam_student_data_{$examId}",
+            "exam_full_{$examId}",
+            "exam_stats_{$examId}"
+        ];
+
+        foreach ($cacheKeys as $key) {
+            Cache::forget($key);
+        }
     }
 
     public function getExam(int $examId): Exam
@@ -426,49 +479,6 @@ class ExamService implements ExamServiceInterface
                 'لا تغادر الصفحة أو تفتح تطبيقات أخرى'
             ]
         ];
-    }
-
-    /**
-     * Clear exam cache when exam is updated
-     */
-    public function clearExamCache(int $examId): void
-    {
-        Cache::forget("exam_student_data_{$examId}");
-        Cache::forget("exam_full_{$examId}");
-    }
-
-    private function validateExamTimes(string $startTime, string $endTime, int $durationMinutes): void
-    {
-        $start = Carbon::parse($startTime);
-        $end = Carbon::parse($endTime);
-
-        if ($start >= $end) {
-            throw new InvalidArgumentException('وقت بداية الامتحان يجب أن يكون قبل وقت النهاية');
-        }
-
-        $diffInMinutes = $start->diffInMinutes($end);
-        if ($diffInMinutes < $durationMinutes) {
-            throw new InvalidArgumentException('مدة الامتحان تتجاوز الوقت المحدد');
-        }
-
-        if ($start <= Carbon::now()) {
-            throw new InvalidArgumentException('وقت بداية الامتحان يجب أن يكون في المستقبل');
-        }
-    }
-
-    private function validateExamForPublishing(Exam $exam): void
-    {
-        if ($exam->questions()->count() === 0) {
-            throw new InvalidArgumentException('لا يمكن نشر الامتحان بدون أسئلة');
-        }
-
-        if ($exam->total_score != $exam->questions()->sum('points')) {
-            throw new InvalidArgumentException('مجموع درجات الأسئلة لا يساوي الدرجة الكلية للامتحان');
-        }
-
-        if (Carbon::parse($exam->start_time) <= Carbon::now()) {
-            throw new InvalidArgumentException('لا يمكن نشر امتحان بوقت بداية في الماضي');
-        }
     }
 
     /**

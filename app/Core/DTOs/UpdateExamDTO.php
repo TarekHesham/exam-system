@@ -2,6 +2,8 @@
 
 namespace App\Core\DTOs;
 
+use App\Http\Requests\UpdateExamRequest;
+
 class UpdateExamDTO
 {
     public function __construct(
@@ -11,25 +13,27 @@ class UpdateExamDTO
         public readonly ?string $endTime = null,
         public readonly ?int $durationMinutes = null,
         public readonly ?int $totalScore = null,
-        public readonly ?bool $allowLateEntry = null,
-        public readonly ?int $lateEntryLimitMinutes = null,
         public readonly ?int $minimumBatteryPercentage = null,
         public readonly ?bool $requireVideoRecording = null,
-        public readonly ?bool $isPublished = null
+        public readonly ?bool $isPublished = null,
+        public readonly ?bool $isActive = null
     ) {}
 
-    public static function fromArray(array $data): self
+    public static function fromRequest(UpdateExamRequest $request): self
     {
+        $validated = $request->validated();
+
         return new self(
-            title: $data['title'] ?? null,
-            description: $data['description'] ?? null,
-            startTime: $data['start_time'] ?? null,
-            endTime: $data['end_time'] ?? null,
-            durationMinutes: $data['duration_minutes'] ?? null,
-            totalScore: $data['total_score'] ?? null,
-            minimumBatteryPercentage: $data['minimum_battery_percentage'] ?? null,
-            requireVideoRecording: $data['require_video_recording'] ?? null,
-            isPublished: $data['is_published'] ?? null
+            title: $validated['title'] ?? null,
+            description: $validated['description'] ?? null,
+            startTime: $validated['start_time'] ?? null,
+            endTime: $validated['end_time'] ?? null,
+            durationMinutes: $validated['duration_minutes'] ?? null,
+            totalScore: $validated['total_score'] ?? null,
+            minimumBatteryPercentage: $validated['minimum_battery_percentage'] ?? null,
+            requireVideoRecording: $validated['require_video_recording'] ?? null,
+            isPublished: $validated['is_published'] ?? null,
+            isActive: $validated['is_active'] ?? null
         );
     }
 
@@ -44,7 +48,8 @@ class UpdateExamDTO
             'total_score' => $this->totalScore,
             'minimum_battery_percentage' => $this->minimumBatteryPercentage,
             'require_video_recording' => $this->requireVideoRecording,
-            'is_published' => $this->isPublished
+            'is_published' => $this->isPublished,
+            'is_active' => $this->isActive
         ], fn($value) => $value !== null);
     }
 }

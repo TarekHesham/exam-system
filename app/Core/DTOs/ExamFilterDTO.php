@@ -15,7 +15,7 @@ class ExamFilterDTO
         public readonly ?string $endDate = null,
         public readonly ?string $search = null,
         public readonly int $page = 1,
-        public readonly int $perPage = 15
+        public readonly int $perPage = 10
     ) {}
 
     public static function fromRequest(array $data): self
@@ -31,7 +31,7 @@ class ExamFilterDTO
             endDate: $data['end_date'] ?? null,
             search: $data['search'] ?? null,
             page: (int)($data['page'] ?? 1),
-            perPage: (int)($data['per_page'] ?? 15)
+            perPage: (int)($data['per_page'] ?? 10)
         );
     }
 }

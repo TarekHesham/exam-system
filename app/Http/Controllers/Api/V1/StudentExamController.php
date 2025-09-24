@@ -96,19 +96,19 @@ class StudentExamController extends Controller
                 'status' => true,
                 'message' => 'تم جلب الامتحان المتاح بنجاح',
                 'data' => [
-                    'exam' => $examData,
-                    'session_id' => $studentSession->id,
+                    'exam'          => $examData,
+                    'session_id'    => $studentSession->id,
                     'session_token' => $studentSession->session_token,
-                    'can_pause' => $studentSession->exam->allow_pause ?? false,
+                    'can_pause'     => $studentSession->exam->allow_pause ?? false,
                     'requirements' => [
                         'minimum_battery' => $studentSession->exam->minimum_battery_percentage,
                         'video_recording' => $studentSession->exam->require_video_recording,
                     ],
                     'timing_info' => [
-                        'exam_start_time' => $examStartTime,
-                        'exam_end_time' => $examEndTime,
+                        'exam_start_time'    => $examStartTime,
+                        'exam_end_time'      => $examEndTime,
                         'student_start_time' => Carbon::now(),
-                        'duration_minutes' => $studentSession->exam->duration_minutes,
+                        'duration_minutes'   => $studentSession->exam->duration_minutes,
                         'time_remaining_minutes' => $timeRemainingMinutes,
                     ]
                 ]
@@ -245,71 +245,6 @@ class StudentExamController extends Controller
     }
 
     /**
-     * Save all student answers at once (batch submission)
-     */
-    public function saveAllAnswers(Request $request): JsonResponse
-    {
-        $validator = Validator::make($request->all(), [
-            'answers' => 'required|array|min:1',
-            'answers.*.question_id' => 'required|integer|exists:exam_questions,id',
-            'answers.*.answer_text' => 'nullable|string',
-            'answers.*.answer_image' => 'nullable|string',
-            'answers.*.answer_data' => 'nullable|array',
-            'answers.*.time_spent_seconds' => 'nullable|integer|min:0',
-            'notes' => 'nullable|string|max:500'
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'status' => false,
-                'message' => 'بيانات غير صحيحة',
-                'errors' => $validator->errors()
-            ], 422);
-        }
-
-        try {
-            $student = Auth::user()->student;
-
-            // Get active session
-            $session = ExamSession::where('student_id', $student->id)
-                ->where('session_status', 'in_progress')
-                ->first();
-
-            if (!$session) {
-                return response()->json([
-                    'status' => false,
-                    'message' => 'لا توجد جلسة نشطة'
-                ], 400);
-            }
-
-            // Save all answers in batch
-            $savedAnswers = $this->sessionService->saveAllAnswers($session, $request->answers);
-
-            return response()->json([
-                'status' => true,
-                'message' => 'تم حفظ جميع الإجابات بنجاح',
-                'data' => [
-                    'session_id' => $session->id,
-                    'total_answers_saved' => count($savedAnswers),
-                    'answers' => $savedAnswers->map(function ($answer) {
-                        return [
-                            'answer_id' => $answer->id,
-                            'question_id' => $answer->question_id,
-                            'saved_at' => $answer->answered_at
-                        ];
-                    }),
-                    'saved_at' => Carbon::now()
-                ]
-            ]);
-        } catch (\Exception $e) {
-            return response()->json([
-                'status' => false,
-                'message' => 'حدث خطأ أثناء حفظ الإجابات: ' . $e->getMessage()
-            ], 500);
-        }
-    }
-
-    /**
      * Submit complete exam with all answers at once
      */
     public function submitExam(Request $request): JsonResponse
@@ -347,27 +282,12 @@ class StudentExamController extends Controller
                 ], 400);
             }
 
-            // Save all answers first, then submit
-            $savedAnswers = $this->sessionService->saveAllAnswers($session, $request->answers);
-
             // Submit the session
-            $result = $this->sessionService->submitSession($session, [
-                'notes' => $request->notes ?? null
-            ]);
+            $this->sessionService->submitSession($session, $request->answers);
 
             return response()->json([
                 'status' => true,
                 'message' => 'تم تسليم الامتحان بنجاح',
-                'data' => [
-                    'session_id' => $result['session_id'],
-                    'total_questions' => $result['total_questions'],
-                    'answered_questions' => $result['answered_questions'],
-                    'saved_answers_count' => $savedAnswers->count(),
-                    'preliminary_score' => $result['preliminary_score'],
-                    'needs_manual_correction' => $result['needs_manual_correction'],
-                    'submission_time' => Carbon::now(),
-                    'result_id' => $result['result_id']
-                ]
             ]);
         } catch (\Exception $e) {
             return response()->json([

@@ -21,7 +21,7 @@ class RoleMiddleware
             return response()->json(['message' => 'غير مصرح لك بالوصول إلى هذه الصفحة'], 401);
         }
 
-        if (! in_array($user->user_type, $roles)) {
+        if (! in_array($user->user_type, explode('|', $roles[0]))) {
             return response()->json([
                 'status' => false,
                 'message' => 'غير مصرح لك بالوصول إلى هذه الصفحة',

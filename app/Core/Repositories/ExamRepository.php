@@ -3,16 +3,14 @@
 namespace App\Core\Repositories;
 
 use App\Core\Contracts\Repositories\ExamRepositoryInterface;
-use App\Core\DTOs\ExamFilterDTO;
-use App\Modules\Authentication\Models\User;
-use App\Modules\ExamManagement\Models\Exam;
-use App\Modules\ExamManagement\Models\ExamSession;
+use App\Modules\ExamManagement\Models\{Exam, ExamSession};
 use App\Modules\UserManagement\Models\Student;
-use Carbon\Carbon;
+use App\Modules\Authentication\Models\User;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\{Builder, Collection};
+use App\Core\DTOs\ExamFilterDTO;
 use Illuminate\Support\Str;
+use Carbon\Carbon;
 
 class ExamRepository implements ExamRepositoryInterface
 {
@@ -47,7 +45,7 @@ class ExamRepository implements ExamRepositoryInterface
     public function paginate(ExamFilterDTO $filters): LengthAwarePaginator
     {
         return $this->buildQuery($filters)
-            ->with(['subject', 'creator'])
+            ->with(['subject:id,name', 'creator'])
             ->paginate($filters->perPage, ['*'], 'page', $filters->page);
     }
 
