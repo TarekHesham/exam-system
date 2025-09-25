@@ -8,7 +8,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class GovernorateRepository implements GovernorateRepositoryInterface
 {
-    public function allPaginated(int $perPage = 15): LengthAwarePaginator
+    public function allPaginated(int $perPage = 10): LengthAwarePaginator
     {
         return Governorate::paginate($perPage);
     }

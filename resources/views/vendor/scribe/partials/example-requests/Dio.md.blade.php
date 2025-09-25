@@ -2,7 +2,7 @@
     use Knuckles\Scribe\Tools\WritingUtils as u;
     /** @var \Knuckles\Camel\Output\OutputEndpointData $endpoint */
 @endphp
-```dart
+```javascript
 import 'dart:convert';
 import 'package:dio/dio.dart';
 

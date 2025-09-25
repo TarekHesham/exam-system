@@ -1,6 +1,6 @@
 # Authenticating requests
 
-To authenticate requests, include an **`Authorization`** header with the value **`"Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6"`**.
+To authenticate requests, include an **`Authorization`** header with the value **`"Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"`**.
 
 All authenticated endpoints are marked with a `requires authentication` badge in the documentation below.
 

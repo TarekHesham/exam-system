@@ -13,6 +13,10 @@ class ExamSection extends BaseModel
         'order_number',
     ];
 
+    protected $casts = [
+        'order_number' => 'integer',
+    ];
+
     public function exam()
     {
         return $this->belongsTo(Exam::class);

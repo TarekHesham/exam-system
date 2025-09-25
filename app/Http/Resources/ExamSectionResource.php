@@ -12,6 +12,7 @@ class ExamSectionResource extends JsonResource
             'id'           => $this->id,
             'code'         => $this->code,
             'name'         => $this->name,
+            'order_number' => $this->order_number,
             'total_points' => $this->questions->sum('points'),
             'questions'    => ExamQuestionResource::collection($this->whenLoaded('questions')),
         ];

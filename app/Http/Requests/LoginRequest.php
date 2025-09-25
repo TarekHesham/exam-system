@@ -41,19 +41,19 @@ class LoginRequest extends FormRequest
         return [
             'phone' => [
                 'description' => 'Phone number of the user (11 digits). Required if national_id and email are not provided.',
-                'example' => '01234567890',
+                'example' => '01010869000',
             ],
             'national_id' => [
                 'description' => 'National ID of the user (14 digits). Required if phone and email are not provided.',
-                'example' => '12345678901234',
+                'example' => '01234567891234',
             ],
             'email' => [
                 'description' => 'Email address of the user. Required if phone and national_id are not provided.',
-                'example' => 'user@example.com',
+                'example' => 'tarek@digitopia.com',
             ],
             'password' => [
                 'description' => 'Password of the user (minimum 8 characters).',
-                'example' => 'password123',
+                'example' => '12345678',
             ],
         ];
     }

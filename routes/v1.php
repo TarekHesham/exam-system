@@ -69,7 +69,6 @@ Route::middleware('roles:school_admin')->prefix('admin')->group(function () {
 Route::middleware('roles:ministry_admin|teacher')->prefix('admin')->group(function () {
     // Account creation routes
     Route::post('create-teacher', [AuthController::class, 'createTeacher']);
-    // Route::post('create-school-admin', [AuthController::class, 'createSchoolAdmin']);
 
     // ============================================
     // Teachers Management
@@ -102,14 +101,20 @@ Route::middleware('roles:ministry_admin|teacher')->prefix('admin')->group(functi
     // Exam Questions Management
     // ============================================
     Route::apiResource('exam-questions', ExamQuestionController::class);
-    Route::apiResource('exam-sections', ExamSectionController::class);
     Route::get('exams/{id}/questions', [ExamQuestionController::class, 'getExamQuestions']);
+
+    // ============================================
+    // Exam Sections Management
+    // ============================================
+    Route::apiResource('exam-sections', ExamSectionController::class);
 
     // =============================================
     // School Admin Management
     // =============================================
     Route::apiResource('school-admins', SchoolAdminController::class);
 
-
+    // =============================================
+    // School Management
+    // =============================================
     Route::apiResource('schools', SchoolController::class);
 });
