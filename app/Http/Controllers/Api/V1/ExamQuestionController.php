@@ -24,7 +24,7 @@ class ExamQuestionController extends Controller
      */
     public function index(Request $request): JsonResponse
     {
-        $perPage = (int) $request->query('per_page', 15);
+        $perPage = (int) $request->query('per_page', 10);
         $examId = $request->query('exam_id');
 
         if ($examId) {
@@ -33,7 +33,11 @@ class ExamQuestionController extends Controller
             $paginator = $this->service->list($perPage);
         }
 
-        return $this->successResponse($paginator, 'Questions retrieved successfully');
+        return $this->successResponsePaginate(
+            ExamQuestionResource::collection($paginator),
+            $paginator,
+            'Questions retrieved successfully'
+        );
     }
 
     /**
@@ -58,7 +62,10 @@ class ExamQuestionController extends Controller
             return $this->errorResponse('Question not found', 404);
         }
 
-        return $this->successResponse($question, 'Question retrieved');
+        return $this->successResponse(
+            ExamQuestionResource::make($question),
+            'Question retrieved'
+        );
     }
 
     /**

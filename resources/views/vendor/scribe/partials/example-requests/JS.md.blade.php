@@ -2,7 +2,7 @@
     use Knuckles\Scribe\Tools\WritingUtils as u;
     /** @var  Knuckles\Camel\Output\OutputEndpointData $endpoint */
 @endphp
-```javascript
+```JS
 const url = new URL(
     "{!! rtrim($baseUrl, '/') !!}/{{ ltrim($endpoint->boundUri, '/') }}"
 );

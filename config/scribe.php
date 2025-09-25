@@ -132,10 +132,10 @@ return [
     // To add a language of your own, see https://scribe.knuckles.wtf/laravel/advanced/example-requests
     // Note: does not work for `external` docs types
     'example_languages' => [
-        'bash',
-        'javascript',
-        'php',
-        'python',
+        'JS',
+        'Laravel',
+        'DartPad',
+        'Dio',
     ],
 
     // Generate a Postman collection (v2.1.0) in addition to HTML docs.

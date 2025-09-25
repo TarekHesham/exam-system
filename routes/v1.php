@@ -12,8 +12,10 @@ use App\Http\Controllers\Api\V1\{
     AuthController,
     ExamController,
     ExamQuestionController,
+    ExamSectionController,
     ExamSessionController,
     SchoolAdminController,
+    SchoolController,
     StudentExamController,
     SubjectController,
     TeacherController,
@@ -28,6 +30,7 @@ Route::withoutMiddleware('auth:sanctum')->prefix('auth')->group(function () {
 // Protected routes
 Route::get('me', [AuthController::class, 'me']);
 Route::post('logout', [AuthController::class, 'logout']);
+Route::get('governorates', [SchoolController::class, 'getGovernorates']);
 
 Route::middleware('roles:student')->prefix('student')->group(function () {
     // ============================================
@@ -95,11 +98,14 @@ Route::middleware('roles:ministry_admin|teacher')->prefix('admin')->group(functi
     // Exam Questions Management
     // ============================================
     Route::apiResource('exam-questions', ExamQuestionController::class);
-    Route::apiResource('exam-sections', ExamQuestionController::class);
+    Route::apiResource('exam-sections', ExamSectionController::class);
     Route::get('exams/{id}/questions', [ExamQuestionController::class, 'getExamQuestions']);
 
     // =============================================
     // School Admin Management
     // =============================================
     Route::apiResource('school-admins', SchoolAdminController::class);
+
+
+    Route::apiResource('schools', SchoolController::class);
 });

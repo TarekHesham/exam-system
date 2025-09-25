@@ -21,10 +21,10 @@
 
     <style id="language-style">
         /* starts out as display none and is replaced with js later  */
-                    body .content .bash-example code { display: none; }
-                    body .content .javascript-example code { display: none; }
-                    body .content .php-example code { display: none; }
-                    body .content .python-example code { display: none; }
+                    body .content .JS-example code { display: none; }
+                    body .content .Laravel-example code { display: none; }
+                    body .content .DartPad-example code { display: none; }
+                    body .content .Dio-example code { display: none; }
             </style>
 
     <script>
@@ -38,7 +38,7 @@
 
 </head>
 
-<body data-languages="[&quot;bash&quot;,&quot;javascript&quot;,&quot;php&quot;,&quot;python&quot;]">
+<body data-languages="[&quot;JS&quot;,&quot;Laravel&quot;,&quot;DartPad&quot;,&quot;Dio&quot;]">
 
 <a href="#" id="nav-button">
     <span>
@@ -49,10 +49,10 @@
 <div class="tocify-wrapper">
     
             <div class="lang-selector">
-                                            <button type="button" class="lang-button" data-language-name="bash">bash</button>
-                                            <button type="button" class="lang-button" data-language-name="javascript">javascript</button>
-                                            <button type="button" class="lang-button" data-language-name="php">php</button>
-                                            <button type="button" class="lang-button" data-language-name="python">python</button>
+                                            <button type="button" class="lang-button" data-language-name="JS">JS</button>
+                                            <button type="button" class="lang-button" data-language-name="Laravel">Laravel</button>
+                                            <button type="button" class="lang-button" data-language-name="DartPad">DartPad</button>
+                                            <button type="button" class="lang-button" data-language-name="Dio">Dio</button>
                     </div>
     
     <div class="search">
@@ -182,19 +182,19 @@ Student can only start exam during exam time window</a>
                                 <a href="#endpoints-DELETEapi-v1-admin-exam-questions--id-">Remove the specified exam question from storage.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-admin-exam-sections">
-                                <a href="#endpoints-GETapi-v1-admin-exam-sections">Display a paginated listing of exam questions.</a>
+                                <a href="#endpoints-GETapi-v1-admin-exam-sections">GET api/v1/admin/exam-sections</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-admin-exam-sections">
-                                <a href="#endpoints-POSTapi-v1-admin-exam-sections">Store a newly created exam question.</a>
+                                <a href="#endpoints-POSTapi-v1-admin-exam-sections">POST api/v1/admin/exam-sections</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-admin-exam-sections--id-">
-                                <a href="#endpoints-GETapi-v1-admin-exam-sections--id-">Display the specified exam question.</a>
+                                <a href="#endpoints-GETapi-v1-admin-exam-sections--id-">GET api/v1/admin/exam-sections/{id}</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-PUTapi-v1-admin-exam-sections--id-">
-                                <a href="#endpoints-PUTapi-v1-admin-exam-sections--id-">Update the specified exam question in storage.</a>
+                                <a href="#endpoints-PUTapi-v1-admin-exam-sections--id-">PUT api/v1/admin/exam-sections/{id}</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-DELETEapi-v1-admin-exam-sections--id-">
-                                <a href="#endpoints-DELETEapi-v1-admin-exam-sections--id-">Remove the specified exam question from storage.</a>
+                                <a href="#endpoints-DELETEapi-v1-admin-exam-sections--id-">DELETE api/v1/admin/exam-sections/{id}</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-admin-exams--id--questions">
                                 <a href="#endpoints-GETapi-v1-admin-exams--id--questions">Get sections (with questions) and unsectioned questions of an exam.</a>
@@ -228,7 +228,7 @@ Student can only start exam during exam time window</a>
     </ul>
 
     <ul class="toc-footer" id="last-updated">
-        <li>Last updated: September 25, 2025</li>
+        <li>Last updated: September 26, 2025</li>
     </ul>
 </div>
 
@@ -265,23 +265,8 @@ You can switch the language used with the tabs at the top right (or from the nav
 <blockquote>Example request:</blockquote>
 
 
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request POST \
-    "http://45.245.151.115:8000/api/v1/auth/login" \
-    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json" \
-    --data "{
-    \"phone\": \"01234567890\",
-    \"national_id\": \"12345678901234\",
-    \"email\": \"user@example.com\",
-    \"password\": \"password123\"
-}"
-</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
+<div class="JS-example">
+    <pre><code class="language-JS">const url = new URL(
     "http://45.245.151.115:8000/api/v1/auth/login"
 );
 
@@ -305,7 +290,7 @@ fetch(url, {
 }).then(response =&gt; response.json());</code></pre></div>
 
 
-<div class="php-example">
+<div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $url = 'http://45.245.151.115:8000/api/v1/auth/login';
 $response = $client-&gt;post(
@@ -328,25 +313,81 @@ $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre></div>
 
 
-<div class="python-example">
-    <pre><code class="language-python">import requests
-import json
+<div class="DartPad-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
 
-url = 'http://45.245.151.115:8000/api/v1/auth/login'
-payload = {
-    "phone": "01234567890",
-    "national_id": "12345678901234",
-    "email": "user@example.com",
-    "password": "password123"
-}
-headers = {
-  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-}
+void main() async {
+  final dio = Dio();
+  final url = 'http://45.245.151.115:8000/api/v1/auth/login';
 
-response = requests.request('POST', url, headers=headers, json=payload)
-response.json()</code></pre></div>
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = [
+    'phone' =&gt; '01234567890',
+    'national_id' =&gt; '12345678901234',
+    'email' =&gt; 'user@example.com',
+    'password' =&gt; 'password123',
+];
+
+  try {
+    final response = await dio.request(
+      url,
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'POST',
+        headers: headers,
+      ),
+    );
+    print(response.data);
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+
+<div class="Dio-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+
+  final url = Uri.parse("http://45.245.151.115:8000/api/v1/auth/login");
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = [
+    'phone' =&gt; '01234567890',
+    'national_id' =&gt; '12345678901234',
+    'email' =&gt; 'user@example.com',
+    'password' =&gt; 'password123',
+];
+
+  try {
+    final response = await dio.request(
+      url.toString(),
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'POST',
+        headers: headers,
+      ),
+    );
+    print('Response: ${response.data}');
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
 
 </span>
 
@@ -491,16 +532,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <blockquote>Example request:</blockquote>
 
 
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request GET \
-    --get "http://45.245.151.115:8000/api/v1/me" \
-    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
+<div class="JS-example">
+    <pre><code class="language-JS">const url = new URL(
     "http://45.245.151.115:8000/api/v1/me"
 );
 
@@ -516,7 +549,7 @@ fetch(url, {
 }).then(response =&gt; response.json());</code></pre></div>
 
 
-<div class="php-example">
+<div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $url = 'http://45.245.151.115:8000/api/v1/me';
 $response = $client-&gt;get(
@@ -533,19 +566,71 @@ $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre></div>
 
 
-<div class="python-example">
-    <pre><code class="language-python">import requests
-import json
+<div class="DartPad-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
 
-url = 'http://45.245.151.115:8000/api/v1/me'
-headers = {
-  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-}
+void main() async {
+  final dio = Dio();
+  final url = 'http://45.245.151.115:8000/api/v1/me';
 
-response = requests.request('GET', url, headers=headers)
-response.json()</code></pre></div>
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url,
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'GET',
+        headers: headers,
+      ),
+    );
+    print(response.data);
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+
+<div class="Dio-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+
+  final url = Uri.parse("http://45.245.151.115:8000/api/v1/me");
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url.toString(),
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'GET',
+        headers: headers,
+      ),
+    );
+    print('Response: ${response.data}');
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
 
 </span>
 
@@ -661,16 +746,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <blockquote>Example request:</blockquote>
 
 
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request POST \
-    "http://45.245.151.115:8000/api/v1/logout" \
-    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
+<div class="JS-example">
+    <pre><code class="language-JS">const url = new URL(
     "http://45.245.151.115:8000/api/v1/logout"
 );
 
@@ -686,7 +763,7 @@ fetch(url, {
 }).then(response =&gt; response.json());</code></pre></div>
 
 
-<div class="php-example">
+<div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $url = 'http://45.245.151.115:8000/api/v1/logout';
 $response = $client-&gt;post(
@@ -703,19 +780,71 @@ $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre></div>
 
 
-<div class="python-example">
-    <pre><code class="language-python">import requests
-import json
+<div class="DartPad-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
 
-url = 'http://45.245.151.115:8000/api/v1/logout'
-headers = {
-  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-}
+void main() async {
+  final dio = Dio();
+  final url = 'http://45.245.151.115:8000/api/v1/logout';
 
-response = requests.request('POST', url, headers=headers)
-response.json()</code></pre></div>
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url,
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'POST',
+        headers: headers,
+      ),
+    );
+    print(response.data);
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+
+<div class="Dio-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+
+  final url = Uri.parse("http://45.245.151.115:8000/api/v1/logout");
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url.toString(),
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'POST',
+        headers: headers,
+      ),
+    );
+    print('Response: ${response.data}');
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
 
 </span>
 
@@ -815,20 +944,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <blockquote>Example request:</blockquote>
 
 
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request POST \
-    "http://45.245.151.115:8000/api/v1/student/exam-sessions/architecto/submit" \
-    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json" \
-    --data "{
-    \"submit_confirmation\": true
-}"
-</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
+<div class="JS-example">
+    <pre><code class="language-JS">const url = new URL(
     "http://45.245.151.115:8000/api/v1/student/exam-sessions/architecto/submit"
 );
 
@@ -849,7 +966,7 @@ fetch(url, {
 }).then(response =&gt; response.json());</code></pre></div>
 
 
-<div class="php-example">
+<div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $url = 'http://45.245.151.115:8000/api/v1/student/exam-sessions/architecto/submit';
 $response = $client-&gt;post(
@@ -869,22 +986,75 @@ $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre></div>
 
 
-<div class="python-example">
-    <pre><code class="language-python">import requests
-import json
+<div class="DartPad-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
 
-url = 'http://45.245.151.115:8000/api/v1/student/exam-sessions/architecto/submit'
-payload = {
-    "submit_confirmation": true
-}
-headers = {
-  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-}
+void main() async {
+  final dio = Dio();
+  final url = 'http://45.245.151.115:8000/api/v1/student/exam-sessions/architecto/submit';
 
-response = requests.request('POST', url, headers=headers, json=payload)
-response.json()</code></pre></div>
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = [
+    'submit_confirmation' =&gt; true,
+];
+
+  try {
+    final response = await dio.request(
+      url,
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'POST',
+        headers: headers,
+      ),
+    );
+    print(response.data);
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+
+<div class="Dio-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+
+  final url = Uri.parse("http://45.245.151.115:8000/api/v1/student/exam-sessions/architecto/submit");
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = [
+    'submit_confirmation' =&gt; true,
+];
+
+  try {
+    final response = await dio.request(
+      url.toString(),
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'POST',
+        headers: headers,
+      ),
+    );
+    print('Response: ${response.data}');
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
 
 </span>
 
@@ -1029,16 +1199,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <blockquote>Example request:</blockquote>
 
 
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request POST \
-    "http://45.245.151.115:8000/api/v1/student/exam-sessions/architecto/heartbeat" \
-    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
+<div class="JS-example">
+    <pre><code class="language-JS">const url = new URL(
     "http://45.245.151.115:8000/api/v1/student/exam-sessions/architecto/heartbeat"
 );
 
@@ -1054,7 +1216,7 @@ fetch(url, {
 }).then(response =&gt; response.json());</code></pre></div>
 
 
-<div class="php-example">
+<div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $url = 'http://45.245.151.115:8000/api/v1/student/exam-sessions/architecto/heartbeat';
 $response = $client-&gt;post(
@@ -1071,19 +1233,71 @@ $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre></div>
 
 
-<div class="python-example">
-    <pre><code class="language-python">import requests
-import json
+<div class="DartPad-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
 
-url = 'http://45.245.151.115:8000/api/v1/student/exam-sessions/architecto/heartbeat'
-headers = {
-  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-}
+void main() async {
+  final dio = Dio();
+  final url = 'http://45.245.151.115:8000/api/v1/student/exam-sessions/architecto/heartbeat';
 
-response = requests.request('POST', url, headers=headers)
-response.json()</code></pre></div>
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url,
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'POST',
+        headers: headers,
+      ),
+    );
+    print(response.data);
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+
+<div class="Dio-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+
+  final url = Uri.parse("http://45.245.151.115:8000/api/v1/student/exam-sessions/architecto/heartbeat");
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url.toString(),
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'POST',
+        headers: headers,
+      ),
+    );
+    print('Response: ${response.data}');
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
 
 </span>
 
@@ -1195,16 +1409,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <blockquote>Example request:</blockquote>
 
 
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request GET \
-    --get "http://45.245.151.115:8000/api/v1/student/exam-sessions/architecto/time-remaining" \
-    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
+<div class="JS-example">
+    <pre><code class="language-JS">const url = new URL(
     "http://45.245.151.115:8000/api/v1/student/exam-sessions/architecto/time-remaining"
 );
 
@@ -1220,7 +1426,7 @@ fetch(url, {
 }).then(response =&gt; response.json());</code></pre></div>
 
 
-<div class="php-example">
+<div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $url = 'http://45.245.151.115:8000/api/v1/student/exam-sessions/architecto/time-remaining';
 $response = $client-&gt;get(
@@ -1237,19 +1443,71 @@ $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre></div>
 
 
-<div class="python-example">
-    <pre><code class="language-python">import requests
-import json
+<div class="DartPad-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
 
-url = 'http://45.245.151.115:8000/api/v1/student/exam-sessions/architecto/time-remaining'
-headers = {
-  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-}
+void main() async {
+  final dio = Dio();
+  final url = 'http://45.245.151.115:8000/api/v1/student/exam-sessions/architecto/time-remaining';
 
-response = requests.request('GET', url, headers=headers)
-response.json()</code></pre></div>
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url,
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'GET',
+        headers: headers,
+      ),
+    );
+    print(response.data);
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+
+<div class="Dio-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+
+  final url = Uri.parse("http://45.245.151.115:8000/api/v1/student/exam-sessions/architecto/time-remaining");
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url.toString(),
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'GET',
+        headers: headers,
+      ),
+    );
+    print('Response: ${response.data}');
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
 
 </span>
 
@@ -1378,16 +1636,8 @@ Student can only start exam during exam time window</h2>
 <blockquote>Example request:</blockquote>
 
 
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request GET \
-    --get "http://45.245.151.115:8000/api/v1/student/available-exam" \
-    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
+<div class="JS-example">
+    <pre><code class="language-JS">const url = new URL(
     "http://45.245.151.115:8000/api/v1/student/available-exam"
 );
 
@@ -1403,7 +1653,7 @@ fetch(url, {
 }).then(response =&gt; response.json());</code></pre></div>
 
 
-<div class="php-example">
+<div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $url = 'http://45.245.151.115:8000/api/v1/student/available-exam';
 $response = $client-&gt;get(
@@ -1420,19 +1670,71 @@ $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre></div>
 
 
-<div class="python-example">
-    <pre><code class="language-python">import requests
-import json
+<div class="DartPad-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
 
-url = 'http://45.245.151.115:8000/api/v1/student/available-exam'
-headers = {
-  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-}
+void main() async {
+  final dio = Dio();
+  final url = 'http://45.245.151.115:8000/api/v1/student/available-exam';
 
-response = requests.request('GET', url, headers=headers)
-response.json()</code></pre></div>
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url,
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'GET',
+        headers: headers,
+      ),
+    );
+    print(response.data);
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+
+<div class="Dio-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+
+  final url = Uri.parse("http://45.245.151.115:8000/api/v1/student/available-exam");
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url.toString(),
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'GET',
+        headers: headers,
+      ),
+    );
+    print('Response: ${response.data}');
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
 
 </span>
 
@@ -1548,23 +1850,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <blockquote>Example request:</blockquote>
 
 
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request POST \
-    "http://45.245.151.115:8000/api/v1/student/exam/save-answer" \
-    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json" \
-    --data "{
-    \"question_id\": 16,
-    \"answer_text\": \"architecto\",
-    \"answer_image\": \"architecto\",
-    \"time_spent_seconds\": 39
-}"
-</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
+<div class="JS-example">
+    <pre><code class="language-JS">const url = new URL(
     "http://45.245.151.115:8000/api/v1/student/exam/save-answer"
 );
 
@@ -1588,7 +1875,7 @@ fetch(url, {
 }).then(response =&gt; response.json());</code></pre></div>
 
 
-<div class="php-example">
+<div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $url = 'http://45.245.151.115:8000/api/v1/student/exam/save-answer';
 $response = $client-&gt;post(
@@ -1611,25 +1898,81 @@ $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre></div>
 
 
-<div class="python-example">
-    <pre><code class="language-python">import requests
-import json
+<div class="DartPad-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
 
-url = 'http://45.245.151.115:8000/api/v1/student/exam/save-answer'
-payload = {
-    "question_id": 16,
-    "answer_text": "architecto",
-    "answer_image": "architecto",
-    "time_spent_seconds": 39
-}
-headers = {
-  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-}
+void main() async {
+  final dio = Dio();
+  final url = 'http://45.245.151.115:8000/api/v1/student/exam/save-answer';
 
-response = requests.request('POST', url, headers=headers, json=payload)
-response.json()</code></pre></div>
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = [
+    'question_id' =&gt; 16,
+    'answer_text' =&gt; 'architecto',
+    'answer_image' =&gt; 'architecto',
+    'time_spent_seconds' =&gt; 39,
+];
+
+  try {
+    final response = await dio.request(
+      url,
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'POST',
+        headers: headers,
+      ),
+    );
+    print(response.data);
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+
+<div class="Dio-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+
+  final url = Uri.parse("http://45.245.151.115:8000/api/v1/student/exam/save-answer");
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = [
+    'question_id' =&gt; 16,
+    'answer_text' =&gt; 'architecto',
+    'answer_image' =&gt; 'architecto',
+    'time_spent_seconds' =&gt; 39,
+];
+
+  try {
+    final response = await dio.request(
+      url.toString(),
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'POST',
+        headers: headers,
+      ),
+    );
+    print('Response: ${response.data}');
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
 
 </span>
 
@@ -1785,28 +2128,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <blockquote>Example request:</blockquote>
 
 
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request POST \
-    "http://45.245.151.115:8000/api/v1/student/exam/submit" \
-    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json" \
-    --data "{
-    \"answers\": [
-        {
-            \"question_id\": 16,
-            \"answer_text\": \"architecto\",
-            \"answer_image\": \"architecto\",
-            \"time_spent_seconds\": 39
-        }
-    ],
-    \"notes\": \"b\"
-}"
-</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
+<div class="JS-example">
+    <pre><code class="language-JS">const url = new URL(
     "http://45.245.151.115:8000/api/v1/student/exam/submit"
 );
 
@@ -1835,7 +2158,7 @@ fetch(url, {
 }).then(response =&gt; response.json());</code></pre></div>
 
 
-<div class="php-example">
+<div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $url = 'http://45.245.151.115:8000/api/v1/student/exam/submit';
 $response = $client-&gt;post(
@@ -1863,30 +2186,91 @@ $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre></div>
 
 
-<div class="python-example">
-    <pre><code class="language-python">import requests
-import json
+<div class="DartPad-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
 
-url = 'http://45.245.151.115:8000/api/v1/student/exam/submit'
-payload = {
-    "answers": [
-        {
-            "question_id": 16,
-            "answer_text": "architecto",
-            "answer_image": "architecto",
-            "time_spent_seconds": 39
-        }
+void main() async {
+  final dio = Dio();
+  final url = 'http://45.245.151.115:8000/api/v1/student/exam/submit';
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = [
+    'answers' =&gt; [
+        [
+            'question_id' =&gt; 16,
+            'answer_text' =&gt; 'architecto',
+            'answer_image' =&gt; 'architecto',
+            'time_spent_seconds' =&gt; 39,
+        ],
     ],
-    "notes": "b"
-}
-headers = {
-  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-}
+    'notes' =&gt; 'b',
+];
 
-response = requests.request('POST', url, headers=headers, json=payload)
-response.json()</code></pre></div>
+  try {
+    final response = await dio.request(
+      url,
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'POST',
+        headers: headers,
+      ),
+    );
+    print(response.data);
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+
+<div class="Dio-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+
+  final url = Uri.parse("http://45.245.151.115:8000/api/v1/student/exam/submit");
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = [
+    'answers' =&gt; [
+        [
+            'question_id' =&gt; 16,
+            'answer_text' =&gt; 'architecto',
+            'answer_image' =&gt; 'architecto',
+            'time_spent_seconds' =&gt; 39,
+        ],
+    ],
+    'notes' =&gt; 'b',
+];
+
+  try {
+    final response = await dio.request(
+      url.toString(),
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'POST',
+        headers: headers,
+      ),
+    );
+    print('Response: ${response.data}');
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
 
 </span>
 
@@ -2064,21 +2448,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <blockquote>Example request:</blockquote>
 
 
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request POST \
-    "http://45.245.151.115:8000/api/v1/student/exam/heartbeat" \
-    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json" \
-    --data "{
-    \"battery_level\": 1,
-    \"connection_status\": \"reconnected\"
-}"
-</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
+<div class="JS-example">
+    <pre><code class="language-JS">const url = new URL(
     "http://45.245.151.115:8000/api/v1/student/exam/heartbeat"
 );
 
@@ -2090,7 +2461,7 @@ const headers = {
 
 let body = {
     "battery_level": 1,
-    "connection_status": "reconnected"
+    "connection_status": "unstable"
 };
 
 fetch(url, {
@@ -2100,7 +2471,7 @@ fetch(url, {
 }).then(response =&gt; response.json());</code></pre></div>
 
 
-<div class="php-example">
+<div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $url = 'http://45.245.151.115:8000/api/v1/student/exam/heartbeat';
 $response = $client-&gt;post(
@@ -2113,7 +2484,7 @@ $response = $client-&gt;post(
         ],
         'json' =&gt; [
             'battery_level' =&gt; 1,
-            'connection_status' =&gt; 'reconnected',
+            'connection_status' =&gt; 'unstable',
         ],
     ]
 );
@@ -2121,23 +2492,77 @@ $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre></div>
 
 
-<div class="python-example">
-    <pre><code class="language-python">import requests
-import json
+<div class="DartPad-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
 
-url = 'http://45.245.151.115:8000/api/v1/student/exam/heartbeat'
-payload = {
-    "battery_level": 1,
-    "connection_status": "reconnected"
-}
-headers = {
-  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-}
+void main() async {
+  final dio = Dio();
+  final url = 'http://45.245.151.115:8000/api/v1/student/exam/heartbeat';
 
-response = requests.request('POST', url, headers=headers, json=payload)
-response.json()</code></pre></div>
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = [
+    'battery_level' =&gt; 1,
+    'connection_status' =&gt; 'unstable',
+];
+
+  try {
+    final response = await dio.request(
+      url,
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'POST',
+        headers: headers,
+      ),
+    );
+    print(response.data);
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+
+<div class="Dio-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+
+  final url = Uri.parse("http://45.245.151.115:8000/api/v1/student/exam/heartbeat");
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = [
+    'battery_level' =&gt; 1,
+    'connection_status' =&gt; 'unstable',
+];
+
+  try {
+    final response = await dio.request(
+      url.toString(),
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'POST',
+        headers: headers,
+      ),
+    );
+    print('Response: ${response.data}');
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
 
 </span>
 
@@ -2241,10 +2666,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                               name="connection_status"                data-endpoint="POSTapi-v1-student-exam-heartbeat"
-               value="reconnected"
+               value="unstable"
                data-component="body">
     <br>
-<p>Example: <code>reconnected</code></p>
+<p>Example: <code>unstable</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>stable</code></li> <li><code>unstable</code></li> <li><code>reconnected</code></li></ul>
         </div>
@@ -2273,21 +2698,8 @@ Must be one of:
 <blockquote>Example request:</blockquote>
 
 
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request POST \
-    "http://45.245.151.115:8000/api/v1/teacher/scan-qr-create-session" \
-    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json" \
-    --data "{
-    \"student_id\": 16,
-    \"battery_level\": 22
-}"
-</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
+<div class="JS-example">
+    <pre><code class="language-JS">const url = new URL(
     "http://45.245.151.115:8000/api/v1/teacher/scan-qr-create-session"
 );
 
@@ -2309,7 +2721,7 @@ fetch(url, {
 }).then(response =&gt; response.json());</code></pre></div>
 
 
-<div class="php-example">
+<div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $url = 'http://45.245.151.115:8000/api/v1/teacher/scan-qr-create-session';
 $response = $client-&gt;post(
@@ -2330,23 +2742,77 @@ $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre></div>
 
 
-<div class="python-example">
-    <pre><code class="language-python">import requests
-import json
+<div class="DartPad-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
 
-url = 'http://45.245.151.115:8000/api/v1/teacher/scan-qr-create-session'
-payload = {
-    "student_id": 16,
-    "battery_level": 22
-}
-headers = {
-  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-}
+void main() async {
+  final dio = Dio();
+  final url = 'http://45.245.151.115:8000/api/v1/teacher/scan-qr-create-session';
 
-response = requests.request('POST', url, headers=headers, json=payload)
-response.json()</code></pre></div>
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = [
+    'student_id' =&gt; 16,
+    'battery_level' =&gt; 22,
+];
+
+  try {
+    final response = await dio.request(
+      url,
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'POST',
+        headers: headers,
+      ),
+    );
+    print(response.data);
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+
+<div class="Dio-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+
+  final url = Uri.parse("http://45.245.151.115:8000/api/v1/teacher/scan-qr-create-session");
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = [
+    'student_id' =&gt; 16,
+    'battery_level' =&gt; 22,
+];
+
+  try {
+    final response = await dio.request(
+      url.toString(),
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'POST',
+        headers: headers,
+      ),
+    );
+    print('Response: ${response.data}');
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
 
 </span>
 
@@ -2491,30 +2957,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <blockquote>Example request:</blockquote>
 
 
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request POST \
-    "http://45.245.151.115:8000/api/v1/admin/create-student" \
-    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json" \
-    --data "{
-    \"name\": \"Tarek Hesham Sayed ElFarmawy\",
-    \"email\": \"student@example.com\",
-    \"phone\": \"01234567890\",
-    \"national_id\": \"12345678901234\",
-    \"password\": \"password123\",
-    \"seat_number\": \"A23\",
-    \"academic_year\": \"second\",
-    \"section\": \"scientific\",
-    \"birth_date\": \"2025-05-15\",
-    \"gender\": \"male\",
-    \"guardian_phone\": \"01098765432\"
-}"
-</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
+<div class="JS-example">
+    <pre><code class="language-JS">const url = new URL(
     "http://45.245.151.115:8000/api/v1/admin/create-student"
 );
 
@@ -2545,7 +2989,7 @@ fetch(url, {
 }).then(response =&gt; response.json());</code></pre></div>
 
 
-<div class="php-example">
+<div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $url = 'http://45.245.151.115:8000/api/v1/admin/create-student';
 $response = $client-&gt;post(
@@ -2575,32 +3019,95 @@ $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre></div>
 
 
-<div class="python-example">
-    <pre><code class="language-python">import requests
-import json
+<div class="DartPad-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
 
-url = 'http://45.245.151.115:8000/api/v1/admin/create-student'
-payload = {
-    "name": "Tarek Hesham Sayed ElFarmawy",
-    "email": "student@example.com",
-    "phone": "01234567890",
-    "national_id": "12345678901234",
-    "password": "password123",
-    "seat_number": "A23",
-    "academic_year": "second",
-    "section": "scientific",
-    "birth_date": "2025-05-15",
-    "gender": "male",
-    "guardian_phone": "01098765432"
-}
-headers = {
-  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-}
+void main() async {
+  final dio = Dio();
+  final url = 'http://45.245.151.115:8000/api/v1/admin/create-student';
 
-response = requests.request('POST', url, headers=headers, json=payload)
-response.json()</code></pre></div>
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = [
+    'name' =&gt; 'Tarek Hesham Sayed ElFarmawy',
+    'email' =&gt; 'student@example.com',
+    'phone' =&gt; '01234567890',
+    'national_id' =&gt; '12345678901234',
+    'password' =&gt; 'password123',
+    'seat_number' =&gt; 'A23',
+    'academic_year' =&gt; 'second',
+    'section' =&gt; 'scientific',
+    'birth_date' =&gt; '2025-05-15',
+    'gender' =&gt; 'male',
+    'guardian_phone' =&gt; '01098765432',
+];
+
+  try {
+    final response = await dio.request(
+      url,
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'POST',
+        headers: headers,
+      ),
+    );
+    print(response.data);
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+
+<div class="Dio-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+
+  final url = Uri.parse("http://45.245.151.115:8000/api/v1/admin/create-student");
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = [
+    'name' =&gt; 'Tarek Hesham Sayed ElFarmawy',
+    'email' =&gt; 'student@example.com',
+    'phone' =&gt; '01234567890',
+    'national_id' =&gt; '12345678901234',
+    'password' =&gt; 'password123',
+    'seat_number' =&gt; 'A23',
+    'academic_year' =&gt; 'second',
+    'section' =&gt; 'scientific',
+    'birth_date' =&gt; '2025-05-15',
+    'gender' =&gt; 'male',
+    'guardian_phone' =&gt; '01098765432',
+];
+
+  try {
+    final response = await dio.request(
+      url.toString(),
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'POST',
+        headers: headers,
+      ),
+    );
+    print('Response: ${response.data}');
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
 
 </span>
 
@@ -2828,30 +3335,8 @@ Must be one of:
 <blockquote>Example request:</blockquote>
 
 
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request POST \
-    "http://45.245.151.115:8000/api/v1/admin/create-teacher" \
-    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json" \
-    --data "{
-    \"name\": \"Tarek Hesham Sayed ElFarmawy\",
-    \"email\": \"teacher@example.com\",
-    \"phone\": \"01234567890\",
-    \"national_id\": \"12345678901234\",
-    \"password\": \"password123\",
-    \"subject_id\": 5,
-    \"teacher_type\": \"regular\",
-    \"can_create_exams\": false,
-    \"can_correct_essays\": false,
-    \"is_active\": false,
-    \"assignment_type\": \"teaching\"
-}"
-</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
+<div class="JS-example">
+    <pre><code class="language-JS">const url = new URL(
     "http://45.245.151.115:8000/api/v1/admin/create-teacher"
 );
 
@@ -2882,7 +3367,7 @@ fetch(url, {
 }).then(response =&gt; response.json());</code></pre></div>
 
 
-<div class="php-example">
+<div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $url = 'http://45.245.151.115:8000/api/v1/admin/create-teacher';
 $response = $client-&gt;post(
@@ -2912,32 +3397,95 @@ $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre></div>
 
 
-<div class="python-example">
-    <pre><code class="language-python">import requests
-import json
+<div class="DartPad-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
 
-url = 'http://45.245.151.115:8000/api/v1/admin/create-teacher'
-payload = {
-    "name": "Tarek Hesham Sayed ElFarmawy",
-    "email": "teacher@example.com",
-    "phone": "01234567890",
-    "national_id": "12345678901234",
-    "password": "password123",
-    "subject_id": 5,
-    "teacher_type": "regular",
-    "can_create_exams": false,
-    "can_correct_essays": false,
-    "is_active": false,
-    "assignment_type": "teaching"
-}
-headers = {
-  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-}
+void main() async {
+  final dio = Dio();
+  final url = 'http://45.245.151.115:8000/api/v1/admin/create-teacher';
 
-response = requests.request('POST', url, headers=headers, json=payload)
-response.json()</code></pre></div>
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = [
+    'name' =&gt; 'Tarek Hesham Sayed ElFarmawy',
+    'email' =&gt; 'teacher@example.com',
+    'phone' =&gt; '01234567890',
+    'national_id' =&gt; '12345678901234',
+    'password' =&gt; 'password123',
+    'subject_id' =&gt; 5,
+    'teacher_type' =&gt; 'regular',
+    'can_create_exams' =&gt; false,
+    'can_correct_essays' =&gt; false,
+    'is_active' =&gt; false,
+    'assignment_type' =&gt; 'teaching',
+];
+
+  try {
+    final response = await dio.request(
+      url,
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'POST',
+        headers: headers,
+      ),
+    );
+    print(response.data);
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+
+<div class="Dio-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+
+  final url = Uri.parse("http://45.245.151.115:8000/api/v1/admin/create-teacher");
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = [
+    'name' =&gt; 'Tarek Hesham Sayed ElFarmawy',
+    'email' =&gt; 'teacher@example.com',
+    'phone' =&gt; '01234567890',
+    'national_id' =&gt; '12345678901234',
+    'password' =&gt; 'password123',
+    'subject_id' =&gt; 5,
+    'teacher_type' =&gt; 'regular',
+    'can_create_exams' =&gt; false,
+    'can_correct_essays' =&gt; false,
+    'is_active' =&gt; false,
+    'assignment_type' =&gt; 'teaching',
+];
+
+  try {
+    final response = await dio.request(
+      url.toString(),
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'POST',
+        headers: headers,
+      ),
+    );
+    print('Response: ${response.data}');
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
 
 </span>
 
@@ -3206,16 +3754,8 @@ Must be one of:
 <blockquote>Example request:</blockquote>
 
 
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request GET \
-    --get "http://45.245.151.115:8000/api/v1/admin/teachers" \
-    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
+<div class="JS-example">
+    <pre><code class="language-JS">const url = new URL(
     "http://45.245.151.115:8000/api/v1/admin/teachers"
 );
 
@@ -3231,7 +3771,7 @@ fetch(url, {
 }).then(response =&gt; response.json());</code></pre></div>
 
 
-<div class="php-example">
+<div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $url = 'http://45.245.151.115:8000/api/v1/admin/teachers';
 $response = $client-&gt;get(
@@ -3248,19 +3788,71 @@ $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre></div>
 
 
-<div class="python-example">
-    <pre><code class="language-python">import requests
-import json
+<div class="DartPad-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
 
-url = 'http://45.245.151.115:8000/api/v1/admin/teachers'
-headers = {
-  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-}
+void main() async {
+  final dio = Dio();
+  final url = 'http://45.245.151.115:8000/api/v1/admin/teachers';
 
-response = requests.request('GET', url, headers=headers)
-response.json()</code></pre></div>
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url,
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'GET',
+        headers: headers,
+      ),
+    );
+    print(response.data);
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+
+<div class="Dio-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+
+  final url = Uri.parse("http://45.245.151.115:8000/api/v1/admin/teachers");
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url.toString(),
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'GET',
+        headers: headers,
+      ),
+    );
+    print('Response: ${response.data}');
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
 
 </span>
 
@@ -3376,16 +3968,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <blockquote>Example request:</blockquote>
 
 
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request GET \
-    --get "http://45.245.151.115:8000/api/v1/admin/teachers/architecto" \
-    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
+<div class="JS-example">
+    <pre><code class="language-JS">const url = new URL(
     "http://45.245.151.115:8000/api/v1/admin/teachers/architecto"
 );
 
@@ -3401,7 +3985,7 @@ fetch(url, {
 }).then(response =&gt; response.json());</code></pre></div>
 
 
-<div class="php-example">
+<div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $url = 'http://45.245.151.115:8000/api/v1/admin/teachers/architecto';
 $response = $client-&gt;get(
@@ -3418,19 +4002,71 @@ $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre></div>
 
 
-<div class="python-example">
-    <pre><code class="language-python">import requests
-import json
+<div class="DartPad-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
 
-url = 'http://45.245.151.115:8000/api/v1/admin/teachers/architecto'
-headers = {
-  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-}
+void main() async {
+  final dio = Dio();
+  final url = 'http://45.245.151.115:8000/api/v1/admin/teachers/architecto';
 
-response = requests.request('GET', url, headers=headers)
-response.json()</code></pre></div>
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url,
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'GET',
+        headers: headers,
+      ),
+    );
+    print(response.data);
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+
+<div class="Dio-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+
+  final url = Uri.parse("http://45.245.151.115:8000/api/v1/admin/teachers/architecto");
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url.toString(),
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'GET',
+        headers: headers,
+      ),
+    );
+    print('Response: ${response.data}');
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
 
 </span>
 
@@ -3558,33 +4194,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <blockquote>Example request:</blockquote>
 
 
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request PUT \
-    "http://45.245.151.115:8000/api/v1/admin/teachers/architecto" \
-    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json" \
-    --data "{
-    \"name\": \"John Doe\",
-    \"email\": \"teacher@example.com\",
-    \"phone\": \"01234567890\",
-    \"national_id\": \"12345678901234\",
-    \"password\": \"password123\",
-    \"subject_id\": \"MATH101\",
-    \"teacher_type\": \"regular\",
-    \"can_create_exams\": false,
-    \"can_correct_essays\": false,
-    \"is_active\": false,
-    \"school_ids\": [
-        1
-    ],
-    \"assignment_type\": \"teaching\"
-}"
-</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
+<div class="JS-example">
+    <pre><code class="language-JS">const url = new URL(
     "http://45.245.151.115:8000/api/v1/admin/teachers/architecto"
 );
 
@@ -3618,7 +4229,7 @@ fetch(url, {
 }).then(response =&gt; response.json());</code></pre></div>
 
 
-<div class="php-example">
+<div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $url = 'http://45.245.151.115:8000/api/v1/admin/teachers/architecto';
 $response = $client-&gt;put(
@@ -3651,35 +4262,101 @@ $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre></div>
 
 
-<div class="python-example">
-    <pre><code class="language-python">import requests
-import json
+<div class="DartPad-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
 
-url = 'http://45.245.151.115:8000/api/v1/admin/teachers/architecto'
-payload = {
-    "name": "John Doe",
-    "email": "teacher@example.com",
-    "phone": "01234567890",
-    "national_id": "12345678901234",
-    "password": "password123",
-    "subject_id": "MATH101",
-    "teacher_type": "regular",
-    "can_create_exams": false,
-    "can_correct_essays": false,
-    "is_active": false,
-    "school_ids": [
-        1
+void main() async {
+  final dio = Dio();
+  final url = 'http://45.245.151.115:8000/api/v1/admin/teachers/architecto';
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = [
+    'name' =&gt; 'John Doe',
+    'email' =&gt; 'teacher@example.com',
+    'phone' =&gt; '01234567890',
+    'national_id' =&gt; '12345678901234',
+    'password' =&gt; 'password123',
+    'subject_id' =&gt; 'MATH101',
+    'teacher_type' =&gt; 'regular',
+    'can_create_exams' =&gt; false,
+    'can_correct_essays' =&gt; false,
+    'is_active' =&gt; false,
+    'school_ids' =&gt; [
+        1,
     ],
-    "assignment_type": "teaching"
-}
-headers = {
-  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-}
+    'assignment_type' =&gt; 'teaching',
+];
 
-response = requests.request('PUT', url, headers=headers, json=payload)
-response.json()</code></pre></div>
+  try {
+    final response = await dio.request(
+      url,
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'PUT',
+        headers: headers,
+      ),
+    );
+    print(response.data);
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+
+<div class="Dio-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+
+  final url = Uri.parse("http://45.245.151.115:8000/api/v1/admin/teachers/architecto");
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = [
+    'name' =&gt; 'John Doe',
+    'email' =&gt; 'teacher@example.com',
+    'phone' =&gt; '01234567890',
+    'national_id' =&gt; '12345678901234',
+    'password' =&gt; 'password123',
+    'subject_id' =&gt; 'MATH101',
+    'teacher_type' =&gt; 'regular',
+    'can_create_exams' =&gt; false,
+    'can_correct_essays' =&gt; false,
+    'is_active' =&gt; false,
+    'school_ids' =&gt; [
+        1,
+    ],
+    'assignment_type' =&gt; 'teaching',
+];
+
+  try {
+    final response = await dio.request(
+      url.toString(),
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'PUT',
+        headers: headers,
+      ),
+    );
+    print('Response: ${response.data}');
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
 
 </span>
 
@@ -3964,16 +4641,8 @@ Must be one of:
 <blockquote>Example request:</blockquote>
 
 
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request DELETE \
-    "http://45.245.151.115:8000/api/v1/admin/teachers/architecto" \
-    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
+<div class="JS-example">
+    <pre><code class="language-JS">const url = new URL(
     "http://45.245.151.115:8000/api/v1/admin/teachers/architecto"
 );
 
@@ -3989,7 +4658,7 @@ fetch(url, {
 }).then(response =&gt; response.json());</code></pre></div>
 
 
-<div class="php-example">
+<div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $url = 'http://45.245.151.115:8000/api/v1/admin/teachers/architecto';
 $response = $client-&gt;delete(
@@ -4006,19 +4675,71 @@ $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre></div>
 
 
-<div class="python-example">
-    <pre><code class="language-python">import requests
-import json
+<div class="DartPad-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
 
-url = 'http://45.245.151.115:8000/api/v1/admin/teachers/architecto'
-headers = {
-  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-}
+void main() async {
+  final dio = Dio();
+  final url = 'http://45.245.151.115:8000/api/v1/admin/teachers/architecto';
 
-response = requests.request('DELETE', url, headers=headers)
-response.json()</code></pre></div>
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url,
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'DELETE',
+        headers: headers,
+      ),
+    );
+    print(response.data);
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+
+<div class="Dio-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+
+  final url = Uri.parse("http://45.245.151.115:8000/api/v1/admin/teachers/architecto");
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url.toString(),
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'DELETE',
+        headers: headers,
+      ),
+    );
+    print('Response: ${response.data}');
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
 
 </span>
 
@@ -4130,16 +4851,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <blockquote>Example request:</blockquote>
 
 
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request PATCH \
-    "http://45.245.151.115:8000/api/v1/admin/teachers/architecto/toggle-status" \
-    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
+<div class="JS-example">
+    <pre><code class="language-JS">const url = new URL(
     "http://45.245.151.115:8000/api/v1/admin/teachers/architecto/toggle-status"
 );
 
@@ -4155,7 +4868,7 @@ fetch(url, {
 }).then(response =&gt; response.json());</code></pre></div>
 
 
-<div class="php-example">
+<div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $url = 'http://45.245.151.115:8000/api/v1/admin/teachers/architecto/toggle-status';
 $response = $client-&gt;patch(
@@ -4172,19 +4885,71 @@ $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre></div>
 
 
-<div class="python-example">
-    <pre><code class="language-python">import requests
-import json
+<div class="DartPad-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
 
-url = 'http://45.245.151.115:8000/api/v1/admin/teachers/architecto/toggle-status'
-headers = {
-  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-}
+void main() async {
+  final dio = Dio();
+  final url = 'http://45.245.151.115:8000/api/v1/admin/teachers/architecto/toggle-status';
 
-response = requests.request('PATCH', url, headers=headers)
-response.json()</code></pre></div>
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url,
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'PATCH',
+        headers: headers,
+      ),
+    );
+    print(response.data);
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+
+<div class="Dio-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+
+  final url = Uri.parse("http://45.245.151.115:8000/api/v1/admin/teachers/architecto/toggle-status");
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url.toString(),
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'PATCH',
+        headers: headers,
+      ),
+    );
+    print('Response: ${response.data}');
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
 
 </span>
 
@@ -4296,16 +5061,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <blockquote>Example request:</blockquote>
 
 
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request GET \
-    --get "http://45.245.151.115:8000/api/v1/admin/exams" \
-    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
+<div class="JS-example">
+    <pre><code class="language-JS">const url = new URL(
     "http://45.245.151.115:8000/api/v1/admin/exams"
 );
 
@@ -4321,7 +5078,7 @@ fetch(url, {
 }).then(response =&gt; response.json());</code></pre></div>
 
 
-<div class="php-example">
+<div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $url = 'http://45.245.151.115:8000/api/v1/admin/exams';
 $response = $client-&gt;get(
@@ -4338,19 +5095,71 @@ $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre></div>
 
 
-<div class="python-example">
-    <pre><code class="language-python">import requests
-import json
+<div class="DartPad-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
 
-url = 'http://45.245.151.115:8000/api/v1/admin/exams'
-headers = {
-  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-}
+void main() async {
+  final dio = Dio();
+  final url = 'http://45.245.151.115:8000/api/v1/admin/exams';
 
-response = requests.request('GET', url, headers=headers)
-response.json()</code></pre></div>
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url,
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'GET',
+        headers: headers,
+      ),
+    );
+    print(response.data);
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+
+<div class="Dio-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+
+  final url = Uri.parse("http://45.245.151.115:8000/api/v1/admin/exams");
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url.toString(),
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'GET',
+        headers: headers,
+      ),
+    );
+    print('Response: ${response.data}');
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
 
 </span>
 
@@ -4466,30 +5275,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <blockquote>Example request:</blockquote>
 
 
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request POST \
-    "http://45.245.151.115:8000/api/v1/admin/exams" \
-    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json" \
-    --data "{
-    \"subject_id\": 3,
-    \"title\": \"Midterm Exam\",
-    \"description\": \"Covers chapters 1 to 3.\",
-    \"exam_type\": \"final\",
-    \"academic_year\": \"second\",
-    \"start_time\": \"2025-10-01 09:00:00\",
-    \"end_time\": \"2025-10-01 11:00:00\",
-    \"duration_minutes\": 120,
-    \"total_score\": 100,
-    \"minimum_battery_percentage\": 30,
-    \"require_video_recording\": false
-}"
-</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
+<div class="JS-example">
+    <pre><code class="language-JS">const url = new URL(
     "http://45.245.151.115:8000/api/v1/admin/exams"
 );
 
@@ -4520,7 +5307,7 @@ fetch(url, {
 }).then(response =&gt; response.json());</code></pre></div>
 
 
-<div class="php-example">
+<div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $url = 'http://45.245.151.115:8000/api/v1/admin/exams';
 $response = $client-&gt;post(
@@ -4550,32 +5337,95 @@ $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre></div>
 
 
-<div class="python-example">
-    <pre><code class="language-python">import requests
-import json
+<div class="DartPad-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
 
-url = 'http://45.245.151.115:8000/api/v1/admin/exams'
-payload = {
-    "subject_id": 3,
-    "title": "Midterm Exam",
-    "description": "Covers chapters 1 to 3.",
-    "exam_type": "final",
-    "academic_year": "second",
-    "start_time": "2025-10-01 09:00:00",
-    "end_time": "2025-10-01 11:00:00",
-    "duration_minutes": 120,
-    "total_score": 100,
-    "minimum_battery_percentage": 30,
-    "require_video_recording": false
-}
-headers = {
-  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-}
+void main() async {
+  final dio = Dio();
+  final url = 'http://45.245.151.115:8000/api/v1/admin/exams';
 
-response = requests.request('POST', url, headers=headers, json=payload)
-response.json()</code></pre></div>
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = [
+    'subject_id' =&gt; 3,
+    'title' =&gt; 'Midterm Exam',
+    'description' =&gt; 'Covers chapters 1 to 3.',
+    'exam_type' =&gt; 'final',
+    'academic_year' =&gt; 'second',
+    'start_time' =&gt; '2025-10-01 09:00:00',
+    'end_time' =&gt; '2025-10-01 11:00:00',
+    'duration_minutes' =&gt; 120,
+    'total_score' =&gt; 100,
+    'minimum_battery_percentage' =&gt; 30,
+    'require_video_recording' =&gt; false,
+];
+
+  try {
+    final response = await dio.request(
+      url,
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'POST',
+        headers: headers,
+      ),
+    );
+    print(response.data);
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+
+<div class="Dio-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+
+  final url = Uri.parse("http://45.245.151.115:8000/api/v1/admin/exams");
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = [
+    'subject_id' =&gt; 3,
+    'title' =&gt; 'Midterm Exam',
+    'description' =&gt; 'Covers chapters 1 to 3.',
+    'exam_type' =&gt; 'final',
+    'academic_year' =&gt; 'second',
+    'start_time' =&gt; '2025-10-01 09:00:00',
+    'end_time' =&gt; '2025-10-01 11:00:00',
+    'duration_minutes' =&gt; 120,
+    'total_score' =&gt; 100,
+    'minimum_battery_percentage' =&gt; 30,
+    'require_video_recording' =&gt; false,
+];
+
+  try {
+    final response = await dio.request(
+      url.toString(),
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'POST',
+        headers: headers,
+      ),
+    );
+    print('Response: ${response.data}');
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
 
 </span>
 
@@ -4811,16 +5661,8 @@ Must be one of:
 <blockquote>Example request:</blockquote>
 
 
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request GET \
-    --get "http://45.245.151.115:8000/api/v1/admin/exams/architecto" \
-    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
+<div class="JS-example">
+    <pre><code class="language-JS">const url = new URL(
     "http://45.245.151.115:8000/api/v1/admin/exams/architecto"
 );
 
@@ -4836,7 +5678,7 @@ fetch(url, {
 }).then(response =&gt; response.json());</code></pre></div>
 
 
-<div class="php-example">
+<div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $url = 'http://45.245.151.115:8000/api/v1/admin/exams/architecto';
 $response = $client-&gt;get(
@@ -4853,19 +5695,71 @@ $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre></div>
 
 
-<div class="python-example">
-    <pre><code class="language-python">import requests
-import json
+<div class="DartPad-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
 
-url = 'http://45.245.151.115:8000/api/v1/admin/exams/architecto'
-headers = {
-  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-}
+void main() async {
+  final dio = Dio();
+  final url = 'http://45.245.151.115:8000/api/v1/admin/exams/architecto';
 
-response = requests.request('GET', url, headers=headers)
-response.json()</code></pre></div>
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url,
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'GET',
+        headers: headers,
+      ),
+    );
+    print(response.data);
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+
+<div class="Dio-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+
+  final url = Uri.parse("http://45.245.151.115:8000/api/v1/admin/exams/architecto");
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url.toString(),
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'GET',
+        headers: headers,
+      ),
+    );
+    print('Response: ${response.data}');
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
 
 </span>
 
@@ -4993,29 +5887,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <blockquote>Example request:</blockquote>
 
 
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request PUT \
-    "http://45.245.151.115:8000/api/v1/admin/exams/1" \
-    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json" \
-    --data "{
-    \"title\": \"Final Exam - Mathematics\",
-    \"description\": \"Covers chapters 1 to 5.\",
-    \"start_time\": \"2025-10-01 09:00:00\",
-    \"end_time\": \"2025-10-01 11:00:00\",
-    \"duration_minutes\": 120,
-    \"total_score\": 100,
-    \"minimum_battery_percentage\": 30,
-    \"require_video_recording\": false,
-    \"is_published\": false,
-    \"is_active\": false
-}"
-</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
+<div class="JS-example">
+    <pre><code class="language-JS">const url = new URL(
     "http://45.245.151.115:8000/api/v1/admin/exams/1"
 );
 
@@ -5045,7 +5918,7 @@ fetch(url, {
 }).then(response =&gt; response.json());</code></pre></div>
 
 
-<div class="php-example">
+<div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $url = 'http://45.245.151.115:8000/api/v1/admin/exams/1';
 $response = $client-&gt;put(
@@ -5074,31 +5947,93 @@ $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre></div>
 
 
-<div class="python-example">
-    <pre><code class="language-python">import requests
-import json
+<div class="DartPad-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
 
-url = 'http://45.245.151.115:8000/api/v1/admin/exams/1'
-payload = {
-    "title": "Final Exam - Mathematics",
-    "description": "Covers chapters 1 to 5.",
-    "start_time": "2025-10-01 09:00:00",
-    "end_time": "2025-10-01 11:00:00",
-    "duration_minutes": 120,
-    "total_score": 100,
-    "minimum_battery_percentage": 30,
-    "require_video_recording": false,
-    "is_published": false,
-    "is_active": false
-}
-headers = {
-  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-}
+void main() async {
+  final dio = Dio();
+  final url = 'http://45.245.151.115:8000/api/v1/admin/exams/1';
 
-response = requests.request('PUT', url, headers=headers, json=payload)
-response.json()</code></pre></div>
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = [
+    'title' =&gt; 'Final Exam - Mathematics',
+    'description' =&gt; 'Covers chapters 1 to 5.',
+    'start_time' =&gt; '2025-10-01 09:00:00',
+    'end_time' =&gt; '2025-10-01 11:00:00',
+    'duration_minutes' =&gt; 120,
+    'total_score' =&gt; 100,
+    'minimum_battery_percentage' =&gt; 30,
+    'require_video_recording' =&gt; false,
+    'is_published' =&gt; false,
+    'is_active' =&gt; false,
+];
+
+  try {
+    final response = await dio.request(
+      url,
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'PUT',
+        headers: headers,
+      ),
+    );
+    print(response.data);
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+
+<div class="Dio-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+
+  final url = Uri.parse("http://45.245.151.115:8000/api/v1/admin/exams/1");
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = [
+    'title' =&gt; 'Final Exam - Mathematics',
+    'description' =&gt; 'Covers chapters 1 to 5.',
+    'start_time' =&gt; '2025-10-01 09:00:00',
+    'end_time' =&gt; '2025-10-01 11:00:00',
+    'duration_minutes' =&gt; 120,
+    'total_score' =&gt; 100,
+    'minimum_battery_percentage' =&gt; 30,
+    'require_video_recording' =&gt; false,
+    'is_published' =&gt; false,
+    'is_active' =&gt; false,
+];
+
+  try {
+    final response = await dio.request(
+      url.toString(),
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'PUT',
+        headers: headers,
+      ),
+    );
+    print('Response: ${response.data}');
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
 
 </span>
 
@@ -5351,16 +6286,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <blockquote>Example request:</blockquote>
 
 
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request DELETE \
-    "http://45.245.151.115:8000/api/v1/admin/exams/architecto" \
-    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
+<div class="JS-example">
+    <pre><code class="language-JS">const url = new URL(
     "http://45.245.151.115:8000/api/v1/admin/exams/architecto"
 );
 
@@ -5376,7 +6303,7 @@ fetch(url, {
 }).then(response =&gt; response.json());</code></pre></div>
 
 
-<div class="php-example">
+<div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $url = 'http://45.245.151.115:8000/api/v1/admin/exams/architecto';
 $response = $client-&gt;delete(
@@ -5393,19 +6320,71 @@ $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre></div>
 
 
-<div class="python-example">
-    <pre><code class="language-python">import requests
-import json
+<div class="DartPad-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
 
-url = 'http://45.245.151.115:8000/api/v1/admin/exams/architecto'
-headers = {
-  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-}
+void main() async {
+  final dio = Dio();
+  final url = 'http://45.245.151.115:8000/api/v1/admin/exams/architecto';
 
-response = requests.request('DELETE', url, headers=headers)
-response.json()</code></pre></div>
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url,
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'DELETE',
+        headers: headers,
+      ),
+    );
+    print(response.data);
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+
+<div class="Dio-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+
+  final url = Uri.parse("http://45.245.151.115:8000/api/v1/admin/exams/architecto");
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url.toString(),
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'DELETE',
+        headers: headers,
+      ),
+    );
+    print('Response: ${response.data}');
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
 
 </span>
 
@@ -5517,16 +6496,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <blockquote>Example request:</blockquote>
 
 
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request POST \
-    "http://45.245.151.115:8000/api/v1/admin/exams/architecto/duplicate" \
-    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
+<div class="JS-example">
+    <pre><code class="language-JS">const url = new URL(
     "http://45.245.151.115:8000/api/v1/admin/exams/architecto/duplicate"
 );
 
@@ -5542,7 +6513,7 @@ fetch(url, {
 }).then(response =&gt; response.json());</code></pre></div>
 
 
-<div class="php-example">
+<div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $url = 'http://45.245.151.115:8000/api/v1/admin/exams/architecto/duplicate';
 $response = $client-&gt;post(
@@ -5559,19 +6530,71 @@ $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre></div>
 
 
-<div class="python-example">
-    <pre><code class="language-python">import requests
-import json
+<div class="DartPad-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
 
-url = 'http://45.245.151.115:8000/api/v1/admin/exams/architecto/duplicate'
-headers = {
-  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-}
+void main() async {
+  final dio = Dio();
+  final url = 'http://45.245.151.115:8000/api/v1/admin/exams/architecto/duplicate';
 
-response = requests.request('POST', url, headers=headers)
-response.json()</code></pre></div>
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url,
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'POST',
+        headers: headers,
+      ),
+    );
+    print(response.data);
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+
+<div class="Dio-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+
+  final url = Uri.parse("http://45.245.151.115:8000/api/v1/admin/exams/architecto/duplicate");
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url.toString(),
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'POST',
+        headers: headers,
+      ),
+    );
+    print('Response: ${response.data}');
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
 
 </span>
 
@@ -5683,16 +6706,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <blockquote>Example request:</blockquote>
 
 
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request GET \
-    --get "http://45.245.151.115:8000/api/v1/admin/exams/architecto/statistics" \
-    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
+<div class="JS-example">
+    <pre><code class="language-JS">const url = new URL(
     "http://45.245.151.115:8000/api/v1/admin/exams/architecto/statistics"
 );
 
@@ -5708,7 +6723,7 @@ fetch(url, {
 }).then(response =&gt; response.json());</code></pre></div>
 
 
-<div class="php-example">
+<div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $url = 'http://45.245.151.115:8000/api/v1/admin/exams/architecto/statistics';
 $response = $client-&gt;get(
@@ -5725,19 +6740,71 @@ $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre></div>
 
 
-<div class="python-example">
-    <pre><code class="language-python">import requests
-import json
+<div class="DartPad-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
 
-url = 'http://45.245.151.115:8000/api/v1/admin/exams/architecto/statistics'
-headers = {
-  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-}
+void main() async {
+  final dio = Dio();
+  final url = 'http://45.245.151.115:8000/api/v1/admin/exams/architecto/statistics';
 
-response = requests.request('GET', url, headers=headers)
-response.json()</code></pre></div>
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url,
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'GET',
+        headers: headers,
+      ),
+    );
+    print(response.data);
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+
+<div class="Dio-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+
+  final url = Uri.parse("http://45.245.151.115:8000/api/v1/admin/exams/architecto/statistics");
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url.toString(),
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'GET',
+        headers: headers,
+      ),
+    );
+    print('Response: ${response.data}');
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
 
 </span>
 
@@ -5865,16 +6932,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <blockquote>Example request:</blockquote>
 
 
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request GET \
-    --get "http://45.245.151.115:8000/api/v1/admin/subjects" \
-    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
+<div class="JS-example">
+    <pre><code class="language-JS">const url = new URL(
     "http://45.245.151.115:8000/api/v1/admin/subjects"
 );
 
@@ -5890,7 +6949,7 @@ fetch(url, {
 }).then(response =&gt; response.json());</code></pre></div>
 
 
-<div class="php-example">
+<div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $url = 'http://45.245.151.115:8000/api/v1/admin/subjects';
 $response = $client-&gt;get(
@@ -5907,19 +6966,71 @@ $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre></div>
 
 
-<div class="python-example">
-    <pre><code class="language-python">import requests
-import json
+<div class="DartPad-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
 
-url = 'http://45.245.151.115:8000/api/v1/admin/subjects'
-headers = {
-  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-}
+void main() async {
+  final dio = Dio();
+  final url = 'http://45.245.151.115:8000/api/v1/admin/subjects';
 
-response = requests.request('GET', url, headers=headers)
-response.json()</code></pre></div>
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url,
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'GET',
+        headers: headers,
+      ),
+    );
+    print(response.data);
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+
+<div class="Dio-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+
+  final url = Uri.parse("http://45.245.151.115:8000/api/v1/admin/subjects");
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url.toString(),
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'GET',
+        headers: headers,
+      ),
+    );
+    print('Response: ${response.data}');
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
 
 </span>
 
@@ -6035,26 +7146,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <blockquote>Example request:</blockquote>
 
 
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request POST \
-    "http://45.245.151.115:8000/api/v1/admin/subjects" \
-    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json" \
-    --data "{
-    \"name\": \"Mathematics\",
-    \"code\": \"MATH101\",
-    \"section\": \"Science\",
-    \"duration_minutes\": 90,
-    \"max_score\": 100,
-    \"has_essay_questions\": false,
-    \"is_active\": false
-}"
-</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
+<div class="JS-example">
+    <pre><code class="language-JS">const url = new URL(
     "http://45.245.151.115:8000/api/v1/admin/subjects"
 );
 
@@ -6081,7 +7174,7 @@ fetch(url, {
 }).then(response =&gt; response.json());</code></pre></div>
 
 
-<div class="php-example">
+<div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $url = 'http://45.245.151.115:8000/api/v1/admin/subjects';
 $response = $client-&gt;post(
@@ -6107,28 +7200,87 @@ $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre></div>
 
 
-<div class="python-example">
-    <pre><code class="language-python">import requests
-import json
+<div class="DartPad-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
 
-url = 'http://45.245.151.115:8000/api/v1/admin/subjects'
-payload = {
-    "name": "Mathematics",
-    "code": "MATH101",
-    "section": "Science",
-    "duration_minutes": 90,
-    "max_score": 100,
-    "has_essay_questions": false,
-    "is_active": false
-}
-headers = {
-  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-}
+void main() async {
+  final dio = Dio();
+  final url = 'http://45.245.151.115:8000/api/v1/admin/subjects';
 
-response = requests.request('POST', url, headers=headers, json=payload)
-response.json()</code></pre></div>
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = [
+    'name' =&gt; 'Mathematics',
+    'code' =&gt; 'MATH101',
+    'section' =&gt; 'Science',
+    'duration_minutes' =&gt; 90,
+    'max_score' =&gt; 100,
+    'has_essay_questions' =&gt; false,
+    'is_active' =&gt; false,
+];
+
+  try {
+    final response = await dio.request(
+      url,
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'POST',
+        headers: headers,
+      ),
+    );
+    print(response.data);
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+
+<div class="Dio-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+
+  final url = Uri.parse("http://45.245.151.115:8000/api/v1/admin/subjects");
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = [
+    'name' =&gt; 'Mathematics',
+    'code' =&gt; 'MATH101',
+    'section' =&gt; 'Science',
+    'duration_minutes' =&gt; 90,
+    'max_score' =&gt; 100,
+    'has_essay_questions' =&gt; false,
+    'is_active' =&gt; false,
+];
+
+  try {
+    final response = await dio.request(
+      url.toString(),
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'POST',
+        headers: headers,
+      ),
+    );
+    print('Response: ${response.data}');
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
 
 </span>
 
@@ -6326,16 +7478,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <blockquote>Example request:</blockquote>
 
 
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request GET \
-    --get "http://45.245.151.115:8000/api/v1/admin/subjects/architecto" \
-    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
+<div class="JS-example">
+    <pre><code class="language-JS">const url = new URL(
     "http://45.245.151.115:8000/api/v1/admin/subjects/architecto"
 );
 
@@ -6351,7 +7495,7 @@ fetch(url, {
 }).then(response =&gt; response.json());</code></pre></div>
 
 
-<div class="php-example">
+<div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $url = 'http://45.245.151.115:8000/api/v1/admin/subjects/architecto';
 $response = $client-&gt;get(
@@ -6368,19 +7512,71 @@ $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre></div>
 
 
-<div class="python-example">
-    <pre><code class="language-python">import requests
-import json
+<div class="DartPad-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
 
-url = 'http://45.245.151.115:8000/api/v1/admin/subjects/architecto'
-headers = {
-  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-}
+void main() async {
+  final dio = Dio();
+  final url = 'http://45.245.151.115:8000/api/v1/admin/subjects/architecto';
 
-response = requests.request('GET', url, headers=headers)
-response.json()</code></pre></div>
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url,
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'GET',
+        headers: headers,
+      ),
+    );
+    print(response.data);
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+
+<div class="Dio-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+
+  final url = Uri.parse("http://45.245.151.115:8000/api/v1/admin/subjects/architecto");
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url.toString(),
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'GET',
+        headers: headers,
+      ),
+    );
+    print('Response: ${response.data}');
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
 
 </span>
 
@@ -6508,26 +7704,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <blockquote>Example request:</blockquote>
 
 
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request PUT \
-    "http://45.245.151.115:8000/api/v1/admin/subjects/architecto" \
-    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json" \
-    --data "{
-    \"name\": \"Physics\",
-    \"code\": \"PHYS101\",
-    \"section\": \"Science\",
-    \"duration_minutes\": 90,
-    \"max_score\": 100,
-    \"has_essay_questions\": false,
-    \"is_active\": false
-}"
-</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
+<div class="JS-example">
+    <pre><code class="language-JS">const url = new URL(
     "http://45.245.151.115:8000/api/v1/admin/subjects/architecto"
 );
 
@@ -6554,7 +7732,7 @@ fetch(url, {
 }).then(response =&gt; response.json());</code></pre></div>
 
 
-<div class="php-example">
+<div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $url = 'http://45.245.151.115:8000/api/v1/admin/subjects/architecto';
 $response = $client-&gt;put(
@@ -6580,28 +7758,87 @@ $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre></div>
 
 
-<div class="python-example">
-    <pre><code class="language-python">import requests
-import json
+<div class="DartPad-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
 
-url = 'http://45.245.151.115:8000/api/v1/admin/subjects/architecto'
-payload = {
-    "name": "Physics",
-    "code": "PHYS101",
-    "section": "Science",
-    "duration_minutes": 90,
-    "max_score": 100,
-    "has_essay_questions": false,
-    "is_active": false
-}
-headers = {
-  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-}
+void main() async {
+  final dio = Dio();
+  final url = 'http://45.245.151.115:8000/api/v1/admin/subjects/architecto';
 
-response = requests.request('PUT', url, headers=headers, json=payload)
-response.json()</code></pre></div>
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = [
+    'name' =&gt; 'Physics',
+    'code' =&gt; 'PHYS101',
+    'section' =&gt; 'Science',
+    'duration_minutes' =&gt; 90,
+    'max_score' =&gt; 100,
+    'has_essay_questions' =&gt; false,
+    'is_active' =&gt; false,
+];
+
+  try {
+    final response = await dio.request(
+      url,
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'PUT',
+        headers: headers,
+      ),
+    );
+    print(response.data);
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+
+<div class="Dio-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+
+  final url = Uri.parse("http://45.245.151.115:8000/api/v1/admin/subjects/architecto");
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = [
+    'name' =&gt; 'Physics',
+    'code' =&gt; 'PHYS101',
+    'section' =&gt; 'Science',
+    'duration_minutes' =&gt; 90,
+    'max_score' =&gt; 100,
+    'has_essay_questions' =&gt; false,
+    'is_active' =&gt; false,
+];
+
+  try {
+    final response = await dio.request(
+      url.toString(),
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'PUT',
+        headers: headers,
+      ),
+    );
+    print('Response: ${response.data}');
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
 
 </span>
 
@@ -6815,16 +8052,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <blockquote>Example request:</blockquote>
 
 
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request DELETE \
-    "http://45.245.151.115:8000/api/v1/admin/subjects/architecto" \
-    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
+<div class="JS-example">
+    <pre><code class="language-JS">const url = new URL(
     "http://45.245.151.115:8000/api/v1/admin/subjects/architecto"
 );
 
@@ -6840,7 +8069,7 @@ fetch(url, {
 }).then(response =&gt; response.json());</code></pre></div>
 
 
-<div class="php-example">
+<div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $url = 'http://45.245.151.115:8000/api/v1/admin/subjects/architecto';
 $response = $client-&gt;delete(
@@ -6857,19 +8086,71 @@ $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre></div>
 
 
-<div class="python-example">
-    <pre><code class="language-python">import requests
-import json
+<div class="DartPad-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
 
-url = 'http://45.245.151.115:8000/api/v1/admin/subjects/architecto'
-headers = {
-  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-}
+void main() async {
+  final dio = Dio();
+  final url = 'http://45.245.151.115:8000/api/v1/admin/subjects/architecto';
 
-response = requests.request('DELETE', url, headers=headers)
-response.json()</code></pre></div>
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url,
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'DELETE',
+        headers: headers,
+      ),
+    );
+    print(response.data);
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+
+<div class="Dio-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+
+  final url = Uri.parse("http://45.245.151.115:8000/api/v1/admin/subjects/architecto");
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url.toString(),
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'DELETE',
+        headers: headers,
+      ),
+    );
+    print('Response: ${response.data}');
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
 
 </span>
 
@@ -6981,16 +8262,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <blockquote>Example request:</blockquote>
 
 
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request GET \
-    --get "http://45.245.151.115:8000/api/v1/admin/exam-questions" \
-    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
+<div class="JS-example">
+    <pre><code class="language-JS">const url = new URL(
     "http://45.245.151.115:8000/api/v1/admin/exam-questions"
 );
 
@@ -7006,7 +8279,7 @@ fetch(url, {
 }).then(response =&gt; response.json());</code></pre></div>
 
 
-<div class="php-example">
+<div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $url = 'http://45.245.151.115:8000/api/v1/admin/exam-questions';
 $response = $client-&gt;get(
@@ -7023,19 +8296,71 @@ $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre></div>
 
 
-<div class="python-example">
-    <pre><code class="language-python">import requests
-import json
+<div class="DartPad-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
 
-url = 'http://45.245.151.115:8000/api/v1/admin/exam-questions'
-headers = {
-  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-}
+void main() async {
+  final dio = Dio();
+  final url = 'http://45.245.151.115:8000/api/v1/admin/exam-questions';
 
-response = requests.request('GET', url, headers=headers)
-response.json()</code></pre></div>
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url,
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'GET',
+        headers: headers,
+      ),
+    );
+    print(response.data);
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+
+<div class="Dio-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+
+  final url = Uri.parse("http://45.245.151.115:8000/api/v1/admin/exam-questions");
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url.toString(),
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'GET',
+        headers: headers,
+      ),
+    );
+    print('Response: ${response.data}');
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
 
 </span>
 
@@ -7151,31 +8476,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <blockquote>Example request:</blockquote>
 
 
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request POST \
-    "http://45.245.151.115:8000/api/v1/admin/exam-questions" \
-    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json" \
-    --data "{
-    \"exam_id\": 1,
-    \"question_text\": \"What is the capital of France?\",
-    \"question_image\": \"https:\\/\\/example.com\\/question1.png\",
-    \"question_type\": \"multiple_choice\",
-    \"options\": [
-        \"Paris\"
-    ],
-    \"correct_answer\": \"Paris\",
-    \"points\": 5,
-    \"is_required\": false,
-    \"help_text\": \"Remember to check European capitals.\",
-    \"section_id\": 2
-}"
-</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
+<div class="JS-example">
+    <pre><code class="language-JS">const url = new URL(
     "http://45.245.151.115:8000/api/v1/admin/exam-questions"
 );
 
@@ -7207,7 +8509,7 @@ fetch(url, {
 }).then(response =&gt; response.json());</code></pre></div>
 
 
-<div class="php-example">
+<div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $url = 'http://45.245.151.115:8000/api/v1/admin/exam-questions';
 $response = $client-&gt;post(
@@ -7238,33 +8540,97 @@ $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre></div>
 
 
-<div class="python-example">
-    <pre><code class="language-python">import requests
-import json
+<div class="DartPad-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
 
-url = 'http://45.245.151.115:8000/api/v1/admin/exam-questions'
-payload = {
-    "exam_id": 1,
-    "question_text": "What is the capital of France?",
-    "question_image": "https:\/\/example.com\/question1.png",
-    "question_type": "multiple_choice",
-    "options": [
-        "Paris"
+void main() async {
+  final dio = Dio();
+  final url = 'http://45.245.151.115:8000/api/v1/admin/exam-questions';
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = [
+    'exam_id' =&gt; 1,
+    'question_text' =&gt; 'What is the capital of France?',
+    'question_image' =&gt; 'https://example.com/question1.png',
+    'question_type' =&gt; 'multiple_choice',
+    'options' =&gt; [
+        'Paris',
     ],
-    "correct_answer": "Paris",
-    "points": 5,
-    "is_required": false,
-    "help_text": "Remember to check European capitals.",
-    "section_id": 2
-}
-headers = {
-  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-}
+    'correct_answer' =&gt; 'Paris',
+    'points' =&gt; 5,
+    'is_required' =&gt; false,
+    'help_text' =&gt; 'Remember to check European capitals.',
+    'section_id' =&gt; 2,
+];
 
-response = requests.request('POST', url, headers=headers, json=payload)
-response.json()</code></pre></div>
+  try {
+    final response = await dio.request(
+      url,
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'POST',
+        headers: headers,
+      ),
+    );
+    print(response.data);
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+
+<div class="Dio-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+
+  final url = Uri.parse("http://45.245.151.115:8000/api/v1/admin/exam-questions");
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = [
+    'exam_id' =&gt; 1,
+    'question_text' =&gt; 'What is the capital of France?',
+    'question_image' =&gt; 'https://example.com/question1.png',
+    'question_type' =&gt; 'multiple_choice',
+    'options' =&gt; [
+        'Paris',
+    ],
+    'correct_answer' =&gt; 'Paris',
+    'points' =&gt; 5,
+    'is_required' =&gt; false,
+    'help_text' =&gt; 'Remember to check European capitals.',
+    'section_id' =&gt; 2,
+];
+
+  try {
+    final response = await dio.request(
+      url.toString(),
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'POST',
+        headers: headers,
+      ),
+    );
+    print('Response: ${response.data}');
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
 
 </span>
 
@@ -7489,16 +8855,8 @@ Must be one of:
 <blockquote>Example request:</blockquote>
 
 
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request GET \
-    --get "http://45.245.151.115:8000/api/v1/admin/exam-questions/architecto" \
-    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
+<div class="JS-example">
+    <pre><code class="language-JS">const url = new URL(
     "http://45.245.151.115:8000/api/v1/admin/exam-questions/architecto"
 );
 
@@ -7514,7 +8872,7 @@ fetch(url, {
 }).then(response =&gt; response.json());</code></pre></div>
 
 
-<div class="php-example">
+<div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $url = 'http://45.245.151.115:8000/api/v1/admin/exam-questions/architecto';
 $response = $client-&gt;get(
@@ -7531,19 +8889,71 @@ $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre></div>
 
 
-<div class="python-example">
-    <pre><code class="language-python">import requests
-import json
+<div class="DartPad-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
 
-url = 'http://45.245.151.115:8000/api/v1/admin/exam-questions/architecto'
-headers = {
-  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-}
+void main() async {
+  final dio = Dio();
+  final url = 'http://45.245.151.115:8000/api/v1/admin/exam-questions/architecto';
 
-response = requests.request('GET', url, headers=headers)
-response.json()</code></pre></div>
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url,
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'GET',
+        headers: headers,
+      ),
+    );
+    print(response.data);
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+
+<div class="Dio-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+
+  final url = Uri.parse("http://45.245.151.115:8000/api/v1/admin/exam-questions/architecto");
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url.toString(),
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'GET',
+        headers: headers,
+      ),
+    );
+    print('Response: ${response.data}');
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
 
 </span>
 
@@ -7671,31 +9081,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <blockquote>Example request:</blockquote>
 
 
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request PUT \
-    "http://45.245.151.115:8000/api/v1/admin/exam-questions/architecto" \
-    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json" \
-    --data "{
-    \"exam_id\": 1,
-    \"question_text\": \"What is the capital of Germany?\",
-    \"question_image\": \"https:\\/\\/example.com\\/question1.png\",
-    \"question_type\": \"multiple_choice\",
-    \"options\": [
-        \"Berlin\"
-    ],
-    \"correct_answer\": \"Berlin\",
-    \"points\": 5,
-    \"is_required\": false,
-    \"help_text\": \"Consider European capitals.\",
-    \"section_id\": 2
-}"
-</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
+<div class="JS-example">
+    <pre><code class="language-JS">const url = new URL(
     "http://45.245.151.115:8000/api/v1/admin/exam-questions/architecto"
 );
 
@@ -7727,7 +9114,7 @@ fetch(url, {
 }).then(response =&gt; response.json());</code></pre></div>
 
 
-<div class="php-example">
+<div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $url = 'http://45.245.151.115:8000/api/v1/admin/exam-questions/architecto';
 $response = $client-&gt;put(
@@ -7758,33 +9145,97 @@ $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre></div>
 
 
-<div class="python-example">
-    <pre><code class="language-python">import requests
-import json
+<div class="DartPad-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
 
-url = 'http://45.245.151.115:8000/api/v1/admin/exam-questions/architecto'
-payload = {
-    "exam_id": 1,
-    "question_text": "What is the capital of Germany?",
-    "question_image": "https:\/\/example.com\/question1.png",
-    "question_type": "multiple_choice",
-    "options": [
-        "Berlin"
+void main() async {
+  final dio = Dio();
+  final url = 'http://45.245.151.115:8000/api/v1/admin/exam-questions/architecto';
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = [
+    'exam_id' =&gt; 1,
+    'question_text' =&gt; 'What is the capital of Germany?',
+    'question_image' =&gt; 'https://example.com/question1.png',
+    'question_type' =&gt; 'multiple_choice',
+    'options' =&gt; [
+        'Berlin',
     ],
-    "correct_answer": "Berlin",
-    "points": 5,
-    "is_required": false,
-    "help_text": "Consider European capitals.",
-    "section_id": 2
-}
-headers = {
-  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-}
+    'correct_answer' =&gt; 'Berlin',
+    'points' =&gt; 5,
+    'is_required' =&gt; false,
+    'help_text' =&gt; 'Consider European capitals.',
+    'section_id' =&gt; 2,
+];
 
-response = requests.request('PUT', url, headers=headers, json=payload)
-response.json()</code></pre></div>
+  try {
+    final response = await dio.request(
+      url,
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'PUT',
+        headers: headers,
+      ),
+    );
+    print(response.data);
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+
+<div class="Dio-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+
+  final url = Uri.parse("http://45.245.151.115:8000/api/v1/admin/exam-questions/architecto");
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = [
+    'exam_id' =&gt; 1,
+    'question_text' =&gt; 'What is the capital of Germany?',
+    'question_image' =&gt; 'https://example.com/question1.png',
+    'question_type' =&gt; 'multiple_choice',
+    'options' =&gt; [
+        'Berlin',
+    ],
+    'correct_answer' =&gt; 'Berlin',
+    'points' =&gt; 5,
+    'is_required' =&gt; false,
+    'help_text' =&gt; 'Consider European capitals.',
+    'section_id' =&gt; 2,
+];
+
+  try {
+    final response = await dio.request(
+      url.toString(),
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'PUT',
+        headers: headers,
+      ),
+    );
+    print('Response: ${response.data}');
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
 
 </span>
 
@@ -8025,16 +9476,8 @@ Must be one of:
 <blockquote>Example request:</blockquote>
 
 
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request DELETE \
-    "http://45.245.151.115:8000/api/v1/admin/exam-questions/architecto" \
-    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
+<div class="JS-example">
+    <pre><code class="language-JS">const url = new URL(
     "http://45.245.151.115:8000/api/v1/admin/exam-questions/architecto"
 );
 
@@ -8050,7 +9493,7 @@ fetch(url, {
 }).then(response =&gt; response.json());</code></pre></div>
 
 
-<div class="php-example">
+<div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $url = 'http://45.245.151.115:8000/api/v1/admin/exam-questions/architecto';
 $response = $client-&gt;delete(
@@ -8067,19 +9510,71 @@ $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre></div>
 
 
-<div class="python-example">
-    <pre><code class="language-python">import requests
-import json
+<div class="DartPad-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
 
-url = 'http://45.245.151.115:8000/api/v1/admin/exam-questions/architecto'
-headers = {
-  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-}
+void main() async {
+  final dio = Dio();
+  final url = 'http://45.245.151.115:8000/api/v1/admin/exam-questions/architecto';
 
-response = requests.request('DELETE', url, headers=headers)
-response.json()</code></pre></div>
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url,
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'DELETE',
+        headers: headers,
+      ),
+    );
+    print(response.data);
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+
+<div class="Dio-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+
+  final url = Uri.parse("http://45.245.151.115:8000/api/v1/admin/exam-questions/architecto");
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url.toString(),
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'DELETE',
+        headers: headers,
+      ),
+    );
+    print('Response: ${response.data}');
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
 
 </span>
 
@@ -8179,7 +9674,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                     </form>
 
-                    <h2 id="endpoints-GETapi-v1-admin-exam-sections">Display a paginated listing of exam questions.</h2>
+                    <h2 id="endpoints-GETapi-v1-admin-exam-sections">GET api/v1/admin/exam-sections</h2>
 
 <p>
 <small class="badge badge-darkred">requires authentication</small>
@@ -8191,16 +9686,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <blockquote>Example request:</blockquote>
 
 
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request GET \
-    --get "http://45.245.151.115:8000/api/v1/admin/exam-sections" \
-    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
+<div class="JS-example">
+    <pre><code class="language-JS">const url = new URL(
     "http://45.245.151.115:8000/api/v1/admin/exam-sections"
 );
 
@@ -8216,7 +9703,7 @@ fetch(url, {
 }).then(response =&gt; response.json());</code></pre></div>
 
 
-<div class="php-example">
+<div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $url = 'http://45.245.151.115:8000/api/v1/admin/exam-sections';
 $response = $client-&gt;get(
@@ -8233,19 +9720,71 @@ $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre></div>
 
 
-<div class="python-example">
-    <pre><code class="language-python">import requests
-import json
+<div class="DartPad-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
 
-url = 'http://45.245.151.115:8000/api/v1/admin/exam-sections'
-headers = {
-  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-}
+void main() async {
+  final dio = Dio();
+  final url = 'http://45.245.151.115:8000/api/v1/admin/exam-sections';
 
-response = requests.request('GET', url, headers=headers)
-response.json()</code></pre></div>
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url,
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'GET',
+        headers: headers,
+      ),
+    );
+    print(response.data);
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+
+<div class="Dio-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+
+  final url = Uri.parse("http://45.245.151.115:8000/api/v1/admin/exam-sections");
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url.toString(),
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'GET',
+        headers: headers,
+      ),
+    );
+    print('Response: ${response.data}');
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
 
 </span>
 
@@ -8349,7 +9888,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                         </form>
 
-                    <h2 id="endpoints-POSTapi-v1-admin-exam-sections">Store a newly created exam question.</h2>
+                    <h2 id="endpoints-POSTapi-v1-admin-exam-sections">POST api/v1/admin/exam-sections</h2>
 
 <p>
 <small class="badge badge-darkred">requires authentication</small>
@@ -8361,31 +9900,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <blockquote>Example request:</blockquote>
 
 
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request POST \
-    "http://45.245.151.115:8000/api/v1/admin/exam-sections" \
-    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json" \
-    --data "{
-    \"exam_id\": 1,
-    \"question_text\": \"What is the capital of France?\",
-    \"question_image\": \"https:\\/\\/example.com\\/question1.png\",
-    \"question_type\": \"multiple_choice\",
-    \"options\": [
-        \"Paris\"
-    ],
-    \"correct_answer\": \"Paris\",
-    \"points\": 5,
-    \"is_required\": false,
-    \"help_text\": \"Remember to check European capitals.\",
-    \"section_id\": 2
-}"
-</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
+<div class="JS-example">
+    <pre><code class="language-JS">const url = new URL(
     "http://45.245.151.115:8000/api/v1/admin/exam-sections"
 );
 
@@ -8397,17 +9913,9 @@ const headers = {
 
 let body = {
     "exam_id": 1,
-    "question_text": "What is the capital of France?",
-    "question_image": "https:\/\/example.com\/question1.png",
-    "question_type": "multiple_choice",
-    "options": [
-        "Paris"
-    ],
-    "correct_answer": "Paris",
-    "points": 5,
-    "is_required": false,
-    "help_text": "Remember to check European capitals.",
-    "section_id": 2
+    "code": "SEC-A",
+    "name": "Mathematics Section",
+    "order_number": 1
 };
 
 fetch(url, {
@@ -8417,7 +9925,7 @@ fetch(url, {
 }).then(response =&gt; response.json());</code></pre></div>
 
 
-<div class="php-example">
+<div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $url = 'http://45.245.151.115:8000/api/v1/admin/exam-sections';
 $response = $client-&gt;post(
@@ -8430,17 +9938,9 @@ $response = $client-&gt;post(
         ],
         'json' =&gt; [
             'exam_id' =&gt; 1,
-            'question_text' =&gt; 'What is the capital of France?',
-            'question_image' =&gt; 'https://example.com/question1.png',
-            'question_type' =&gt; 'multiple_choice',
-            'options' =&gt; [
-                'Paris',
-            ],
-            'correct_answer' =&gt; 'Paris',
-            'points' =&gt; 5,
-            'is_required' =&gt; false,
-            'help_text' =&gt; 'Remember to check European capitals.',
-            'section_id' =&gt; 2,
+            'code' =&gt; 'SEC-A',
+            'name' =&gt; 'Mathematics Section',
+            'order_number' =&gt; 1,
         ],
     ]
 );
@@ -8448,33 +9948,81 @@ $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre></div>
 
 
-<div class="python-example">
-    <pre><code class="language-python">import requests
-import json
+<div class="DartPad-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
 
-url = 'http://45.245.151.115:8000/api/v1/admin/exam-sections'
-payload = {
-    "exam_id": 1,
-    "question_text": "What is the capital of France?",
-    "question_image": "https:\/\/example.com\/question1.png",
-    "question_type": "multiple_choice",
-    "options": [
-        "Paris"
-    ],
-    "correct_answer": "Paris",
-    "points": 5,
-    "is_required": false,
-    "help_text": "Remember to check European capitals.",
-    "section_id": 2
-}
-headers = {
-  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-}
+void main() async {
+  final dio = Dio();
+  final url = 'http://45.245.151.115:8000/api/v1/admin/exam-sections';
 
-response = requests.request('POST', url, headers=headers, json=payload)
-response.json()</code></pre></div>
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = [
+    'exam_id' =&gt; 1,
+    'code' =&gt; 'SEC-A',
+    'name' =&gt; 'Mathematics Section',
+    'order_number' =&gt; 1,
+];
+
+  try {
+    final response = await dio.request(
+      url,
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'POST',
+        headers: headers,
+      ),
+    );
+    print(response.data);
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+
+<div class="Dio-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+
+  final url = Uri.parse("http://45.245.151.115:8000/api/v1/admin/exam-sections");
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = [
+    'exam_id' =&gt; 1,
+    'code' =&gt; 'SEC-A',
+    'name' =&gt; 'Mathematics Section',
+    'order_number' =&gt; 1,
+];
+
+  try {
+    final response = await dio.request(
+      url.toString(),
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'POST',
+        headers: headers,
+      ),
+    );
+    print('Response: ${response.data}');
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
 
 </span>
 
@@ -8570,124 +10118,44 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="1"
                data-component="body">
     <br>
-<p>ID of the exam this question belongs to. The <code>id</code> of an existing record in the exams table. Example: <code>1</code></p>
+<p>ID of the exam this section belongs to. The <code>id</code> of an existing record in the exams table. Example: <code>1</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>question_text</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
-<i>optional</i> &nbsp;
-                <input type="text" style="display: none"
-                              name="question_text"                data-endpoint="POSTapi-v1-admin-exam-sections"
-               value="What is the capital of France?"
-               data-component="body">
-    <br>
-<p>Text content of the question (optional if question_image is provided). Example: <code>What is the capital of France?</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>question_image</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
-<i>optional</i> &nbsp;
-                <input type="text" style="display: none"
-                              name="question_image"                data-endpoint="POSTapi-v1-admin-exam-sections"
-               value="https://example.com/question1.png"
-               data-component="body">
-    <br>
-<p>URL or path of an image for the question (optional). Example: <code>https://example.com/question1.png</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>question_type</code></b>&nbsp;&nbsp;
+            <b style="line-height: 2;"><code>code</code></b>&nbsp;&nbsp;
 <small>string</small>&nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="question_type"                data-endpoint="POSTapi-v1-admin-exam-sections"
-               value="multiple_choice"
+                              name="code"                data-endpoint="POSTapi-v1-admin-exam-sections"
+               value="SEC-A"
                data-component="body">
     <br>
-<p>Type of the question. Example: <code>multiple_choice</code></p>
-Must be one of:
-<ul style="list-style-type: square;"><li><code>multiple_choice</code></li> <li><code>essay</code></li> <li><code>true_false</code></li> <li><code>fill_blank</code></li></ul>
+<p>Unique code for the exam section. Must not be greater than 255 characters. Example: <code>SEC-A</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>options</code></b>&nbsp;&nbsp;
-<small>string[]</small>&nbsp;
-<i>optional</i> &nbsp;
-                <input type="text" style="display: none"
-                              name="options[0]"                data-endpoint="POSTapi-v1-admin-exam-sections"
-               data-component="body">
-        <input type="text" style="display: none"
-               name="options[1]"                data-endpoint="POSTapi-v1-admin-exam-sections"
-               data-component="body">
-    <br>
-<p>Individual option for multiple_choice question.</p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>correct_answer</code></b>&nbsp;&nbsp;
+            <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
 <small>string</small>&nbsp;
-<i>optional</i> &nbsp;
+ &nbsp;
                 <input type="text" style="display: none"
-                              name="correct_answer"                data-endpoint="POSTapi-v1-admin-exam-sections"
-               value="Paris"
+                              name="name"                data-endpoint="POSTapi-v1-admin-exam-sections"
+               value="Mathematics Section"
                data-component="body">
     <br>
-<p>Correct answer for the question (format depends on question_type). Example: <code>Paris</code></p>
+<p>Name of the exam section. Must not be greater than 255 characters. Example: <code>Mathematics Section</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>points</code></b>&nbsp;&nbsp;
+            <b style="line-height: 2;"><code>order_number</code></b>&nbsp;&nbsp;
 <small>integer</small>&nbsp;
  &nbsp;
                 <input type="number" style="display: none"
-               step="any"               name="points"                data-endpoint="POSTapi-v1-admin-exam-sections"
-               value="5"
+               step="any"               name="order_number"                data-endpoint="POSTapi-v1-admin-exam-sections"
+               value="1"
                data-component="body">
     <br>
-<p>Points assigned to the question. Must be at least 0. Example: <code>5</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>is_required</code></b>&nbsp;&nbsp;
-<small>boolean</small>&nbsp;
-<i>optional</i> &nbsp;
-                <label data-endpoint="POSTapi-v1-admin-exam-sections" style="display: none">
-            <input type="radio" name="is_required"
-                   value="true"
-                   data-endpoint="POSTapi-v1-admin-exam-sections"
-                   data-component="body"             >
-            <code>true</code>
-        </label>
-        <label data-endpoint="POSTapi-v1-admin-exam-sections" style="display: none">
-            <input type="radio" name="is_required"
-                   value="false"
-                   data-endpoint="POSTapi-v1-admin-exam-sections"
-                   data-component="body"             >
-            <code>false</code>
-        </label>
-    <br>
-<p>Indicates if answering the question is mandatory. Example: <code>false</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>help_text</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
-<i>optional</i> &nbsp;
-                <input type="text" style="display: none"
-                              name="help_text"                data-endpoint="POSTapi-v1-admin-exam-sections"
-               value="Remember to check European capitals."
-               data-component="body">
-    <br>
-<p>Optional hint or guidance for the question. Example: <code>Remember to check European capitals.</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>section_id</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
-<i>optional</i> &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="section_id"                data-endpoint="POSTapi-v1-admin-exam-sections"
-               value="2"
-               data-component="body">
-    <br>
-<p>ID of the exam section this question belongs to (optional). The <code>id</code> of an existing record in the exam_sections table. Example: <code>2</code></p>
+<p>Order of the section within the exam. Example: <code>1</code></p>
         </div>
         </form>
 
-                    <h2 id="endpoints-GETapi-v1-admin-exam-sections--id-">Display the specified exam question.</h2>
+                    <h2 id="endpoints-GETapi-v1-admin-exam-sections--id-">GET api/v1/admin/exam-sections/{id}</h2>
 
 <p>
 <small class="badge badge-darkred">requires authentication</small>
@@ -8699,16 +10167,8 @@ Must be one of:
 <blockquote>Example request:</blockquote>
 
 
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request GET \
-    --get "http://45.245.151.115:8000/api/v1/admin/exam-sections/architecto" \
-    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
+<div class="JS-example">
+    <pre><code class="language-JS">const url = new URL(
     "http://45.245.151.115:8000/api/v1/admin/exam-sections/architecto"
 );
 
@@ -8724,7 +10184,7 @@ fetch(url, {
 }).then(response =&gt; response.json());</code></pre></div>
 
 
-<div class="php-example">
+<div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $url = 'http://45.245.151.115:8000/api/v1/admin/exam-sections/architecto';
 $response = $client-&gt;get(
@@ -8741,19 +10201,71 @@ $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre></div>
 
 
-<div class="python-example">
-    <pre><code class="language-python">import requests
-import json
+<div class="DartPad-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
 
-url = 'http://45.245.151.115:8000/api/v1/admin/exam-sections/architecto'
-headers = {
-  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-}
+void main() async {
+  final dio = Dio();
+  final url = 'http://45.245.151.115:8000/api/v1/admin/exam-sections/architecto';
 
-response = requests.request('GET', url, headers=headers)
-response.json()</code></pre></div>
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url,
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'GET',
+        headers: headers,
+      ),
+    );
+    print(response.data);
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+
+<div class="Dio-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+
+  final url = Uri.parse("http://45.245.151.115:8000/api/v1/admin/exam-sections/architecto");
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url.toString(),
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'GET',
+        headers: headers,
+      ),
+    );
+    print('Response: ${response.data}');
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
 
 </span>
 
@@ -8869,7 +10381,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                     </form>
 
-                    <h2 id="endpoints-PUTapi-v1-admin-exam-sections--id-">Update the specified exam question in storage.</h2>
+                    <h2 id="endpoints-PUTapi-v1-admin-exam-sections--id-">PUT api/v1/admin/exam-sections/{id}</h2>
 
 <p>
 <small class="badge badge-darkred">requires authentication</small>
@@ -8881,31 +10393,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <blockquote>Example request:</blockquote>
 
 
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request PUT \
-    "http://45.245.151.115:8000/api/v1/admin/exam-sections/architecto" \
-    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json" \
-    --data "{
-    \"exam_id\": 1,
-    \"question_text\": \"What is the capital of Germany?\",
-    \"question_image\": \"https:\\/\\/example.com\\/question1.png\",
-    \"question_type\": \"multiple_choice\",
-    \"options\": [
-        \"Berlin\"
-    ],
-    \"correct_answer\": \"Berlin\",
-    \"points\": 5,
-    \"is_required\": false,
-    \"help_text\": \"Consider European capitals.\",
-    \"section_id\": 2
-}"
-</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
+<div class="JS-example">
+    <pre><code class="language-JS">const url = new URL(
     "http://45.245.151.115:8000/api/v1/admin/exam-sections/architecto"
 );
 
@@ -8917,17 +10406,9 @@ const headers = {
 
 let body = {
     "exam_id": 1,
-    "question_text": "What is the capital of Germany?",
-    "question_image": "https:\/\/example.com\/question1.png",
-    "question_type": "multiple_choice",
-    "options": [
-        "Berlin"
-    ],
-    "correct_answer": "Berlin",
-    "points": 5,
-    "is_required": false,
-    "help_text": "Consider European capitals.",
-    "section_id": 2
+    "code": "SEC-B",
+    "name": "Physics Section",
+    "order_number": 2
 };
 
 fetch(url, {
@@ -8937,7 +10418,7 @@ fetch(url, {
 }).then(response =&gt; response.json());</code></pre></div>
 
 
-<div class="php-example">
+<div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $url = 'http://45.245.151.115:8000/api/v1/admin/exam-sections/architecto';
 $response = $client-&gt;put(
@@ -8950,17 +10431,9 @@ $response = $client-&gt;put(
         ],
         'json' =&gt; [
             'exam_id' =&gt; 1,
-            'question_text' =&gt; 'What is the capital of Germany?',
-            'question_image' =&gt; 'https://example.com/question1.png',
-            'question_type' =&gt; 'multiple_choice',
-            'options' =&gt; [
-                'Berlin',
-            ],
-            'correct_answer' =&gt; 'Berlin',
-            'points' =&gt; 5,
-            'is_required' =&gt; false,
-            'help_text' =&gt; 'Consider European capitals.',
-            'section_id' =&gt; 2,
+            'code' =&gt; 'SEC-B',
+            'name' =&gt; 'Physics Section',
+            'order_number' =&gt; 2,
         ],
     ]
 );
@@ -8968,33 +10441,81 @@ $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre></div>
 
 
-<div class="python-example">
-    <pre><code class="language-python">import requests
-import json
+<div class="DartPad-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
 
-url = 'http://45.245.151.115:8000/api/v1/admin/exam-sections/architecto'
-payload = {
-    "exam_id": 1,
-    "question_text": "What is the capital of Germany?",
-    "question_image": "https:\/\/example.com\/question1.png",
-    "question_type": "multiple_choice",
-    "options": [
-        "Berlin"
-    ],
-    "correct_answer": "Berlin",
-    "points": 5,
-    "is_required": false,
-    "help_text": "Consider European capitals.",
-    "section_id": 2
-}
-headers = {
-  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-}
+void main() async {
+  final dio = Dio();
+  final url = 'http://45.245.151.115:8000/api/v1/admin/exam-sections/architecto';
 
-response = requests.request('PUT', url, headers=headers, json=payload)
-response.json()</code></pre></div>
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = [
+    'exam_id' =&gt; 1,
+    'code' =&gt; 'SEC-B',
+    'name' =&gt; 'Physics Section',
+    'order_number' =&gt; 2,
+];
+
+  try {
+    final response = await dio.request(
+      url,
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'PUT',
+        headers: headers,
+      ),
+    );
+    print(response.data);
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+
+<div class="Dio-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+
+  final url = Uri.parse("http://45.245.151.115:8000/api/v1/admin/exam-sections/architecto");
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = [
+    'exam_id' =&gt; 1,
+    'code' =&gt; 'SEC-B',
+    'name' =&gt; 'Physics Section',
+    'order_number' =&gt; 2,
+];
+
+  try {
+    final response = await dio.request(
+      url.toString(),
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'PUT',
+        headers: headers,
+      ),
+    );
+    print('Response: ${response.data}');
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
 
 </span>
 
@@ -9100,130 +10621,50 @@ You can check the Dev Tools console for debugging information.</code></pre>
         <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>exam_id</code></b>&nbsp;&nbsp;
 <small>integer</small>&nbsp;
-<i>optional</i> &nbsp;
+ &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="exam_id"                data-endpoint="PUTapi-v1-admin-exam-sections--id-"
                value="1"
                data-component="body">
     <br>
-<p>ID of the exam this question belongs to. The <code>id</code> of an existing record in the exams table. Example: <code>1</code></p>
+<p>ID of the exam this section belongs to. The <code>id</code> of an existing record in the exams table. Example: <code>1</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>question_text</code></b>&nbsp;&nbsp;
+            <b style="line-height: 2;"><code>code</code></b>&nbsp;&nbsp;
 <small>string</small>&nbsp;
-<i>optional</i> &nbsp;
+ &nbsp;
                 <input type="text" style="display: none"
-                              name="question_text"                data-endpoint="PUTapi-v1-admin-exam-sections--id-"
-               value="What is the capital of Germany?"
+                              name="code"                data-endpoint="PUTapi-v1-admin-exam-sections--id-"
+               value="SEC-B"
                data-component="body">
     <br>
-<p>Text content of the question (optional if question_image is provided). Example: <code>What is the capital of Germany?</code></p>
+<p>Unique code for the exam section. Must not be greater than 255 characters. Example: <code>SEC-B</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>question_image</code></b>&nbsp;&nbsp;
+            <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
 <small>string</small>&nbsp;
-<i>optional</i> &nbsp;
+ &nbsp;
                 <input type="text" style="display: none"
-                              name="question_image"                data-endpoint="PUTapi-v1-admin-exam-sections--id-"
-               value="https://example.com/question1.png"
+                              name="name"                data-endpoint="PUTapi-v1-admin-exam-sections--id-"
+               value="Physics Section"
                data-component="body">
     <br>
-<p>URL or path of an image for the question (optional). Example: <code>https://example.com/question1.png</code></p>
+<p>Name of the exam section. Must not be greater than 255 characters. Example: <code>Physics Section</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>question_type</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
-<i>optional</i> &nbsp;
-                <input type="text" style="display: none"
-                              name="question_type"                data-endpoint="PUTapi-v1-admin-exam-sections--id-"
-               value="multiple_choice"
-               data-component="body">
-    <br>
-<p>Type of the question. Example: <code>multiple_choice</code></p>
-Must be one of:
-<ul style="list-style-type: square;"><li><code>multiple_choice</code></li> <li><code>essay</code></li> <li><code>true_false</code></li> <li><code>fill_blank</code></li></ul>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>options</code></b>&nbsp;&nbsp;
-<small>string[]</small>&nbsp;
-<i>optional</i> &nbsp;
-                <input type="text" style="display: none"
-                              name="options[0]"                data-endpoint="PUTapi-v1-admin-exam-sections--id-"
-               data-component="body">
-        <input type="text" style="display: none"
-               name="options[1]"                data-endpoint="PUTapi-v1-admin-exam-sections--id-"
-               data-component="body">
-    <br>
-<p>Individual option for multiple_choice question.</p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>correct_answer</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
-<i>optional</i> &nbsp;
-                <input type="text" style="display: none"
-                              name="correct_answer"                data-endpoint="PUTapi-v1-admin-exam-sections--id-"
-               value="Berlin"
-               data-component="body">
-    <br>
-<p>Correct answer for the question (format depends on question_type). Example: <code>Berlin</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>points</code></b>&nbsp;&nbsp;
+            <b style="line-height: 2;"><code>order_number</code></b>&nbsp;&nbsp;
 <small>integer</small>&nbsp;
-<i>optional</i> &nbsp;
+ &nbsp;
                 <input type="number" style="display: none"
-               step="any"               name="points"                data-endpoint="PUTapi-v1-admin-exam-sections--id-"
-               value="5"
-               data-component="body">
-    <br>
-<p>Points assigned to the question. Must be at least 0. Example: <code>5</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>is_required</code></b>&nbsp;&nbsp;
-<small>boolean</small>&nbsp;
-<i>optional</i> &nbsp;
-                <label data-endpoint="PUTapi-v1-admin-exam-sections--id-" style="display: none">
-            <input type="radio" name="is_required"
-                   value="true"
-                   data-endpoint="PUTapi-v1-admin-exam-sections--id-"
-                   data-component="body"             >
-            <code>true</code>
-        </label>
-        <label data-endpoint="PUTapi-v1-admin-exam-sections--id-" style="display: none">
-            <input type="radio" name="is_required"
-                   value="false"
-                   data-endpoint="PUTapi-v1-admin-exam-sections--id-"
-                   data-component="body"             >
-            <code>false</code>
-        </label>
-    <br>
-<p>Indicates if answering the question is mandatory. Example: <code>false</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>help_text</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
-<i>optional</i> &nbsp;
-                <input type="text" style="display: none"
-                              name="help_text"                data-endpoint="PUTapi-v1-admin-exam-sections--id-"
-               value="Consider European capitals."
-               data-component="body">
-    <br>
-<p>Optional hint or guidance for the question. Example: <code>Consider European capitals.</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>section_id</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
-<i>optional</i> &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="section_id"                data-endpoint="PUTapi-v1-admin-exam-sections--id-"
+               step="any"               name="order_number"                data-endpoint="PUTapi-v1-admin-exam-sections--id-"
                value="2"
                data-component="body">
     <br>
-<p>ID of the exam section this question belongs to (optional). The <code>id</code> of an existing record in the exam_sections table. Example: <code>2</code></p>
+<p>Order of the section within the exam. Example: <code>2</code></p>
         </div>
         </form>
 
-                    <h2 id="endpoints-DELETEapi-v1-admin-exam-sections--id-">Remove the specified exam question from storage.</h2>
+                    <h2 id="endpoints-DELETEapi-v1-admin-exam-sections--id-">DELETE api/v1/admin/exam-sections/{id}</h2>
 
 <p>
 <small class="badge badge-darkred">requires authentication</small>
@@ -9235,16 +10676,8 @@ Must be one of:
 <blockquote>Example request:</blockquote>
 
 
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request DELETE \
-    "http://45.245.151.115:8000/api/v1/admin/exam-sections/architecto" \
-    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
+<div class="JS-example">
+    <pre><code class="language-JS">const url = new URL(
     "http://45.245.151.115:8000/api/v1/admin/exam-sections/architecto"
 );
 
@@ -9260,7 +10693,7 @@ fetch(url, {
 }).then(response =&gt; response.json());</code></pre></div>
 
 
-<div class="php-example">
+<div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $url = 'http://45.245.151.115:8000/api/v1/admin/exam-sections/architecto';
 $response = $client-&gt;delete(
@@ -9277,19 +10710,71 @@ $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre></div>
 
 
-<div class="python-example">
-    <pre><code class="language-python">import requests
-import json
+<div class="DartPad-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
 
-url = 'http://45.245.151.115:8000/api/v1/admin/exam-sections/architecto'
-headers = {
-  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-}
+void main() async {
+  final dio = Dio();
+  final url = 'http://45.245.151.115:8000/api/v1/admin/exam-sections/architecto';
 
-response = requests.request('DELETE', url, headers=headers)
-response.json()</code></pre></div>
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url,
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'DELETE',
+        headers: headers,
+      ),
+    );
+    print(response.data);
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+
+<div class="Dio-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+
+  final url = Uri.parse("http://45.245.151.115:8000/api/v1/admin/exam-sections/architecto");
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url.toString(),
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'DELETE',
+        headers: headers,
+      ),
+    );
+    print('Response: ${response.data}');
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
 
 </span>
 
@@ -9401,16 +10886,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <blockquote>Example request:</blockquote>
 
 
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request GET \
-    --get "http://45.245.151.115:8000/api/v1/admin/exams/architecto/questions" \
-    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
+<div class="JS-example">
+    <pre><code class="language-JS">const url = new URL(
     "http://45.245.151.115:8000/api/v1/admin/exams/architecto/questions"
 );
 
@@ -9426,7 +10903,7 @@ fetch(url, {
 }).then(response =&gt; response.json());</code></pre></div>
 
 
-<div class="php-example">
+<div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $url = 'http://45.245.151.115:8000/api/v1/admin/exams/architecto/questions';
 $response = $client-&gt;get(
@@ -9443,19 +10920,71 @@ $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre></div>
 
 
-<div class="python-example">
-    <pre><code class="language-python">import requests
-import json
+<div class="DartPad-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
 
-url = 'http://45.245.151.115:8000/api/v1/admin/exams/architecto/questions'
-headers = {
-  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-}
+void main() async {
+  final dio = Dio();
+  final url = 'http://45.245.151.115:8000/api/v1/admin/exams/architecto/questions';
 
-response = requests.request('GET', url, headers=headers)
-response.json()</code></pre></div>
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url,
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'GET',
+        headers: headers,
+      ),
+    );
+    print(response.data);
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+
+<div class="Dio-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+
+  final url = Uri.parse("http://45.245.151.115:8000/api/v1/admin/exams/architecto/questions");
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url.toString(),
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'GET',
+        headers: headers,
+      ),
+    );
+    print('Response: ${response.data}');
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
 
 </span>
 
@@ -9583,16 +11112,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <blockquote>Example request:</blockquote>
 
 
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request GET \
-    --get "http://45.245.151.115:8000/api/v1/admin/school-admins" \
-    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
+<div class="JS-example">
+    <pre><code class="language-JS">const url = new URL(
     "http://45.245.151.115:8000/api/v1/admin/school-admins"
 );
 
@@ -9608,7 +11129,7 @@ fetch(url, {
 }).then(response =&gt; response.json());</code></pre></div>
 
 
-<div class="php-example">
+<div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $url = 'http://45.245.151.115:8000/api/v1/admin/school-admins';
 $response = $client-&gt;get(
@@ -9625,19 +11146,71 @@ $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre></div>
 
 
-<div class="python-example">
-    <pre><code class="language-python">import requests
-import json
+<div class="DartPad-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
 
-url = 'http://45.245.151.115:8000/api/v1/admin/school-admins'
-headers = {
-  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-}
+void main() async {
+  final dio = Dio();
+  final url = 'http://45.245.151.115:8000/api/v1/admin/school-admins';
 
-response = requests.request('GET', url, headers=headers)
-response.json()</code></pre></div>
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url,
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'GET',
+        headers: headers,
+      ),
+    );
+    print(response.data);
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+
+<div class="Dio-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+
+  final url = Uri.parse("http://45.245.151.115:8000/api/v1/admin/school-admins");
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url.toString(),
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'GET',
+        headers: headers,
+      ),
+    );
+    print('Response: ${response.data}');
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
 
 </span>
 
@@ -9753,32 +11326,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <blockquote>Example request:</blockquote>
 
 
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request POST \
-    "http://45.245.151.115:8000/api/v1/admin/school-admins" \
-    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json" \
-    --data "{
-    \"name\": \"Tarek Hesham Sayed ElFarmawy\",
-    \"email\": \"schooladmin@example.com\",
-    \"phone\": \"01234567890\",
-    \"national_id\": \"12345678901234\",
-    \"password\": \"password123\",
-    \"school_id\": 1,
-    \"is_active\": false,
-    \"admin_permissions\": {
-        \"manage_students\": true,
-        \"view_reports\": true,
-        \"manage_school_settings\": false,
-        \"manage_exams\": true
-    }
-}"
-</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
+<div class="JS-example">
+    <pre><code class="language-JS">const url = new URL(
     "http://45.245.151.115:8000/api/v1/admin/school-admins"
 );
 
@@ -9811,7 +11360,7 @@ fetch(url, {
 }).then(response =&gt; response.json());</code></pre></div>
 
 
-<div class="php-example">
+<div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $url = 'http://45.245.151.115:8000/api/v1/admin/school-admins';
 $response = $client-&gt;post(
@@ -9843,34 +11392,99 @@ $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre></div>
 
 
-<div class="python-example">
-    <pre><code class="language-python">import requests
-import json
+<div class="DartPad-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
 
-url = 'http://45.245.151.115:8000/api/v1/admin/school-admins'
-payload = {
-    "name": "Tarek Hesham Sayed ElFarmawy",
-    "email": "schooladmin@example.com",
-    "phone": "01234567890",
-    "national_id": "12345678901234",
-    "password": "password123",
-    "school_id": 1,
-    "is_active": false,
-    "admin_permissions": {
-        "manage_students": true,
-        "view_reports": true,
-        "manage_school_settings": false,
-        "manage_exams": true
-    }
-}
-headers = {
-  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-}
+void main() async {
+  final dio = Dio();
+  final url = 'http://45.245.151.115:8000/api/v1/admin/school-admins';
 
-response = requests.request('POST', url, headers=headers, json=payload)
-response.json()</code></pre></div>
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = [
+    'name' =&gt; 'Tarek Hesham Sayed ElFarmawy',
+    'email' =&gt; 'schooladmin@example.com',
+    'phone' =&gt; '01234567890',
+    'national_id' =&gt; '12345678901234',
+    'password' =&gt; 'password123',
+    'school_id' =&gt; 1,
+    'is_active' =&gt; false,
+    'admin_permissions' =&gt; [
+        'manage_students' =&gt; true,
+        'view_reports' =&gt; true,
+        'manage_school_settings' =&gt; false,
+        'manage_exams' =&gt; true,
+    ],
+];
+
+  try {
+    final response = await dio.request(
+      url,
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'POST',
+        headers: headers,
+      ),
+    );
+    print(response.data);
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+
+<div class="Dio-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+
+  final url = Uri.parse("http://45.245.151.115:8000/api/v1/admin/school-admins");
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = [
+    'name' =&gt; 'Tarek Hesham Sayed ElFarmawy',
+    'email' =&gt; 'schooladmin@example.com',
+    'phone' =&gt; '01234567890',
+    'national_id' =&gt; '12345678901234',
+    'password' =&gt; 'password123',
+    'school_id' =&gt; 1,
+    'is_active' =&gt; false,
+    'admin_permissions' =&gt; [
+        'manage_students' =&gt; true,
+        'view_reports' =&gt; true,
+        'manage_school_settings' =&gt; false,
+        'manage_exams' =&gt; true,
+    ],
+];
+
+  try {
+    final response = await dio.request(
+      url.toString(),
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'POST',
+        headers: headers,
+      ),
+    );
+    print('Response: ${response.data}');
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
 
 </span>
 
@@ -10153,16 +11767,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <blockquote>Example request:</blockquote>
 
 
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request GET \
-    --get "http://45.245.151.115:8000/api/v1/admin/school-admins/architecto" \
-    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
+<div class="JS-example">
+    <pre><code class="language-JS">const url = new URL(
     "http://45.245.151.115:8000/api/v1/admin/school-admins/architecto"
 );
 
@@ -10178,7 +11784,7 @@ fetch(url, {
 }).then(response =&gt; response.json());</code></pre></div>
 
 
-<div class="php-example">
+<div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $url = 'http://45.245.151.115:8000/api/v1/admin/school-admins/architecto';
 $response = $client-&gt;get(
@@ -10195,19 +11801,71 @@ $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre></div>
 
 
-<div class="python-example">
-    <pre><code class="language-python">import requests
-import json
+<div class="DartPad-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
 
-url = 'http://45.245.151.115:8000/api/v1/admin/school-admins/architecto'
-headers = {
-  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-}
+void main() async {
+  final dio = Dio();
+  final url = 'http://45.245.151.115:8000/api/v1/admin/school-admins/architecto';
 
-response = requests.request('GET', url, headers=headers)
-response.json()</code></pre></div>
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url,
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'GET',
+        headers: headers,
+      ),
+    );
+    print(response.data);
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+
+<div class="Dio-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+
+  final url = Uri.parse("http://45.245.151.115:8000/api/v1/admin/school-admins/architecto");
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url.toString(),
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'GET',
+        headers: headers,
+      ),
+    );
+    print('Response: ${response.data}');
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
 
 </span>
 
@@ -10335,27 +11993,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <blockquote>Example request:</blockquote>
 
 
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request PUT \
-    "http://45.245.151.115:8000/api/v1/admin/school-admins/architecto" \
-    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json" \
-    --data "{
-    \"school_id\": 1,
-    \"is_active\": false,
-    \"admin_permissions\": {
-        \"manage_students\": true,
-        \"view_reports\": true,
-        \"manage_school_settings\": false,
-        \"manage_exams\": true
-    }
-}"
-</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
+<div class="JS-example">
+    <pre><code class="language-JS">const url = new URL(
     "http://45.245.151.115:8000/api/v1/admin/school-admins/architecto"
 );
 
@@ -10383,7 +12022,7 @@ fetch(url, {
 }).then(response =&gt; response.json());</code></pre></div>
 
 
-<div class="php-example">
+<div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $url = 'http://45.245.151.115:8000/api/v1/admin/school-admins/architecto';
 $response = $client-&gt;put(
@@ -10410,29 +12049,89 @@ $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre></div>
 
 
-<div class="python-example">
-    <pre><code class="language-python">import requests
-import json
+<div class="DartPad-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
 
-url = 'http://45.245.151.115:8000/api/v1/admin/school-admins/architecto'
-payload = {
-    "school_id": 1,
-    "is_active": false,
-    "admin_permissions": {
-        "manage_students": true,
-        "view_reports": true,
-        "manage_school_settings": false,
-        "manage_exams": true
-    }
-}
-headers = {
-  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-}
+void main() async {
+  final dio = Dio();
+  final url = 'http://45.245.151.115:8000/api/v1/admin/school-admins/architecto';
 
-response = requests.request('PUT', url, headers=headers, json=payload)
-response.json()</code></pre></div>
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = [
+    'school_id' =&gt; 1,
+    'is_active' =&gt; false,
+    'admin_permissions' =&gt; [
+        'manage_students' =&gt; true,
+        'view_reports' =&gt; true,
+        'manage_school_settings' =&gt; false,
+        'manage_exams' =&gt; true,
+    ],
+];
+
+  try {
+    final response = await dio.request(
+      url,
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'PUT',
+        headers: headers,
+      ),
+    );
+    print(response.data);
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+
+<div class="Dio-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+
+  final url = Uri.parse("http://45.245.151.115:8000/api/v1/admin/school-admins/architecto");
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = [
+    'school_id' =&gt; 1,
+    'is_active' =&gt; false,
+    'admin_permissions' =&gt; [
+        'manage_students' =&gt; true,
+        'view_reports' =&gt; true,
+        'manage_school_settings' =&gt; false,
+        'manage_exams' =&gt; true,
+    ],
+];
+
+  try {
+    final response = await dio.request(
+      url.toString(),
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'PUT',
+        headers: headers,
+      ),
+    );
+    print('Response: ${response.data}');
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
 
 </span>
 
@@ -10676,16 +12375,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <blockquote>Example request:</blockquote>
 
 
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request DELETE \
-    "http://45.245.151.115:8000/api/v1/admin/school-admins/architecto" \
-    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
+<div class="JS-example">
+    <pre><code class="language-JS">const url = new URL(
     "http://45.245.151.115:8000/api/v1/admin/school-admins/architecto"
 );
 
@@ -10701,7 +12392,7 @@ fetch(url, {
 }).then(response =&gt; response.json());</code></pre></div>
 
 
-<div class="php-example">
+<div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $url = 'http://45.245.151.115:8000/api/v1/admin/school-admins/architecto';
 $response = $client-&gt;delete(
@@ -10718,19 +12409,71 @@ $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre></div>
 
 
-<div class="python-example">
-    <pre><code class="language-python">import requests
-import json
+<div class="DartPad-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
 
-url = 'http://45.245.151.115:8000/api/v1/admin/school-admins/architecto'
-headers = {
-  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-}
+void main() async {
+  final dio = Dio();
+  final url = 'http://45.245.151.115:8000/api/v1/admin/school-admins/architecto';
 
-response = requests.request('DELETE', url, headers=headers)
-response.json()</code></pre></div>
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url,
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'DELETE',
+        headers: headers,
+      ),
+    );
+    print(response.data);
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+
+<div class="Dio-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+
+  final url = Uri.parse("http://45.245.151.115:8000/api/v1/admin/school-admins/architecto");
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url.toString(),
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'DELETE',
+        headers: headers,
+      ),
+    );
+    print('Response: ${response.data}');
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
 
 </span>
 
@@ -10842,16 +12585,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <blockquote>Example request:</blockquote>
 
 
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request GET \
-    --get "http://45.245.151.115:8000/api/health" \
-    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
+<div class="JS-example">
+    <pre><code class="language-JS">const url = new URL(
     "http://45.245.151.115:8000/api/health"
 );
 
@@ -10867,7 +12602,7 @@ fetch(url, {
 }).then(response =&gt; response.json());</code></pre></div>
 
 
-<div class="php-example">
+<div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $url = 'http://45.245.151.115:8000/api/health';
 $response = $client-&gt;get(
@@ -10884,19 +12619,71 @@ $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre></div>
 
 
-<div class="python-example">
-    <pre><code class="language-python">import requests
-import json
+<div class="DartPad-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
 
-url = 'http://45.245.151.115:8000/api/health'
-headers = {
-  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-}
+void main() async {
+  final dio = Dio();
+  final url = 'http://45.245.151.115:8000/api/health';
 
-response = requests.request('GET', url, headers=headers)
-response.json()</code></pre></div>
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url,
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'GET',
+        headers: headers,
+      ),
+    );
+    print(response.data);
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+
+<div class="Dio-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+
+  final url = Uri.parse("http://45.245.151.115:8000/api/health");
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url.toString(),
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'GET',
+        headers: headers,
+      ),
+    );
+    print('Response: ${response.data}');
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
 
 </span>
 
@@ -10915,7 +12702,7 @@ access-control-allow-origin: *
 
 <code class="language-json" style="max-height: 300px;">{
     &quot;status&quot;: &quot;ok&quot;,
-    &quot;timestamp&quot;: &quot;2025-09-25T19:54:27.522473Z&quot;,
+    &quot;timestamp&quot;: &quot;2025-09-25T21:16:29.376429Z&quot;,
     &quot;version&quot;: &quot;1.0.0&quot;
 }</code>
  </pre>
@@ -11008,10 +12795,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
     </div>
     <div class="dark-box">
                     <div class="lang-selector">
-                                                        <button type="button" class="lang-button" data-language-name="bash">bash</button>
-                                                        <button type="button" class="lang-button" data-language-name="javascript">javascript</button>
-                                                        <button type="button" class="lang-button" data-language-name="php">php</button>
-                                                        <button type="button" class="lang-button" data-language-name="python">python</button>
+                                                        <button type="button" class="lang-button" data-language-name="JS">JS</button>
+                                                        <button type="button" class="lang-button" data-language-name="Laravel">Laravel</button>
+                                                        <button type="button" class="lang-button" data-language-name="DartPad">DartPad</button>
+                                                        <button type="button" class="lang-button" data-language-name="Dio">Dio</button>
                             </div>
             </div>
 </div>

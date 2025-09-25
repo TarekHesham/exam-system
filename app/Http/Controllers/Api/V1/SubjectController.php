@@ -13,7 +13,9 @@ class SubjectController extends Controller
 {
     public function __construct(
         protected SubjectServiceInterface $service
-    ) {}
+    ) {
+        // 
+    }
 
     /**
      * Display a listing of the resource.

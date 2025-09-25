@@ -614,7 +614,7 @@ endpoints:
         name: connection_status
         description: ''
         required: false
-        example: reconnected
+        example: unstable
         type: string
         enumValues:
           - stable
@@ -635,7 +635,7 @@ endpoints:
         custom: []
     cleanBodyParameters:
       battery_level: 1
-      connection_status: reconnected
+      connection_status: unstable
     fileParameters: []
     responses: []
     responseFields: []
@@ -2847,7 +2847,7 @@ endpoints:
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Display a paginated listing of exam questions.'
+      title: ''
       description: ''
       authenticated: true
       deprecated: false
@@ -2891,7 +2891,7 @@ endpoints:
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Store a newly created exam question.'
+      title: ''
       description: ''
       authenticated: true
       deprecated: false
@@ -2907,7 +2907,7 @@ endpoints:
     bodyParameters:
       exam_id:
         name: exam_id
-        description: 'ID of the exam this question belongs to. The <code>id</code> of an existing record in the exams table.'
+        description: 'ID of the exam this section belongs to. The <code>id</code> of an existing record in the exams table.'
         required: true
         example: 1
         type: integer
@@ -2915,113 +2915,41 @@ endpoints:
         exampleWasSpecified: false
         nullable: false
         custom: []
-      question_text:
-        name: question_text
-        description: 'Text content of the question (optional if question_image is provided).'
-        required: false
-        example: 'What is the capital of France?'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        custom: []
-      question_image:
-        name: question_image
-        description: 'URL or path of an image for the question (optional).'
-        required: false
-        example: 'https://example.com/question1.png'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        custom: []
-      question_type:
-        name: question_type
-        description: 'Type of the question.'
+      code:
+        name: code
+        description: 'Unique code for the exam section. Must not be greater than 255 characters.'
         required: true
-        example: multiple_choice
+        example: SEC-A
         type: string
-        enumValues:
-          - multiple_choice
-          - essay
-          - true_false
-          - fill_blank
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      options:
-        name: options
-        description: 'Individual option for multiple_choice question.'
-        required: false
-        example:
-          - Paris
-        type: 'string[]'
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
-      correct_answer:
-        name: correct_answer
-        description: 'Correct answer for the question (format depends on question_type).'
-        required: false
-        example: Paris
+      name:
+        name: name
+        description: 'Name of the exam section. Must not be greater than 255 characters.'
+        required: true
+        example: 'Mathematics Section'
         type: string
         enumValues: []
         exampleWasSpecified: false
-        nullable: true
+        nullable: false
         custom: []
-      points:
-        name: points
-        description: 'Points assigned to the question. Must be at least 0.'
+      order_number:
+        name: order_number
+        description: 'Order of the section within the exam.'
         required: true
-        example: 5
+        example: 1
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
-        custom: []
-      is_required:
-        name: is_required
-        description: 'Indicates if answering the question is mandatory.'
-        required: false
-        example: false
-        type: boolean
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      help_text:
-        name: help_text
-        description: 'Optional hint or guidance for the question.'
-        required: false
-        example: 'Remember to check European capitals.'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        custom: []
-      section_id:
-        name: section_id
-        description: 'ID of the exam section this question belongs to (optional). The <code>id</code> of an existing record in the exam_sections table.'
-        required: false
-        example: 2
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
         custom: []
     cleanBodyParameters:
       exam_id: 1
-      question_text: 'What is the capital of France?'
-      question_image: 'https://example.com/question1.png'
-      question_type: multiple_choice
-      options:
-        - Paris
-      correct_answer: Paris
-      points: 5
-      is_required: false
-      help_text: 'Remember to check European capitals.'
-      section_id: 2
+      code: SEC-A
+      name: 'Mathematics Section'
+      order_number: 1
     fileParameters: []
     responses: []
     responseFields: []
@@ -3042,7 +2970,7 @@ endpoints:
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Display the specified exam question.'
+      title: ''
       description: ''
       authenticated: true
       deprecated: false
@@ -3098,7 +3026,7 @@ endpoints:
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Update the specified exam question in storage.'
+      title: ''
       description: ''
       authenticated: true
       deprecated: false
@@ -3125,121 +3053,49 @@ endpoints:
     bodyParameters:
       exam_id:
         name: exam_id
-        description: 'ID of the exam this question belongs to. The <code>id</code> of an existing record in the exams table.'
-        required: false
+        description: 'ID of the exam this section belongs to. The <code>id</code> of an existing record in the exams table.'
+        required: true
         example: 1
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
-      question_text:
-        name: question_text
-        description: 'Text content of the question (optional if question_image is provided).'
-        required: false
-        example: 'What is the capital of Germany?'
+      code:
+        name: code
+        description: 'Unique code for the exam section. Must not be greater than 255 characters.'
+        required: true
+        example: SEC-B
         type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        custom: []
-      question_image:
-        name: question_image
-        description: 'URL or path of an image for the question (optional).'
-        required: false
-        example: 'https://example.com/question1.png'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        custom: []
-      question_type:
-        name: question_type
-        description: 'Type of the question.'
-        required: false
-        example: multiple_choice
-        type: string
-        enumValues:
-          - multiple_choice
-          - essay
-          - true_false
-          - fill_blank
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      options:
-        name: options
-        description: 'Individual option for multiple_choice question.'
-        required: false
-        example:
-          - Berlin
-        type: 'string[]'
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
-      correct_answer:
-        name: correct_answer
-        description: 'Correct answer for the question (format depends on question_type).'
-        required: false
-        example: Berlin
+      name:
+        name: name
+        description: 'Name of the exam section. Must not be greater than 255 characters.'
+        required: true
+        example: 'Physics Section'
         type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        custom: []
-      points:
-        name: points
-        description: 'Points assigned to the question. Must be at least 0.'
-        required: false
-        example: 5
-        type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
-      is_required:
-        name: is_required
-        description: 'Indicates if answering the question is mandatory.'
-        required: false
-        example: false
-        type: boolean
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      help_text:
-        name: help_text
-        description: 'Optional hint or guidance for the question.'
-        required: false
-        example: 'Consider European capitals.'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        custom: []
-      section_id:
-        name: section_id
-        description: 'ID of the exam section this question belongs to (optional). The <code>id</code> of an existing record in the exam_sections table.'
-        required: false
+      order_number:
+        name: order_number
+        description: 'Order of the section within the exam.'
+        required: true
         example: 2
         type: integer
         enumValues: []
         exampleWasSpecified: false
-        nullable: true
+        nullable: false
         custom: []
     cleanBodyParameters:
       exam_id: 1
-      question_text: 'What is the capital of Germany?'
-      question_image: 'https://example.com/question1.png'
-      question_type: multiple_choice
-      options:
-        - Berlin
-      correct_answer: Berlin
-      points: 5
-      is_required: false
-      help_text: 'Consider European capitals.'
-      section_id: 2
+      code: SEC-B
+      name: 'Physics Section'
+      order_number: 2
     fileParameters: []
     responses: []
     responseFields: []
@@ -3260,7 +3116,7 @@ endpoints:
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Remove the specified exam question from storage.'
+      title: ''
       description: ''
       authenticated: true
       deprecated: false
@@ -3824,7 +3680,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"status":"ok","timestamp":"2025-09-25T19:54:27.522473Z","version":"1.0.0"}'
+        content: '{"status":"ok","timestamp":"2025-09-25T21:16:29.376429Z","version":"1.0.0"}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
