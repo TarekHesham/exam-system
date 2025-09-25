@@ -84,6 +84,12 @@
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-logout">
                                 <a href="#endpoints-POSTapi-v1-logout">Logout user and revoke token</a>
                             </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-governorates">
+                                <a href="#endpoints-GETapi-v1-governorates">GET api/v1/governorates</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-governorates--id-">
+                                <a href="#endpoints-GETapi-v1-governorates--id-">GET api/v1/governorates/{id}</a>
+                            </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-student-exam-sessions--sessionId--submit">
                                 <a href="#endpoints-POSTapi-v1-student-exam-sessions--sessionId--submit">POST api/v1/student/exam-sessions/{sessionId}/submit</a>
                             </li>
@@ -213,6 +219,21 @@ Student can only start exam during exam time window</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-DELETEapi-v1-admin-school-admins--id-">
                                 <a href="#endpoints-DELETEapi-v1-admin-school-admins--id-">Delete school admin and its user (soft delete user)</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-admin-schools">
+                                <a href="#endpoints-GETapi-v1-admin-schools">GET api/v1/admin/schools</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-admin-schools">
+                                <a href="#endpoints-POSTapi-v1-admin-schools">POST api/v1/admin/schools</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-admin-schools--id-">
+                                <a href="#endpoints-GETapi-v1-admin-schools--id-">GET api/v1/admin/schools/{id}</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-PUTapi-v1-admin-schools--id-">
+                                <a href="#endpoints-PUTapi-v1-admin-schools--id-">PUT api/v1/admin/schools/{id}</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-DELETEapi-v1-admin-schools--id-">
+                                <a href="#endpoints-DELETEapi-v1-admin-schools--id-">DELETE api/v1/admin/schools/{id}</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-GETapi-health">
                                 <a href="#endpoints-GETapi-health">GET api/health</a>
@@ -931,6 +952,446 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <p>Example: <code>application/json</code></p>
             </div>
                         </form>
+
+                    <h2 id="endpoints-GETapi-v1-governorates">GET api/v1/governorates</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-governorates">
+<blockquote>Example request:</blockquote>
+
+
+<div class="JS-example">
+    <pre><code class="language-JS">const url = new URL(
+    "http://45.245.151.115:8000/api/v1/governorates"
+);
+
+const headers = {
+    "Authorization": "Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="Laravel-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://45.245.151.115:8000/api/v1/governorates';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="DartPad-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+  final url = 'http://45.245.151.115:8000/api/v1/governorates';
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url,
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'GET',
+        headers: headers,
+      ),
+    );
+    print(response.data);
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+
+<div class="Dio-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+
+  final url = Uri.parse("http://45.245.151.115:8000/api/v1/governorates");
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url.toString(),
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'GET',
+        headers: headers,
+      ),
+    );
+    print('Response: ${response.data}');
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-governorates">
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: *
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-governorates" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-governorates"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-governorates"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-governorates" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-governorates">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-governorates" data-method="GET"
+      data-path="api/v1/governorates"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-governorates', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-governorates"
+                    onclick="tryItOut('GETapi-v1-governorates');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-governorates"
+                    onclick="cancelTryOut('GETapi-v1-governorates');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-governorates"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/governorates</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-v1-governorates"
+               value="Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-governorates"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-governorates"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                    <h2 id="endpoints-GETapi-v1-governorates--id-">GET api/v1/governorates/{id}</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-governorates--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="JS-example">
+    <pre><code class="language-JS">const url = new URL(
+    "http://45.245.151.115:8000/api/v1/governorates/architecto"
+);
+
+const headers = {
+    "Authorization": "Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="Laravel-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://45.245.151.115:8000/api/v1/governorates/architecto';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="DartPad-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+  final url = 'http://45.245.151.115:8000/api/v1/governorates/architecto';
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url,
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'GET',
+        headers: headers,
+      ),
+    );
+    print(response.data);
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+
+<div class="Dio-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+
+  final url = Uri.parse("http://45.245.151.115:8000/api/v1/governorates/architecto");
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url.toString(),
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'GET',
+        headers: headers,
+      ),
+    );
+    print('Response: ${response.data}');
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-governorates--id-">
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: *
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-governorates--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-governorates--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-governorates--id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-governorates--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-governorates--id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-governorates--id-" data-method="GET"
+      data-path="api/v1/governorates/{id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-governorates--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-governorates--id-"
+                    onclick="tryItOut('GETapi-v1-governorates--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-governorates--id-"
+                    onclick="cancelTryOut('GETapi-v1-governorates--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-governorates--id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/governorates/{id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-v1-governorates--id-"
+               value="Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-governorates--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-governorates--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="id"                data-endpoint="GETapi-v1-governorates--id-"
+               value="architecto"
+               data-component="url">
+    <br>
+<p>The ID of the governorate. Example: <code>architecto</code></p>
+            </div>
+                    </form>
 
                     <h2 id="endpoints-POSTapi-v1-student-exam-sessions--sessionId--submit">POST api/v1/student/exam-sessions/{sessionId}/submit</h2>
 
@@ -2461,7 +2922,7 @@ const headers = {
 
 let body = {
     "battery_level": 1,
-    "connection_status": "unstable"
+    "connection_status": "stable"
 };
 
 fetch(url, {
@@ -2484,7 +2945,7 @@ $response = $client-&gt;post(
         ],
         'json' =&gt; [
             'battery_level' =&gt; 1,
-            'connection_status' =&gt; 'unstable',
+            'connection_status' =&gt; 'stable',
         ],
     ]
 );
@@ -2508,7 +2969,7 @@ void main() async {
   dynamic data;
     data = [
     'battery_level' =&gt; 1,
-    'connection_status' =&gt; 'unstable',
+    'connection_status' =&gt; 'stable',
 ];
 
   try {
@@ -2545,7 +3006,7 @@ void main() async {
   dynamic data;
     data = [
     'battery_level' =&gt; 1,
-    'connection_status' =&gt; 'unstable',
+    'connection_status' =&gt; 'stable',
 ];
 
   try {
@@ -2666,10 +3127,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                               name="connection_status"                data-endpoint="POSTapi-v1-student-exam-heartbeat"
-               value="unstable"
+               value="stable"
                data-component="body">
     <br>
-<p>Example: <code>unstable</code></p>
+<p>Example: <code>stable</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>stable</code></li> <li><code>unstable</code></li> <li><code>reconnected</code></li></ul>
         </div>
@@ -12573,6 +13034,1376 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                     </form>
 
+                    <h2 id="endpoints-GETapi-v1-admin-schools">GET api/v1/admin/schools</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-admin-schools">
+<blockquote>Example request:</blockquote>
+
+
+<div class="JS-example">
+    <pre><code class="language-JS">const url = new URL(
+    "http://45.245.151.115:8000/api/v1/admin/schools"
+);
+
+const headers = {
+    "Authorization": "Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="Laravel-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://45.245.151.115:8000/api/v1/admin/schools';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="DartPad-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+  final url = 'http://45.245.151.115:8000/api/v1/admin/schools';
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url,
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'GET',
+        headers: headers,
+      ),
+    );
+    print(response.data);
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+
+<div class="Dio-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+
+  final url = Uri.parse("http://45.245.151.115:8000/api/v1/admin/schools");
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url.toString(),
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'GET',
+        headers: headers,
+      ),
+    );
+    print('Response: ${response.data}');
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-admin-schools">
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: *
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-admin-schools" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-admin-schools"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-admin-schools"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-admin-schools" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-admin-schools">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-admin-schools" data-method="GET"
+      data-path="api/v1/admin/schools"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-admin-schools', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-admin-schools"
+                    onclick="tryItOut('GETapi-v1-admin-schools');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-admin-schools"
+                    onclick="cancelTryOut('GETapi-v1-admin-schools');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-admin-schools"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/admin/schools</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-v1-admin-schools"
+               value="Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-admin-schools"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-admin-schools"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                    <h2 id="endpoints-POSTapi-v1-admin-schools">POST api/v1/admin/schools</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-admin-schools">
+<blockquote>Example request:</blockquote>
+
+
+<div class="JS-example">
+    <pre><code class="language-JS">const url = new URL(
+    "http://45.245.151.115:8000/api/v1/admin/schools"
+);
+
+const headers = {
+    "Authorization": "Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "governorate_id": 1,
+    "name": "Al Azhar School",
+    "code": "S001",
+    "address": "123 Main St",
+    "phone": "+201234567890",
+    "latitude": 30.123456,
+    "longitude": 31.654321,
+    "allowed_ip_range": "192.168.1.1-192.168.1.255",
+    "is_active": false
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="Laravel-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://45.245.151.115:8000/api/v1/admin/schools';
+$response = $client-&gt;post(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+        'json' =&gt; [
+            'governorate_id' =&gt; 1,
+            'name' =&gt; 'Al Azhar School',
+            'code' =&gt; 'S001',
+            'address' =&gt; '123 Main St',
+            'phone' =&gt; '+201234567890',
+            'latitude' =&gt; 30.123456,
+            'longitude' =&gt; 31.654321,
+            'allowed_ip_range' =&gt; '192.168.1.1-192.168.1.255',
+            'is_active' =&gt; false,
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="DartPad-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+  final url = 'http://45.245.151.115:8000/api/v1/admin/schools';
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = [
+    'governorate_id' =&gt; 1,
+    'name' =&gt; 'Al Azhar School',
+    'code' =&gt; 'S001',
+    'address' =&gt; '123 Main St',
+    'phone' =&gt; '+201234567890',
+    'latitude' =&gt; 30.123456,
+    'longitude' =&gt; 31.654321,
+    'allowed_ip_range' =&gt; '192.168.1.1-192.168.1.255',
+    'is_active' =&gt; false,
+];
+
+  try {
+    final response = await dio.request(
+      url,
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'POST',
+        headers: headers,
+      ),
+    );
+    print(response.data);
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+
+<div class="Dio-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+
+  final url = Uri.parse("http://45.245.151.115:8000/api/v1/admin/schools");
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = [
+    'governorate_id' =&gt; 1,
+    'name' =&gt; 'Al Azhar School',
+    'code' =&gt; 'S001',
+    'address' =&gt; '123 Main St',
+    'phone' =&gt; '+201234567890',
+    'latitude' =&gt; 30.123456,
+    'longitude' =&gt; 31.654321,
+    'allowed_ip_range' =&gt; '192.168.1.1-192.168.1.255',
+    'is_active' =&gt; false,
+];
+
+  try {
+    final response = await dio.request(
+      url.toString(),
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'POST',
+        headers: headers,
+      ),
+    );
+    print('Response: ${response.data}');
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-admin-schools">
+</span>
+<span id="execution-results-POSTapi-v1-admin-schools" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-admin-schools"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-admin-schools"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-admin-schools" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-admin-schools">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-admin-schools" data-method="POST"
+      data-path="api/v1/admin/schools"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-admin-schools', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-admin-schools"
+                    onclick="tryItOut('POSTapi-v1-admin-schools');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-admin-schools"
+                    onclick="cancelTryOut('POSTapi-v1-admin-schools');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-admin-schools"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/admin/schools</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-v1-admin-schools"
+               value="Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-v1-admin-schools"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-v1-admin-schools"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>governorate_id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="governorate_id"                data-endpoint="POSTapi-v1-admin-schools"
+               value="1"
+               data-component="body">
+    <br>
+<p>ID of the governorate. The <code>id</code> of an existing record in the governorates table. Example: <code>1</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="name"                data-endpoint="POSTapi-v1-admin-schools"
+               value="Al Azhar School"
+               data-component="body">
+    <br>
+<p>Name of the school. Must not be greater than 255 characters. Example: <code>Al Azhar School</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>code</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="code"                data-endpoint="POSTapi-v1-admin-schools"
+               value="S001"
+               data-component="body">
+    <br>
+<p>Unique code of the school. Must not be greater than 50 characters. Example: <code>S001</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>address</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="address"                data-endpoint="POSTapi-v1-admin-schools"
+               value="123 Main St"
+               data-component="body">
+    <br>
+<p>Address of the school (optional). Must not be greater than 500 characters. Example: <code>123 Main St</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>phone</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="phone"                data-endpoint="POSTapi-v1-admin-schools"
+               value="+201234567890"
+               data-component="body">
+    <br>
+<p>Phone number of the school (optional). Must not be greater than 20 characters. Example: <code>+201234567890</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>latitude</code></b>&nbsp;&nbsp;
+<small>number</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="latitude"                data-endpoint="POSTapi-v1-admin-schools"
+               value="30.123456"
+               data-component="body">
+    <br>
+<p>Latitude coordinate of the school (optional). Example: <code>30.123456</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>longitude</code></b>&nbsp;&nbsp;
+<small>number</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="longitude"                data-endpoint="POSTapi-v1-admin-schools"
+               value="31.654321"
+               data-component="body">
+    <br>
+<p>Longitude coordinate of the school (optional). Example: <code>31.654321</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>allowed_ip_range</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="allowed_ip_range"                data-endpoint="POSTapi-v1-admin-schools"
+               value="192.168.1.1-192.168.1.255"
+               data-component="body">
+    <br>
+<p>Allowed IP range for the school (optional). Must not be greater than 100 characters. Example: <code>192.168.1.1-192.168.1.255</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>is_active</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+<i>optional</i> &nbsp;
+                <label data-endpoint="POSTapi-v1-admin-schools" style="display: none">
+            <input type="radio" name="is_active"
+                   value="true"
+                   data-endpoint="POSTapi-v1-admin-schools"
+                   data-component="body"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="POSTapi-v1-admin-schools" style="display: none">
+            <input type="radio" name="is_active"
+                   value="false"
+                   data-endpoint="POSTapi-v1-admin-schools"
+                   data-component="body"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>Whether the school is active (optional). Example: <code>false</code></p>
+        </div>
+        </form>
+
+                    <h2 id="endpoints-GETapi-v1-admin-schools--id-">GET api/v1/admin/schools/{id}</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-admin-schools--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="JS-example">
+    <pre><code class="language-JS">const url = new URL(
+    "http://45.245.151.115:8000/api/v1/admin/schools/architecto"
+);
+
+const headers = {
+    "Authorization": "Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="Laravel-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://45.245.151.115:8000/api/v1/admin/schools/architecto';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="DartPad-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+  final url = 'http://45.245.151.115:8000/api/v1/admin/schools/architecto';
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url,
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'GET',
+        headers: headers,
+      ),
+    );
+    print(response.data);
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+
+<div class="Dio-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+
+  final url = Uri.parse("http://45.245.151.115:8000/api/v1/admin/schools/architecto");
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url.toString(),
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'GET',
+        headers: headers,
+      ),
+    );
+    print('Response: ${response.data}');
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-admin-schools--id-">
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: *
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-admin-schools--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-admin-schools--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-admin-schools--id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-admin-schools--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-admin-schools--id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-admin-schools--id-" data-method="GET"
+      data-path="api/v1/admin/schools/{id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-admin-schools--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-admin-schools--id-"
+                    onclick="tryItOut('GETapi-v1-admin-schools--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-admin-schools--id-"
+                    onclick="cancelTryOut('GETapi-v1-admin-schools--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-admin-schools--id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/admin/schools/{id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-v1-admin-schools--id-"
+               value="Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-admin-schools--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-admin-schools--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="id"                data-endpoint="GETapi-v1-admin-schools--id-"
+               value="architecto"
+               data-component="url">
+    <br>
+<p>The ID of the school. Example: <code>architecto</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="endpoints-PUTapi-v1-admin-schools--id-">PUT api/v1/admin/schools/{id}</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-PUTapi-v1-admin-schools--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="JS-example">
+    <pre><code class="language-JS">const url = new URL(
+    "http://45.245.151.115:8000/api/v1/admin/schools/architecto"
+);
+
+const headers = {
+    "Authorization": "Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "governorate_id": 1,
+    "name": "Al Azhar School",
+    "code": "S001",
+    "address": "123 Main St",
+    "phone": "+201234567890",
+    "latitude": 30.123456,
+    "longitude": 31.654321,
+    "allowed_ip_range": "192.168.1.1-192.168.1.255",
+    "is_active": false
+};
+
+fetch(url, {
+    method: "PUT",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="Laravel-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://45.245.151.115:8000/api/v1/admin/schools/architecto';
+$response = $client-&gt;put(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+        'json' =&gt; [
+            'governorate_id' =&gt; 1,
+            'name' =&gt; 'Al Azhar School',
+            'code' =&gt; 'S001',
+            'address' =&gt; '123 Main St',
+            'phone' =&gt; '+201234567890',
+            'latitude' =&gt; 30.123456,
+            'longitude' =&gt; 31.654321,
+            'allowed_ip_range' =&gt; '192.168.1.1-192.168.1.255',
+            'is_active' =&gt; false,
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="DartPad-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+  final url = 'http://45.245.151.115:8000/api/v1/admin/schools/architecto';
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = [
+    'governorate_id' =&gt; 1,
+    'name' =&gt; 'Al Azhar School',
+    'code' =&gt; 'S001',
+    'address' =&gt; '123 Main St',
+    'phone' =&gt; '+201234567890',
+    'latitude' =&gt; 30.123456,
+    'longitude' =&gt; 31.654321,
+    'allowed_ip_range' =&gt; '192.168.1.1-192.168.1.255',
+    'is_active' =&gt; false,
+];
+
+  try {
+    final response = await dio.request(
+      url,
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'PUT',
+        headers: headers,
+      ),
+    );
+    print(response.data);
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+
+<div class="Dio-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+
+  final url = Uri.parse("http://45.245.151.115:8000/api/v1/admin/schools/architecto");
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = [
+    'governorate_id' =&gt; 1,
+    'name' =&gt; 'Al Azhar School',
+    'code' =&gt; 'S001',
+    'address' =&gt; '123 Main St',
+    'phone' =&gt; '+201234567890',
+    'latitude' =&gt; 30.123456,
+    'longitude' =&gt; 31.654321,
+    'allowed_ip_range' =&gt; '192.168.1.1-192.168.1.255',
+    'is_active' =&gt; false,
+];
+
+  try {
+    final response = await dio.request(
+      url.toString(),
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'PUT',
+        headers: headers,
+      ),
+    );
+    print('Response: ${response.data}');
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+</span>
+
+<span id="example-responses-PUTapi-v1-admin-schools--id-">
+</span>
+<span id="execution-results-PUTapi-v1-admin-schools--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-PUTapi-v1-admin-schools--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-PUTapi-v1-admin-schools--id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-PUTapi-v1-admin-schools--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-PUTapi-v1-admin-schools--id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-PUTapi-v1-admin-schools--id-" data-method="PUT"
+      data-path="api/v1/admin/schools/{id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('PUTapi-v1-admin-schools--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-PUTapi-v1-admin-schools--id-"
+                    onclick="tryItOut('PUTapi-v1-admin-schools--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-PUTapi-v1-admin-schools--id-"
+                    onclick="cancelTryOut('PUTapi-v1-admin-schools--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-PUTapi-v1-admin-schools--id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-darkblue">PUT</small>
+            <b><code>api/v1/admin/schools/{id}</code></b>
+        </p>
+            <p>
+            <small class="badge badge-purple">PATCH</small>
+            <b><code>api/v1/admin/schools/{id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="PUTapi-v1-admin-schools--id-"
+               value="Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="PUTapi-v1-admin-schools--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="PUTapi-v1-admin-schools--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="id"                data-endpoint="PUTapi-v1-admin-schools--id-"
+               value="architecto"
+               data-component="url">
+    <br>
+<p>The ID of the school. Example: <code>architecto</code></p>
+            </div>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>governorate_id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="governorate_id"                data-endpoint="PUTapi-v1-admin-schools--id-"
+               value="1"
+               data-component="body">
+    <br>
+<p>ID of the governorate. The <code>id</code> of an existing record in the governorates table. Example: <code>1</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="name"                data-endpoint="PUTapi-v1-admin-schools--id-"
+               value="Al Azhar School"
+               data-component="body">
+    <br>
+<p>Name of the school. Must not be greater than 255 characters. Example: <code>Al Azhar School</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>code</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="code"                data-endpoint="PUTapi-v1-admin-schools--id-"
+               value="S001"
+               data-component="body">
+    <br>
+<p>Unique code of the school. Must not be greater than 50 characters. Example: <code>S001</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>address</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="address"                data-endpoint="PUTapi-v1-admin-schools--id-"
+               value="123 Main St"
+               data-component="body">
+    <br>
+<p>Address of the school (optional). Must not be greater than 500 characters. Example: <code>123 Main St</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>phone</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="phone"                data-endpoint="PUTapi-v1-admin-schools--id-"
+               value="+201234567890"
+               data-component="body">
+    <br>
+<p>Phone number of the school (optional). Must not be greater than 20 characters. Example: <code>+201234567890</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>latitude</code></b>&nbsp;&nbsp;
+<small>number</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="latitude"                data-endpoint="PUTapi-v1-admin-schools--id-"
+               value="30.123456"
+               data-component="body">
+    <br>
+<p>Latitude coordinate of the school (optional). Example: <code>30.123456</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>longitude</code></b>&nbsp;&nbsp;
+<small>number</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="longitude"                data-endpoint="PUTapi-v1-admin-schools--id-"
+               value="31.654321"
+               data-component="body">
+    <br>
+<p>Longitude coordinate of the school (optional). Example: <code>31.654321</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>allowed_ip_range</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="allowed_ip_range"                data-endpoint="PUTapi-v1-admin-schools--id-"
+               value="192.168.1.1-192.168.1.255"
+               data-component="body">
+    <br>
+<p>Allowed IP range for the school (optional). Must not be greater than 100 characters. Example: <code>192.168.1.1-192.168.1.255</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>is_active</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+<i>optional</i> &nbsp;
+                <label data-endpoint="PUTapi-v1-admin-schools--id-" style="display: none">
+            <input type="radio" name="is_active"
+                   value="true"
+                   data-endpoint="PUTapi-v1-admin-schools--id-"
+                   data-component="body"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="PUTapi-v1-admin-schools--id-" style="display: none">
+            <input type="radio" name="is_active"
+                   value="false"
+                   data-endpoint="PUTapi-v1-admin-schools--id-"
+                   data-component="body"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>Whether the school is active. Example: <code>false</code></p>
+        </div>
+        </form>
+
+                    <h2 id="endpoints-DELETEapi-v1-admin-schools--id-">DELETE api/v1/admin/schools/{id}</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-DELETEapi-v1-admin-schools--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="JS-example">
+    <pre><code class="language-JS">const url = new URL(
+    "http://45.245.151.115:8000/api/v1/admin/schools/architecto"
+);
+
+const headers = {
+    "Authorization": "Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="Laravel-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://45.245.151.115:8000/api/v1/admin/schools/architecto';
+$response = $client-&gt;delete(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="DartPad-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+  final url = 'http://45.245.151.115:8000/api/v1/admin/schools/architecto';
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url,
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'DELETE',
+        headers: headers,
+      ),
+    );
+    print(response.data);
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+
+<div class="Dio-example">
+    <pre><code class="language-dart">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+
+  final url = Uri.parse("http://45.245.151.115:8000/api/v1/admin/schools/architecto");
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url.toString(),
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'DELETE',
+        headers: headers,
+      ),
+    );
+    print('Response: ${response.data}');
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+</span>
+
+<span id="example-responses-DELETEapi-v1-admin-schools--id-">
+</span>
+<span id="execution-results-DELETEapi-v1-admin-schools--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-DELETEapi-v1-admin-schools--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-DELETEapi-v1-admin-schools--id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-DELETEapi-v1-admin-schools--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-DELETEapi-v1-admin-schools--id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-DELETEapi-v1-admin-schools--id-" data-method="DELETE"
+      data-path="api/v1/admin/schools/{id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('DELETEapi-v1-admin-schools--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-DELETEapi-v1-admin-schools--id-"
+                    onclick="tryItOut('DELETEapi-v1-admin-schools--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-DELETEapi-v1-admin-schools--id-"
+                    onclick="cancelTryOut('DELETEapi-v1-admin-schools--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-DELETEapi-v1-admin-schools--id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-red">DELETE</small>
+            <b><code>api/v1/admin/schools/{id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="DELETEapi-v1-admin-schools--id-"
+               value="Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="DELETEapi-v1-admin-schools--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="DELETEapi-v1-admin-schools--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="id"                data-endpoint="DELETEapi-v1-admin-schools--id-"
+               value="architecto"
+               data-component="url">
+    <br>
+<p>The ID of the school. Example: <code>architecto</code></p>
+            </div>
+                    </form>
+
                     <h2 id="endpoints-GETapi-health">GET api/health</h2>
 
 <p>
@@ -12702,7 +14533,7 @@ access-control-allow-origin: *
 
 <code class="language-json" style="max-height: 300px;">{
     &quot;status&quot;: &quot;ok&quot;,
-    &quot;timestamp&quot;: &quot;2025-09-25T21:16:29.376429Z&quot;,
+    &quot;timestamp&quot;: &quot;2025-09-25T21:38:43.139296Z&quot;,
     &quot;version&quot;: &quot;1.0.0&quot;
 }</code>
  </pre>

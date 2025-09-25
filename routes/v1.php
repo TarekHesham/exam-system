@@ -14,6 +14,7 @@ use App\Http\Controllers\Api\V1\{
     ExamQuestionController,
     ExamSectionController,
     ExamSessionController,
+    GovernorateController,
     SchoolAdminController,
     SchoolController,
     StudentExamController,
@@ -30,7 +31,10 @@ Route::withoutMiddleware('auth:sanctum')->prefix('auth')->group(function () {
 // Protected routes
 Route::get('me', [AuthController::class, 'me']);
 Route::post('logout', [AuthController::class, 'logout']);
-Route::get('governorates', [SchoolController::class, 'getGovernorates']);
+Route::prefix('governorates')->group(function () {
+    Route::get('/', [GovernorateController::class, 'index']);
+    Route::get('{id}', [GovernorateController::class, 'show']);
+});
 
 Route::middleware('roles:student')->prefix('student')->group(function () {
     // ============================================
