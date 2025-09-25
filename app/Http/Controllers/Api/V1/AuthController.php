@@ -6,9 +6,9 @@ use App\Core\Services\{AuthService, UserService};
 use App\Http\Controllers\Controller;
 use App\Http\Requests\{
     LoginRequest,
-    CreateTeacherRequest,
-    CreateStudentRequest,
-    CreateSchoolAdminRequest
+    StoreTeacherRequest,
+    StoreStudentRequest,
+    StoreSchoolAdminRequest
 };
 use App\Http\Resources\UserResource;
 use App\Core\DTOs\UserDTO;
@@ -76,7 +76,7 @@ class AuthController extends Controller
      * Create teacher account (Ministry Admin only)
      * @param Request $request
      */
-    public function createTeacher(CreateTeacherRequest $request): JsonResponse
+    public function createTeacher(StoreTeacherRequest $request): JsonResponse
     {
         return DB::transaction(function () use ($request) {
             $userData = UserDTO::fromArray([
@@ -127,7 +127,7 @@ class AuthController extends Controller
      * Create student account (School Admin only)
      * @param Request $request
      */
-    public function createStudent(CreateStudentRequest $request): JsonResponse
+    public function createStudent(StoreStudentRequest $request): JsonResponse
     {
         $user = Auth::user();
 
@@ -227,7 +227,7 @@ class AuthController extends Controller
      * Create school admin account (Ministry Admin only)
      * @param Request $request
      */
-    public function createSchoolAdmin(CreateSchoolAdminRequest $request): JsonResponse
+    public function createSchoolAdmin(StoreSchoolAdminRequest $request): JsonResponse
     {
         if (Auth::user()->user_type !== 'ministry_admin') {
             throw new UnauthorizedException('غير مصرح لك بإنشاء حسابات مدراء المدارس');

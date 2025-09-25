@@ -2,7 +2,7 @@
 
 namespace App\Core\DTOs;
 
-use App\Http\Requests\CreateExamRequest;
+use App\Http\Requests\StoreExamRequest;
 use Illuminate\Support\Facades\Auth;
 
 class CreateExamDTO
@@ -22,7 +22,7 @@ class CreateExamDTO
         public readonly bool $requireVideoRecording = false
     ) {}
 
-    public static function fromRequest(CreateExamRequest $request): self
+    public static function fromRequest(StoreExamRequest $request): self
     {
         return new self(
             subjectId: $request->validated('subject_id'),

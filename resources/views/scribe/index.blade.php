@@ -1,0 +1,11019 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Laravel API Documentation</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ asset("/vendor/scribe/css/theme-default.style.css") }}" media="screen">
+    <link rel="stylesheet" href="{{ asset("/vendor/scribe/css/theme-default.print.css") }}" media="print">
+
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.10/lodash.min.js"></script>
+
+    <link rel="stylesheet"
+          href="https://unpkg.com/@highlightjs/cdn-assets@11.6.0/styles/obsidian.min.css">
+    <script src="https://unpkg.com/@highlightjs/cdn-assets@11.6.0/highlight.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jets/0.14.1/jets.min.js"></script>
+
+    <style id="language-style">
+        /* starts out as display none and is replaced with js later  */
+                    body .content .bash-example code { display: none; }
+                    body .content .javascript-example code { display: none; }
+                    body .content .php-example code { display: none; }
+                    body .content .python-example code { display: none; }
+            </style>
+
+    <script>
+        var tryItOutBaseUrl = "http://45.245.151.115:8000";
+        var useCsrf = Boolean();
+        var csrfUrl = "/sanctum/csrf-cookie";
+    </script>
+    <script src="{{ asset("/vendor/scribe/js/tryitout-5.3.0.js") }}"></script>
+
+    <script src="{{ asset("/vendor/scribe/js/theme-default-5.3.0.js") }}"></script>
+
+</head>
+
+<body data-languages="[&quot;bash&quot;,&quot;javascript&quot;,&quot;php&quot;,&quot;python&quot;]">
+
+<a href="#" id="nav-button">
+    <span>
+        MENU
+        <img src="{{ asset("/vendor/scribe/images/navbar.png") }}" alt="navbar-image"/>
+    </span>
+</a>
+<div class="tocify-wrapper">
+    
+            <div class="lang-selector">
+                                            <button type="button" class="lang-button" data-language-name="bash">bash</button>
+                                            <button type="button" class="lang-button" data-language-name="javascript">javascript</button>
+                                            <button type="button" class="lang-button" data-language-name="php">php</button>
+                                            <button type="button" class="lang-button" data-language-name="python">python</button>
+                    </div>
+    
+    <div class="search">
+        <input type="text" class="search" id="input-search" placeholder="Search">
+    </div>
+
+    <div id="toc">
+                    <ul id="tocify-header-introduction" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="introduction">
+                    <a href="#introduction">Introduction</a>
+                </li>
+                            </ul>
+                    <ul id="tocify-header-authenticating-requests" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="authenticating-requests">
+                    <a href="#authenticating-requests">Authenticating requests</a>
+                </li>
+                            </ul>
+                    <ul id="tocify-header-endpoints" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="endpoints">
+                    <a href="#endpoints">Endpoints</a>
+                </li>
+                                    <ul id="tocify-subheader-endpoints" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-auth-login">
+                                <a href="#endpoints-POSTapi-v1-auth-login">Authenticate user and return access token</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-me">
+                                <a href="#endpoints-GETapi-v1-me">Get current authenticated user</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-logout">
+                                <a href="#endpoints-POSTapi-v1-logout">Logout user and revoke token</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-student-exam-sessions--sessionId--submit">
+                                <a href="#endpoints-POSTapi-v1-student-exam-sessions--sessionId--submit">POST api/v1/student/exam-sessions/{sessionId}/submit</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-student-exam-sessions--sessionId--heartbeat">
+                                <a href="#endpoints-POSTapi-v1-student-exam-sessions--sessionId--heartbeat">POST api/v1/student/exam-sessions/{sessionId}/heartbeat</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-student-exam-sessions--sessionId--time-remaining">
+                                <a href="#endpoints-GETapi-v1-student-exam-sessions--sessionId--time-remaining">GET api/v1/student/exam-sessions/{sessionId}/time-remaining</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-student-available-exam">
+                                <a href="#endpoints-GETapi-v1-student-available-exam">Student gets available exam if session exists
+Student can only start exam during exam time window</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-student-exam-save-answer">
+                                <a href="#endpoints-POSTapi-v1-student-exam-save-answer">Save student answer for a question</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-student-exam-submit">
+                                <a href="#endpoints-POSTapi-v1-student-exam-submit">Submit complete exam with all answers at once</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-student-exam-heartbeat">
+                                <a href="#endpoints-POSTapi-v1-student-exam-heartbeat">Send heartbeat to keep session alive</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-teacher-scan-qr-create-session">
+                                <a href="#endpoints-POSTapi-v1-teacher-scan-qr-create-session">Teacher scans QR code with student_id and creates session</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-admin-create-student">
+                                <a href="#endpoints-POSTapi-v1-admin-create-student">Create student account (School Admin only)</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-admin-create-teacher">
+                                <a href="#endpoints-POSTapi-v1-admin-create-teacher">Create teacher account (Ministry Admin only)</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-admin-teachers">
+                                <a href="#endpoints-GETapi-v1-admin-teachers">List all teachers</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-admin-teachers--id-">
+                                <a href="#endpoints-GETapi-v1-admin-teachers--id-">Show teacher details</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-PUTapi-v1-admin-teachers--id-">
+                                <a href="#endpoints-PUTapi-v1-admin-teachers--id-">Update teacher information</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-DELETEapi-v1-admin-teachers--id-">
+                                <a href="#endpoints-DELETEapi-v1-admin-teachers--id-">Delete teacher</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-PATCHapi-v1-admin-teachers--id--toggle-status">
+                                <a href="#endpoints-PATCHapi-v1-admin-teachers--id--toggle-status">Toggle teacher active status</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-admin-exams">
+                                <a href="#endpoints-GETapi-v1-admin-exams">GET api/v1/admin/exams</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-admin-exams">
+                                <a href="#endpoints-POSTapi-v1-admin-exams">POST api/v1/admin/exams</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-admin-exams--id-">
+                                <a href="#endpoints-GETapi-v1-admin-exams--id-">GET api/v1/admin/exams/{id}</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-PUTapi-v1-admin-exams--exam_id-">
+                                <a href="#endpoints-PUTapi-v1-admin-exams--exam_id-">PUT api/v1/admin/exams/{exam_id}</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-DELETEapi-v1-admin-exams--id-">
+                                <a href="#endpoints-DELETEapi-v1-admin-exams--id-">DELETE api/v1/admin/exams/{id}</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-admin-exams--id--duplicate">
+                                <a href="#endpoints-POSTapi-v1-admin-exams--id--duplicate">POST api/v1/admin/exams/{id}/duplicate</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-admin-exams--id--statistics">
+                                <a href="#endpoints-GETapi-v1-admin-exams--id--statistics">GET api/v1/admin/exams/{id}/statistics</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-admin-subjects">
+                                <a href="#endpoints-GETapi-v1-admin-subjects">Display a listing of the resource.</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-admin-subjects">
+                                <a href="#endpoints-POSTapi-v1-admin-subjects">Store a newly created resource in storage.</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-admin-subjects--id-">
+                                <a href="#endpoints-GETapi-v1-admin-subjects--id-">Display the specified resource.</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-PUTapi-v1-admin-subjects--id-">
+                                <a href="#endpoints-PUTapi-v1-admin-subjects--id-">Update the specified resource in storage.</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-DELETEapi-v1-admin-subjects--id-">
+                                <a href="#endpoints-DELETEapi-v1-admin-subjects--id-">Remove the specified resource from storage.</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-admin-exam-questions">
+                                <a href="#endpoints-GETapi-v1-admin-exam-questions">Display a paginated listing of exam questions.</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-admin-exam-questions">
+                                <a href="#endpoints-POSTapi-v1-admin-exam-questions">Store a newly created exam question.</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-admin-exam-questions--id-">
+                                <a href="#endpoints-GETapi-v1-admin-exam-questions--id-">Display the specified exam question.</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-PUTapi-v1-admin-exam-questions--id-">
+                                <a href="#endpoints-PUTapi-v1-admin-exam-questions--id-">Update the specified exam question in storage.</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-DELETEapi-v1-admin-exam-questions--id-">
+                                <a href="#endpoints-DELETEapi-v1-admin-exam-questions--id-">Remove the specified exam question from storage.</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-admin-exam-sections">
+                                <a href="#endpoints-GETapi-v1-admin-exam-sections">Display a paginated listing of exam questions.</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-admin-exam-sections">
+                                <a href="#endpoints-POSTapi-v1-admin-exam-sections">Store a newly created exam question.</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-admin-exam-sections--id-">
+                                <a href="#endpoints-GETapi-v1-admin-exam-sections--id-">Display the specified exam question.</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-PUTapi-v1-admin-exam-sections--id-">
+                                <a href="#endpoints-PUTapi-v1-admin-exam-sections--id-">Update the specified exam question in storage.</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-DELETEapi-v1-admin-exam-sections--id-">
+                                <a href="#endpoints-DELETEapi-v1-admin-exam-sections--id-">Remove the specified exam question from storage.</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-admin-exams--id--questions">
+                                <a href="#endpoints-GETapi-v1-admin-exams--id--questions">Get sections (with questions) and unsectioned questions of an exam.</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-admin-school-admins">
+                                <a href="#endpoints-GETapi-v1-admin-school-admins">List paginated school admins</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-admin-school-admins">
+                                <a href="#endpoints-POSTapi-v1-admin-school-admins">Create school admin: create user first then create school admin profile</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-admin-school-admins--id-">
+                                <a href="#endpoints-GETapi-v1-admin-school-admins--id-">Show school admin details</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-PUTapi-v1-admin-school-admins--id-">
+                                <a href="#endpoints-PUTapi-v1-admin-school-admins--id-">Update school admin and optionally its user</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-DELETEapi-v1-admin-school-admins--id-">
+                                <a href="#endpoints-DELETEapi-v1-admin-school-admins--id-">Delete school admin and its user (soft delete user)</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-health">
+                                <a href="#endpoints-GETapi-health">GET api/health</a>
+                            </li>
+                                                                        </ul>
+                            </ul>
+            </div>
+
+    <ul class="toc-footer" id="toc-footer">
+                    <li style="padding-bottom: 5px;"><a href="{{ route("scribe.postman") }}">View Postman collection</a></li>
+                            <li style="padding-bottom: 5px;"><a href="{{ route("scribe.openapi") }}">View OpenAPI spec</a></li>
+                <li><a href="http://github.com/knuckleswtf/scribe">Documentation powered by Scribe ✍</a></li>
+    </ul>
+
+    <ul class="toc-footer" id="last-updated">
+        <li>Last updated: September 25, 2025</li>
+    </ul>
+</div>
+
+<div class="page-wrapper">
+    <div class="dark-box"></div>
+    <div class="content">
+        <h1 id="introduction">Introduction</h1>
+<aside>
+    <strong>Base URL</strong>: <code>http://45.245.151.115:8000</code>
+</aside>
+<pre><code>This documentation aims to provide all the information you need to work with our API.
+
+&lt;aside&gt;As you scroll, you'll see code examples for working with the API in different programming languages in the dark area to the right (or as part of the content on mobile).
+You can switch the language used with the tabs at the top right (or from the nav menu at the top left on mobile).&lt;/aside&gt;</code></pre>
+
+        <h1 id="authenticating-requests">Authenticating requests</h1>
+<p>To authenticate requests, include an <strong><code>Authorization</code></strong> header with the value <strong><code>"Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6"</code></strong>.</p>
+<p>All authenticated endpoints are marked with a <code>requires authentication</code> badge in the documentation below.</p>
+<p>You can retrieve your token by visiting your dashboard and clicking <b>Generate API token</b>.</p>
+
+        <h1 id="endpoints">Endpoints</h1>
+
+    
+
+                                <h2 id="endpoints-POSTapi-v1-auth-login">Authenticate user and return access token</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-auth-login">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://45.245.151.115:8000/api/v1/auth/login" \
+    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"phone\": \"01234567890\",
+    \"national_id\": \"12345678901234\",
+    \"email\": \"user@example.com\",
+    \"password\": \"password123\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://45.245.151.115:8000/api/v1/auth/login"
+);
+
+const headers = {
+    "Authorization": "Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "phone": "01234567890",
+    "national_id": "12345678901234",
+    "email": "user@example.com",
+    "password": "password123"
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://45.245.151.115:8000/api/v1/auth/login';
+$response = $client-&gt;post(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+        'json' =&gt; [
+            'phone' =&gt; '01234567890',
+            'national_id' =&gt; '12345678901234',
+            'email' =&gt; 'user@example.com',
+            'password' =&gt; 'password123',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="python-example">
+    <pre><code class="language-python">import requests
+import json
+
+url = 'http://45.245.151.115:8000/api/v1/auth/login'
+payload = {
+    "phone": "01234567890",
+    "national_id": "12345678901234",
+    "email": "user@example.com",
+    "password": "password123"
+}
+headers = {
+  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('POST', url, headers=headers, json=payload)
+response.json()</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-auth-login">
+</span>
+<span id="execution-results-POSTapi-v1-auth-login" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-auth-login"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-auth-login"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-auth-login" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-auth-login">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-auth-login" data-method="POST"
+      data-path="api/v1/auth/login"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-auth-login', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-auth-login"
+                    onclick="tryItOut('POSTapi-v1-auth-login');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-auth-login"
+                    onclick="cancelTryOut('POSTapi-v1-auth-login');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-auth-login"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/auth/login</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-v1-auth-login"
+               value="Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-v1-auth-login"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-v1-auth-login"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>phone</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="phone"                data-endpoint="POSTapi-v1-auth-login"
+               value="01234567890"
+               data-component="body">
+    <br>
+<p>Phone number of the user (11 digits). Required if national_id and email are not provided. This field is required when none of <code>national_id</code> and <code>email</code> are present. Must be 11 digits. Example: <code>01234567890</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>national_id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="national_id"                data-endpoint="POSTapi-v1-auth-login"
+               value="12345678901234"
+               data-component="body">
+    <br>
+<p>National ID of the user (14 digits). Required if phone and email are not provided. This field is required when none of <code>phone</code> and <code>email</code> are present. Must be 14 digits. Example: <code>12345678901234</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="email"                data-endpoint="POSTapi-v1-auth-login"
+               value="user@example.com"
+               data-component="body">
+    <br>
+<p>Email address of the user. Required if phone and national_id are not provided. This field is required when none of <code>phone</code> and <code>national_id</code> are present. Must be a valid email address. Must not be greater than 255 characters. Example: <code>user@example.com</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>password</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="password"                data-endpoint="POSTapi-v1-auth-login"
+               value="password123"
+               data-component="body">
+    <br>
+<p>Password of the user (minimum 8 characters). Must be at least 8 characters. Example: <code>password123</code></p>
+        </div>
+        </form>
+
+                    <h2 id="endpoints-GETapi-v1-me">Get current authenticated user</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-me">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://45.245.151.115:8000/api/v1/me" \
+    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://45.245.151.115:8000/api/v1/me"
+);
+
+const headers = {
+    "Authorization": "Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://45.245.151.115:8000/api/v1/me';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="python-example">
+    <pre><code class="language-python">import requests
+import json
+
+url = 'http://45.245.151.115:8000/api/v1/me'
+headers = {
+  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('GET', url, headers=headers)
+response.json()</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-me">
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: *
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-me" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-me"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-me"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-me" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-me">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-me" data-method="GET"
+      data-path="api/v1/me"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-me', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-me"
+                    onclick="tryItOut('GETapi-v1-me');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-me"
+                    onclick="cancelTryOut('GETapi-v1-me');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-me"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/me</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-v1-me"
+               value="Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-me"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-me"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                    <h2 id="endpoints-POSTapi-v1-logout">Logout user and revoke token</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-logout">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://45.245.151.115:8000/api/v1/logout" \
+    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://45.245.151.115:8000/api/v1/logout"
+);
+
+const headers = {
+    "Authorization": "Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://45.245.151.115:8000/api/v1/logout';
+$response = $client-&gt;post(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="python-example">
+    <pre><code class="language-python">import requests
+import json
+
+url = 'http://45.245.151.115:8000/api/v1/logout'
+headers = {
+  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('POST', url, headers=headers)
+response.json()</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-logout">
+</span>
+<span id="execution-results-POSTapi-v1-logout" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-logout"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-logout"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-logout" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-logout">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-logout" data-method="POST"
+      data-path="api/v1/logout"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-logout', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-logout"
+                    onclick="tryItOut('POSTapi-v1-logout');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-logout"
+                    onclick="cancelTryOut('POSTapi-v1-logout');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-logout"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/logout</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-v1-logout"
+               value="Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-v1-logout"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-v1-logout"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                    <h2 id="endpoints-POSTapi-v1-student-exam-sessions--sessionId--submit">POST api/v1/student/exam-sessions/{sessionId}/submit</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-student-exam-sessions--sessionId--submit">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://45.245.151.115:8000/api/v1/student/exam-sessions/architecto/submit" \
+    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"submit_confirmation\": true
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://45.245.151.115:8000/api/v1/student/exam-sessions/architecto/submit"
+);
+
+const headers = {
+    "Authorization": "Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "submit_confirmation": true
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://45.245.151.115:8000/api/v1/student/exam-sessions/architecto/submit';
+$response = $client-&gt;post(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+        'json' =&gt; [
+            'submit_confirmation' =&gt; true,
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="python-example">
+    <pre><code class="language-python">import requests
+import json
+
+url = 'http://45.245.151.115:8000/api/v1/student/exam-sessions/architecto/submit'
+payload = {
+    "submit_confirmation": true
+}
+headers = {
+  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('POST', url, headers=headers, json=payload)
+response.json()</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-student-exam-sessions--sessionId--submit">
+</span>
+<span id="execution-results-POSTapi-v1-student-exam-sessions--sessionId--submit" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-student-exam-sessions--sessionId--submit"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-student-exam-sessions--sessionId--submit"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-student-exam-sessions--sessionId--submit" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-student-exam-sessions--sessionId--submit">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-student-exam-sessions--sessionId--submit" data-method="POST"
+      data-path="api/v1/student/exam-sessions/{sessionId}/submit"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-student-exam-sessions--sessionId--submit', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-student-exam-sessions--sessionId--submit"
+                    onclick="tryItOut('POSTapi-v1-student-exam-sessions--sessionId--submit');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-student-exam-sessions--sessionId--submit"
+                    onclick="cancelTryOut('POSTapi-v1-student-exam-sessions--sessionId--submit');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-student-exam-sessions--sessionId--submit"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/student/exam-sessions/{sessionId}/submit</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-v1-student-exam-sessions--sessionId--submit"
+               value="Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-v1-student-exam-sessions--sessionId--submit"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-v1-student-exam-sessions--sessionId--submit"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>sessionId</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="sessionId"                data-endpoint="POSTapi-v1-student-exam-sessions--sessionId--submit"
+               value="architecto"
+               data-component="url">
+    <br>
+<p>Example: <code>architecto</code></p>
+            </div>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>final_answers</code></b>&nbsp;&nbsp;
+<small>object</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="final_answers"                data-endpoint="POSTapi-v1-student-exam-sessions--sessionId--submit"
+               value=""
+               data-component="body">
+    <br>
+
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>submit_confirmation</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+ &nbsp;
+                <label data-endpoint="POSTapi-v1-student-exam-sessions--sessionId--submit" style="display: none">
+            <input type="radio" name="submit_confirmation"
+                   value="true"
+                   data-endpoint="POSTapi-v1-student-exam-sessions--sessionId--submit"
+                   data-component="body"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="POSTapi-v1-student-exam-sessions--sessionId--submit" style="display: none">
+            <input type="radio" name="submit_confirmation"
+                   value="false"
+                   data-endpoint="POSTapi-v1-student-exam-sessions--sessionId--submit"
+                   data-component="body"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>Must be accepted. Example: <code>true</code></p>
+        </div>
+        </form>
+
+                    <h2 id="endpoints-POSTapi-v1-student-exam-sessions--sessionId--heartbeat">POST api/v1/student/exam-sessions/{sessionId}/heartbeat</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-student-exam-sessions--sessionId--heartbeat">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://45.245.151.115:8000/api/v1/student/exam-sessions/architecto/heartbeat" \
+    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://45.245.151.115:8000/api/v1/student/exam-sessions/architecto/heartbeat"
+);
+
+const headers = {
+    "Authorization": "Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://45.245.151.115:8000/api/v1/student/exam-sessions/architecto/heartbeat';
+$response = $client-&gt;post(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="python-example">
+    <pre><code class="language-python">import requests
+import json
+
+url = 'http://45.245.151.115:8000/api/v1/student/exam-sessions/architecto/heartbeat'
+headers = {
+  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('POST', url, headers=headers)
+response.json()</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-student-exam-sessions--sessionId--heartbeat">
+</span>
+<span id="execution-results-POSTapi-v1-student-exam-sessions--sessionId--heartbeat" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-student-exam-sessions--sessionId--heartbeat"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-student-exam-sessions--sessionId--heartbeat"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-student-exam-sessions--sessionId--heartbeat" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-student-exam-sessions--sessionId--heartbeat">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-student-exam-sessions--sessionId--heartbeat" data-method="POST"
+      data-path="api/v1/student/exam-sessions/{sessionId}/heartbeat"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-student-exam-sessions--sessionId--heartbeat', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-student-exam-sessions--sessionId--heartbeat"
+                    onclick="tryItOut('POSTapi-v1-student-exam-sessions--sessionId--heartbeat');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-student-exam-sessions--sessionId--heartbeat"
+                    onclick="cancelTryOut('POSTapi-v1-student-exam-sessions--sessionId--heartbeat');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-student-exam-sessions--sessionId--heartbeat"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/student/exam-sessions/{sessionId}/heartbeat</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-v1-student-exam-sessions--sessionId--heartbeat"
+               value="Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-v1-student-exam-sessions--sessionId--heartbeat"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-v1-student-exam-sessions--sessionId--heartbeat"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>sessionId</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="sessionId"                data-endpoint="POSTapi-v1-student-exam-sessions--sessionId--heartbeat"
+               value="architecto"
+               data-component="url">
+    <br>
+<p>Example: <code>architecto</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="endpoints-GETapi-v1-student-exam-sessions--sessionId--time-remaining">GET api/v1/student/exam-sessions/{sessionId}/time-remaining</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-student-exam-sessions--sessionId--time-remaining">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://45.245.151.115:8000/api/v1/student/exam-sessions/architecto/time-remaining" \
+    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://45.245.151.115:8000/api/v1/student/exam-sessions/architecto/time-remaining"
+);
+
+const headers = {
+    "Authorization": "Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://45.245.151.115:8000/api/v1/student/exam-sessions/architecto/time-remaining';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="python-example">
+    <pre><code class="language-python">import requests
+import json
+
+url = 'http://45.245.151.115:8000/api/v1/student/exam-sessions/architecto/time-remaining'
+headers = {
+  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('GET', url, headers=headers)
+response.json()</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-student-exam-sessions--sessionId--time-remaining">
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: *
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-student-exam-sessions--sessionId--time-remaining" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-student-exam-sessions--sessionId--time-remaining"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-student-exam-sessions--sessionId--time-remaining"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-student-exam-sessions--sessionId--time-remaining" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-student-exam-sessions--sessionId--time-remaining">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-student-exam-sessions--sessionId--time-remaining" data-method="GET"
+      data-path="api/v1/student/exam-sessions/{sessionId}/time-remaining"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-student-exam-sessions--sessionId--time-remaining', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-student-exam-sessions--sessionId--time-remaining"
+                    onclick="tryItOut('GETapi-v1-student-exam-sessions--sessionId--time-remaining');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-student-exam-sessions--sessionId--time-remaining"
+                    onclick="cancelTryOut('GETapi-v1-student-exam-sessions--sessionId--time-remaining');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-student-exam-sessions--sessionId--time-remaining"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/student/exam-sessions/{sessionId}/time-remaining</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-v1-student-exam-sessions--sessionId--time-remaining"
+               value="Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-student-exam-sessions--sessionId--time-remaining"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-student-exam-sessions--sessionId--time-remaining"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>sessionId</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="sessionId"                data-endpoint="GETapi-v1-student-exam-sessions--sessionId--time-remaining"
+               value="architecto"
+               data-component="url">
+    <br>
+<p>Example: <code>architecto</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="endpoints-GETapi-v1-student-available-exam">Student gets available exam if session exists
+Student can only start exam during exam time window</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-student-available-exam">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://45.245.151.115:8000/api/v1/student/available-exam" \
+    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://45.245.151.115:8000/api/v1/student/available-exam"
+);
+
+const headers = {
+    "Authorization": "Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://45.245.151.115:8000/api/v1/student/available-exam';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="python-example">
+    <pre><code class="language-python">import requests
+import json
+
+url = 'http://45.245.151.115:8000/api/v1/student/available-exam'
+headers = {
+  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('GET', url, headers=headers)
+response.json()</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-student-available-exam">
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: *
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-student-available-exam" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-student-available-exam"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-student-available-exam"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-student-available-exam" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-student-available-exam">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-student-available-exam" data-method="GET"
+      data-path="api/v1/student/available-exam"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-student-available-exam', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-student-available-exam"
+                    onclick="tryItOut('GETapi-v1-student-available-exam');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-student-available-exam"
+                    onclick="cancelTryOut('GETapi-v1-student-available-exam');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-student-available-exam"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/student/available-exam</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-v1-student-available-exam"
+               value="Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-student-available-exam"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-student-available-exam"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                    <h2 id="endpoints-POSTapi-v1-student-exam-save-answer">Save student answer for a question</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-student-exam-save-answer">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://45.245.151.115:8000/api/v1/student/exam/save-answer" \
+    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"question_id\": 16,
+    \"answer_text\": \"architecto\",
+    \"answer_image\": \"architecto\",
+    \"time_spent_seconds\": 39
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://45.245.151.115:8000/api/v1/student/exam/save-answer"
+);
+
+const headers = {
+    "Authorization": "Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "question_id": 16,
+    "answer_text": "architecto",
+    "answer_image": "architecto",
+    "time_spent_seconds": 39
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://45.245.151.115:8000/api/v1/student/exam/save-answer';
+$response = $client-&gt;post(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+        'json' =&gt; [
+            'question_id' =&gt; 16,
+            'answer_text' =&gt; 'architecto',
+            'answer_image' =&gt; 'architecto',
+            'time_spent_seconds' =&gt; 39,
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="python-example">
+    <pre><code class="language-python">import requests
+import json
+
+url = 'http://45.245.151.115:8000/api/v1/student/exam/save-answer'
+payload = {
+    "question_id": 16,
+    "answer_text": "architecto",
+    "answer_image": "architecto",
+    "time_spent_seconds": 39
+}
+headers = {
+  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('POST', url, headers=headers, json=payload)
+response.json()</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-student-exam-save-answer">
+</span>
+<span id="execution-results-POSTapi-v1-student-exam-save-answer" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-student-exam-save-answer"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-student-exam-save-answer"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-student-exam-save-answer" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-student-exam-save-answer">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-student-exam-save-answer" data-method="POST"
+      data-path="api/v1/student/exam/save-answer"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-student-exam-save-answer', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-student-exam-save-answer"
+                    onclick="tryItOut('POSTapi-v1-student-exam-save-answer');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-student-exam-save-answer"
+                    onclick="cancelTryOut('POSTapi-v1-student-exam-save-answer');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-student-exam-save-answer"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/student/exam/save-answer</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-v1-student-exam-save-answer"
+               value="Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-v1-student-exam-save-answer"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-v1-student-exam-save-answer"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>question_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="question_id"                data-endpoint="POSTapi-v1-student-exam-save-answer"
+               value="16"
+               data-component="body">
+    <br>
+<p>The <code>id</code> of an existing record in the exam_questions table. Example: <code>16</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>answer_text</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="answer_text"                data-endpoint="POSTapi-v1-student-exam-save-answer"
+               value="architecto"
+               data-component="body">
+    <br>
+<p>Example: <code>architecto</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>answer_image</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="answer_image"                data-endpoint="POSTapi-v1-student-exam-save-answer"
+               value="architecto"
+               data-component="body">
+    <br>
+<p>Example: <code>architecto</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>answer_data</code></b>&nbsp;&nbsp;
+<small>object</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="answer_data"                data-endpoint="POSTapi-v1-student-exam-save-answer"
+               value=""
+               data-component="body">
+    <br>
+
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>time_spent_seconds</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="time_spent_seconds"                data-endpoint="POSTapi-v1-student-exam-save-answer"
+               value="39"
+               data-component="body">
+    <br>
+<p>Must be at least 0. Example: <code>39</code></p>
+        </div>
+        </form>
+
+                    <h2 id="endpoints-POSTapi-v1-student-exam-submit">Submit complete exam with all answers at once</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-student-exam-submit">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://45.245.151.115:8000/api/v1/student/exam/submit" \
+    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"answers\": [
+        {
+            \"question_id\": 16,
+            \"answer_text\": \"architecto\",
+            \"answer_image\": \"architecto\",
+            \"time_spent_seconds\": 39
+        }
+    ],
+    \"notes\": \"b\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://45.245.151.115:8000/api/v1/student/exam/submit"
+);
+
+const headers = {
+    "Authorization": "Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "answers": [
+        {
+            "question_id": 16,
+            "answer_text": "architecto",
+            "answer_image": "architecto",
+            "time_spent_seconds": 39
+        }
+    ],
+    "notes": "b"
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://45.245.151.115:8000/api/v1/student/exam/submit';
+$response = $client-&gt;post(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+        'json' =&gt; [
+            'answers' =&gt; [
+                [
+                    'question_id' =&gt; 16,
+                    'answer_text' =&gt; 'architecto',
+                    'answer_image' =&gt; 'architecto',
+                    'time_spent_seconds' =&gt; 39,
+                ],
+            ],
+            'notes' =&gt; 'b',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="python-example">
+    <pre><code class="language-python">import requests
+import json
+
+url = 'http://45.245.151.115:8000/api/v1/student/exam/submit'
+payload = {
+    "answers": [
+        {
+            "question_id": 16,
+            "answer_text": "architecto",
+            "answer_image": "architecto",
+            "time_spent_seconds": 39
+        }
+    ],
+    "notes": "b"
+}
+headers = {
+  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('POST', url, headers=headers, json=payload)
+response.json()</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-student-exam-submit">
+</span>
+<span id="execution-results-POSTapi-v1-student-exam-submit" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-student-exam-submit"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-student-exam-submit"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-student-exam-submit" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-student-exam-submit">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-student-exam-submit" data-method="POST"
+      data-path="api/v1/student/exam/submit"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-student-exam-submit', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-student-exam-submit"
+                    onclick="tryItOut('POSTapi-v1-student-exam-submit');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-student-exam-submit"
+                    onclick="cancelTryOut('POSTapi-v1-student-exam-submit');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-student-exam-submit"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/student/exam/submit</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-v1-student-exam-submit"
+               value="Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-v1-student-exam-submit"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-v1-student-exam-submit"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+        <details>
+            <summary style="padding-bottom: 10px;">
+                <b style="line-height: 2;"><code>answers</code></b>&nbsp;&nbsp;
+<small>object[]</small>&nbsp;
+ &nbsp;
+<br>
+<p>Must have at least 1 items.</p>
+            </summary>
+                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>question_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="answers.0.question_id"                data-endpoint="POSTapi-v1-student-exam-submit"
+               value="16"
+               data-component="body">
+    <br>
+<p>The <code>id</code> of an existing record in the exam_questions table. Example: <code>16</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>answer_text</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="answers.0.answer_text"                data-endpoint="POSTapi-v1-student-exam-submit"
+               value="architecto"
+               data-component="body">
+    <br>
+<p>Example: <code>architecto</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>answer_image</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="answers.0.answer_image"                data-endpoint="POSTapi-v1-student-exam-submit"
+               value="architecto"
+               data-component="body">
+    <br>
+<p>Example: <code>architecto</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>answer_data</code></b>&nbsp;&nbsp;
+<small>object</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="answers.0.answer_data"                data-endpoint="POSTapi-v1-student-exam-submit"
+               value=""
+               data-component="body">
+    <br>
+
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>time_spent_seconds</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="answers.0.time_spent_seconds"                data-endpoint="POSTapi-v1-student-exam-submit"
+               value="39"
+               data-component="body">
+    <br>
+<p>Must be at least 0. Example: <code>39</code></p>
+                    </div>
+                                    </details>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>notes</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="notes"                data-endpoint="POSTapi-v1-student-exam-submit"
+               value="b"
+               data-component="body">
+    <br>
+<p>Must not be greater than 500 characters. Example: <code>b</code></p>
+        </div>
+        </form>
+
+                    <h2 id="endpoints-POSTapi-v1-student-exam-heartbeat">Send heartbeat to keep session alive</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-student-exam-heartbeat">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://45.245.151.115:8000/api/v1/student/exam/heartbeat" \
+    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"battery_level\": 1,
+    \"connection_status\": \"reconnected\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://45.245.151.115:8000/api/v1/student/exam/heartbeat"
+);
+
+const headers = {
+    "Authorization": "Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "battery_level": 1,
+    "connection_status": "reconnected"
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://45.245.151.115:8000/api/v1/student/exam/heartbeat';
+$response = $client-&gt;post(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+        'json' =&gt; [
+            'battery_level' =&gt; 1,
+            'connection_status' =&gt; 'reconnected',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="python-example">
+    <pre><code class="language-python">import requests
+import json
+
+url = 'http://45.245.151.115:8000/api/v1/student/exam/heartbeat'
+payload = {
+    "battery_level": 1,
+    "connection_status": "reconnected"
+}
+headers = {
+  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('POST', url, headers=headers, json=payload)
+response.json()</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-student-exam-heartbeat">
+</span>
+<span id="execution-results-POSTapi-v1-student-exam-heartbeat" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-student-exam-heartbeat"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-student-exam-heartbeat"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-student-exam-heartbeat" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-student-exam-heartbeat">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-student-exam-heartbeat" data-method="POST"
+      data-path="api/v1/student/exam/heartbeat"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-student-exam-heartbeat', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-student-exam-heartbeat"
+                    onclick="tryItOut('POSTapi-v1-student-exam-heartbeat');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-student-exam-heartbeat"
+                    onclick="cancelTryOut('POSTapi-v1-student-exam-heartbeat');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-student-exam-heartbeat"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/student/exam/heartbeat</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-v1-student-exam-heartbeat"
+               value="Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-v1-student-exam-heartbeat"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-v1-student-exam-heartbeat"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>battery_level</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="battery_level"                data-endpoint="POSTapi-v1-student-exam-heartbeat"
+               value="1"
+               data-component="body">
+    <br>
+<p>Must be at least 0. Must not be greater than 100. Example: <code>1</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>connection_status</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="connection_status"                data-endpoint="POSTapi-v1-student-exam-heartbeat"
+               value="reconnected"
+               data-component="body">
+    <br>
+<p>Example: <code>reconnected</code></p>
+Must be one of:
+<ul style="list-style-type: square;"><li><code>stable</code></li> <li><code>unstable</code></li> <li><code>reconnected</code></li></ul>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>active_apps</code></b>&nbsp;&nbsp;
+<small>object</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="active_apps"                data-endpoint="POSTapi-v1-student-exam-heartbeat"
+               value=""
+               data-component="body">
+    <br>
+
+        </div>
+        </form>
+
+                    <h2 id="endpoints-POSTapi-v1-teacher-scan-qr-create-session">Teacher scans QR code with student_id and creates session</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-teacher-scan-qr-create-session">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://45.245.151.115:8000/api/v1/teacher/scan-qr-create-session" \
+    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"student_id\": 16,
+    \"battery_level\": 22
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://45.245.151.115:8000/api/v1/teacher/scan-qr-create-session"
+);
+
+const headers = {
+    "Authorization": "Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "student_id": 16,
+    "battery_level": 22
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://45.245.151.115:8000/api/v1/teacher/scan-qr-create-session';
+$response = $client-&gt;post(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+        'json' =&gt; [
+            'student_id' =&gt; 16,
+            'battery_level' =&gt; 22,
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="python-example">
+    <pre><code class="language-python">import requests
+import json
+
+url = 'http://45.245.151.115:8000/api/v1/teacher/scan-qr-create-session'
+payload = {
+    "student_id": 16,
+    "battery_level": 22
+}
+headers = {
+  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('POST', url, headers=headers, json=payload)
+response.json()</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-teacher-scan-qr-create-session">
+</span>
+<span id="execution-results-POSTapi-v1-teacher-scan-qr-create-session" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-teacher-scan-qr-create-session"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-teacher-scan-qr-create-session"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-teacher-scan-qr-create-session" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-teacher-scan-qr-create-session">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-teacher-scan-qr-create-session" data-method="POST"
+      data-path="api/v1/teacher/scan-qr-create-session"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-teacher-scan-qr-create-session', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-teacher-scan-qr-create-session"
+                    onclick="tryItOut('POSTapi-v1-teacher-scan-qr-create-session');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-teacher-scan-qr-create-session"
+                    onclick="cancelTryOut('POSTapi-v1-teacher-scan-qr-create-session');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-teacher-scan-qr-create-session"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/teacher/scan-qr-create-session</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-v1-teacher-scan-qr-create-session"
+               value="Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-v1-teacher-scan-qr-create-session"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-v1-teacher-scan-qr-create-session"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>student_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="student_id"                data-endpoint="POSTapi-v1-teacher-scan-qr-create-session"
+               value="16"
+               data-component="body">
+    <br>
+<p>The <code>id</code> of an existing record in the students table. Example: <code>16</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>device_info</code></b>&nbsp;&nbsp;
+<small>object</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="device_info"                data-endpoint="POSTapi-v1-teacher-scan-qr-create-session"
+               value=""
+               data-component="body">
+    <br>
+
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>battery_level</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="battery_level"                data-endpoint="POSTapi-v1-teacher-scan-qr-create-session"
+               value="22"
+               data-component="body">
+    <br>
+<p>Must be at least 0. Must not be greater than 100. Example: <code>22</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>location</code></b>&nbsp;&nbsp;
+<small>object</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="location"                data-endpoint="POSTapi-v1-teacher-scan-qr-create-session"
+               value=""
+               data-component="body">
+    <br>
+
+        </div>
+        </form>
+
+                    <h2 id="endpoints-POSTapi-v1-admin-create-student">Create student account (School Admin only)</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-admin-create-student">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://45.245.151.115:8000/api/v1/admin/create-student" \
+    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"name\": \"Tarek Hesham Sayed ElFarmawy\",
+    \"email\": \"student@example.com\",
+    \"phone\": \"01234567890\",
+    \"national_id\": \"12345678901234\",
+    \"password\": \"password123\",
+    \"seat_number\": \"A23\",
+    \"academic_year\": \"second\",
+    \"section\": \"scientific\",
+    \"birth_date\": \"2025-05-15\",
+    \"gender\": \"male\",
+    \"guardian_phone\": \"01098765432\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://45.245.151.115:8000/api/v1/admin/create-student"
+);
+
+const headers = {
+    "Authorization": "Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "name": "Tarek Hesham Sayed ElFarmawy",
+    "email": "student@example.com",
+    "phone": "01234567890",
+    "national_id": "12345678901234",
+    "password": "password123",
+    "seat_number": "A23",
+    "academic_year": "second",
+    "section": "scientific",
+    "birth_date": "2025-05-15",
+    "gender": "male",
+    "guardian_phone": "01098765432"
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://45.245.151.115:8000/api/v1/admin/create-student';
+$response = $client-&gt;post(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+        'json' =&gt; [
+            'name' =&gt; 'Tarek Hesham Sayed ElFarmawy',
+            'email' =&gt; 'student@example.com',
+            'phone' =&gt; '01234567890',
+            'national_id' =&gt; '12345678901234',
+            'password' =&gt; 'password123',
+            'seat_number' =&gt; 'A23',
+            'academic_year' =&gt; 'second',
+            'section' =&gt; 'scientific',
+            'birth_date' =&gt; '2025-05-15',
+            'gender' =&gt; 'male',
+            'guardian_phone' =&gt; '01098765432',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="python-example">
+    <pre><code class="language-python">import requests
+import json
+
+url = 'http://45.245.151.115:8000/api/v1/admin/create-student'
+payload = {
+    "name": "Tarek Hesham Sayed ElFarmawy",
+    "email": "student@example.com",
+    "phone": "01234567890",
+    "national_id": "12345678901234",
+    "password": "password123",
+    "seat_number": "A23",
+    "academic_year": "second",
+    "section": "scientific",
+    "birth_date": "2025-05-15",
+    "gender": "male",
+    "guardian_phone": "01098765432"
+}
+headers = {
+  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('POST', url, headers=headers, json=payload)
+response.json()</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-admin-create-student">
+</span>
+<span id="execution-results-POSTapi-v1-admin-create-student" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-admin-create-student"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-admin-create-student"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-admin-create-student" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-admin-create-student">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-admin-create-student" data-method="POST"
+      data-path="api/v1/admin/create-student"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-admin-create-student', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-admin-create-student"
+                    onclick="tryItOut('POSTapi-v1-admin-create-student');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-admin-create-student"
+                    onclick="cancelTryOut('POSTapi-v1-admin-create-student');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-admin-create-student"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/admin/create-student</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-v1-admin-create-student"
+               value="Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-v1-admin-create-student"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-v1-admin-create-student"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="name"                data-endpoint="POSTapi-v1-admin-create-student"
+               value="Tarek Hesham Sayed ElFarmawy"
+               data-component="body">
+    <br>
+<p>Full name of the student. Must not be greater than 255 characters. Example: <code>Tarek Hesham Sayed ElFarmawy</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="email"                data-endpoint="POSTapi-v1-admin-create-student"
+               value="student@example.com"
+               data-component="body">
+    <br>
+<p>Email address of the student (must be unique). Must be a valid email address. Must not be greater than 255 characters. Example: <code>student@example.com</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>phone</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="phone"                data-endpoint="POSTapi-v1-admin-create-student"
+               value="01234567890"
+               data-component="body">
+    <br>
+<p>Phone number of the student (must be unique). Must not be greater than 20 characters. Example: <code>01234567890</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>national_id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="national_id"                data-endpoint="POSTapi-v1-admin-create-student"
+               value="12345678901234"
+               data-component="body">
+    <br>
+<p>National ID of the student (14 digits, unique). Must be 14 digits. Example: <code>12345678901234</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>password</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="password"                data-endpoint="POSTapi-v1-admin-create-student"
+               value="password123"
+               data-component="body">
+    <br>
+<p>Password for the student account. Must be at least 8 characters. Example: <code>password123</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>seat_number</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="seat_number"                data-endpoint="POSTapi-v1-admin-create-student"
+               value="A23"
+               data-component="body">
+    <br>
+<p>Seat number of the student (optional). Must not be greater than 20 characters. Example: <code>A23</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>academic_year</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="academic_year"                data-endpoint="POSTapi-v1-admin-create-student"
+               value="second"
+               data-component="body">
+    <br>
+<p>Academic year of the student. Example: <code>second</code></p>
+Must be one of:
+<ul style="list-style-type: square;"><li><code>first</code></li> <li><code>second</code></li> <li><code>third</code></li></ul>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>section</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="section"                data-endpoint="POSTapi-v1-admin-create-student"
+               value="scientific"
+               data-component="body">
+    <br>
+<p>Student section (scientific or literature). Example: <code>scientific</code></p>
+Must be one of:
+<ul style="list-style-type: square;"><li><code>scientific</code></li> <li><code>literature</code></li></ul>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>birth_date</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="birth_date"                data-endpoint="POSTapi-v1-admin-create-student"
+               value="2025-05-15"
+               data-component="body">
+    <br>
+<p>Date of birth of the student. Must be a valid date. Must be a date before <code>today</code>. Example: <code>2025-05-15</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>gender</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="gender"                data-endpoint="POSTapi-v1-admin-create-student"
+               value="male"
+               data-component="body">
+    <br>
+<p>Gender of the student. Example: <code>male</code></p>
+Must be one of:
+<ul style="list-style-type: square;"><li><code>male</code></li> <li><code>female</code></li></ul>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>guardian_phone</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="guardian_phone"                data-endpoint="POSTapi-v1-admin-create-student"
+               value="01098765432"
+               data-component="body">
+    <br>
+<p>Phone number of the guardian. Must not be greater than 20 characters. Example: <code>01098765432</code></p>
+        </div>
+        </form>
+
+                    <h2 id="endpoints-POSTapi-v1-admin-create-teacher">Create teacher account (Ministry Admin only)</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-admin-create-teacher">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://45.245.151.115:8000/api/v1/admin/create-teacher" \
+    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"name\": \"Tarek Hesham Sayed ElFarmawy\",
+    \"email\": \"teacher@example.com\",
+    \"phone\": \"01234567890\",
+    \"national_id\": \"12345678901234\",
+    \"password\": \"password123\",
+    \"subject_id\": 5,
+    \"teacher_type\": \"regular\",
+    \"can_create_exams\": false,
+    \"can_correct_essays\": false,
+    \"is_active\": false,
+    \"assignment_type\": \"teaching\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://45.245.151.115:8000/api/v1/admin/create-teacher"
+);
+
+const headers = {
+    "Authorization": "Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "name": "Tarek Hesham Sayed ElFarmawy",
+    "email": "teacher@example.com",
+    "phone": "01234567890",
+    "national_id": "12345678901234",
+    "password": "password123",
+    "subject_id": 5,
+    "teacher_type": "regular",
+    "can_create_exams": false,
+    "can_correct_essays": false,
+    "is_active": false,
+    "assignment_type": "teaching"
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://45.245.151.115:8000/api/v1/admin/create-teacher';
+$response = $client-&gt;post(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+        'json' =&gt; [
+            'name' =&gt; 'Tarek Hesham Sayed ElFarmawy',
+            'email' =&gt; 'teacher@example.com',
+            'phone' =&gt; '01234567890',
+            'national_id' =&gt; '12345678901234',
+            'password' =&gt; 'password123',
+            'subject_id' =&gt; 5,
+            'teacher_type' =&gt; 'regular',
+            'can_create_exams' =&gt; false,
+            'can_correct_essays' =&gt; false,
+            'is_active' =&gt; false,
+            'assignment_type' =&gt; 'teaching',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="python-example">
+    <pre><code class="language-python">import requests
+import json
+
+url = 'http://45.245.151.115:8000/api/v1/admin/create-teacher'
+payload = {
+    "name": "Tarek Hesham Sayed ElFarmawy",
+    "email": "teacher@example.com",
+    "phone": "01234567890",
+    "national_id": "12345678901234",
+    "password": "password123",
+    "subject_id": 5,
+    "teacher_type": "regular",
+    "can_create_exams": false,
+    "can_correct_essays": false,
+    "is_active": false,
+    "assignment_type": "teaching"
+}
+headers = {
+  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('POST', url, headers=headers, json=payload)
+response.json()</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-admin-create-teacher">
+</span>
+<span id="execution-results-POSTapi-v1-admin-create-teacher" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-admin-create-teacher"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-admin-create-teacher"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-admin-create-teacher" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-admin-create-teacher">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-admin-create-teacher" data-method="POST"
+      data-path="api/v1/admin/create-teacher"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-admin-create-teacher', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-admin-create-teacher"
+                    onclick="tryItOut('POSTapi-v1-admin-create-teacher');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-admin-create-teacher"
+                    onclick="cancelTryOut('POSTapi-v1-admin-create-teacher');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-admin-create-teacher"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/admin/create-teacher</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-v1-admin-create-teacher"
+               value="Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-v1-admin-create-teacher"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-v1-admin-create-teacher"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="name"                data-endpoint="POSTapi-v1-admin-create-teacher"
+               value="Tarek Hesham Sayed ElFarmawy"
+               data-component="body">
+    <br>
+<p>Full name of the teacher. Must not be greater than 255 characters. Example: <code>Tarek Hesham Sayed ElFarmawy</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="email"                data-endpoint="POSTapi-v1-admin-create-teacher"
+               value="teacher@example.com"
+               data-component="body">
+    <br>
+<p>Email address of the teacher (must be unique). Must be a valid email address. Must not be greater than 100 characters. Example: <code>teacher@example.com</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>phone</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="phone"                data-endpoint="POSTapi-v1-admin-create-teacher"
+               value="01234567890"
+               data-component="body">
+    <br>
+<p>Phone number of the teacher (must be unique). Must not be greater than 20 characters. Example: <code>01234567890</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>national_id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="national_id"                data-endpoint="POSTapi-v1-admin-create-teacher"
+               value="12345678901234"
+               data-component="body">
+    <br>
+<p>National ID of the teacher (14 digits, unique). Must be 14 digits. Example: <code>12345678901234</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>password</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="password"                data-endpoint="POSTapi-v1-admin-create-teacher"
+               value="password123"
+               data-component="body">
+    <br>
+<p>Password for the teacher account. Must be at least 8 characters. Example: <code>password123</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>subject_id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="subject_id"                data-endpoint="POSTapi-v1-admin-create-teacher"
+               value="5"
+               data-component="body">
+    <br>
+<p>Subject ID or name assigned to the teacher. Must not be greater than 255 characters. Example: <code>5</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>teacher_type</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="teacher_type"                data-endpoint="POSTapi-v1-admin-create-teacher"
+               value="regular"
+               data-component="body">
+    <br>
+<p>Type of teacher (regular or supervisor). Example: <code>regular</code></p>
+Must be one of:
+<ul style="list-style-type: square;"><li><code>regular</code></li> <li><code>supervisor</code></li></ul>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>can_create_exams</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+<i>optional</i> &nbsp;
+                <label data-endpoint="POSTapi-v1-admin-create-teacher" style="display: none">
+            <input type="radio" name="can_create_exams"
+                   value="true"
+                   data-endpoint="POSTapi-v1-admin-create-teacher"
+                   data-component="body"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="POSTapi-v1-admin-create-teacher" style="display: none">
+            <input type="radio" name="can_create_exams"
+                   value="false"
+                   data-endpoint="POSTapi-v1-admin-create-teacher"
+                   data-component="body"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>Whether the teacher can create exams. Example: <code>false</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>can_correct_essays</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+<i>optional</i> &nbsp;
+                <label data-endpoint="POSTapi-v1-admin-create-teacher" style="display: none">
+            <input type="radio" name="can_correct_essays"
+                   value="true"
+                   data-endpoint="POSTapi-v1-admin-create-teacher"
+                   data-component="body"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="POSTapi-v1-admin-create-teacher" style="display: none">
+            <input type="radio" name="can_correct_essays"
+                   value="false"
+                   data-endpoint="POSTapi-v1-admin-create-teacher"
+                   data-component="body"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>Whether the teacher can correct essays. Example: <code>false</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>is_active</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+<i>optional</i> &nbsp;
+                <label data-endpoint="POSTapi-v1-admin-create-teacher" style="display: none">
+            <input type="radio" name="is_active"
+                   value="true"
+                   data-endpoint="POSTapi-v1-admin-create-teacher"
+                   data-component="body"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="POSTapi-v1-admin-create-teacher" style="display: none">
+            <input type="radio" name="is_active"
+                   value="false"
+                   data-endpoint="POSTapi-v1-admin-create-teacher"
+                   data-component="body"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>Indicates if the teacher account is active. Example: <code>false</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>school_ids</code></b>&nbsp;&nbsp;
+<small>string[]</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="school_ids[0]"                data-endpoint="POSTapi-v1-admin-create-teacher"
+               data-component="body">
+        <input type="text" style="display: none"
+               name="school_ids[1]"                data-endpoint="POSTapi-v1-admin-create-teacher"
+               data-component="body">
+    <br>
+<p>The <code>id</code> of an existing record in the schools table.</p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>assignment_type</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="assignment_type"                data-endpoint="POSTapi-v1-admin-create-teacher"
+               value="teaching"
+               data-component="body">
+    <br>
+<p>Type of assignment for the teacher (teaching, supervision, correction). Example: <code>teaching</code></p>
+Must be one of:
+<ul style="list-style-type: square;"><li><code>teaching</code></li> <li><code>supervision</code></li> <li><code>correction</code></li></ul>
+        </div>
+        </form>
+
+                    <h2 id="endpoints-GETapi-v1-admin-teachers">List all teachers</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-admin-teachers">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://45.245.151.115:8000/api/v1/admin/teachers" \
+    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://45.245.151.115:8000/api/v1/admin/teachers"
+);
+
+const headers = {
+    "Authorization": "Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://45.245.151.115:8000/api/v1/admin/teachers';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="python-example">
+    <pre><code class="language-python">import requests
+import json
+
+url = 'http://45.245.151.115:8000/api/v1/admin/teachers'
+headers = {
+  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('GET', url, headers=headers)
+response.json()</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-admin-teachers">
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: *
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-admin-teachers" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-admin-teachers"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-admin-teachers"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-admin-teachers" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-admin-teachers">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-admin-teachers" data-method="GET"
+      data-path="api/v1/admin/teachers"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-admin-teachers', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-admin-teachers"
+                    onclick="tryItOut('GETapi-v1-admin-teachers');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-admin-teachers"
+                    onclick="cancelTryOut('GETapi-v1-admin-teachers');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-admin-teachers"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/admin/teachers</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-v1-admin-teachers"
+               value="Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-admin-teachers"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-admin-teachers"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                    <h2 id="endpoints-GETapi-v1-admin-teachers--id-">Show teacher details</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-admin-teachers--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://45.245.151.115:8000/api/v1/admin/teachers/architecto" \
+    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://45.245.151.115:8000/api/v1/admin/teachers/architecto"
+);
+
+const headers = {
+    "Authorization": "Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://45.245.151.115:8000/api/v1/admin/teachers/architecto';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="python-example">
+    <pre><code class="language-python">import requests
+import json
+
+url = 'http://45.245.151.115:8000/api/v1/admin/teachers/architecto'
+headers = {
+  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('GET', url, headers=headers)
+response.json()</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-admin-teachers--id-">
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: *
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-admin-teachers--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-admin-teachers--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-admin-teachers--id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-admin-teachers--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-admin-teachers--id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-admin-teachers--id-" data-method="GET"
+      data-path="api/v1/admin/teachers/{id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-admin-teachers--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-admin-teachers--id-"
+                    onclick="tryItOut('GETapi-v1-admin-teachers--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-admin-teachers--id-"
+                    onclick="cancelTryOut('GETapi-v1-admin-teachers--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-admin-teachers--id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/admin/teachers/{id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-v1-admin-teachers--id-"
+               value="Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-admin-teachers--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-admin-teachers--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="id"                data-endpoint="GETapi-v1-admin-teachers--id-"
+               value="architecto"
+               data-component="url">
+    <br>
+<p>The ID of the teacher. Example: <code>architecto</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="endpoints-PUTapi-v1-admin-teachers--id-">Update teacher information</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-PUTapi-v1-admin-teachers--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request PUT \
+    "http://45.245.151.115:8000/api/v1/admin/teachers/architecto" \
+    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"name\": \"John Doe\",
+    \"email\": \"teacher@example.com\",
+    \"phone\": \"01234567890\",
+    \"national_id\": \"12345678901234\",
+    \"password\": \"password123\",
+    \"subject_id\": \"MATH101\",
+    \"teacher_type\": \"regular\",
+    \"can_create_exams\": false,
+    \"can_correct_essays\": false,
+    \"is_active\": false,
+    \"school_ids\": [
+        1
+    ],
+    \"assignment_type\": \"teaching\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://45.245.151.115:8000/api/v1/admin/teachers/architecto"
+);
+
+const headers = {
+    "Authorization": "Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "name": "John Doe",
+    "email": "teacher@example.com",
+    "phone": "01234567890",
+    "national_id": "12345678901234",
+    "password": "password123",
+    "subject_id": "MATH101",
+    "teacher_type": "regular",
+    "can_create_exams": false,
+    "can_correct_essays": false,
+    "is_active": false,
+    "school_ids": [
+        1
+    ],
+    "assignment_type": "teaching"
+};
+
+fetch(url, {
+    method: "PUT",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://45.245.151.115:8000/api/v1/admin/teachers/architecto';
+$response = $client-&gt;put(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+        'json' =&gt; [
+            'name' =&gt; 'John Doe',
+            'email' =&gt; 'teacher@example.com',
+            'phone' =&gt; '01234567890',
+            'national_id' =&gt; '12345678901234',
+            'password' =&gt; 'password123',
+            'subject_id' =&gt; 'MATH101',
+            'teacher_type' =&gt; 'regular',
+            'can_create_exams' =&gt; false,
+            'can_correct_essays' =&gt; false,
+            'is_active' =&gt; false,
+            'school_ids' =&gt; [
+                1,
+            ],
+            'assignment_type' =&gt; 'teaching',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="python-example">
+    <pre><code class="language-python">import requests
+import json
+
+url = 'http://45.245.151.115:8000/api/v1/admin/teachers/architecto'
+payload = {
+    "name": "John Doe",
+    "email": "teacher@example.com",
+    "phone": "01234567890",
+    "national_id": "12345678901234",
+    "password": "password123",
+    "subject_id": "MATH101",
+    "teacher_type": "regular",
+    "can_create_exams": false,
+    "can_correct_essays": false,
+    "is_active": false,
+    "school_ids": [
+        1
+    ],
+    "assignment_type": "teaching"
+}
+headers = {
+  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('PUT', url, headers=headers, json=payload)
+response.json()</code></pre></div>
+
+</span>
+
+<span id="example-responses-PUTapi-v1-admin-teachers--id-">
+</span>
+<span id="execution-results-PUTapi-v1-admin-teachers--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-PUTapi-v1-admin-teachers--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-PUTapi-v1-admin-teachers--id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-PUTapi-v1-admin-teachers--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-PUTapi-v1-admin-teachers--id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-PUTapi-v1-admin-teachers--id-" data-method="PUT"
+      data-path="api/v1/admin/teachers/{id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('PUTapi-v1-admin-teachers--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-PUTapi-v1-admin-teachers--id-"
+                    onclick="tryItOut('PUTapi-v1-admin-teachers--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-PUTapi-v1-admin-teachers--id-"
+                    onclick="cancelTryOut('PUTapi-v1-admin-teachers--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-PUTapi-v1-admin-teachers--id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-darkblue">PUT</small>
+            <b><code>api/v1/admin/teachers/{id}</code></b>
+        </p>
+            <p>
+            <small class="badge badge-purple">PATCH</small>
+            <b><code>api/v1/admin/teachers/{id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="PUTapi-v1-admin-teachers--id-"
+               value="Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="PUTapi-v1-admin-teachers--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="PUTapi-v1-admin-teachers--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="id"                data-endpoint="PUTapi-v1-admin-teachers--id-"
+               value="architecto"
+               data-component="url">
+    <br>
+<p>The ID of the teacher. Example: <code>architecto</code></p>
+            </div>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="name"                data-endpoint="PUTapi-v1-admin-teachers--id-"
+               value="John Doe"
+               data-component="body">
+    <br>
+<p>Full name of the teacher. Must not be greater than 255 characters. Example: <code>John Doe</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="email"                data-endpoint="PUTapi-v1-admin-teachers--id-"
+               value="teacher@example.com"
+               data-component="body">
+    <br>
+<p>Email address of the teacher (must be unique). Must be a valid email address. Must not be greater than 255 characters. Example: <code>teacher@example.com</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>phone</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="phone"                data-endpoint="PUTapi-v1-admin-teachers--id-"
+               value="01234567890"
+               data-component="body">
+    <br>
+<p>Phone number of the teacher (must be unique). Must not be greater than 20 characters. Example: <code>01234567890</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>national_id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="national_id"                data-endpoint="PUTapi-v1-admin-teachers--id-"
+               value="12345678901234"
+               data-component="body">
+    <br>
+<p>National ID of the teacher (14 digits, unique). Must be 14 digits. Example: <code>12345678901234</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>password</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="password"                data-endpoint="PUTapi-v1-admin-teachers--id-"
+               value="password123"
+               data-component="body">
+    <br>
+<p>Password for the teacher account (minimum 8 characters). Must be at least 8 characters. Example: <code>password123</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>subject_id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="subject_id"                data-endpoint="PUTapi-v1-admin-teachers--id-"
+               value="MATH101"
+               data-component="body">
+    <br>
+<p>ID or code of the subject assigned to the teacher. Must not be greater than 255 characters. Example: <code>MATH101</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>teacher_type</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="teacher_type"                data-endpoint="PUTapi-v1-admin-teachers--id-"
+               value="regular"
+               data-component="body">
+    <br>
+<p>Type of teacher. Example: <code>regular</code></p>
+Must be one of:
+<ul style="list-style-type: square;"><li><code>regular</code></li> <li><code>supervisor</code></li></ul>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>can_create_exams</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+<i>optional</i> &nbsp;
+                <label data-endpoint="PUTapi-v1-admin-teachers--id-" style="display: none">
+            <input type="radio" name="can_create_exams"
+                   value="true"
+                   data-endpoint="PUTapi-v1-admin-teachers--id-"
+                   data-component="body"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="PUTapi-v1-admin-teachers--id-" style="display: none">
+            <input type="radio" name="can_create_exams"
+                   value="false"
+                   data-endpoint="PUTapi-v1-admin-teachers--id-"
+                   data-component="body"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>Whether the teacher can create exams. Example: <code>false</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>can_correct_essays</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+<i>optional</i> &nbsp;
+                <label data-endpoint="PUTapi-v1-admin-teachers--id-" style="display: none">
+            <input type="radio" name="can_correct_essays"
+                   value="true"
+                   data-endpoint="PUTapi-v1-admin-teachers--id-"
+                   data-component="body"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="PUTapi-v1-admin-teachers--id-" style="display: none">
+            <input type="radio" name="can_correct_essays"
+                   value="false"
+                   data-endpoint="PUTapi-v1-admin-teachers--id-"
+                   data-component="body"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>Whether the teacher can correct essay questions. Example: <code>false</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>is_active</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+<i>optional</i> &nbsp;
+                <label data-endpoint="PUTapi-v1-admin-teachers--id-" style="display: none">
+            <input type="radio" name="is_active"
+                   value="true"
+                   data-endpoint="PUTapi-v1-admin-teachers--id-"
+                   data-component="body"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="PUTapi-v1-admin-teachers--id-" style="display: none">
+            <input type="radio" name="is_active"
+                   value="false"
+                   data-endpoint="PUTapi-v1-admin-teachers--id-"
+                   data-component="body"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>Indicates if the teacher account is active. Example: <code>false</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>school_ids</code></b>&nbsp;&nbsp;
+<small>string[]</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="school_ids[0]"                data-endpoint="PUTapi-v1-admin-teachers--id-"
+               data-component="body">
+        <input type="text" style="display: none"
+               name="school_ids[1]"                data-endpoint="PUTapi-v1-admin-teachers--id-"
+               data-component="body">
+    <br>
+<p>Individual school ID assigned to the teacher. The <code>id</code> of an existing record in the schools table.</p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>assignment_type</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="assignment_type"                data-endpoint="PUTapi-v1-admin-teachers--id-"
+               value="teaching"
+               data-component="body">
+    <br>
+<p>Type of assignment for the teacher in schools. Example: <code>teaching</code></p>
+Must be one of:
+<ul style="list-style-type: square;"><li><code>teaching</code></li> <li><code>supervision</code></li> <li><code>correction</code></li></ul>
+        </div>
+        </form>
+
+                    <h2 id="endpoints-DELETEapi-v1-admin-teachers--id-">Delete teacher</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-DELETEapi-v1-admin-teachers--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request DELETE \
+    "http://45.245.151.115:8000/api/v1/admin/teachers/architecto" \
+    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://45.245.151.115:8000/api/v1/admin/teachers/architecto"
+);
+
+const headers = {
+    "Authorization": "Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://45.245.151.115:8000/api/v1/admin/teachers/architecto';
+$response = $client-&gt;delete(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="python-example">
+    <pre><code class="language-python">import requests
+import json
+
+url = 'http://45.245.151.115:8000/api/v1/admin/teachers/architecto'
+headers = {
+  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('DELETE', url, headers=headers)
+response.json()</code></pre></div>
+
+</span>
+
+<span id="example-responses-DELETEapi-v1-admin-teachers--id-">
+</span>
+<span id="execution-results-DELETEapi-v1-admin-teachers--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-DELETEapi-v1-admin-teachers--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-DELETEapi-v1-admin-teachers--id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-DELETEapi-v1-admin-teachers--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-DELETEapi-v1-admin-teachers--id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-DELETEapi-v1-admin-teachers--id-" data-method="DELETE"
+      data-path="api/v1/admin/teachers/{id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('DELETEapi-v1-admin-teachers--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-DELETEapi-v1-admin-teachers--id-"
+                    onclick="tryItOut('DELETEapi-v1-admin-teachers--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-DELETEapi-v1-admin-teachers--id-"
+                    onclick="cancelTryOut('DELETEapi-v1-admin-teachers--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-DELETEapi-v1-admin-teachers--id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-red">DELETE</small>
+            <b><code>api/v1/admin/teachers/{id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="DELETEapi-v1-admin-teachers--id-"
+               value="Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="DELETEapi-v1-admin-teachers--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="DELETEapi-v1-admin-teachers--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="id"                data-endpoint="DELETEapi-v1-admin-teachers--id-"
+               value="architecto"
+               data-component="url">
+    <br>
+<p>The ID of the teacher. Example: <code>architecto</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="endpoints-PATCHapi-v1-admin-teachers--id--toggle-status">Toggle teacher active status</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-PATCHapi-v1-admin-teachers--id--toggle-status">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request PATCH \
+    "http://45.245.151.115:8000/api/v1/admin/teachers/architecto/toggle-status" \
+    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://45.245.151.115:8000/api/v1/admin/teachers/architecto/toggle-status"
+);
+
+const headers = {
+    "Authorization": "Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "PATCH",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://45.245.151.115:8000/api/v1/admin/teachers/architecto/toggle-status';
+$response = $client-&gt;patch(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="python-example">
+    <pre><code class="language-python">import requests
+import json
+
+url = 'http://45.245.151.115:8000/api/v1/admin/teachers/architecto/toggle-status'
+headers = {
+  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('PATCH', url, headers=headers)
+response.json()</code></pre></div>
+
+</span>
+
+<span id="example-responses-PATCHapi-v1-admin-teachers--id--toggle-status">
+</span>
+<span id="execution-results-PATCHapi-v1-admin-teachers--id--toggle-status" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-PATCHapi-v1-admin-teachers--id--toggle-status"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-PATCHapi-v1-admin-teachers--id--toggle-status"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-PATCHapi-v1-admin-teachers--id--toggle-status" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-PATCHapi-v1-admin-teachers--id--toggle-status">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-PATCHapi-v1-admin-teachers--id--toggle-status" data-method="PATCH"
+      data-path="api/v1/admin/teachers/{id}/toggle-status"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('PATCHapi-v1-admin-teachers--id--toggle-status', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-PATCHapi-v1-admin-teachers--id--toggle-status"
+                    onclick="tryItOut('PATCHapi-v1-admin-teachers--id--toggle-status');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-PATCHapi-v1-admin-teachers--id--toggle-status"
+                    onclick="cancelTryOut('PATCHapi-v1-admin-teachers--id--toggle-status');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-PATCHapi-v1-admin-teachers--id--toggle-status"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-purple">PATCH</small>
+            <b><code>api/v1/admin/teachers/{id}/toggle-status</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="PATCHapi-v1-admin-teachers--id--toggle-status"
+               value="Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="PATCHapi-v1-admin-teachers--id--toggle-status"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="PATCHapi-v1-admin-teachers--id--toggle-status"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="id"                data-endpoint="PATCHapi-v1-admin-teachers--id--toggle-status"
+               value="architecto"
+               data-component="url">
+    <br>
+<p>The ID of the teacher. Example: <code>architecto</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="endpoints-GETapi-v1-admin-exams">GET api/v1/admin/exams</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-admin-exams">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://45.245.151.115:8000/api/v1/admin/exams" \
+    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://45.245.151.115:8000/api/v1/admin/exams"
+);
+
+const headers = {
+    "Authorization": "Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://45.245.151.115:8000/api/v1/admin/exams';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="python-example">
+    <pre><code class="language-python">import requests
+import json
+
+url = 'http://45.245.151.115:8000/api/v1/admin/exams'
+headers = {
+  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('GET', url, headers=headers)
+response.json()</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-admin-exams">
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: *
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-admin-exams" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-admin-exams"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-admin-exams"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-admin-exams" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-admin-exams">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-admin-exams" data-method="GET"
+      data-path="api/v1/admin/exams"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-admin-exams', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-admin-exams"
+                    onclick="tryItOut('GETapi-v1-admin-exams');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-admin-exams"
+                    onclick="cancelTryOut('GETapi-v1-admin-exams');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-admin-exams"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/admin/exams</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-v1-admin-exams"
+               value="Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-admin-exams"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-admin-exams"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                    <h2 id="endpoints-POSTapi-v1-admin-exams">POST api/v1/admin/exams</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-admin-exams">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://45.245.151.115:8000/api/v1/admin/exams" \
+    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"subject_id\": 3,
+    \"title\": \"Midterm Exam\",
+    \"description\": \"Covers chapters 1 to 3.\",
+    \"exam_type\": \"final\",
+    \"academic_year\": \"second\",
+    \"start_time\": \"2025-10-01 09:00:00\",
+    \"end_time\": \"2025-10-01 11:00:00\",
+    \"duration_minutes\": 120,
+    \"total_score\": 100,
+    \"minimum_battery_percentage\": 30,
+    \"require_video_recording\": false
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://45.245.151.115:8000/api/v1/admin/exams"
+);
+
+const headers = {
+    "Authorization": "Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "subject_id": 3,
+    "title": "Midterm Exam",
+    "description": "Covers chapters 1 to 3.",
+    "exam_type": "final",
+    "academic_year": "second",
+    "start_time": "2025-10-01 09:00:00",
+    "end_time": "2025-10-01 11:00:00",
+    "duration_minutes": 120,
+    "total_score": 100,
+    "minimum_battery_percentage": 30,
+    "require_video_recording": false
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://45.245.151.115:8000/api/v1/admin/exams';
+$response = $client-&gt;post(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+        'json' =&gt; [
+            'subject_id' =&gt; 3,
+            'title' =&gt; 'Midterm Exam',
+            'description' =&gt; 'Covers chapters 1 to 3.',
+            'exam_type' =&gt; 'final',
+            'academic_year' =&gt; 'second',
+            'start_time' =&gt; '2025-10-01 09:00:00',
+            'end_time' =&gt; '2025-10-01 11:00:00',
+            'duration_minutes' =&gt; 120,
+            'total_score' =&gt; 100,
+            'minimum_battery_percentage' =&gt; 30,
+            'require_video_recording' =&gt; false,
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="python-example">
+    <pre><code class="language-python">import requests
+import json
+
+url = 'http://45.245.151.115:8000/api/v1/admin/exams'
+payload = {
+    "subject_id": 3,
+    "title": "Midterm Exam",
+    "description": "Covers chapters 1 to 3.",
+    "exam_type": "final",
+    "academic_year": "second",
+    "start_time": "2025-10-01 09:00:00",
+    "end_time": "2025-10-01 11:00:00",
+    "duration_minutes": 120,
+    "total_score": 100,
+    "minimum_battery_percentage": 30,
+    "require_video_recording": false
+}
+headers = {
+  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('POST', url, headers=headers, json=payload)
+response.json()</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-admin-exams">
+</span>
+<span id="execution-results-POSTapi-v1-admin-exams" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-admin-exams"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-admin-exams"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-admin-exams" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-admin-exams">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-admin-exams" data-method="POST"
+      data-path="api/v1/admin/exams"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-admin-exams', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-admin-exams"
+                    onclick="tryItOut('POSTapi-v1-admin-exams');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-admin-exams"
+                    onclick="cancelTryOut('POSTapi-v1-admin-exams');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-admin-exams"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/admin/exams</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-v1-admin-exams"
+               value="Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-v1-admin-exams"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-v1-admin-exams"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>subject_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="subject_id"                data-endpoint="POSTapi-v1-admin-exams"
+               value="3"
+               data-component="body">
+    <br>
+<p>ID of the subject related to the exam. The <code>id</code> of an existing record in the subjects table. Example: <code>3</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>title</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="title"                data-endpoint="POSTapi-v1-admin-exams"
+               value="Midterm Exam"
+               data-component="body">
+    <br>
+<p>Title of the exam. Must not be greater than 255 characters. Example: <code>Midterm Exam</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>description</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="description"                data-endpoint="POSTapi-v1-admin-exams"
+               value="Covers chapters 1 to 3."
+               data-component="body">
+    <br>
+<p>Short description of the exam (optional). Must not be greater than 1000 characters. Example: <code>Covers chapters 1 to 3.</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>exam_type</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="exam_type"                data-endpoint="POSTapi-v1-admin-exams"
+               value="final"
+               data-component="body">
+    <br>
+<p>Type of the exam (practice or final). Example: <code>final</code></p>
+Must be one of:
+<ul style="list-style-type: square;"><li><code>practice</code></li> <li><code>final</code></li></ul>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>academic_year</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="academic_year"                data-endpoint="POSTapi-v1-admin-exams"
+               value="second"
+               data-component="body">
+    <br>
+<p>Target academic year (first, second, third). Example: <code>second</code></p>
+Must be one of:
+<ul style="list-style-type: square;"><li><code>first</code></li> <li><code>second</code></li> <li><code>third</code></li></ul>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>start_time</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="start_time"                data-endpoint="POSTapi-v1-admin-exams"
+               value="2025-10-01 09:00:00"
+               data-component="body">
+    <br>
+<p>Start date and time of the exam (must be in the future). Must be a valid date. Must be a date after <code>now</code>. Example: <code>2025-10-01 09:00:00</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>end_time</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="end_time"                data-endpoint="POSTapi-v1-admin-exams"
+               value="2025-10-01 11:00:00"
+               data-component="body">
+    <br>
+<p>End date and time of the exam (must be after start_time). Must be a valid date. Must be a date after <code>start_time</code>. Example: <code>2025-10-01 11:00:00</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>duration_minutes</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="duration_minutes"                data-endpoint="POSTapi-v1-admin-exams"
+               value="120"
+               data-component="body">
+    <br>
+<p>Duration of the exam in minutes (1 to 480). Must be at least 1. Must not be greater than 480. Example: <code>120</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>total_score</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="total_score"                data-endpoint="POSTapi-v1-admin-exams"
+               value="100"
+               data-component="body">
+    <br>
+<p>Total score of the exam. Must be at least 1. Example: <code>100</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>minimum_battery_percentage</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="minimum_battery_percentage"                data-endpoint="POSTapi-v1-admin-exams"
+               value="30"
+               data-component="body">
+    <br>
+<p>Minimum allowed battery percentage to enter the exam (0 to 100). Must be at least 0. Must not be greater than 100. Example: <code>30</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>require_video_recording</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+<i>optional</i> &nbsp;
+                <label data-endpoint="POSTapi-v1-admin-exams" style="display: none">
+            <input type="radio" name="require_video_recording"
+                   value="true"
+                   data-endpoint="POSTapi-v1-admin-exams"
+                   data-component="body"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="POSTapi-v1-admin-exams" style="display: none">
+            <input type="radio" name="require_video_recording"
+                   value="false"
+                   data-endpoint="POSTapi-v1-admin-exams"
+                   data-component="body"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>Whether video recording is required during the exam (true/false). Example: <code>false</code></p>
+        </div>
+        </form>
+
+                    <h2 id="endpoints-GETapi-v1-admin-exams--id-">GET api/v1/admin/exams/{id}</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-admin-exams--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://45.245.151.115:8000/api/v1/admin/exams/architecto" \
+    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://45.245.151.115:8000/api/v1/admin/exams/architecto"
+);
+
+const headers = {
+    "Authorization": "Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://45.245.151.115:8000/api/v1/admin/exams/architecto';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="python-example">
+    <pre><code class="language-python">import requests
+import json
+
+url = 'http://45.245.151.115:8000/api/v1/admin/exams/architecto'
+headers = {
+  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('GET', url, headers=headers)
+response.json()</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-admin-exams--id-">
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: *
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-admin-exams--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-admin-exams--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-admin-exams--id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-admin-exams--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-admin-exams--id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-admin-exams--id-" data-method="GET"
+      data-path="api/v1/admin/exams/{id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-admin-exams--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-admin-exams--id-"
+                    onclick="tryItOut('GETapi-v1-admin-exams--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-admin-exams--id-"
+                    onclick="cancelTryOut('GETapi-v1-admin-exams--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-admin-exams--id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/admin/exams/{id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-v1-admin-exams--id-"
+               value="Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-admin-exams--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-admin-exams--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="id"                data-endpoint="GETapi-v1-admin-exams--id-"
+               value="architecto"
+               data-component="url">
+    <br>
+<p>The ID of the exam. Example: <code>architecto</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="endpoints-PUTapi-v1-admin-exams--exam_id-">PUT api/v1/admin/exams/{exam_id}</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-PUTapi-v1-admin-exams--exam_id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request PUT \
+    "http://45.245.151.115:8000/api/v1/admin/exams/1" \
+    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"title\": \"Final Exam - Mathematics\",
+    \"description\": \"Covers chapters 1 to 5.\",
+    \"start_time\": \"2025-10-01 09:00:00\",
+    \"end_time\": \"2025-10-01 11:00:00\",
+    \"duration_minutes\": 120,
+    \"total_score\": 100,
+    \"minimum_battery_percentage\": 30,
+    \"require_video_recording\": false,
+    \"is_published\": false,
+    \"is_active\": false
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://45.245.151.115:8000/api/v1/admin/exams/1"
+);
+
+const headers = {
+    "Authorization": "Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "title": "Final Exam - Mathematics",
+    "description": "Covers chapters 1 to 5.",
+    "start_time": "2025-10-01 09:00:00",
+    "end_time": "2025-10-01 11:00:00",
+    "duration_minutes": 120,
+    "total_score": 100,
+    "minimum_battery_percentage": 30,
+    "require_video_recording": false,
+    "is_published": false,
+    "is_active": false
+};
+
+fetch(url, {
+    method: "PUT",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://45.245.151.115:8000/api/v1/admin/exams/1';
+$response = $client-&gt;put(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+        'json' =&gt; [
+            'title' =&gt; 'Final Exam - Mathematics',
+            'description' =&gt; 'Covers chapters 1 to 5.',
+            'start_time' =&gt; '2025-10-01 09:00:00',
+            'end_time' =&gt; '2025-10-01 11:00:00',
+            'duration_minutes' =&gt; 120,
+            'total_score' =&gt; 100,
+            'minimum_battery_percentage' =&gt; 30,
+            'require_video_recording' =&gt; false,
+            'is_published' =&gt; false,
+            'is_active' =&gt; false,
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="python-example">
+    <pre><code class="language-python">import requests
+import json
+
+url = 'http://45.245.151.115:8000/api/v1/admin/exams/1'
+payload = {
+    "title": "Final Exam - Mathematics",
+    "description": "Covers chapters 1 to 5.",
+    "start_time": "2025-10-01 09:00:00",
+    "end_time": "2025-10-01 11:00:00",
+    "duration_minutes": 120,
+    "total_score": 100,
+    "minimum_battery_percentage": 30,
+    "require_video_recording": false,
+    "is_published": false,
+    "is_active": false
+}
+headers = {
+  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('PUT', url, headers=headers, json=payload)
+response.json()</code></pre></div>
+
+</span>
+
+<span id="example-responses-PUTapi-v1-admin-exams--exam_id-">
+</span>
+<span id="execution-results-PUTapi-v1-admin-exams--exam_id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-PUTapi-v1-admin-exams--exam_id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-PUTapi-v1-admin-exams--exam_id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-PUTapi-v1-admin-exams--exam_id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-PUTapi-v1-admin-exams--exam_id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-PUTapi-v1-admin-exams--exam_id-" data-method="PUT"
+      data-path="api/v1/admin/exams/{exam_id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('PUTapi-v1-admin-exams--exam_id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-PUTapi-v1-admin-exams--exam_id-"
+                    onclick="tryItOut('PUTapi-v1-admin-exams--exam_id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-PUTapi-v1-admin-exams--exam_id-"
+                    onclick="cancelTryOut('PUTapi-v1-admin-exams--exam_id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-PUTapi-v1-admin-exams--exam_id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-darkblue">PUT</small>
+            <b><code>api/v1/admin/exams/{exam_id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="PUTapi-v1-admin-exams--exam_id-"
+               value="Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="PUTapi-v1-admin-exams--exam_id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="PUTapi-v1-admin-exams--exam_id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>exam_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="exam_id"                data-endpoint="PUTapi-v1-admin-exams--exam_id-"
+               value="1"
+               data-component="url">
+    <br>
+<p>The ID of the exam. Example: <code>1</code></p>
+            </div>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>title</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="title"                data-endpoint="PUTapi-v1-admin-exams--exam_id-"
+               value="Final Exam - Mathematics"
+               data-component="body">
+    <br>
+<p>Title of the exam. Must not be greater than 255 characters. Example: <code>Final Exam - Mathematics</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>description</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="description"                data-endpoint="PUTapi-v1-admin-exams--exam_id-"
+               value="Covers chapters 1 to 5."
+               data-component="body">
+    <br>
+<p>Short description of the exam. Must not be greater than 1000 characters. Example: <code>Covers chapters 1 to 5.</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>start_time</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="start_time"                data-endpoint="PUTapi-v1-admin-exams--exam_id-"
+               value="2025-10-01 09:00:00"
+               data-component="body">
+    <br>
+<p>Start date and time of the exam (must be in the future if exam not started). Must be a valid date. Must be a date after <code>now</code>. Example: <code>2025-10-01 09:00:00</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>end_time</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="end_time"                data-endpoint="PUTapi-v1-admin-exams--exam_id-"
+               value="2025-10-01 11:00:00"
+               data-component="body">
+    <br>
+<p>End date and time of the exam (must be after start_time). Must be a valid date. Must be a date after <code>start_time</code>. Example: <code>2025-10-01 11:00:00</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>duration_minutes</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="duration_minutes"                data-endpoint="PUTapi-v1-admin-exams--exam_id-"
+               value="120"
+               data-component="body">
+    <br>
+<p>Duration of the exam in minutes. Must be at least 1. Must not be greater than 480. Example: <code>120</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>total_score</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="total_score"                data-endpoint="PUTapi-v1-admin-exams--exam_id-"
+               value="100"
+               data-component="body">
+    <br>
+<p>Total score of the exam. Must be at least 1. Example: <code>100</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>minimum_battery_percentage</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="minimum_battery_percentage"                data-endpoint="PUTapi-v1-admin-exams--exam_id-"
+               value="30"
+               data-component="body">
+    <br>
+<p>Minimum allowed battery percentage to enter the exam. Must be at least 0. Must not be greater than 100. Example: <code>30</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>require_video_recording</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+<i>optional</i> &nbsp;
+                <label data-endpoint="PUTapi-v1-admin-exams--exam_id-" style="display: none">
+            <input type="radio" name="require_video_recording"
+                   value="true"
+                   data-endpoint="PUTapi-v1-admin-exams--exam_id-"
+                   data-component="body"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="PUTapi-v1-admin-exams--exam_id-" style="display: none">
+            <input type="radio" name="require_video_recording"
+                   value="false"
+                   data-endpoint="PUTapi-v1-admin-exams--exam_id-"
+                   data-component="body"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>Whether video recording is required during the exam. Example: <code>false</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>is_published</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+<i>optional</i> &nbsp;
+                <label data-endpoint="PUTapi-v1-admin-exams--exam_id-" style="display: none">
+            <input type="radio" name="is_published"
+                   value="true"
+                   data-endpoint="PUTapi-v1-admin-exams--exam_id-"
+                   data-component="body"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="PUTapi-v1-admin-exams--exam_id-" style="display: none">
+            <input type="radio" name="is_published"
+                   value="false"
+                   data-endpoint="PUTapi-v1-admin-exams--exam_id-"
+                   data-component="body"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>Indicates if the exam is published. Example: <code>false</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>is_active</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+<i>optional</i> &nbsp;
+                <label data-endpoint="PUTapi-v1-admin-exams--exam_id-" style="display: none">
+            <input type="radio" name="is_active"
+                   value="true"
+                   data-endpoint="PUTapi-v1-admin-exams--exam_id-"
+                   data-component="body"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="PUTapi-v1-admin-exams--exam_id-" style="display: none">
+            <input type="radio" name="is_active"
+                   value="false"
+                   data-endpoint="PUTapi-v1-admin-exams--exam_id-"
+                   data-component="body"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>Indicates if the exam is active. Example: <code>false</code></p>
+        </div>
+        </form>
+
+                    <h2 id="endpoints-DELETEapi-v1-admin-exams--id-">DELETE api/v1/admin/exams/{id}</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-DELETEapi-v1-admin-exams--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request DELETE \
+    "http://45.245.151.115:8000/api/v1/admin/exams/architecto" \
+    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://45.245.151.115:8000/api/v1/admin/exams/architecto"
+);
+
+const headers = {
+    "Authorization": "Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://45.245.151.115:8000/api/v1/admin/exams/architecto';
+$response = $client-&gt;delete(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="python-example">
+    <pre><code class="language-python">import requests
+import json
+
+url = 'http://45.245.151.115:8000/api/v1/admin/exams/architecto'
+headers = {
+  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('DELETE', url, headers=headers)
+response.json()</code></pre></div>
+
+</span>
+
+<span id="example-responses-DELETEapi-v1-admin-exams--id-">
+</span>
+<span id="execution-results-DELETEapi-v1-admin-exams--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-DELETEapi-v1-admin-exams--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-DELETEapi-v1-admin-exams--id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-DELETEapi-v1-admin-exams--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-DELETEapi-v1-admin-exams--id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-DELETEapi-v1-admin-exams--id-" data-method="DELETE"
+      data-path="api/v1/admin/exams/{id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('DELETEapi-v1-admin-exams--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-DELETEapi-v1-admin-exams--id-"
+                    onclick="tryItOut('DELETEapi-v1-admin-exams--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-DELETEapi-v1-admin-exams--id-"
+                    onclick="cancelTryOut('DELETEapi-v1-admin-exams--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-DELETEapi-v1-admin-exams--id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-red">DELETE</small>
+            <b><code>api/v1/admin/exams/{id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="DELETEapi-v1-admin-exams--id-"
+               value="Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="DELETEapi-v1-admin-exams--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="DELETEapi-v1-admin-exams--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="id"                data-endpoint="DELETEapi-v1-admin-exams--id-"
+               value="architecto"
+               data-component="url">
+    <br>
+<p>The ID of the exam. Example: <code>architecto</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="endpoints-POSTapi-v1-admin-exams--id--duplicate">POST api/v1/admin/exams/{id}/duplicate</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-admin-exams--id--duplicate">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://45.245.151.115:8000/api/v1/admin/exams/architecto/duplicate" \
+    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://45.245.151.115:8000/api/v1/admin/exams/architecto/duplicate"
+);
+
+const headers = {
+    "Authorization": "Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://45.245.151.115:8000/api/v1/admin/exams/architecto/duplicate';
+$response = $client-&gt;post(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="python-example">
+    <pre><code class="language-python">import requests
+import json
+
+url = 'http://45.245.151.115:8000/api/v1/admin/exams/architecto/duplicate'
+headers = {
+  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('POST', url, headers=headers)
+response.json()</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-admin-exams--id--duplicate">
+</span>
+<span id="execution-results-POSTapi-v1-admin-exams--id--duplicate" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-admin-exams--id--duplicate"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-admin-exams--id--duplicate"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-admin-exams--id--duplicate" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-admin-exams--id--duplicate">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-admin-exams--id--duplicate" data-method="POST"
+      data-path="api/v1/admin/exams/{id}/duplicate"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-admin-exams--id--duplicate', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-admin-exams--id--duplicate"
+                    onclick="tryItOut('POSTapi-v1-admin-exams--id--duplicate');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-admin-exams--id--duplicate"
+                    onclick="cancelTryOut('POSTapi-v1-admin-exams--id--duplicate');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-admin-exams--id--duplicate"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/admin/exams/{id}/duplicate</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-v1-admin-exams--id--duplicate"
+               value="Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-v1-admin-exams--id--duplicate"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-v1-admin-exams--id--duplicate"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="id"                data-endpoint="POSTapi-v1-admin-exams--id--duplicate"
+               value="architecto"
+               data-component="url">
+    <br>
+<p>The ID of the exam. Example: <code>architecto</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="endpoints-GETapi-v1-admin-exams--id--statistics">GET api/v1/admin/exams/{id}/statistics</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-admin-exams--id--statistics">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://45.245.151.115:8000/api/v1/admin/exams/architecto/statistics" \
+    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://45.245.151.115:8000/api/v1/admin/exams/architecto/statistics"
+);
+
+const headers = {
+    "Authorization": "Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://45.245.151.115:8000/api/v1/admin/exams/architecto/statistics';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="python-example">
+    <pre><code class="language-python">import requests
+import json
+
+url = 'http://45.245.151.115:8000/api/v1/admin/exams/architecto/statistics'
+headers = {
+  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('GET', url, headers=headers)
+response.json()</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-admin-exams--id--statistics">
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: *
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-admin-exams--id--statistics" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-admin-exams--id--statistics"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-admin-exams--id--statistics"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-admin-exams--id--statistics" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-admin-exams--id--statistics">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-admin-exams--id--statistics" data-method="GET"
+      data-path="api/v1/admin/exams/{id}/statistics"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-admin-exams--id--statistics', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-admin-exams--id--statistics"
+                    onclick="tryItOut('GETapi-v1-admin-exams--id--statistics');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-admin-exams--id--statistics"
+                    onclick="cancelTryOut('GETapi-v1-admin-exams--id--statistics');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-admin-exams--id--statistics"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/admin/exams/{id}/statistics</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-v1-admin-exams--id--statistics"
+               value="Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-admin-exams--id--statistics"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-admin-exams--id--statistics"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="id"                data-endpoint="GETapi-v1-admin-exams--id--statistics"
+               value="architecto"
+               data-component="url">
+    <br>
+<p>The ID of the exam. Example: <code>architecto</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="endpoints-GETapi-v1-admin-subjects">Display a listing of the resource.</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-admin-subjects">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://45.245.151.115:8000/api/v1/admin/subjects" \
+    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://45.245.151.115:8000/api/v1/admin/subjects"
+);
+
+const headers = {
+    "Authorization": "Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://45.245.151.115:8000/api/v1/admin/subjects';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="python-example">
+    <pre><code class="language-python">import requests
+import json
+
+url = 'http://45.245.151.115:8000/api/v1/admin/subjects'
+headers = {
+  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('GET', url, headers=headers)
+response.json()</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-admin-subjects">
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: *
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-admin-subjects" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-admin-subjects"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-admin-subjects"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-admin-subjects" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-admin-subjects">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-admin-subjects" data-method="GET"
+      data-path="api/v1/admin/subjects"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-admin-subjects', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-admin-subjects"
+                    onclick="tryItOut('GETapi-v1-admin-subjects');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-admin-subjects"
+                    onclick="cancelTryOut('GETapi-v1-admin-subjects');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-admin-subjects"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/admin/subjects</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-v1-admin-subjects"
+               value="Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-admin-subjects"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-admin-subjects"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                    <h2 id="endpoints-POSTapi-v1-admin-subjects">Store a newly created resource in storage.</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-admin-subjects">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://45.245.151.115:8000/api/v1/admin/subjects" \
+    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"name\": \"Mathematics\",
+    \"code\": \"MATH101\",
+    \"section\": \"Science\",
+    \"duration_minutes\": 90,
+    \"max_score\": 100,
+    \"has_essay_questions\": false,
+    \"is_active\": false
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://45.245.151.115:8000/api/v1/admin/subjects"
+);
+
+const headers = {
+    "Authorization": "Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "name": "Mathematics",
+    "code": "MATH101",
+    "section": "Science",
+    "duration_minutes": 90,
+    "max_score": 100,
+    "has_essay_questions": false,
+    "is_active": false
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://45.245.151.115:8000/api/v1/admin/subjects';
+$response = $client-&gt;post(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+        'json' =&gt; [
+            'name' =&gt; 'Mathematics',
+            'code' =&gt; 'MATH101',
+            'section' =&gt; 'Science',
+            'duration_minutes' =&gt; 90,
+            'max_score' =&gt; 100,
+            'has_essay_questions' =&gt; false,
+            'is_active' =&gt; false,
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="python-example">
+    <pre><code class="language-python">import requests
+import json
+
+url = 'http://45.245.151.115:8000/api/v1/admin/subjects'
+payload = {
+    "name": "Mathematics",
+    "code": "MATH101",
+    "section": "Science",
+    "duration_minutes": 90,
+    "max_score": 100,
+    "has_essay_questions": false,
+    "is_active": false
+}
+headers = {
+  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('POST', url, headers=headers, json=payload)
+response.json()</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-admin-subjects">
+</span>
+<span id="execution-results-POSTapi-v1-admin-subjects" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-admin-subjects"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-admin-subjects"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-admin-subjects" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-admin-subjects">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-admin-subjects" data-method="POST"
+      data-path="api/v1/admin/subjects"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-admin-subjects', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-admin-subjects"
+                    onclick="tryItOut('POSTapi-v1-admin-subjects');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-admin-subjects"
+                    onclick="cancelTryOut('POSTapi-v1-admin-subjects');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-admin-subjects"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/admin/subjects</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-v1-admin-subjects"
+               value="Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-v1-admin-subjects"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-v1-admin-subjects"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="name"                data-endpoint="POSTapi-v1-admin-subjects"
+               value="Mathematics"
+               data-component="body">
+    <br>
+<p>Name of the subject. Must not be greater than 255 characters. Example: <code>Mathematics</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>code</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="code"                data-endpoint="POSTapi-v1-admin-subjects"
+               value="MATH101"
+               data-component="body">
+    <br>
+<p>Unique code of the subject. Must not be greater than 50 characters. Example: <code>MATH101</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>section</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="section"                data-endpoint="POSTapi-v1-admin-subjects"
+               value="Science"
+               data-component="body">
+    <br>
+<p>Section or category of the subject (optional). Must not be greater than 255 characters. Example: <code>Science</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>duration_minutes</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="duration_minutes"                data-endpoint="POSTapi-v1-admin-subjects"
+               value="90"
+               data-component="body">
+    <br>
+<p>Default duration of exams for this subject in minutes. Must be at least 1. Example: <code>90</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>max_score</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="max_score"                data-endpoint="POSTapi-v1-admin-subjects"
+               value="100"
+               data-component="body">
+    <br>
+<p>Maximum score achievable in this subject. Must be at least 1. Example: <code>100</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>has_essay_questions</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+ &nbsp;
+                <label data-endpoint="POSTapi-v1-admin-subjects" style="display: none">
+            <input type="radio" name="has_essay_questions"
+                   value="true"
+                   data-endpoint="POSTapi-v1-admin-subjects"
+                   data-component="body"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="POSTapi-v1-admin-subjects" style="display: none">
+            <input type="radio" name="has_essay_questions"
+                   value="false"
+                   data-endpoint="POSTapi-v1-admin-subjects"
+                   data-component="body"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>Indicates if the subject includes essay questions. Example: <code>false</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>is_active</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+ &nbsp;
+                <label data-endpoint="POSTapi-v1-admin-subjects" style="display: none">
+            <input type="radio" name="is_active"
+                   value="true"
+                   data-endpoint="POSTapi-v1-admin-subjects"
+                   data-component="body"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="POSTapi-v1-admin-subjects" style="display: none">
+            <input type="radio" name="is_active"
+                   value="false"
+                   data-endpoint="POSTapi-v1-admin-subjects"
+                   data-component="body"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>Whether the subject is active. Example: <code>false</code></p>
+        </div>
+        </form>
+
+                    <h2 id="endpoints-GETapi-v1-admin-subjects--id-">Display the specified resource.</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-admin-subjects--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://45.245.151.115:8000/api/v1/admin/subjects/architecto" \
+    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://45.245.151.115:8000/api/v1/admin/subjects/architecto"
+);
+
+const headers = {
+    "Authorization": "Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://45.245.151.115:8000/api/v1/admin/subjects/architecto';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="python-example">
+    <pre><code class="language-python">import requests
+import json
+
+url = 'http://45.245.151.115:8000/api/v1/admin/subjects/architecto'
+headers = {
+  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('GET', url, headers=headers)
+response.json()</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-admin-subjects--id-">
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: *
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-admin-subjects--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-admin-subjects--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-admin-subjects--id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-admin-subjects--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-admin-subjects--id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-admin-subjects--id-" data-method="GET"
+      data-path="api/v1/admin/subjects/{id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-admin-subjects--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-admin-subjects--id-"
+                    onclick="tryItOut('GETapi-v1-admin-subjects--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-admin-subjects--id-"
+                    onclick="cancelTryOut('GETapi-v1-admin-subjects--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-admin-subjects--id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/admin/subjects/{id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-v1-admin-subjects--id-"
+               value="Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-admin-subjects--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-admin-subjects--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="id"                data-endpoint="GETapi-v1-admin-subjects--id-"
+               value="architecto"
+               data-component="url">
+    <br>
+<p>The ID of the subject. Example: <code>architecto</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="endpoints-PUTapi-v1-admin-subjects--id-">Update the specified resource in storage.</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-PUTapi-v1-admin-subjects--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request PUT \
+    "http://45.245.151.115:8000/api/v1/admin/subjects/architecto" \
+    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"name\": \"Physics\",
+    \"code\": \"PHYS101\",
+    \"section\": \"Science\",
+    \"duration_minutes\": 90,
+    \"max_score\": 100,
+    \"has_essay_questions\": false,
+    \"is_active\": false
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://45.245.151.115:8000/api/v1/admin/subjects/architecto"
+);
+
+const headers = {
+    "Authorization": "Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "name": "Physics",
+    "code": "PHYS101",
+    "section": "Science",
+    "duration_minutes": 90,
+    "max_score": 100,
+    "has_essay_questions": false,
+    "is_active": false
+};
+
+fetch(url, {
+    method: "PUT",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://45.245.151.115:8000/api/v1/admin/subjects/architecto';
+$response = $client-&gt;put(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+        'json' =&gt; [
+            'name' =&gt; 'Physics',
+            'code' =&gt; 'PHYS101',
+            'section' =&gt; 'Science',
+            'duration_minutes' =&gt; 90,
+            'max_score' =&gt; 100,
+            'has_essay_questions' =&gt; false,
+            'is_active' =&gt; false,
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="python-example">
+    <pre><code class="language-python">import requests
+import json
+
+url = 'http://45.245.151.115:8000/api/v1/admin/subjects/architecto'
+payload = {
+    "name": "Physics",
+    "code": "PHYS101",
+    "section": "Science",
+    "duration_minutes": 90,
+    "max_score": 100,
+    "has_essay_questions": false,
+    "is_active": false
+}
+headers = {
+  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('PUT', url, headers=headers, json=payload)
+response.json()</code></pre></div>
+
+</span>
+
+<span id="example-responses-PUTapi-v1-admin-subjects--id-">
+</span>
+<span id="execution-results-PUTapi-v1-admin-subjects--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-PUTapi-v1-admin-subjects--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-PUTapi-v1-admin-subjects--id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-PUTapi-v1-admin-subjects--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-PUTapi-v1-admin-subjects--id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-PUTapi-v1-admin-subjects--id-" data-method="PUT"
+      data-path="api/v1/admin/subjects/{id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('PUTapi-v1-admin-subjects--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-PUTapi-v1-admin-subjects--id-"
+                    onclick="tryItOut('PUTapi-v1-admin-subjects--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-PUTapi-v1-admin-subjects--id-"
+                    onclick="cancelTryOut('PUTapi-v1-admin-subjects--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-PUTapi-v1-admin-subjects--id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-darkblue">PUT</small>
+            <b><code>api/v1/admin/subjects/{id}</code></b>
+        </p>
+            <p>
+            <small class="badge badge-purple">PATCH</small>
+            <b><code>api/v1/admin/subjects/{id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="PUTapi-v1-admin-subjects--id-"
+               value="Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="PUTapi-v1-admin-subjects--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="PUTapi-v1-admin-subjects--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="id"                data-endpoint="PUTapi-v1-admin-subjects--id-"
+               value="architecto"
+               data-component="url">
+    <br>
+<p>The ID of the subject. Example: <code>architecto</code></p>
+            </div>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="name"                data-endpoint="PUTapi-v1-admin-subjects--id-"
+               value="Physics"
+               data-component="body">
+    <br>
+<p>Name of the subject. Must not be greater than 255 characters. Example: <code>Physics</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>code</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="code"                data-endpoint="PUTapi-v1-admin-subjects--id-"
+               value="PHYS101"
+               data-component="body">
+    <br>
+<p>Unique code of the subject. Must not be greater than 50 characters. Example: <code>PHYS101</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>section</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="section"                data-endpoint="PUTapi-v1-admin-subjects--id-"
+               value="Science"
+               data-component="body">
+    <br>
+<p>Section or category of the subject (optional). Must not be greater than 255 characters. Example: <code>Science</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>duration_minutes</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="duration_minutes"                data-endpoint="PUTapi-v1-admin-subjects--id-"
+               value="90"
+               data-component="body">
+    <br>
+<p>Default duration of exams for this subject in minutes. Must be at least 1. Example: <code>90</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>max_score</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="max_score"                data-endpoint="PUTapi-v1-admin-subjects--id-"
+               value="100"
+               data-component="body">
+    <br>
+<p>Maximum score achievable in this subject. Must be at least 1. Example: <code>100</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>has_essay_questions</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+<i>optional</i> &nbsp;
+                <label data-endpoint="PUTapi-v1-admin-subjects--id-" style="display: none">
+            <input type="radio" name="has_essay_questions"
+                   value="true"
+                   data-endpoint="PUTapi-v1-admin-subjects--id-"
+                   data-component="body"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="PUTapi-v1-admin-subjects--id-" style="display: none">
+            <input type="radio" name="has_essay_questions"
+                   value="false"
+                   data-endpoint="PUTapi-v1-admin-subjects--id-"
+                   data-component="body"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>Indicates if the subject includes essay questions. Example: <code>false</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>is_active</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+<i>optional</i> &nbsp;
+                <label data-endpoint="PUTapi-v1-admin-subjects--id-" style="display: none">
+            <input type="radio" name="is_active"
+                   value="true"
+                   data-endpoint="PUTapi-v1-admin-subjects--id-"
+                   data-component="body"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="PUTapi-v1-admin-subjects--id-" style="display: none">
+            <input type="radio" name="is_active"
+                   value="false"
+                   data-endpoint="PUTapi-v1-admin-subjects--id-"
+                   data-component="body"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>Whether the subject is active. Example: <code>false</code></p>
+        </div>
+        </form>
+
+                    <h2 id="endpoints-DELETEapi-v1-admin-subjects--id-">Remove the specified resource from storage.</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-DELETEapi-v1-admin-subjects--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request DELETE \
+    "http://45.245.151.115:8000/api/v1/admin/subjects/architecto" \
+    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://45.245.151.115:8000/api/v1/admin/subjects/architecto"
+);
+
+const headers = {
+    "Authorization": "Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://45.245.151.115:8000/api/v1/admin/subjects/architecto';
+$response = $client-&gt;delete(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="python-example">
+    <pre><code class="language-python">import requests
+import json
+
+url = 'http://45.245.151.115:8000/api/v1/admin/subjects/architecto'
+headers = {
+  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('DELETE', url, headers=headers)
+response.json()</code></pre></div>
+
+</span>
+
+<span id="example-responses-DELETEapi-v1-admin-subjects--id-">
+</span>
+<span id="execution-results-DELETEapi-v1-admin-subjects--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-DELETEapi-v1-admin-subjects--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-DELETEapi-v1-admin-subjects--id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-DELETEapi-v1-admin-subjects--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-DELETEapi-v1-admin-subjects--id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-DELETEapi-v1-admin-subjects--id-" data-method="DELETE"
+      data-path="api/v1/admin/subjects/{id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('DELETEapi-v1-admin-subjects--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-DELETEapi-v1-admin-subjects--id-"
+                    onclick="tryItOut('DELETEapi-v1-admin-subjects--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-DELETEapi-v1-admin-subjects--id-"
+                    onclick="cancelTryOut('DELETEapi-v1-admin-subjects--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-DELETEapi-v1-admin-subjects--id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-red">DELETE</small>
+            <b><code>api/v1/admin/subjects/{id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="DELETEapi-v1-admin-subjects--id-"
+               value="Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="DELETEapi-v1-admin-subjects--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="DELETEapi-v1-admin-subjects--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="id"                data-endpoint="DELETEapi-v1-admin-subjects--id-"
+               value="architecto"
+               data-component="url">
+    <br>
+<p>The ID of the subject. Example: <code>architecto</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="endpoints-GETapi-v1-admin-exam-questions">Display a paginated listing of exam questions.</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-admin-exam-questions">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://45.245.151.115:8000/api/v1/admin/exam-questions" \
+    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://45.245.151.115:8000/api/v1/admin/exam-questions"
+);
+
+const headers = {
+    "Authorization": "Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://45.245.151.115:8000/api/v1/admin/exam-questions';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="python-example">
+    <pre><code class="language-python">import requests
+import json
+
+url = 'http://45.245.151.115:8000/api/v1/admin/exam-questions'
+headers = {
+  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('GET', url, headers=headers)
+response.json()</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-admin-exam-questions">
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: *
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-admin-exam-questions" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-admin-exam-questions"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-admin-exam-questions"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-admin-exam-questions" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-admin-exam-questions">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-admin-exam-questions" data-method="GET"
+      data-path="api/v1/admin/exam-questions"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-admin-exam-questions', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-admin-exam-questions"
+                    onclick="tryItOut('GETapi-v1-admin-exam-questions');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-admin-exam-questions"
+                    onclick="cancelTryOut('GETapi-v1-admin-exam-questions');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-admin-exam-questions"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/admin/exam-questions</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-v1-admin-exam-questions"
+               value="Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-admin-exam-questions"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-admin-exam-questions"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                    <h2 id="endpoints-POSTapi-v1-admin-exam-questions">Store a newly created exam question.</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-admin-exam-questions">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://45.245.151.115:8000/api/v1/admin/exam-questions" \
+    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"exam_id\": 1,
+    \"question_text\": \"What is the capital of France?\",
+    \"question_image\": \"https:\\/\\/example.com\\/question1.png\",
+    \"question_type\": \"multiple_choice\",
+    \"options\": [
+        \"Paris\"
+    ],
+    \"correct_answer\": \"Paris\",
+    \"points\": 5,
+    \"is_required\": false,
+    \"help_text\": \"Remember to check European capitals.\",
+    \"section_id\": 2
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://45.245.151.115:8000/api/v1/admin/exam-questions"
+);
+
+const headers = {
+    "Authorization": "Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "exam_id": 1,
+    "question_text": "What is the capital of France?",
+    "question_image": "https:\/\/example.com\/question1.png",
+    "question_type": "multiple_choice",
+    "options": [
+        "Paris"
+    ],
+    "correct_answer": "Paris",
+    "points": 5,
+    "is_required": false,
+    "help_text": "Remember to check European capitals.",
+    "section_id": 2
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://45.245.151.115:8000/api/v1/admin/exam-questions';
+$response = $client-&gt;post(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+        'json' =&gt; [
+            'exam_id' =&gt; 1,
+            'question_text' =&gt; 'What is the capital of France?',
+            'question_image' =&gt; 'https://example.com/question1.png',
+            'question_type' =&gt; 'multiple_choice',
+            'options' =&gt; [
+                'Paris',
+            ],
+            'correct_answer' =&gt; 'Paris',
+            'points' =&gt; 5,
+            'is_required' =&gt; false,
+            'help_text' =&gt; 'Remember to check European capitals.',
+            'section_id' =&gt; 2,
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="python-example">
+    <pre><code class="language-python">import requests
+import json
+
+url = 'http://45.245.151.115:8000/api/v1/admin/exam-questions'
+payload = {
+    "exam_id": 1,
+    "question_text": "What is the capital of France?",
+    "question_image": "https:\/\/example.com\/question1.png",
+    "question_type": "multiple_choice",
+    "options": [
+        "Paris"
+    ],
+    "correct_answer": "Paris",
+    "points": 5,
+    "is_required": false,
+    "help_text": "Remember to check European capitals.",
+    "section_id": 2
+}
+headers = {
+  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('POST', url, headers=headers, json=payload)
+response.json()</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-admin-exam-questions">
+</span>
+<span id="execution-results-POSTapi-v1-admin-exam-questions" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-admin-exam-questions"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-admin-exam-questions"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-admin-exam-questions" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-admin-exam-questions">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-admin-exam-questions" data-method="POST"
+      data-path="api/v1/admin/exam-questions"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-admin-exam-questions', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-admin-exam-questions"
+                    onclick="tryItOut('POSTapi-v1-admin-exam-questions');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-admin-exam-questions"
+                    onclick="cancelTryOut('POSTapi-v1-admin-exam-questions');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-admin-exam-questions"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/admin/exam-questions</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-v1-admin-exam-questions"
+               value="Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-v1-admin-exam-questions"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-v1-admin-exam-questions"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>exam_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="exam_id"                data-endpoint="POSTapi-v1-admin-exam-questions"
+               value="1"
+               data-component="body">
+    <br>
+<p>ID of the exam this question belongs to. The <code>id</code> of an existing record in the exams table. Example: <code>1</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>question_text</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="question_text"                data-endpoint="POSTapi-v1-admin-exam-questions"
+               value="What is the capital of France?"
+               data-component="body">
+    <br>
+<p>Text content of the question (optional if question_image is provided). Example: <code>What is the capital of France?</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>question_image</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="question_image"                data-endpoint="POSTapi-v1-admin-exam-questions"
+               value="https://example.com/question1.png"
+               data-component="body">
+    <br>
+<p>URL or path of an image for the question (optional). Example: <code>https://example.com/question1.png</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>question_type</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="question_type"                data-endpoint="POSTapi-v1-admin-exam-questions"
+               value="multiple_choice"
+               data-component="body">
+    <br>
+<p>Type of the question. Example: <code>multiple_choice</code></p>
+Must be one of:
+<ul style="list-style-type: square;"><li><code>multiple_choice</code></li> <li><code>essay</code></li> <li><code>true_false</code></li> <li><code>fill_blank</code></li></ul>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>options</code></b>&nbsp;&nbsp;
+<small>string[]</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="options[0]"                data-endpoint="POSTapi-v1-admin-exam-questions"
+               data-component="body">
+        <input type="text" style="display: none"
+               name="options[1]"                data-endpoint="POSTapi-v1-admin-exam-questions"
+               data-component="body">
+    <br>
+<p>Individual option for multiple_choice question.</p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>correct_answer</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="correct_answer"                data-endpoint="POSTapi-v1-admin-exam-questions"
+               value="Paris"
+               data-component="body">
+    <br>
+<p>Correct answer for the question (format depends on question_type). Example: <code>Paris</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>points</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="points"                data-endpoint="POSTapi-v1-admin-exam-questions"
+               value="5"
+               data-component="body">
+    <br>
+<p>Points assigned to the question. Must be at least 0. Example: <code>5</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>is_required</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+<i>optional</i> &nbsp;
+                <label data-endpoint="POSTapi-v1-admin-exam-questions" style="display: none">
+            <input type="radio" name="is_required"
+                   value="true"
+                   data-endpoint="POSTapi-v1-admin-exam-questions"
+                   data-component="body"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="POSTapi-v1-admin-exam-questions" style="display: none">
+            <input type="radio" name="is_required"
+                   value="false"
+                   data-endpoint="POSTapi-v1-admin-exam-questions"
+                   data-component="body"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>Indicates if answering the question is mandatory. Example: <code>false</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>help_text</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="help_text"                data-endpoint="POSTapi-v1-admin-exam-questions"
+               value="Remember to check European capitals."
+               data-component="body">
+    <br>
+<p>Optional hint or guidance for the question. Example: <code>Remember to check European capitals.</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>section_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="section_id"                data-endpoint="POSTapi-v1-admin-exam-questions"
+               value="2"
+               data-component="body">
+    <br>
+<p>ID of the exam section this question belongs to (optional). The <code>id</code> of an existing record in the exam_sections table. Example: <code>2</code></p>
+        </div>
+        </form>
+
+                    <h2 id="endpoints-GETapi-v1-admin-exam-questions--id-">Display the specified exam question.</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-admin-exam-questions--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://45.245.151.115:8000/api/v1/admin/exam-questions/architecto" \
+    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://45.245.151.115:8000/api/v1/admin/exam-questions/architecto"
+);
+
+const headers = {
+    "Authorization": "Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://45.245.151.115:8000/api/v1/admin/exam-questions/architecto';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="python-example">
+    <pre><code class="language-python">import requests
+import json
+
+url = 'http://45.245.151.115:8000/api/v1/admin/exam-questions/architecto'
+headers = {
+  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('GET', url, headers=headers)
+response.json()</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-admin-exam-questions--id-">
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: *
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-admin-exam-questions--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-admin-exam-questions--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-admin-exam-questions--id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-admin-exam-questions--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-admin-exam-questions--id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-admin-exam-questions--id-" data-method="GET"
+      data-path="api/v1/admin/exam-questions/{id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-admin-exam-questions--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-admin-exam-questions--id-"
+                    onclick="tryItOut('GETapi-v1-admin-exam-questions--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-admin-exam-questions--id-"
+                    onclick="cancelTryOut('GETapi-v1-admin-exam-questions--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-admin-exam-questions--id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/admin/exam-questions/{id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-v1-admin-exam-questions--id-"
+               value="Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-admin-exam-questions--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-admin-exam-questions--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="id"                data-endpoint="GETapi-v1-admin-exam-questions--id-"
+               value="architecto"
+               data-component="url">
+    <br>
+<p>The ID of the exam question. Example: <code>architecto</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="endpoints-PUTapi-v1-admin-exam-questions--id-">Update the specified exam question in storage.</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-PUTapi-v1-admin-exam-questions--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request PUT \
+    "http://45.245.151.115:8000/api/v1/admin/exam-questions/architecto" \
+    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"exam_id\": 1,
+    \"question_text\": \"What is the capital of Germany?\",
+    \"question_image\": \"https:\\/\\/example.com\\/question1.png\",
+    \"question_type\": \"multiple_choice\",
+    \"options\": [
+        \"Berlin\"
+    ],
+    \"correct_answer\": \"Berlin\",
+    \"points\": 5,
+    \"is_required\": false,
+    \"help_text\": \"Consider European capitals.\",
+    \"section_id\": 2
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://45.245.151.115:8000/api/v1/admin/exam-questions/architecto"
+);
+
+const headers = {
+    "Authorization": "Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "exam_id": 1,
+    "question_text": "What is the capital of Germany?",
+    "question_image": "https:\/\/example.com\/question1.png",
+    "question_type": "multiple_choice",
+    "options": [
+        "Berlin"
+    ],
+    "correct_answer": "Berlin",
+    "points": 5,
+    "is_required": false,
+    "help_text": "Consider European capitals.",
+    "section_id": 2
+};
+
+fetch(url, {
+    method: "PUT",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://45.245.151.115:8000/api/v1/admin/exam-questions/architecto';
+$response = $client-&gt;put(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+        'json' =&gt; [
+            'exam_id' =&gt; 1,
+            'question_text' =&gt; 'What is the capital of Germany?',
+            'question_image' =&gt; 'https://example.com/question1.png',
+            'question_type' =&gt; 'multiple_choice',
+            'options' =&gt; [
+                'Berlin',
+            ],
+            'correct_answer' =&gt; 'Berlin',
+            'points' =&gt; 5,
+            'is_required' =&gt; false,
+            'help_text' =&gt; 'Consider European capitals.',
+            'section_id' =&gt; 2,
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="python-example">
+    <pre><code class="language-python">import requests
+import json
+
+url = 'http://45.245.151.115:8000/api/v1/admin/exam-questions/architecto'
+payload = {
+    "exam_id": 1,
+    "question_text": "What is the capital of Germany?",
+    "question_image": "https:\/\/example.com\/question1.png",
+    "question_type": "multiple_choice",
+    "options": [
+        "Berlin"
+    ],
+    "correct_answer": "Berlin",
+    "points": 5,
+    "is_required": false,
+    "help_text": "Consider European capitals.",
+    "section_id": 2
+}
+headers = {
+  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('PUT', url, headers=headers, json=payload)
+response.json()</code></pre></div>
+
+</span>
+
+<span id="example-responses-PUTapi-v1-admin-exam-questions--id-">
+</span>
+<span id="execution-results-PUTapi-v1-admin-exam-questions--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-PUTapi-v1-admin-exam-questions--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-PUTapi-v1-admin-exam-questions--id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-PUTapi-v1-admin-exam-questions--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-PUTapi-v1-admin-exam-questions--id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-PUTapi-v1-admin-exam-questions--id-" data-method="PUT"
+      data-path="api/v1/admin/exam-questions/{id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('PUTapi-v1-admin-exam-questions--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-PUTapi-v1-admin-exam-questions--id-"
+                    onclick="tryItOut('PUTapi-v1-admin-exam-questions--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-PUTapi-v1-admin-exam-questions--id-"
+                    onclick="cancelTryOut('PUTapi-v1-admin-exam-questions--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-PUTapi-v1-admin-exam-questions--id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-darkblue">PUT</small>
+            <b><code>api/v1/admin/exam-questions/{id}</code></b>
+        </p>
+            <p>
+            <small class="badge badge-purple">PATCH</small>
+            <b><code>api/v1/admin/exam-questions/{id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="PUTapi-v1-admin-exam-questions--id-"
+               value="Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="PUTapi-v1-admin-exam-questions--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="PUTapi-v1-admin-exam-questions--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="id"                data-endpoint="PUTapi-v1-admin-exam-questions--id-"
+               value="architecto"
+               data-component="url">
+    <br>
+<p>The ID of the exam question. Example: <code>architecto</code></p>
+            </div>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>exam_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="exam_id"                data-endpoint="PUTapi-v1-admin-exam-questions--id-"
+               value="1"
+               data-component="body">
+    <br>
+<p>ID of the exam this question belongs to. The <code>id</code> of an existing record in the exams table. Example: <code>1</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>question_text</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="question_text"                data-endpoint="PUTapi-v1-admin-exam-questions--id-"
+               value="What is the capital of Germany?"
+               data-component="body">
+    <br>
+<p>Text content of the question (optional if question_image is provided). Example: <code>What is the capital of Germany?</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>question_image</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="question_image"                data-endpoint="PUTapi-v1-admin-exam-questions--id-"
+               value="https://example.com/question1.png"
+               data-component="body">
+    <br>
+<p>URL or path of an image for the question (optional). Example: <code>https://example.com/question1.png</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>question_type</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="question_type"                data-endpoint="PUTapi-v1-admin-exam-questions--id-"
+               value="multiple_choice"
+               data-component="body">
+    <br>
+<p>Type of the question. Example: <code>multiple_choice</code></p>
+Must be one of:
+<ul style="list-style-type: square;"><li><code>multiple_choice</code></li> <li><code>essay</code></li> <li><code>true_false</code></li> <li><code>fill_blank</code></li></ul>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>options</code></b>&nbsp;&nbsp;
+<small>string[]</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="options[0]"                data-endpoint="PUTapi-v1-admin-exam-questions--id-"
+               data-component="body">
+        <input type="text" style="display: none"
+               name="options[1]"                data-endpoint="PUTapi-v1-admin-exam-questions--id-"
+               data-component="body">
+    <br>
+<p>Individual option for multiple_choice question.</p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>correct_answer</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="correct_answer"                data-endpoint="PUTapi-v1-admin-exam-questions--id-"
+               value="Berlin"
+               data-component="body">
+    <br>
+<p>Correct answer for the question (format depends on question_type). Example: <code>Berlin</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>points</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="points"                data-endpoint="PUTapi-v1-admin-exam-questions--id-"
+               value="5"
+               data-component="body">
+    <br>
+<p>Points assigned to the question. Must be at least 0. Example: <code>5</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>is_required</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+<i>optional</i> &nbsp;
+                <label data-endpoint="PUTapi-v1-admin-exam-questions--id-" style="display: none">
+            <input type="radio" name="is_required"
+                   value="true"
+                   data-endpoint="PUTapi-v1-admin-exam-questions--id-"
+                   data-component="body"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="PUTapi-v1-admin-exam-questions--id-" style="display: none">
+            <input type="radio" name="is_required"
+                   value="false"
+                   data-endpoint="PUTapi-v1-admin-exam-questions--id-"
+                   data-component="body"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>Indicates if answering the question is mandatory. Example: <code>false</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>help_text</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="help_text"                data-endpoint="PUTapi-v1-admin-exam-questions--id-"
+               value="Consider European capitals."
+               data-component="body">
+    <br>
+<p>Optional hint or guidance for the question. Example: <code>Consider European capitals.</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>section_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="section_id"                data-endpoint="PUTapi-v1-admin-exam-questions--id-"
+               value="2"
+               data-component="body">
+    <br>
+<p>ID of the exam section this question belongs to (optional). The <code>id</code> of an existing record in the exam_sections table. Example: <code>2</code></p>
+        </div>
+        </form>
+
+                    <h2 id="endpoints-DELETEapi-v1-admin-exam-questions--id-">Remove the specified exam question from storage.</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-DELETEapi-v1-admin-exam-questions--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request DELETE \
+    "http://45.245.151.115:8000/api/v1/admin/exam-questions/architecto" \
+    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://45.245.151.115:8000/api/v1/admin/exam-questions/architecto"
+);
+
+const headers = {
+    "Authorization": "Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://45.245.151.115:8000/api/v1/admin/exam-questions/architecto';
+$response = $client-&gt;delete(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="python-example">
+    <pre><code class="language-python">import requests
+import json
+
+url = 'http://45.245.151.115:8000/api/v1/admin/exam-questions/architecto'
+headers = {
+  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('DELETE', url, headers=headers)
+response.json()</code></pre></div>
+
+</span>
+
+<span id="example-responses-DELETEapi-v1-admin-exam-questions--id-">
+</span>
+<span id="execution-results-DELETEapi-v1-admin-exam-questions--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-DELETEapi-v1-admin-exam-questions--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-DELETEapi-v1-admin-exam-questions--id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-DELETEapi-v1-admin-exam-questions--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-DELETEapi-v1-admin-exam-questions--id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-DELETEapi-v1-admin-exam-questions--id-" data-method="DELETE"
+      data-path="api/v1/admin/exam-questions/{id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('DELETEapi-v1-admin-exam-questions--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-DELETEapi-v1-admin-exam-questions--id-"
+                    onclick="tryItOut('DELETEapi-v1-admin-exam-questions--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-DELETEapi-v1-admin-exam-questions--id-"
+                    onclick="cancelTryOut('DELETEapi-v1-admin-exam-questions--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-DELETEapi-v1-admin-exam-questions--id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-red">DELETE</small>
+            <b><code>api/v1/admin/exam-questions/{id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="DELETEapi-v1-admin-exam-questions--id-"
+               value="Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="DELETEapi-v1-admin-exam-questions--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="DELETEapi-v1-admin-exam-questions--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="id"                data-endpoint="DELETEapi-v1-admin-exam-questions--id-"
+               value="architecto"
+               data-component="url">
+    <br>
+<p>The ID of the exam question. Example: <code>architecto</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="endpoints-GETapi-v1-admin-exam-sections">Display a paginated listing of exam questions.</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-admin-exam-sections">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://45.245.151.115:8000/api/v1/admin/exam-sections" \
+    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://45.245.151.115:8000/api/v1/admin/exam-sections"
+);
+
+const headers = {
+    "Authorization": "Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://45.245.151.115:8000/api/v1/admin/exam-sections';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="python-example">
+    <pre><code class="language-python">import requests
+import json
+
+url = 'http://45.245.151.115:8000/api/v1/admin/exam-sections'
+headers = {
+  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('GET', url, headers=headers)
+response.json()</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-admin-exam-sections">
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: *
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-admin-exam-sections" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-admin-exam-sections"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-admin-exam-sections"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-admin-exam-sections" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-admin-exam-sections">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-admin-exam-sections" data-method="GET"
+      data-path="api/v1/admin/exam-sections"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-admin-exam-sections', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-admin-exam-sections"
+                    onclick="tryItOut('GETapi-v1-admin-exam-sections');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-admin-exam-sections"
+                    onclick="cancelTryOut('GETapi-v1-admin-exam-sections');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-admin-exam-sections"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/admin/exam-sections</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-v1-admin-exam-sections"
+               value="Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-admin-exam-sections"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-admin-exam-sections"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                    <h2 id="endpoints-POSTapi-v1-admin-exam-sections">Store a newly created exam question.</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-admin-exam-sections">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://45.245.151.115:8000/api/v1/admin/exam-sections" \
+    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"exam_id\": 1,
+    \"question_text\": \"What is the capital of France?\",
+    \"question_image\": \"https:\\/\\/example.com\\/question1.png\",
+    \"question_type\": \"multiple_choice\",
+    \"options\": [
+        \"Paris\"
+    ],
+    \"correct_answer\": \"Paris\",
+    \"points\": 5,
+    \"is_required\": false,
+    \"help_text\": \"Remember to check European capitals.\",
+    \"section_id\": 2
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://45.245.151.115:8000/api/v1/admin/exam-sections"
+);
+
+const headers = {
+    "Authorization": "Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "exam_id": 1,
+    "question_text": "What is the capital of France?",
+    "question_image": "https:\/\/example.com\/question1.png",
+    "question_type": "multiple_choice",
+    "options": [
+        "Paris"
+    ],
+    "correct_answer": "Paris",
+    "points": 5,
+    "is_required": false,
+    "help_text": "Remember to check European capitals.",
+    "section_id": 2
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://45.245.151.115:8000/api/v1/admin/exam-sections';
+$response = $client-&gt;post(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+        'json' =&gt; [
+            'exam_id' =&gt; 1,
+            'question_text' =&gt; 'What is the capital of France?',
+            'question_image' =&gt; 'https://example.com/question1.png',
+            'question_type' =&gt; 'multiple_choice',
+            'options' =&gt; [
+                'Paris',
+            ],
+            'correct_answer' =&gt; 'Paris',
+            'points' =&gt; 5,
+            'is_required' =&gt; false,
+            'help_text' =&gt; 'Remember to check European capitals.',
+            'section_id' =&gt; 2,
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="python-example">
+    <pre><code class="language-python">import requests
+import json
+
+url = 'http://45.245.151.115:8000/api/v1/admin/exam-sections'
+payload = {
+    "exam_id": 1,
+    "question_text": "What is the capital of France?",
+    "question_image": "https:\/\/example.com\/question1.png",
+    "question_type": "multiple_choice",
+    "options": [
+        "Paris"
+    ],
+    "correct_answer": "Paris",
+    "points": 5,
+    "is_required": false,
+    "help_text": "Remember to check European capitals.",
+    "section_id": 2
+}
+headers = {
+  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('POST', url, headers=headers, json=payload)
+response.json()</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-admin-exam-sections">
+</span>
+<span id="execution-results-POSTapi-v1-admin-exam-sections" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-admin-exam-sections"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-admin-exam-sections"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-admin-exam-sections" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-admin-exam-sections">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-admin-exam-sections" data-method="POST"
+      data-path="api/v1/admin/exam-sections"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-admin-exam-sections', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-admin-exam-sections"
+                    onclick="tryItOut('POSTapi-v1-admin-exam-sections');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-admin-exam-sections"
+                    onclick="cancelTryOut('POSTapi-v1-admin-exam-sections');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-admin-exam-sections"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/admin/exam-sections</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-v1-admin-exam-sections"
+               value="Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-v1-admin-exam-sections"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-v1-admin-exam-sections"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>exam_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="exam_id"                data-endpoint="POSTapi-v1-admin-exam-sections"
+               value="1"
+               data-component="body">
+    <br>
+<p>ID of the exam this question belongs to. The <code>id</code> of an existing record in the exams table. Example: <code>1</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>question_text</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="question_text"                data-endpoint="POSTapi-v1-admin-exam-sections"
+               value="What is the capital of France?"
+               data-component="body">
+    <br>
+<p>Text content of the question (optional if question_image is provided). Example: <code>What is the capital of France?</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>question_image</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="question_image"                data-endpoint="POSTapi-v1-admin-exam-sections"
+               value="https://example.com/question1.png"
+               data-component="body">
+    <br>
+<p>URL or path of an image for the question (optional). Example: <code>https://example.com/question1.png</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>question_type</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="question_type"                data-endpoint="POSTapi-v1-admin-exam-sections"
+               value="multiple_choice"
+               data-component="body">
+    <br>
+<p>Type of the question. Example: <code>multiple_choice</code></p>
+Must be one of:
+<ul style="list-style-type: square;"><li><code>multiple_choice</code></li> <li><code>essay</code></li> <li><code>true_false</code></li> <li><code>fill_blank</code></li></ul>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>options</code></b>&nbsp;&nbsp;
+<small>string[]</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="options[0]"                data-endpoint="POSTapi-v1-admin-exam-sections"
+               data-component="body">
+        <input type="text" style="display: none"
+               name="options[1]"                data-endpoint="POSTapi-v1-admin-exam-sections"
+               data-component="body">
+    <br>
+<p>Individual option for multiple_choice question.</p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>correct_answer</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="correct_answer"                data-endpoint="POSTapi-v1-admin-exam-sections"
+               value="Paris"
+               data-component="body">
+    <br>
+<p>Correct answer for the question (format depends on question_type). Example: <code>Paris</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>points</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="points"                data-endpoint="POSTapi-v1-admin-exam-sections"
+               value="5"
+               data-component="body">
+    <br>
+<p>Points assigned to the question. Must be at least 0. Example: <code>5</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>is_required</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+<i>optional</i> &nbsp;
+                <label data-endpoint="POSTapi-v1-admin-exam-sections" style="display: none">
+            <input type="radio" name="is_required"
+                   value="true"
+                   data-endpoint="POSTapi-v1-admin-exam-sections"
+                   data-component="body"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="POSTapi-v1-admin-exam-sections" style="display: none">
+            <input type="radio" name="is_required"
+                   value="false"
+                   data-endpoint="POSTapi-v1-admin-exam-sections"
+                   data-component="body"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>Indicates if answering the question is mandatory. Example: <code>false</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>help_text</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="help_text"                data-endpoint="POSTapi-v1-admin-exam-sections"
+               value="Remember to check European capitals."
+               data-component="body">
+    <br>
+<p>Optional hint or guidance for the question. Example: <code>Remember to check European capitals.</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>section_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="section_id"                data-endpoint="POSTapi-v1-admin-exam-sections"
+               value="2"
+               data-component="body">
+    <br>
+<p>ID of the exam section this question belongs to (optional). The <code>id</code> of an existing record in the exam_sections table. Example: <code>2</code></p>
+        </div>
+        </form>
+
+                    <h2 id="endpoints-GETapi-v1-admin-exam-sections--id-">Display the specified exam question.</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-admin-exam-sections--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://45.245.151.115:8000/api/v1/admin/exam-sections/architecto" \
+    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://45.245.151.115:8000/api/v1/admin/exam-sections/architecto"
+);
+
+const headers = {
+    "Authorization": "Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://45.245.151.115:8000/api/v1/admin/exam-sections/architecto';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="python-example">
+    <pre><code class="language-python">import requests
+import json
+
+url = 'http://45.245.151.115:8000/api/v1/admin/exam-sections/architecto'
+headers = {
+  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('GET', url, headers=headers)
+response.json()</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-admin-exam-sections--id-">
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: *
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-admin-exam-sections--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-admin-exam-sections--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-admin-exam-sections--id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-admin-exam-sections--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-admin-exam-sections--id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-admin-exam-sections--id-" data-method="GET"
+      data-path="api/v1/admin/exam-sections/{id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-admin-exam-sections--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-admin-exam-sections--id-"
+                    onclick="tryItOut('GETapi-v1-admin-exam-sections--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-admin-exam-sections--id-"
+                    onclick="cancelTryOut('GETapi-v1-admin-exam-sections--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-admin-exam-sections--id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/admin/exam-sections/{id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-v1-admin-exam-sections--id-"
+               value="Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-admin-exam-sections--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-admin-exam-sections--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="id"                data-endpoint="GETapi-v1-admin-exam-sections--id-"
+               value="architecto"
+               data-component="url">
+    <br>
+<p>The ID of the exam section. Example: <code>architecto</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="endpoints-PUTapi-v1-admin-exam-sections--id-">Update the specified exam question in storage.</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-PUTapi-v1-admin-exam-sections--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request PUT \
+    "http://45.245.151.115:8000/api/v1/admin/exam-sections/architecto" \
+    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"exam_id\": 1,
+    \"question_text\": \"What is the capital of Germany?\",
+    \"question_image\": \"https:\\/\\/example.com\\/question1.png\",
+    \"question_type\": \"multiple_choice\",
+    \"options\": [
+        \"Berlin\"
+    ],
+    \"correct_answer\": \"Berlin\",
+    \"points\": 5,
+    \"is_required\": false,
+    \"help_text\": \"Consider European capitals.\",
+    \"section_id\": 2
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://45.245.151.115:8000/api/v1/admin/exam-sections/architecto"
+);
+
+const headers = {
+    "Authorization": "Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "exam_id": 1,
+    "question_text": "What is the capital of Germany?",
+    "question_image": "https:\/\/example.com\/question1.png",
+    "question_type": "multiple_choice",
+    "options": [
+        "Berlin"
+    ],
+    "correct_answer": "Berlin",
+    "points": 5,
+    "is_required": false,
+    "help_text": "Consider European capitals.",
+    "section_id": 2
+};
+
+fetch(url, {
+    method: "PUT",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://45.245.151.115:8000/api/v1/admin/exam-sections/architecto';
+$response = $client-&gt;put(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+        'json' =&gt; [
+            'exam_id' =&gt; 1,
+            'question_text' =&gt; 'What is the capital of Germany?',
+            'question_image' =&gt; 'https://example.com/question1.png',
+            'question_type' =&gt; 'multiple_choice',
+            'options' =&gt; [
+                'Berlin',
+            ],
+            'correct_answer' =&gt; 'Berlin',
+            'points' =&gt; 5,
+            'is_required' =&gt; false,
+            'help_text' =&gt; 'Consider European capitals.',
+            'section_id' =&gt; 2,
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="python-example">
+    <pre><code class="language-python">import requests
+import json
+
+url = 'http://45.245.151.115:8000/api/v1/admin/exam-sections/architecto'
+payload = {
+    "exam_id": 1,
+    "question_text": "What is the capital of Germany?",
+    "question_image": "https:\/\/example.com\/question1.png",
+    "question_type": "multiple_choice",
+    "options": [
+        "Berlin"
+    ],
+    "correct_answer": "Berlin",
+    "points": 5,
+    "is_required": false,
+    "help_text": "Consider European capitals.",
+    "section_id": 2
+}
+headers = {
+  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('PUT', url, headers=headers, json=payload)
+response.json()</code></pre></div>
+
+</span>
+
+<span id="example-responses-PUTapi-v1-admin-exam-sections--id-">
+</span>
+<span id="execution-results-PUTapi-v1-admin-exam-sections--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-PUTapi-v1-admin-exam-sections--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-PUTapi-v1-admin-exam-sections--id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-PUTapi-v1-admin-exam-sections--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-PUTapi-v1-admin-exam-sections--id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-PUTapi-v1-admin-exam-sections--id-" data-method="PUT"
+      data-path="api/v1/admin/exam-sections/{id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('PUTapi-v1-admin-exam-sections--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-PUTapi-v1-admin-exam-sections--id-"
+                    onclick="tryItOut('PUTapi-v1-admin-exam-sections--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-PUTapi-v1-admin-exam-sections--id-"
+                    onclick="cancelTryOut('PUTapi-v1-admin-exam-sections--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-PUTapi-v1-admin-exam-sections--id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-darkblue">PUT</small>
+            <b><code>api/v1/admin/exam-sections/{id}</code></b>
+        </p>
+            <p>
+            <small class="badge badge-purple">PATCH</small>
+            <b><code>api/v1/admin/exam-sections/{id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="PUTapi-v1-admin-exam-sections--id-"
+               value="Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="PUTapi-v1-admin-exam-sections--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="PUTapi-v1-admin-exam-sections--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="id"                data-endpoint="PUTapi-v1-admin-exam-sections--id-"
+               value="architecto"
+               data-component="url">
+    <br>
+<p>The ID of the exam section. Example: <code>architecto</code></p>
+            </div>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>exam_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="exam_id"                data-endpoint="PUTapi-v1-admin-exam-sections--id-"
+               value="1"
+               data-component="body">
+    <br>
+<p>ID of the exam this question belongs to. The <code>id</code> of an existing record in the exams table. Example: <code>1</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>question_text</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="question_text"                data-endpoint="PUTapi-v1-admin-exam-sections--id-"
+               value="What is the capital of Germany?"
+               data-component="body">
+    <br>
+<p>Text content of the question (optional if question_image is provided). Example: <code>What is the capital of Germany?</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>question_image</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="question_image"                data-endpoint="PUTapi-v1-admin-exam-sections--id-"
+               value="https://example.com/question1.png"
+               data-component="body">
+    <br>
+<p>URL or path of an image for the question (optional). Example: <code>https://example.com/question1.png</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>question_type</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="question_type"                data-endpoint="PUTapi-v1-admin-exam-sections--id-"
+               value="multiple_choice"
+               data-component="body">
+    <br>
+<p>Type of the question. Example: <code>multiple_choice</code></p>
+Must be one of:
+<ul style="list-style-type: square;"><li><code>multiple_choice</code></li> <li><code>essay</code></li> <li><code>true_false</code></li> <li><code>fill_blank</code></li></ul>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>options</code></b>&nbsp;&nbsp;
+<small>string[]</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="options[0]"                data-endpoint="PUTapi-v1-admin-exam-sections--id-"
+               data-component="body">
+        <input type="text" style="display: none"
+               name="options[1]"                data-endpoint="PUTapi-v1-admin-exam-sections--id-"
+               data-component="body">
+    <br>
+<p>Individual option for multiple_choice question.</p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>correct_answer</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="correct_answer"                data-endpoint="PUTapi-v1-admin-exam-sections--id-"
+               value="Berlin"
+               data-component="body">
+    <br>
+<p>Correct answer for the question (format depends on question_type). Example: <code>Berlin</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>points</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="points"                data-endpoint="PUTapi-v1-admin-exam-sections--id-"
+               value="5"
+               data-component="body">
+    <br>
+<p>Points assigned to the question. Must be at least 0. Example: <code>5</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>is_required</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+<i>optional</i> &nbsp;
+                <label data-endpoint="PUTapi-v1-admin-exam-sections--id-" style="display: none">
+            <input type="radio" name="is_required"
+                   value="true"
+                   data-endpoint="PUTapi-v1-admin-exam-sections--id-"
+                   data-component="body"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="PUTapi-v1-admin-exam-sections--id-" style="display: none">
+            <input type="radio" name="is_required"
+                   value="false"
+                   data-endpoint="PUTapi-v1-admin-exam-sections--id-"
+                   data-component="body"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>Indicates if answering the question is mandatory. Example: <code>false</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>help_text</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="help_text"                data-endpoint="PUTapi-v1-admin-exam-sections--id-"
+               value="Consider European capitals."
+               data-component="body">
+    <br>
+<p>Optional hint or guidance for the question. Example: <code>Consider European capitals.</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>section_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="section_id"                data-endpoint="PUTapi-v1-admin-exam-sections--id-"
+               value="2"
+               data-component="body">
+    <br>
+<p>ID of the exam section this question belongs to (optional). The <code>id</code> of an existing record in the exam_sections table. Example: <code>2</code></p>
+        </div>
+        </form>
+
+                    <h2 id="endpoints-DELETEapi-v1-admin-exam-sections--id-">Remove the specified exam question from storage.</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-DELETEapi-v1-admin-exam-sections--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request DELETE \
+    "http://45.245.151.115:8000/api/v1/admin/exam-sections/architecto" \
+    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://45.245.151.115:8000/api/v1/admin/exam-sections/architecto"
+);
+
+const headers = {
+    "Authorization": "Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://45.245.151.115:8000/api/v1/admin/exam-sections/architecto';
+$response = $client-&gt;delete(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="python-example">
+    <pre><code class="language-python">import requests
+import json
+
+url = 'http://45.245.151.115:8000/api/v1/admin/exam-sections/architecto'
+headers = {
+  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('DELETE', url, headers=headers)
+response.json()</code></pre></div>
+
+</span>
+
+<span id="example-responses-DELETEapi-v1-admin-exam-sections--id-">
+</span>
+<span id="execution-results-DELETEapi-v1-admin-exam-sections--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-DELETEapi-v1-admin-exam-sections--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-DELETEapi-v1-admin-exam-sections--id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-DELETEapi-v1-admin-exam-sections--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-DELETEapi-v1-admin-exam-sections--id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-DELETEapi-v1-admin-exam-sections--id-" data-method="DELETE"
+      data-path="api/v1/admin/exam-sections/{id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('DELETEapi-v1-admin-exam-sections--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-DELETEapi-v1-admin-exam-sections--id-"
+                    onclick="tryItOut('DELETEapi-v1-admin-exam-sections--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-DELETEapi-v1-admin-exam-sections--id-"
+                    onclick="cancelTryOut('DELETEapi-v1-admin-exam-sections--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-DELETEapi-v1-admin-exam-sections--id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-red">DELETE</small>
+            <b><code>api/v1/admin/exam-sections/{id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="DELETEapi-v1-admin-exam-sections--id-"
+               value="Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="DELETEapi-v1-admin-exam-sections--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="DELETEapi-v1-admin-exam-sections--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="id"                data-endpoint="DELETEapi-v1-admin-exam-sections--id-"
+               value="architecto"
+               data-component="url">
+    <br>
+<p>The ID of the exam section. Example: <code>architecto</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="endpoints-GETapi-v1-admin-exams--id--questions">Get sections (with questions) and unsectioned questions of an exam.</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-admin-exams--id--questions">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://45.245.151.115:8000/api/v1/admin/exams/architecto/questions" \
+    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://45.245.151.115:8000/api/v1/admin/exams/architecto/questions"
+);
+
+const headers = {
+    "Authorization": "Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://45.245.151.115:8000/api/v1/admin/exams/architecto/questions';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="python-example">
+    <pre><code class="language-python">import requests
+import json
+
+url = 'http://45.245.151.115:8000/api/v1/admin/exams/architecto/questions'
+headers = {
+  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('GET', url, headers=headers)
+response.json()</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-admin-exams--id--questions">
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: *
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-admin-exams--id--questions" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-admin-exams--id--questions"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-admin-exams--id--questions"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-admin-exams--id--questions" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-admin-exams--id--questions">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-admin-exams--id--questions" data-method="GET"
+      data-path="api/v1/admin/exams/{id}/questions"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-admin-exams--id--questions', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-admin-exams--id--questions"
+                    onclick="tryItOut('GETapi-v1-admin-exams--id--questions');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-admin-exams--id--questions"
+                    onclick="cancelTryOut('GETapi-v1-admin-exams--id--questions');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-admin-exams--id--questions"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/admin/exams/{id}/questions</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-v1-admin-exams--id--questions"
+               value="Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-admin-exams--id--questions"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-admin-exams--id--questions"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="id"                data-endpoint="GETapi-v1-admin-exams--id--questions"
+               value="architecto"
+               data-component="url">
+    <br>
+<p>The ID of the exam. Example: <code>architecto</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="endpoints-GETapi-v1-admin-school-admins">List paginated school admins</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-admin-school-admins">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://45.245.151.115:8000/api/v1/admin/school-admins" \
+    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://45.245.151.115:8000/api/v1/admin/school-admins"
+);
+
+const headers = {
+    "Authorization": "Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://45.245.151.115:8000/api/v1/admin/school-admins';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="python-example">
+    <pre><code class="language-python">import requests
+import json
+
+url = 'http://45.245.151.115:8000/api/v1/admin/school-admins'
+headers = {
+  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('GET', url, headers=headers)
+response.json()</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-admin-school-admins">
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: *
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-admin-school-admins" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-admin-school-admins"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-admin-school-admins"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-admin-school-admins" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-admin-school-admins">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-admin-school-admins" data-method="GET"
+      data-path="api/v1/admin/school-admins"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-admin-school-admins', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-admin-school-admins"
+                    onclick="tryItOut('GETapi-v1-admin-school-admins');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-admin-school-admins"
+                    onclick="cancelTryOut('GETapi-v1-admin-school-admins');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-admin-school-admins"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/admin/school-admins</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-v1-admin-school-admins"
+               value="Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-admin-school-admins"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-admin-school-admins"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                    <h2 id="endpoints-POSTapi-v1-admin-school-admins">Create school admin: create user first then create school admin profile</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-admin-school-admins">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://45.245.151.115:8000/api/v1/admin/school-admins" \
+    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"name\": \"Tarek Hesham Sayed ElFarmawy\",
+    \"email\": \"schooladmin@example.com\",
+    \"phone\": \"01234567890\",
+    \"national_id\": \"12345678901234\",
+    \"password\": \"password123\",
+    \"school_id\": 1,
+    \"is_active\": false,
+    \"admin_permissions\": {
+        \"manage_students\": true,
+        \"view_reports\": true,
+        \"manage_school_settings\": false,
+        \"manage_exams\": true
+    }
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://45.245.151.115:8000/api/v1/admin/school-admins"
+);
+
+const headers = {
+    "Authorization": "Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "name": "Tarek Hesham Sayed ElFarmawy",
+    "email": "schooladmin@example.com",
+    "phone": "01234567890",
+    "national_id": "12345678901234",
+    "password": "password123",
+    "school_id": 1,
+    "is_active": false,
+    "admin_permissions": {
+        "manage_students": true,
+        "view_reports": true,
+        "manage_school_settings": false,
+        "manage_exams": true
+    }
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://45.245.151.115:8000/api/v1/admin/school-admins';
+$response = $client-&gt;post(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+        'json' =&gt; [
+            'name' =&gt; 'Tarek Hesham Sayed ElFarmawy',
+            'email' =&gt; 'schooladmin@example.com',
+            'phone' =&gt; '01234567890',
+            'national_id' =&gt; '12345678901234',
+            'password' =&gt; 'password123',
+            'school_id' =&gt; 1,
+            'is_active' =&gt; false,
+            'admin_permissions' =&gt; [
+                'manage_students' =&gt; true,
+                'view_reports' =&gt; true,
+                'manage_school_settings' =&gt; false,
+                'manage_exams' =&gt; true,
+            ],
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="python-example">
+    <pre><code class="language-python">import requests
+import json
+
+url = 'http://45.245.151.115:8000/api/v1/admin/school-admins'
+payload = {
+    "name": "Tarek Hesham Sayed ElFarmawy",
+    "email": "schooladmin@example.com",
+    "phone": "01234567890",
+    "national_id": "12345678901234",
+    "password": "password123",
+    "school_id": 1,
+    "is_active": false,
+    "admin_permissions": {
+        "manage_students": true,
+        "view_reports": true,
+        "manage_school_settings": false,
+        "manage_exams": true
+    }
+}
+headers = {
+  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('POST', url, headers=headers, json=payload)
+response.json()</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-admin-school-admins">
+</span>
+<span id="execution-results-POSTapi-v1-admin-school-admins" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-admin-school-admins"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-admin-school-admins"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-admin-school-admins" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-admin-school-admins">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-admin-school-admins" data-method="POST"
+      data-path="api/v1/admin/school-admins"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-admin-school-admins', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-admin-school-admins"
+                    onclick="tryItOut('POSTapi-v1-admin-school-admins');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-admin-school-admins"
+                    onclick="cancelTryOut('POSTapi-v1-admin-school-admins');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-admin-school-admins"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/admin/school-admins</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-v1-admin-school-admins"
+               value="Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-v1-admin-school-admins"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-v1-admin-school-admins"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="name"                data-endpoint="POSTapi-v1-admin-school-admins"
+               value="Tarek Hesham Sayed ElFarmawy"
+               data-component="body">
+    <br>
+<p>Full name of the school admin. Must not be greater than 255 characters. Example: <code>Tarek Hesham Sayed ElFarmawy</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="email"                data-endpoint="POSTapi-v1-admin-school-admins"
+               value="schooladmin@example.com"
+               data-component="body">
+    <br>
+<p>Email address of the school admin (must be unique). Must be a valid email address. Must not be greater than 255 characters. Example: <code>schooladmin@example.com</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>phone</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="phone"                data-endpoint="POSTapi-v1-admin-school-admins"
+               value="01234567890"
+               data-component="body">
+    <br>
+<p>Phone number of the school admin (must be unique). Must not be greater than 20 characters. Example: <code>01234567890</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>national_id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="national_id"                data-endpoint="POSTapi-v1-admin-school-admins"
+               value="12345678901234"
+               data-component="body">
+    <br>
+<p>National ID of the school admin (14 digits, unique). Must be 14 digits. Example: <code>12345678901234</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>password</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="password"                data-endpoint="POSTapi-v1-admin-school-admins"
+               value="password123"
+               data-component="body">
+    <br>
+<p>Password for the school admin account. Must be at least 8 characters. Example: <code>password123</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>school_id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="school_id"                data-endpoint="POSTapi-v1-admin-school-admins"
+               value="1"
+               data-component="body">
+    <br>
+<p>ID of the school to assign the admin to. The <code>id</code> of an existing record in the schools table. Example: <code>1</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>is_active</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+<i>optional</i> &nbsp;
+                <label data-endpoint="POSTapi-v1-admin-school-admins" style="display: none">
+            <input type="radio" name="is_active"
+                   value="true"
+                   data-endpoint="POSTapi-v1-admin-school-admins"
+                   data-component="body"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="POSTapi-v1-admin-school-admins" style="display: none">
+            <input type="radio" name="is_active"
+                   value="false"
+                   data-endpoint="POSTapi-v1-admin-school-admins"
+                   data-component="body"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>Whether the school admin account should be active. Example: <code>false</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+        <details>
+            <summary style="padding-bottom: 10px;">
+                <b style="line-height: 2;"><code>admin_permissions</code></b>&nbsp;&nbsp;
+<small>object</small>&nbsp;
+<i>optional</i> &nbsp;
+<br>
+<p>Permissions assigned to the school admin (optional).</p>
+            </summary>
+                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>manage_students</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+<i>optional</i> &nbsp;
+                <label data-endpoint="POSTapi-v1-admin-school-admins" style="display: none">
+            <input type="radio" name="admin_permissions.manage_students"
+                   value="true"
+                   data-endpoint="POSTapi-v1-admin-school-admins"
+                   data-component="body"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="POSTapi-v1-admin-school-admins" style="display: none">
+            <input type="radio" name="admin_permissions.manage_students"
+                   value="false"
+                   data-endpoint="POSTapi-v1-admin-school-admins"
+                   data-component="body"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>Allow managing students. Example: <code>false</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>view_reports</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+<i>optional</i> &nbsp;
+                <label data-endpoint="POSTapi-v1-admin-school-admins" style="display: none">
+            <input type="radio" name="admin_permissions.view_reports"
+                   value="true"
+                   data-endpoint="POSTapi-v1-admin-school-admins"
+                   data-component="body"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="POSTapi-v1-admin-school-admins" style="display: none">
+            <input type="radio" name="admin_permissions.view_reports"
+                   value="false"
+                   data-endpoint="POSTapi-v1-admin-school-admins"
+                   data-component="body"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>Allow viewing reports. Example: <code>false</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>manage_school_settings</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+<i>optional</i> &nbsp;
+                <label data-endpoint="POSTapi-v1-admin-school-admins" style="display: none">
+            <input type="radio" name="admin_permissions.manage_school_settings"
+                   value="true"
+                   data-endpoint="POSTapi-v1-admin-school-admins"
+                   data-component="body"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="POSTapi-v1-admin-school-admins" style="display: none">
+            <input type="radio" name="admin_permissions.manage_school_settings"
+                   value="false"
+                   data-endpoint="POSTapi-v1-admin-school-admins"
+                   data-component="body"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>Allow managing school settings. Example: <code>false</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>manage_exams</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+<i>optional</i> &nbsp;
+                <label data-endpoint="POSTapi-v1-admin-school-admins" style="display: none">
+            <input type="radio" name="admin_permissions.manage_exams"
+                   value="true"
+                   data-endpoint="POSTapi-v1-admin-school-admins"
+                   data-component="body"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="POSTapi-v1-admin-school-admins" style="display: none">
+            <input type="radio" name="admin_permissions.manage_exams"
+                   value="false"
+                   data-endpoint="POSTapi-v1-admin-school-admins"
+                   data-component="body"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>Allow managing exams. Example: <code>false</code></p>
+                    </div>
+                                    </details>
+        </div>
+        </form>
+
+                    <h2 id="endpoints-GETapi-v1-admin-school-admins--id-">Show school admin details</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-admin-school-admins--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://45.245.151.115:8000/api/v1/admin/school-admins/architecto" \
+    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://45.245.151.115:8000/api/v1/admin/school-admins/architecto"
+);
+
+const headers = {
+    "Authorization": "Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://45.245.151.115:8000/api/v1/admin/school-admins/architecto';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="python-example">
+    <pre><code class="language-python">import requests
+import json
+
+url = 'http://45.245.151.115:8000/api/v1/admin/school-admins/architecto'
+headers = {
+  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('GET', url, headers=headers)
+response.json()</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-admin-school-admins--id-">
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: *
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-admin-school-admins--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-admin-school-admins--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-admin-school-admins--id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-admin-school-admins--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-admin-school-admins--id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-admin-school-admins--id-" data-method="GET"
+      data-path="api/v1/admin/school-admins/{id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-admin-school-admins--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-admin-school-admins--id-"
+                    onclick="tryItOut('GETapi-v1-admin-school-admins--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-admin-school-admins--id-"
+                    onclick="cancelTryOut('GETapi-v1-admin-school-admins--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-admin-school-admins--id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/admin/school-admins/{id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-v1-admin-school-admins--id-"
+               value="Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-admin-school-admins--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-admin-school-admins--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="id"                data-endpoint="GETapi-v1-admin-school-admins--id-"
+               value="architecto"
+               data-component="url">
+    <br>
+<p>The ID of the school admin. Example: <code>architecto</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="endpoints-PUTapi-v1-admin-school-admins--id-">Update school admin and optionally its user</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-PUTapi-v1-admin-school-admins--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request PUT \
+    "http://45.245.151.115:8000/api/v1/admin/school-admins/architecto" \
+    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"school_id\": 1,
+    \"is_active\": false,
+    \"admin_permissions\": {
+        \"manage_students\": true,
+        \"view_reports\": true,
+        \"manage_school_settings\": false,
+        \"manage_exams\": true
+    }
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://45.245.151.115:8000/api/v1/admin/school-admins/architecto"
+);
+
+const headers = {
+    "Authorization": "Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "school_id": 1,
+    "is_active": false,
+    "admin_permissions": {
+        "manage_students": true,
+        "view_reports": true,
+        "manage_school_settings": false,
+        "manage_exams": true
+    }
+};
+
+fetch(url, {
+    method: "PUT",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://45.245.151.115:8000/api/v1/admin/school-admins/architecto';
+$response = $client-&gt;put(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+        'json' =&gt; [
+            'school_id' =&gt; 1,
+            'is_active' =&gt; false,
+            'admin_permissions' =&gt; [
+                'manage_students' =&gt; true,
+                'view_reports' =&gt; true,
+                'manage_school_settings' =&gt; false,
+                'manage_exams' =&gt; true,
+            ],
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="python-example">
+    <pre><code class="language-python">import requests
+import json
+
+url = 'http://45.245.151.115:8000/api/v1/admin/school-admins/architecto'
+payload = {
+    "school_id": 1,
+    "is_active": false,
+    "admin_permissions": {
+        "manage_students": true,
+        "view_reports": true,
+        "manage_school_settings": false,
+        "manage_exams": true
+    }
+}
+headers = {
+  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('PUT', url, headers=headers, json=payload)
+response.json()</code></pre></div>
+
+</span>
+
+<span id="example-responses-PUTapi-v1-admin-school-admins--id-">
+</span>
+<span id="execution-results-PUTapi-v1-admin-school-admins--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-PUTapi-v1-admin-school-admins--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-PUTapi-v1-admin-school-admins--id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-PUTapi-v1-admin-school-admins--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-PUTapi-v1-admin-school-admins--id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-PUTapi-v1-admin-school-admins--id-" data-method="PUT"
+      data-path="api/v1/admin/school-admins/{id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('PUTapi-v1-admin-school-admins--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-PUTapi-v1-admin-school-admins--id-"
+                    onclick="tryItOut('PUTapi-v1-admin-school-admins--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-PUTapi-v1-admin-school-admins--id-"
+                    onclick="cancelTryOut('PUTapi-v1-admin-school-admins--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-PUTapi-v1-admin-school-admins--id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-darkblue">PUT</small>
+            <b><code>api/v1/admin/school-admins/{id}</code></b>
+        </p>
+            <p>
+            <small class="badge badge-purple">PATCH</small>
+            <b><code>api/v1/admin/school-admins/{id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="PUTapi-v1-admin-school-admins--id-"
+               value="Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="PUTapi-v1-admin-school-admins--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="PUTapi-v1-admin-school-admins--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="id"                data-endpoint="PUTapi-v1-admin-school-admins--id-"
+               value="architecto"
+               data-component="url">
+    <br>
+<p>The ID of the school admin. Example: <code>architecto</code></p>
+            </div>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>school_id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="school_id"                data-endpoint="PUTapi-v1-admin-school-admins--id-"
+               value="1"
+               data-component="body">
+    <br>
+<p>ID of the school to assign the admin to. The <code>id</code> of an existing record in the schools table. Example: <code>1</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>is_active</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+<i>optional</i> &nbsp;
+                <label data-endpoint="PUTapi-v1-admin-school-admins--id-" style="display: none">
+            <input type="radio" name="is_active"
+                   value="true"
+                   data-endpoint="PUTapi-v1-admin-school-admins--id-"
+                   data-component="body"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="PUTapi-v1-admin-school-admins--id-" style="display: none">
+            <input type="radio" name="is_active"
+                   value="false"
+                   data-endpoint="PUTapi-v1-admin-school-admins--id-"
+                   data-component="body"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>Indicates whether the school admin account is active. Example: <code>false</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+        <details>
+            <summary style="padding-bottom: 10px;">
+                <b style="line-height: 2;"><code>admin_permissions</code></b>&nbsp;&nbsp;
+<small>object</small>&nbsp;
+<i>optional</i> &nbsp;
+<br>
+<p>Permissions assigned to the school admin (optional).</p>
+            </summary>
+                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>manage_students</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+<i>optional</i> &nbsp;
+                <label data-endpoint="PUTapi-v1-admin-school-admins--id-" style="display: none">
+            <input type="radio" name="admin_permissions.manage_students"
+                   value="true"
+                   data-endpoint="PUTapi-v1-admin-school-admins--id-"
+                   data-component="body"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="PUTapi-v1-admin-school-admins--id-" style="display: none">
+            <input type="radio" name="admin_permissions.manage_students"
+                   value="false"
+                   data-endpoint="PUTapi-v1-admin-school-admins--id-"
+                   data-component="body"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>Allow managing students. Example: <code>false</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>view_reports</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+<i>optional</i> &nbsp;
+                <label data-endpoint="PUTapi-v1-admin-school-admins--id-" style="display: none">
+            <input type="radio" name="admin_permissions.view_reports"
+                   value="true"
+                   data-endpoint="PUTapi-v1-admin-school-admins--id-"
+                   data-component="body"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="PUTapi-v1-admin-school-admins--id-" style="display: none">
+            <input type="radio" name="admin_permissions.view_reports"
+                   value="false"
+                   data-endpoint="PUTapi-v1-admin-school-admins--id-"
+                   data-component="body"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>Allow viewing reports. Example: <code>false</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>manage_school_settings</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+<i>optional</i> &nbsp;
+                <label data-endpoint="PUTapi-v1-admin-school-admins--id-" style="display: none">
+            <input type="radio" name="admin_permissions.manage_school_settings"
+                   value="true"
+                   data-endpoint="PUTapi-v1-admin-school-admins--id-"
+                   data-component="body"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="PUTapi-v1-admin-school-admins--id-" style="display: none">
+            <input type="radio" name="admin_permissions.manage_school_settings"
+                   value="false"
+                   data-endpoint="PUTapi-v1-admin-school-admins--id-"
+                   data-component="body"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>Allow managing school settings. Example: <code>false</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>manage_exams</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+<i>optional</i> &nbsp;
+                <label data-endpoint="PUTapi-v1-admin-school-admins--id-" style="display: none">
+            <input type="radio" name="admin_permissions.manage_exams"
+                   value="true"
+                   data-endpoint="PUTapi-v1-admin-school-admins--id-"
+                   data-component="body"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="PUTapi-v1-admin-school-admins--id-" style="display: none">
+            <input type="radio" name="admin_permissions.manage_exams"
+                   value="false"
+                   data-endpoint="PUTapi-v1-admin-school-admins--id-"
+                   data-component="body"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>Allow managing exams. Example: <code>false</code></p>
+                    </div>
+                                    </details>
+        </div>
+        </form>
+
+                    <h2 id="endpoints-DELETEapi-v1-admin-school-admins--id-">Delete school admin and its user (soft delete user)</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-DELETEapi-v1-admin-school-admins--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request DELETE \
+    "http://45.245.151.115:8000/api/v1/admin/school-admins/architecto" \
+    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://45.245.151.115:8000/api/v1/admin/school-admins/architecto"
+);
+
+const headers = {
+    "Authorization": "Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://45.245.151.115:8000/api/v1/admin/school-admins/architecto';
+$response = $client-&gt;delete(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="python-example">
+    <pre><code class="language-python">import requests
+import json
+
+url = 'http://45.245.151.115:8000/api/v1/admin/school-admins/architecto'
+headers = {
+  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('DELETE', url, headers=headers)
+response.json()</code></pre></div>
+
+</span>
+
+<span id="example-responses-DELETEapi-v1-admin-school-admins--id-">
+</span>
+<span id="execution-results-DELETEapi-v1-admin-school-admins--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-DELETEapi-v1-admin-school-admins--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-DELETEapi-v1-admin-school-admins--id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-DELETEapi-v1-admin-school-admins--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-DELETEapi-v1-admin-school-admins--id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-DELETEapi-v1-admin-school-admins--id-" data-method="DELETE"
+      data-path="api/v1/admin/school-admins/{id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('DELETEapi-v1-admin-school-admins--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-DELETEapi-v1-admin-school-admins--id-"
+                    onclick="tryItOut('DELETEapi-v1-admin-school-admins--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-DELETEapi-v1-admin-school-admins--id-"
+                    onclick="cancelTryOut('DELETEapi-v1-admin-school-admins--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-DELETEapi-v1-admin-school-admins--id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-red">DELETE</small>
+            <b><code>api/v1/admin/school-admins/{id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="DELETEapi-v1-admin-school-admins--id-"
+               value="Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="DELETEapi-v1-admin-school-admins--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="DELETEapi-v1-admin-school-admins--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="id"                data-endpoint="DELETEapi-v1-admin-school-admins--id-"
+               value="architecto"
+               data-component="url">
+    <br>
+<p>The ID of the school admin. Example: <code>architecto</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="endpoints-GETapi-health">GET api/health</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-GETapi-health">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://45.245.151.115:8000/api/health" \
+    --header "Authorization: Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://45.245.151.115:8000/api/health"
+);
+
+const headers = {
+    "Authorization": "Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://45.245.151.115:8000/api/health';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="python-example">
+    <pre><code class="language-python">import requests
+import json
+
+url = 'http://45.245.151.115:8000/api/health'
+headers = {
+  'Authorization': 'Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('GET', url, headers=headers)
+response.json()</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-health">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: *
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;status&quot;: &quot;ok&quot;,
+    &quot;timestamp&quot;: &quot;2025-09-25T19:54:27.522473Z&quot;,
+    &quot;version&quot;: &quot;1.0.0&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-health" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-health"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-health"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-health" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-health">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-health" data-method="GET"
+      data-path="api/health"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-health', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-health"
+                    onclick="tryItOut('GETapi-health');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-health"
+                    onclick="cancelTryOut('GETapi-health');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-health"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/health</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-health"
+               value="Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 32|SfB5VTlbnaK3sAODNHr0bdC6245PaFCdCrRTE4iA69a373c6</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-health"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-health"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+            
+
+        
+    </div>
+    <div class="dark-box">
+                    <div class="lang-selector">
+                                                        <button type="button" class="lang-button" data-language-name="bash">bash</button>
+                                                        <button type="button" class="lang-button" data-language-name="javascript">javascript</button>
+                                                        <button type="button" class="lang-button" data-language-name="php">php</button>
+                                                        <button type="button" class="lang-button" data-language-name="python">python</button>
+                            </div>
+            </div>
+</div>
+</body>
+</html>

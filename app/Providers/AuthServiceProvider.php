@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Core\Contracts\Repositories\SchoolAdminRepositoryInterface;
+use App\Core\Contracts\Services\SchoolAdminServiceInterface;
+use App\Core\Repositories\SchoolAdminRepository;
+use App\Core\Services\SchoolAdminService;
 use App\Modules\Authentication\Models\User;
 use App\Modules\ExamManagement\Models\Exam;
 use Illuminate\Support\Facades\Gate;
@@ -14,7 +18,8 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->bind(SchoolAdminServiceInterface::class, SchoolAdminService::class);
+        $this->app->bind(SchoolAdminRepositoryInterface::class, SchoolAdminRepository::class);
     }
 
     /**

@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class CreateTeacherRequest extends FormRequest
+class StoreTeacherRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -54,6 +54,64 @@ class CreateTeacherRequest extends FormRequest
             'is_active.boolean'              => 'حالة التفعيل يجب أن تكون صحيحة أو خطأ',
             'school_ids.array'               => 'قائمة المدارس يجب أن تكون مصفوفة',
             'school_ids.*.exists'            => 'المدرسة المختارة غير موجودة',
+        ];
+    }
+
+    public function bodyParameters(): array
+    {
+        return [
+            'name' => [
+                'description' => 'Full name of the teacher.',
+                'example' => 'Tarek Hesham Sayed ElFarmawy',
+            ],
+            'email' => [
+                'description' => 'Email address of the teacher (must be unique).',
+                'example' => 'teacher@example.com',
+            ],
+            'phone' => [
+                'description' => 'Phone number of the teacher (must be unique).',
+                'example' => '01234567890',
+            ],
+            'national_id' => [
+                'description' => 'National ID of the teacher (14 digits, unique).',
+                'example' => '12345678901234',
+            ],
+            'password' => [
+                'description' => 'Password for the teacher account.',
+                'example' => 'password123',
+            ],
+            'password_confirmation' => [
+                'description' => 'Confirmation of the password.',
+                'example' => 'password123',
+            ],
+            'subject_id' => [
+                'description' => 'Subject ID or name assigned to the teacher.',
+                'example' => 5,
+            ],
+            'teacher_type' => [
+                'description' => 'Type of teacher (regular or supervisor).',
+                'example' => 'regular',
+            ],
+            'can_create_exams' => [
+                'description' => 'Whether the teacher can create exams.',
+                'example' => true,
+            ],
+            'can_correct_essays' => [
+                'description' => 'Whether the teacher can correct essays.',
+                'example' => false,
+            ],
+            'is_active' => [
+                'description' => 'Indicates if the teacher account is active.',
+                'example' => true,
+            ],
+            'school_ids' => [
+                'description' => 'Array of school IDs assigned to the teacher.',
+                'example' => [1, 2, 3],
+            ],
+            'assignment_type' => [
+                'description' => 'Type of assignment for the teacher (teaching, supervision, correction).',
+                'example' => 'teaching',
+            ],
         ];
     }
 }

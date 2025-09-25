@@ -43,4 +43,38 @@ class StoreSubjectRequest extends FormRequest
             'is_active.boolean' => 'حالة المادة غير صحيحة',
         ];
     }
+
+    public function bodyParameters(): array
+    {
+        return [
+            'name' => [
+                'description' => 'Name of the subject.',
+                'example' => 'Mathematics',
+            ],
+            'code' => [
+                'description' => 'Unique code of the subject.',
+                'example' => 'MATH101',
+            ],
+            'section' => [
+                'description' => 'Section or category of the subject (optional).',
+                'example' => 'Science',
+            ],
+            'duration_minutes' => [
+                'description' => 'Default duration of exams for this subject in minutes.',
+                'example' => 90,
+            ],
+            'max_score' => [
+                'description' => 'Maximum score achievable in this subject.',
+                'example' => 100,
+            ],
+            'has_essay_questions' => [
+                'description' => 'Indicates if the subject includes essay questions.',
+                'example' => true,
+            ],
+            'is_active' => [
+                'description' => 'Whether the subject is active.',
+                'example' => true,
+            ],
+        ];
+    }
 }

@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class CreateSchoolAdminRequest extends FormRequest
+class StoreSchoolAdminRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -52,6 +52,69 @@ class CreateSchoolAdminRequest extends FormRequest
             'admin_permissions.view_reports.boolean' => 'حقوق المدير المدرسة يجب ان تكون صحيحة',
             'admin_permissions.manage_school_settings.boolean' => 'حقوق المدير المدرسة يجب ان تكون صحيحة',
             'admin_permissions.manage_exams.boolean' => 'حقوق المدير المدرسة يجب ان تكون صحيحة',
+        ];
+    }
+
+    public function bodyParameters(): array
+    {
+        return [
+            'name' => [
+                'description' => 'Full name of the school admin.',
+                'example' => 'Tarek Hesham Sayed ElFarmawy',
+            ],
+            'email' => [
+                'description' => 'Email address of the school admin (must be unique).',
+                'example' => 'schooladmin@example.com',
+            ],
+            'phone' => [
+                'description' => 'Phone number of the school admin (must be unique).',
+                'example' => '01234567890',
+            ],
+            'national_id' => [
+                'description' => 'National ID of the school admin (14 digits, unique).',
+                'example' => '12345678901234',
+            ],
+            'password' => [
+                'description' => 'Password for the school admin account.',
+                'example' => 'password123',
+            ],
+            'password_confirmation' => [
+                'description' => 'Confirmation of the password.',
+                'example' => 'password123',
+            ],
+            'school_id' => [
+                'description' => 'ID of the school to assign the admin to.',
+                'example' => 1,
+            ],
+            'is_active' => [
+                'description' => 'Whether the school admin account should be active.',
+                'example' => true,
+            ],
+            'admin_permissions' => [
+                'description' => 'Permissions assigned to the school admin (optional).',
+                'example' => [
+                    'manage_students' => true,
+                    'view_reports' => true,
+                    'manage_school_settings' => false,
+                    'manage_exams' => true,
+                ],
+            ],
+            'admin_permissions.manage_students' => [
+                'description' => 'Allow managing students.',
+                'example' => true,
+            ],
+            'admin_permissions.view_reports' => [
+                'description' => 'Allow viewing reports.',
+                'example' => true,
+            ],
+            'admin_permissions.manage_school_settings' => [
+                'description' => 'Allow managing school settings.',
+                'example' => false,
+            ],
+            'admin_permissions.manage_exams' => [
+                'description' => 'Allow managing exams.',
+                'example' => true,
+            ],
         ];
     }
 }

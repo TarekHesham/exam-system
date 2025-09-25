@@ -38,7 +38,11 @@ class TeacherController extends Controller
      */
     public function show(int $id): JsonResponse
     {
-        $teacher = Teacher::with(['user.teacher.schoolAssignments.school'])->findOrFail($id);
+        $teacher = Teacher::with(['user.teacher.schoolAssignments.school'])->find($id);
+
+        if (! $teacher) {
+            return $this->errorResponse('Teacher not found');
+        }
 
         return $this->successResponse(new UserResource($teacher->user), 'Teacher details');
     }

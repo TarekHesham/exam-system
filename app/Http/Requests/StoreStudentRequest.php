@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class CreateStudentRequest extends FormRequest
+class StoreStudentRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -50,6 +50,60 @@ class CreateStudentRequest extends FormRequest
             'birth_date.before' => 'تاريخ الميلاد يجب أن يكون في الماضي',
             'gender.required' => 'الجنس مطلوب',
             'guardian_phone.required' => 'رقم هاتف ولي الأمر مطلوب',
+        ];
+    }
+
+    public function bodyParameters(): array
+    {
+        return [
+            'name' => [
+                'description' => 'Full name of the student.',
+                'example' => 'Tarek Hesham Sayed ElFarmawy',
+            ],
+            'email' => [
+                'description' => 'Email address of the student (must be unique).',
+                'example' => 'student@example.com',
+            ],
+            'phone' => [
+                'description' => 'Phone number of the student (must be unique).',
+                'example' => '01234567890',
+            ],
+            'national_id' => [
+                'description' => 'National ID of the student (14 digits, unique).',
+                'example' => '12345678901234',
+            ],
+            'password' => [
+                'description' => 'Password for the student account.',
+                'example' => 'password123',
+            ],
+            'password_confirmation' => [
+                'description' => 'Confirmation of the password.',
+                'example' => 'password123',
+            ],
+            'seat_number' => [
+                'description' => 'Seat number of the student (optional).',
+                'example' => 'A23',
+            ],
+            'academic_year' => [
+                'description' => 'Academic year of the student.',
+                'example' => 'second',
+            ],
+            'section' => [
+                'description' => 'Student section (scientific or literature).',
+                'example' => 'scientific',
+            ],
+            'birth_date' => [
+                'description' => 'Date of birth of the student.',
+                'example' => '2025-05-15',
+            ],
+            'gender' => [
+                'description' => 'Gender of the student.',
+                'example' => 'male',
+            ],
+            'guardian_phone' => [
+                'description' => 'Phone number of the guardian.',
+                'example' => '01098765432',
+            ],
         ];
     }
 }

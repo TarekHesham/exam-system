@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class CreateExamRequest extends FormRequest
+class StoreExamRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -61,5 +61,55 @@ class CreateExamRequest extends FormRequest
             'require_video_recording' => $this->boolean('require_video_recording'),
             'minimum_battery_percentage' => $this->input('minimum_battery_percentage') ?: 20
         ]);
+    }
+
+    public function bodyParameters(): array
+    {
+        return [
+            'subject_id' => [
+                'description' => 'ID of the subject related to the exam.',
+                'example' => 3,
+            ],
+            'title' => [
+                'description' => 'Title of the exam.',
+                'example' => 'Midterm Exam',
+            ],
+            'description' => [
+                'description' => 'Short description of the exam (optional).',
+                'example' => 'Covers chapters 1 to 3.',
+            ],
+            'exam_type' => [
+                'description' => 'Type of the exam (practice or final).',
+                'example' => 'final',
+            ],
+            'academic_year' => [
+                'description' => 'Target academic year (first, second, third).',
+                'example' => 'second',
+            ],
+            'start_time' => [
+                'description' => 'Start date and time of the exam (must be in the future).',
+                'example' => '2025-10-01 09:00:00',
+            ],
+            'end_time' => [
+                'description' => 'End date and time of the exam (must be after start_time).',
+                'example' => '2025-10-01 11:00:00',
+            ],
+            'duration_minutes' => [
+                'description' => 'Duration of the exam in minutes (1 to 480).',
+                'example' => 120,
+            ],
+            'total_score' => [
+                'description' => 'Total score of the exam.',
+                'example' => 100,
+            ],
+            'minimum_battery_percentage' => [
+                'description' => 'Minimum allowed battery percentage to enter the exam (0 to 100).',
+                'example' => 30,
+            ],
+            'require_video_recording' => [
+                'description' => 'Whether video recording is required during the exam (true/false).',
+                'example' => true,
+            ],
+        ];
     }
 }

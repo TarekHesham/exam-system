@@ -4,11 +4,15 @@ namespace App\Providers;
 
 use App\Core\Contracts\Repositories\ExamQuestionRepositoryInterface;
 use App\Core\Contracts\Repositories\ExamRepositoryInterface;
+use App\Core\Contracts\Repositories\ExamSectionRepositoryInterface;
 use App\Core\Contracts\Services\ExamQuestionServiceInterface;
+use App\Core\Contracts\Services\ExamSectionServiceInterface;
 use App\Core\Contracts\Services\ExamServiceInterface;
 use App\Core\Repositories\ExamQuestionRepository;
 use App\Core\Repositories\ExamRepository;
+use App\Core\Repositories\ExamSectionRepository;
 use App\Core\Services\ExamQuestionService;
+use App\Core\Services\ExamSectionService;
 use App\Core\Services\ExamService;
 use Illuminate\Support\ServiceProvider;
 
@@ -24,6 +28,9 @@ class ExamServiceProvider extends ServiceProvider
 
         $this->app->bind(ExamQuestionRepositoryInterface::class, ExamQuestionRepository::class);
         $this->app->bind(ExamQuestionServiceInterface::class, ExamQuestionService::class);
+
+        $this->app->bind(ExamSectionRepositoryInterface::class, ExamSectionRepository::class);
+        $this->app->bind(ExamSectionServiceInterface::class, ExamSectionService::class);
     }
 
     /**

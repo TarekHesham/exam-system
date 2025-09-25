@@ -45,7 +45,7 @@ class TeacherExamController extends Controller
             // Find available exam for the student
             $availableExam = $this->findAvailableExamForStudent($request->student_id);
 
-            if (!$availableExam) {
+            if (! $availableExam) {
                 return response()->json([
                     'status' => false,
                     'message' => 'لا يوجد امتحان متاح للطالب في الوقت الحالي'
@@ -91,7 +91,12 @@ class TeacherExamController extends Controller
      */
     private function findAvailableExamForStudent(int $studentId): ?Exam
     {
-        $student = Student::with(['user', 'school'])->findOrFail($studentId);
+        $student = Student::with(['user', 'school'])->find($studentId);
+
+        if (! $student) {
+            return null;
+        }
+
         $now = Carbon::now();
 
         return Exam::query()

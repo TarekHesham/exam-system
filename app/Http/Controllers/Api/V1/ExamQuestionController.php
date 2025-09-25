@@ -128,7 +128,11 @@ class ExamQuestionController extends Controller
                     'help_text'
                 ])->whereNull('section_id')->orderBy('id');
             }
-        ])->findOrFail($id);
+        ])->find($id);
+
+        if (! $exam) {
+            return $this->errorResponse('Exam not found');
+        }
 
         return response()->json([
             'sections' => ExamSectionWithQuestionsResource::collection($exam->sections),

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api\V1;
 use App\Core\Contracts\Services\ExamServiceInterface;
 use App\Http\Controllers\Controller;
 use App\Core\DTOs\{CreateExamDTO, ExamFilterDTO, UpdateExamDTO};
-use App\Http\Requests\{CreateExamRequest, UpdateExamRequest};
+use App\Http\Requests\{StoreExamRequest, UpdateExamRequest};
 use App\Http\Resources\ExamResource;
 use App\Modules\ExamManagement\Models\Exam;
 use Exception;
@@ -33,7 +33,7 @@ class ExamController extends Controller
         );
     }
 
-    public function store(CreateExamRequest $request)
+    public function store(StoreExamRequest $request)
     {
         try {
             $dto = CreateExamDTO::fromRequest($request);
