@@ -73,57 +73,6 @@ class AuthController extends Controller
     }
 
     /**
-     * Create teacher account (Ministry Admin only)
-     * @param Request $request
-     */
-    public function createTeacher(StoreTeacherRequest $request): JsonResponse
-    {
-        return DB::transaction(function () use ($request) {
-            $userData = UserDTO::fromArray([
-                'name'        => $request->name,
-                'email'       => $request->email,
-                'phone'       => $request->phone,
-                'national_id' => $request->national_id,
-                'user_type'   => 'teacher',
-                'password'    => Hash::make($request->password),
-                'is_active'   => $request->get('is_active', true),
-            ]);
-
-            // Create user
-            $user = $this->userService->createUser($userData);
-
-            // Create teacher profile
-            $teacher = $this->userService->createTeacherProfile($user->id, [
-                'teacher_code'           => $this->generateTeacherCode(),
-                'subject_id'             => $request->subject_id,
-                'teacher_type'           => $request->get('teacher_type', 'regular'),
-                'can_create_exams'       => $request->get('can_create_exams', false),
-                'can_correct_essays'     => $request->get('can_correct_essays', false),
-            ]);
-
-            // Assign to schools if provided
-            if ($request->has('school_ids')) {
-                $this->userService->assignTeacherToSchools(
-                    $teacher->id,
-                    $request->school_ids,
-                    $request->get('assignment_type', 'teaching')
-                );
-            }
-
-            // Log activity
-            $this->authService->logActivity(Auth::id(), 'create_teacher', [
-                'teacher_id'   => $teacher->id,
-                'teacher_code' => $teacher->teacher_code,
-            ]);
-
-            return $this->successResponse([
-                'user' => new UserResource($user->load('teacher')),
-                'teacher_code' => $teacher->teacher_code,
-            ], 'تم إنشاء حساب المعلم بنجاح', 201);
-        });
-    }
-
-    /**
      * Create school admin account (Ministry Admin only)
      * @param Request $request
      */
@@ -246,17 +195,5 @@ class AuthController extends Controller
                 'message' => 'حدث خطأ أثناء تسجيل الخروج'
             ], 500);
         }
-    }
-
-    /**
-     * Generate unique teacher code
-     */
-    private function generateTeacherCode(): string
-    {
-        do {
-            $code = 'T' . date('Y') . str_pad(rand(1, 9999), 4, '0', STR_PAD_LEFT);
-        } while ($this->userService->teacherCodeExists($code));
-
-        return $code;
     }
 }

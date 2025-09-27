@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers\Api\V1\Admin;
 
-use App\Core\Contracts\Services\SchoolServiceInterface;
-use App\Core\DTOs\SchoolDTO;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreSchoolRequest;
-use App\Http\Requests\UpdateSchoolRequest;
+use App\Http\Requests\{StoreSchoolRequest, UpdateSchoolRequest};
+use App\Core\Contracts\Services\SchoolServiceInterface;
 use App\Http\Resources\IndexSchoolResource;
+use App\Core\DTOs\SchoolDTO;
 
 class SchoolController extends Controller
 {
@@ -19,9 +18,22 @@ class SchoolController extends Controller
 
     public function index()
     {
-        $perPage = request()->get('per_page', 15);
-        $schools = $this->service->list($perPage);
-        return $this->successResponsePaginate(IndexSchoolResource::collection($schools), $schools);
+        $governorateId = request()->query('governorate_id');
+        $perPage = request()->query('per_page', 10);
+
+        $schools = $governorateId
+            ? $this->service->listByGovernorate($governorateId)
+            : $this->service->list($perPage);
+
+        if ($schools->isEmpty()) {
+            return $this->errorResponse('Schools not found');
+        }
+
+        $resource = IndexSchoolResource::collection($schools);
+
+        return $governorateId
+            ? $this->successResponse($resource, 'Schools found')
+            : $this->successResponsePaginate($resource, $schools);
     }
 
     public function show(int $id)

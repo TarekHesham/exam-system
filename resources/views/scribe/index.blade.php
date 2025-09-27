@@ -28,7 +28,7 @@
             </style>
 
     <script>
-        var tryItOutBaseUrl = "http://45.245.134.74:8000";
+        var tryItOutBaseUrl = "http://45.241.41.90:8000";
         var useCsrf = Boolean();
         var csrfUrl = "/sanctum/csrf-cookie";
     </script>
@@ -75,7 +75,10 @@
                     <a href="#endpoints">Endpoints</a>
                 </li>
                                     <ul id="tocify-subheader-endpoints" class="tocify-subheader">
-                                                    <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-student-available-exam">
+                                                    <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-auth-login">
+                                <a href="#endpoints-POSTapi-v1-auth-login">Authenticate user and return access token</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-student-available-exam">
                                 <a href="#endpoints-GETapi-v1-student-available-exam">Student gets available exam if session exists
 Student can only start exam during exam time window</a>
                             </li>
@@ -100,11 +103,11 @@ Student can only start exam during exam time window</a>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-DELETEapi-v1-admin-students--id-">
                                 <a href="#endpoints-DELETEapi-v1-admin-students--id-">Remove a student (soft-delete) and associated user.</a>
                             </li>
-                                                                                <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-admin-create-teacher">
-                                <a href="#endpoints-POSTapi-v1-admin-create-teacher">Create teacher account (Ministry Admin only)</a>
-                            </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-admin-teachers">
                                 <a href="#endpoints-GETapi-v1-admin-teachers">List all teachers</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-admin-teachers">
+                                <a href="#endpoints-POSTapi-v1-admin-teachers">Create teacher account (Ministry Admin only)</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-admin-teachers--id-">
                                 <a href="#endpoints-GETapi-v1-admin-teachers--id-">Show teacher details</a>
@@ -214,9 +217,6 @@ Student can only start exam during exam time window</a>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-DELETEapi-v1-admin-schools--id-">
                                 <a href="#endpoints-DELETEapi-v1-admin-schools--id-">DELETE api/v1/admin/schools/{id}</a>
                             </li>
-                                                                                <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-auth-login">
-                                <a href="#endpoints-POSTapi-v1-auth-login">Authenticate user and return access token</a>
-                            </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-me">
                                 <a href="#endpoints-GETapi-v1-me">Get current authenticated user</a>
                             </li>
@@ -253,7 +253,7 @@ Student can only start exam during exam time window</a>
         <h1 id="introduction">Introduction</h1>
 <p>This documentation aims to provide all the information you need to work with our API.</p>
 <aside>
-    <strong>Base URL</strong>: <code>http://45.245.134.74:8000</code>
+    <strong>Base URL</strong>: <code>http://45.241.41.90:8000</code>
 </aside>
 <pre><code>This documentation aims to provide all the information you need to work with our API.
 
@@ -269,7 +269,274 @@ You can switch the language used with the tabs at the top right (or from the nav
 
     
 
-                                <h2 id="endpoints-GETapi-v1-student-available-exam">Student gets available exam if session exists
+                                <h2 id="endpoints-POSTapi-v1-auth-login">Authenticate user and return access token</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-auth-login">
+<blockquote>Example request:</blockquote>
+
+
+<div class="JS-example">
+    <pre><code class="language-JS">const url = new URL(
+    "http://45.241.41.90:8000/api/v1/auth/login"
+);
+
+const headers = {
+    "Authorization": "Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "phone": "01010869000",
+    "national_id": "01234567891234",
+    "email": "tarek@digitopia.com",
+    "password": "12345678"
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="Laravel-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://45.241.41.90:8000/api/v1/auth/login';
+$response = $client-&gt;post(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+        'json' =&gt; [
+            'phone' =&gt; '01010869000',
+            'national_id' =&gt; '01234567891234',
+            'email' =&gt; 'tarek@digitopia.com',
+            'password' =&gt; '12345678',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="DartPad-example">
+    <pre><code class="language-ts">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+  final url = 'http://45.241.41.90:8000/api/v1/auth/login';
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = [
+    'phone' =&gt; '01010869000',
+    'national_id' =&gt; '01234567891234',
+    'email' =&gt; 'tarek@digitopia.com',
+    'password' =&gt; '12345678',
+];
+
+  try {
+    final response = await dio.request(
+      url,
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'POST',
+        headers: headers,
+      ),
+    );
+    print(response.data);
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+
+<div class="Dio-example">
+    <pre><code class="language-javascript">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+
+  final url = Uri.parse("http://45.241.41.90:8000/api/v1/auth/login");
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = [
+    'phone' =&gt; '01010869000',
+    'national_id' =&gt; '01234567891234',
+    'email' =&gt; 'tarek@digitopia.com',
+    'password' =&gt; '12345678',
+];
+
+  try {
+    final response = await dio.request(
+      url.toString(),
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'POST',
+        headers: headers,
+      ),
+    );
+    print('Response: ${response.data}');
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-auth-login">
+</span>
+<span id="execution-results-POSTapi-v1-auth-login" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-auth-login"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-auth-login"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-auth-login" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-auth-login">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-auth-login" data-method="POST"
+      data-path="api/v1/auth/login"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-auth-login', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-auth-login"
+                    onclick="tryItOut('POSTapi-v1-auth-login');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-auth-login"
+                    onclick="cancelTryOut('POSTapi-v1-auth-login');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-auth-login"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/auth/login</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-v1-auth-login"
+               value="Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-v1-auth-login"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-v1-auth-login"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>phone</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="phone"                data-endpoint="POSTapi-v1-auth-login"
+               value="01010869000"
+               data-component="body">
+    <br>
+<p>Phone number of the user (11 digits). Required if national_id and email are not provided. This field is required when none of <code>national_id</code> and <code>email</code> are present. Must be 11 digits. Example: <code>01010869000</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>national_id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="national_id"                data-endpoint="POSTapi-v1-auth-login"
+               value="01234567891234"
+               data-component="body">
+    <br>
+<p>National ID of the user (14 digits). Required if phone and email are not provided. This field is required when none of <code>phone</code> and <code>email</code> are present. Must be 14 digits. Example: <code>01234567891234</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="email"                data-endpoint="POSTapi-v1-auth-login"
+               value="tarek@digitopia.com"
+               data-component="body">
+    <br>
+<p>Email address of the user. Required if phone and national_id are not provided. This field is required when none of <code>phone</code> and <code>national_id</code> are present. Must be a valid email address. Must not be greater than 255 characters. Example: <code>tarek@digitopia.com</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>password</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="password"                data-endpoint="POSTapi-v1-auth-login"
+               value="12345678"
+               data-component="body">
+    <br>
+<p>Password of the user (minimum 8 characters). Must be at least 8 characters. Example: <code>12345678</code></p>
+        </div>
+        </form>
+
+                    <h2 id="endpoints-GETapi-v1-student-available-exam">Student gets available exam if session exists
 Student can only start exam during exam time window</h2>
 
 <p>
@@ -284,7 +551,7 @@ Student can only start exam during exam time window</h2>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.134.74:8000/api/v1/student/available-exam"
+    "http://45.241.41.90:8000/api/v1/student/available-exam"
 );
 
 const headers = {
@@ -301,7 +568,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.134.74:8000/api/v1/student/available-exam';
+$url = 'http://45.241.41.90:8000/api/v1/student/available-exam';
 $response = $client-&gt;get(
     $url,
     [
@@ -322,7 +589,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.134.74:8000/api/v1/student/available-exam';
+  final url = 'http://45.241.41.90:8000/api/v1/student/available-exam';
 
     final queryParams = {};
 
@@ -356,7 +623,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.134.74:8000/api/v1/student/available-exam");
+  final url = Uri.parse("http://45.241.41.90:8000/api/v1/student/available-exam");
 
     final queryParams = {};
 
@@ -498,7 +765,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.134.74:8000/api/v1/student/exam/submit"
+    "http://45.241.41.90:8000/api/v1/student/exam/submit"
 );
 
 const headers = {
@@ -543,7 +810,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.134.74:8000/api/v1/student/exam/submit';
+$url = 'http://45.241.41.90:8000/api/v1/student/exam/submit';
 $response = $client-&gt;post(
     $url,
     [
@@ -590,7 +857,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.134.74:8000/api/v1/student/exam/submit';
+  final url = 'http://45.241.41.90:8000/api/v1/student/exam/submit';
 
     final queryParams = {};
 
@@ -649,7 +916,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.134.74:8000/api/v1/student/exam/submit");
+  final url = Uri.parse("http://45.241.41.90:8000/api/v1/student/exam/submit");
 
     final queryParams = {};
 
@@ -878,7 +1145,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.134.74:8000/api/v1/teacher/scan-qr-create-session"
+    "http://45.241.41.90:8000/api/v1/teacher/scan-qr-create-session"
 );
 
 const headers = {
@@ -901,7 +1168,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.134.74:8000/api/v1/teacher/scan-qr-create-session';
+$url = 'http://45.241.41.90:8000/api/v1/teacher/scan-qr-create-session';
 $response = $client-&gt;post(
     $url,
     [
@@ -926,7 +1193,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.134.74:8000/api/v1/teacher/scan-qr-create-session';
+  final url = 'http://45.241.41.90:8000/api/v1/teacher/scan-qr-create-session';
 
     final queryParams = {};
 
@@ -963,7 +1230,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.134.74:8000/api/v1/teacher/scan-qr-create-session");
+  final url = Uri.parse("http://45.241.41.90:8000/api/v1/teacher/scan-qr-create-session");
 
     final queryParams = {};
 
@@ -1137,7 +1404,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.134.74:8000/api/v1/admin/students"
+    "http://45.241.41.90:8000/api/v1/admin/students"
 );
 
 const headers = {
@@ -1154,7 +1421,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.134.74:8000/api/v1/admin/students';
+$url = 'http://45.241.41.90:8000/api/v1/admin/students';
 $response = $client-&gt;get(
     $url,
     [
@@ -1175,7 +1442,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.134.74:8000/api/v1/admin/students';
+  final url = 'http://45.241.41.90:8000/api/v1/admin/students';
 
     final queryParams = {};
 
@@ -1209,7 +1476,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.134.74:8000/api/v1/admin/students");
+  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/students");
 
     final queryParams = {};
 
@@ -1351,7 +1618,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.134.74:8000/api/v1/admin/students"
+    "http://45.241.41.90:8000/api/v1/admin/students"
 );
 
 const headers = {
@@ -1383,7 +1650,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.134.74:8000/api/v1/admin/students';
+$url = 'http://45.241.41.90:8000/api/v1/admin/students';
 $response = $client-&gt;post(
     $url,
     [
@@ -1417,7 +1684,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.134.74:8000/api/v1/admin/students';
+  final url = 'http://45.241.41.90:8000/api/v1/admin/students';
 
     final queryParams = {};
 
@@ -1463,7 +1730,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.134.74:8000/api/v1/admin/students");
+  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/students");
 
     final queryParams = {};
 
@@ -1729,7 +1996,7 @@ Must be one of:
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.134.74:8000/api/v1/admin/students/architecto"
+    "http://45.241.41.90:8000/api/v1/admin/students/architecto"
 );
 
 const headers = {
@@ -1746,7 +2013,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.134.74:8000/api/v1/admin/students/architecto';
+$url = 'http://45.241.41.90:8000/api/v1/admin/students/architecto';
 $response = $client-&gt;get(
     $url,
     [
@@ -1767,7 +2034,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.134.74:8000/api/v1/admin/students/architecto';
+  final url = 'http://45.241.41.90:8000/api/v1/admin/students/architecto';
 
     final queryParams = {};
 
@@ -1801,7 +2068,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.134.74:8000/api/v1/admin/students/architecto");
+  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/students/architecto");
 
     final queryParams = {};
 
@@ -1955,7 +2222,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.134.74:8000/api/v1/admin/students/architecto"
+    "http://45.241.41.90:8000/api/v1/admin/students/architecto"
 );
 
 const headers = {
@@ -1990,7 +2257,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.134.74:8000/api/v1/admin/students/architecto';
+$url = 'http://45.241.41.90:8000/api/v1/admin/students/architecto';
 $response = $client-&gt;put(
     $url,
     [
@@ -2027,7 +2294,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.134.74:8000/api/v1/admin/students/architecto';
+  final url = 'http://45.241.41.90:8000/api/v1/admin/students/architecto';
 
     final queryParams = {};
 
@@ -2076,7 +2343,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.134.74:8000/api/v1/admin/students/architecto");
+  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/students/architecto");
 
     final queryParams = {};
 
@@ -2404,7 +2671,7 @@ Must be one of:
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.134.74:8000/api/v1/admin/students/architecto"
+    "http://45.241.41.90:8000/api/v1/admin/students/architecto"
 );
 
 const headers = {
@@ -2421,7 +2688,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.134.74:8000/api/v1/admin/students/architecto';
+$url = 'http://45.241.41.90:8000/api/v1/admin/students/architecto';
 $response = $client-&gt;delete(
     $url,
     [
@@ -2442,7 +2709,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.134.74:8000/api/v1/admin/students/architecto';
+  final url = 'http://45.241.41.90:8000/api/v1/admin/students/architecto';
 
     final queryParams = {};
 
@@ -2476,7 +2743,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.134.74:8000/api/v1/admin/students/architecto");
+  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/students/architecto");
 
     final queryParams = {};
 
@@ -2600,425 +2867,6 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                     </form>
 
-                    <h2 id="endpoints-POSTapi-v1-admin-create-teacher">Create teacher account (Ministry Admin only)</h2>
-
-<p>
-<small class="badge badge-darkred">requires authentication</small>
-</p>
-
-
-
-<span id="example-requests-POSTapi-v1-admin-create-teacher">
-<blockquote>Example request:</blockquote>
-
-
-<div class="JS-example">
-    <pre><code class="language-JS">const url = new URL(
-    "http://45.245.134.74:8000/api/v1/admin/create-teacher"
-);
-
-const headers = {
-    "Authorization": "Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d",
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-let body = {
-    "name": "Tarek Hesham Sayed ElFarmawy",
-    "email": "teacher@example.com",
-    "phone": "01234567890",
-    "national_id": "12345678901234",
-    "password": "password123",
-    "subject_id": 5,
-    "teacher_type": "regular",
-    "can_create_exams": false,
-    "can_correct_essays": false,
-    "is_active": false,
-    "assignment_type": "teaching"
-};
-
-fetch(url, {
-    method: "POST",
-    headers,
-    body: JSON.stringify(body),
-}).then(response =&gt; response.json());</code></pre></div>
-
-
-<div class="Laravel-example">
-    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.134.74:8000/api/v1/admin/create-teacher';
-$response = $client-&gt;post(
-    $url,
-    [
-        'headers' =&gt; [
-            'Authorization' =&gt; 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d',
-            'Content-Type' =&gt; 'application/json',
-            'Accept' =&gt; 'application/json',
-        ],
-        'json' =&gt; [
-            'name' =&gt; 'Tarek Hesham Sayed ElFarmawy',
-            'email' =&gt; 'teacher@example.com',
-            'phone' =&gt; '01234567890',
-            'national_id' =&gt; '12345678901234',
-            'password' =&gt; 'password123',
-            'subject_id' =&gt; 5,
-            'teacher_type' =&gt; 'regular',
-            'can_create_exams' =&gt; false,
-            'can_correct_essays' =&gt; false,
-            'is_active' =&gt; false,
-            'assignment_type' =&gt; 'teaching',
-        ],
-    ]
-);
-$body = $response-&gt;getBody();
-print_r(json_decode((string) $body));</code></pre></div>
-
-
-<div class="DartPad-example">
-    <pre><code class="language-ts">import 'dart:convert';
-import 'package:dio/dio.dart';
-
-void main() async {
-  final dio = Dio();
-  final url = 'http://45.245.134.74:8000/api/v1/admin/create-teacher';
-
-    final queryParams = {};
-
-  final headers = {
-        'Authorization': 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
-
-  dynamic data;
-    data = [
-    'name' =&gt; 'Tarek Hesham Sayed ElFarmawy',
-    'email' =&gt; 'teacher@example.com',
-    'phone' =&gt; '01234567890',
-    'national_id' =&gt; '12345678901234',
-    'password' =&gt; 'password123',
-    'subject_id' =&gt; 5,
-    'teacher_type' =&gt; 'regular',
-    'can_create_exams' =&gt; false,
-    'can_correct_essays' =&gt; false,
-    'is_active' =&gt; false,
-    'assignment_type' =&gt; 'teaching',
-];
-
-  try {
-    final response = await dio.request(
-      url,
-      data: data,
-      queryParameters: queryParams,
-      options: Options(
-        method: 'POST',
-        headers: headers,
-      ),
-    );
-    print(response.data);
-  } catch (e) {
-    print('Request failed: $e');
-  }
-}</code></pre></div>
-
-
-<div class="Dio-example">
-    <pre><code class="language-javascript">import 'dart:convert';
-import 'package:dio/dio.dart';
-
-void main() async {
-  final dio = Dio();
-
-  final url = Uri.parse("http://45.245.134.74:8000/api/v1/admin/create-teacher");
-
-    final queryParams = {};
-
-  final headers = {
-        'Authorization': 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
-
-  dynamic data;
-    data = [
-    'name' =&gt; 'Tarek Hesham Sayed ElFarmawy',
-    'email' =&gt; 'teacher@example.com',
-    'phone' =&gt; '01234567890',
-    'national_id' =&gt; '12345678901234',
-    'password' =&gt; 'password123',
-    'subject_id' =&gt; 5,
-    'teacher_type' =&gt; 'regular',
-    'can_create_exams' =&gt; false,
-    'can_correct_essays' =&gt; false,
-    'is_active' =&gt; false,
-    'assignment_type' =&gt; 'teaching',
-];
-
-  try {
-    final response = await dio.request(
-      url.toString(),
-      data: data,
-      queryParameters: queryParams,
-      options: Options(
-        method: 'POST',
-        headers: headers,
-      ),
-    );
-    print('Response: ${response.data}');
-  } catch (e) {
-    print('Request failed: $e');
-  }
-}</code></pre></div>
-
-</span>
-
-<span id="example-responses-POSTapi-v1-admin-create-teacher">
-</span>
-<span id="execution-results-POSTapi-v1-admin-create-teacher" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-POSTapi-v1-admin-create-teacher"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-POSTapi-v1-admin-create-teacher"
-      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
-</span>
-<span id="execution-error-POSTapi-v1-admin-create-teacher" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-POSTapi-v1-admin-create-teacher">
-
-Tip: Check that you&#039;re properly connected to the network.
-If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
-You can check the Dev Tools console for debugging information.</code></pre>
-</span>
-<form id="form-POSTapi-v1-admin-create-teacher" data-method="POST"
-      data-path="api/v1/admin/create-teacher"
-      data-authed="1"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-admin-create-teacher', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-POSTapi-v1-admin-create-teacher"
-                    onclick="tryItOut('POSTapi-v1-admin-create-teacher');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-POSTapi-v1-admin-create-teacher"
-                    onclick="cancelTryOut('POSTapi-v1-admin-create-teacher');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-POSTapi-v1-admin-create-teacher"
-                    data-initial-text="Send Request 💥"
-                    data-loading-text="⏱ Sending..."
-                    hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-black">POST</small>
-            <b><code>api/v1/admin/create-teacher</code></b>
-        </p>
-                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-v1-admin-create-teacher"
-               value="Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"
-               data-component="header">
-    <br>
-<p>Example: <code>Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="POSTapi-v1-admin-create-teacher"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="POSTapi-v1-admin-create-teacher"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
-        <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="name"                data-endpoint="POSTapi-v1-admin-create-teacher"
-               value="Tarek Hesham Sayed ElFarmawy"
-               data-component="body">
-    <br>
-<p>Full name of the teacher. Must not be greater than 255 characters. Example: <code>Tarek Hesham Sayed ElFarmawy</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="email"                data-endpoint="POSTapi-v1-admin-create-teacher"
-               value="teacher@example.com"
-               data-component="body">
-    <br>
-<p>Email address of the teacher (must be unique). Must be a valid email address. Must not be greater than 100 characters. Example: <code>teacher@example.com</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>phone</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="phone"                data-endpoint="POSTapi-v1-admin-create-teacher"
-               value="01234567890"
-               data-component="body">
-    <br>
-<p>Phone number of the teacher (must be unique). Must not be greater than 20 characters. Example: <code>01234567890</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>national_id</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="national_id"                data-endpoint="POSTapi-v1-admin-create-teacher"
-               value="12345678901234"
-               data-component="body">
-    <br>
-<p>National ID of the teacher (14 digits, unique). Must be 14 digits. Example: <code>12345678901234</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>password</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="password"                data-endpoint="POSTapi-v1-admin-create-teacher"
-               value="password123"
-               data-component="body">
-    <br>
-<p>Password for the teacher account. Must be at least 8 characters. Example: <code>password123</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>subject_id</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="subject_id"                data-endpoint="POSTapi-v1-admin-create-teacher"
-               value="5"
-               data-component="body">
-    <br>
-<p>Subject ID or name assigned to the teacher. Must not be greater than 255 characters. Example: <code>5</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>teacher_type</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
-<i>optional</i> &nbsp;
-                <input type="text" style="display: none"
-                              name="teacher_type"                data-endpoint="POSTapi-v1-admin-create-teacher"
-               value="regular"
-               data-component="body">
-    <br>
-<p>Type of teacher (regular or supervisor). Example: <code>regular</code></p>
-Must be one of:
-<ul style="list-style-type: square;"><li><code>regular</code></li> <li><code>supervisor</code></li></ul>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>can_create_exams</code></b>&nbsp;&nbsp;
-<small>boolean</small>&nbsp;
-<i>optional</i> &nbsp;
-                <label data-endpoint="POSTapi-v1-admin-create-teacher" style="display: none">
-            <input type="radio" name="can_create_exams"
-                   value="true"
-                   data-endpoint="POSTapi-v1-admin-create-teacher"
-                   data-component="body"             >
-            <code>true</code>
-        </label>
-        <label data-endpoint="POSTapi-v1-admin-create-teacher" style="display: none">
-            <input type="radio" name="can_create_exams"
-                   value="false"
-                   data-endpoint="POSTapi-v1-admin-create-teacher"
-                   data-component="body"             >
-            <code>false</code>
-        </label>
-    <br>
-<p>Whether the teacher can create exams. Example: <code>false</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>can_correct_essays</code></b>&nbsp;&nbsp;
-<small>boolean</small>&nbsp;
-<i>optional</i> &nbsp;
-                <label data-endpoint="POSTapi-v1-admin-create-teacher" style="display: none">
-            <input type="radio" name="can_correct_essays"
-                   value="true"
-                   data-endpoint="POSTapi-v1-admin-create-teacher"
-                   data-component="body"             >
-            <code>true</code>
-        </label>
-        <label data-endpoint="POSTapi-v1-admin-create-teacher" style="display: none">
-            <input type="radio" name="can_correct_essays"
-                   value="false"
-                   data-endpoint="POSTapi-v1-admin-create-teacher"
-                   data-component="body"             >
-            <code>false</code>
-        </label>
-    <br>
-<p>Whether the teacher can correct essays. Example: <code>false</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>is_active</code></b>&nbsp;&nbsp;
-<small>boolean</small>&nbsp;
-<i>optional</i> &nbsp;
-                <label data-endpoint="POSTapi-v1-admin-create-teacher" style="display: none">
-            <input type="radio" name="is_active"
-                   value="true"
-                   data-endpoint="POSTapi-v1-admin-create-teacher"
-                   data-component="body"             >
-            <code>true</code>
-        </label>
-        <label data-endpoint="POSTapi-v1-admin-create-teacher" style="display: none">
-            <input type="radio" name="is_active"
-                   value="false"
-                   data-endpoint="POSTapi-v1-admin-create-teacher"
-                   data-component="body"             >
-            <code>false</code>
-        </label>
-    <br>
-<p>Indicates if the teacher account is active. Example: <code>false</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>school_ids</code></b>&nbsp;&nbsp;
-<small>string[]</small>&nbsp;
-<i>optional</i> &nbsp;
-                <input type="text" style="display: none"
-                              name="school_ids[0]"                data-endpoint="POSTapi-v1-admin-create-teacher"
-               data-component="body">
-        <input type="text" style="display: none"
-               name="school_ids[1]"                data-endpoint="POSTapi-v1-admin-create-teacher"
-               data-component="body">
-    <br>
-<p>The <code>id</code> of an existing record in the schools table.</p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>assignment_type</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
-<i>optional</i> &nbsp;
-                <input type="text" style="display: none"
-                              name="assignment_type"                data-endpoint="POSTapi-v1-admin-create-teacher"
-               value="teaching"
-               data-component="body">
-    <br>
-<p>Type of assignment for the teacher (teaching, supervision, correction). Example: <code>teaching</code></p>
-Must be one of:
-<ul style="list-style-type: square;"><li><code>teaching</code></li> <li><code>supervision</code></li> <li><code>correction</code></li></ul>
-        </div>
-        </form>
-
                     <h2 id="endpoints-GETapi-v1-admin-teachers">List all teachers</h2>
 
 <p>
@@ -3033,7 +2881,7 @@ Must be one of:
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.134.74:8000/api/v1/admin/teachers"
+    "http://45.241.41.90:8000/api/v1/admin/teachers"
 );
 
 const headers = {
@@ -3050,7 +2898,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.134.74:8000/api/v1/admin/teachers';
+$url = 'http://45.241.41.90:8000/api/v1/admin/teachers';
 $response = $client-&gt;get(
     $url,
     [
@@ -3071,7 +2919,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.134.74:8000/api/v1/admin/teachers';
+  final url = 'http://45.241.41.90:8000/api/v1/admin/teachers';
 
     final queryParams = {};
 
@@ -3105,7 +2953,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.134.74:8000/api/v1/admin/teachers");
+  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/teachers");
 
     final queryParams = {};
 
@@ -3233,6 +3081,425 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                         </form>
 
+                    <h2 id="endpoints-POSTapi-v1-admin-teachers">Create teacher account (Ministry Admin only)</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-admin-teachers">
+<blockquote>Example request:</blockquote>
+
+
+<div class="JS-example">
+    <pre><code class="language-JS">const url = new URL(
+    "http://45.241.41.90:8000/api/v1/admin/teachers"
+);
+
+const headers = {
+    "Authorization": "Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "name": "Tarek Hesham Sayed ElFarmawy",
+    "email": "teacher@example.com",
+    "phone": "01234567890",
+    "national_id": "12345678901234",
+    "password": "password123",
+    "subject_id": 5,
+    "teacher_type": "regular",
+    "can_create_exams": false,
+    "can_correct_essays": false,
+    "is_active": false,
+    "assignment_type": "teaching"
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="Laravel-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://45.241.41.90:8000/api/v1/admin/teachers';
+$response = $client-&gt;post(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+        'json' =&gt; [
+            'name' =&gt; 'Tarek Hesham Sayed ElFarmawy',
+            'email' =&gt; 'teacher@example.com',
+            'phone' =&gt; '01234567890',
+            'national_id' =&gt; '12345678901234',
+            'password' =&gt; 'password123',
+            'subject_id' =&gt; 5,
+            'teacher_type' =&gt; 'regular',
+            'can_create_exams' =&gt; false,
+            'can_correct_essays' =&gt; false,
+            'is_active' =&gt; false,
+            'assignment_type' =&gt; 'teaching',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="DartPad-example">
+    <pre><code class="language-ts">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+  final url = 'http://45.241.41.90:8000/api/v1/admin/teachers';
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = [
+    'name' =&gt; 'Tarek Hesham Sayed ElFarmawy',
+    'email' =&gt; 'teacher@example.com',
+    'phone' =&gt; '01234567890',
+    'national_id' =&gt; '12345678901234',
+    'password' =&gt; 'password123',
+    'subject_id' =&gt; 5,
+    'teacher_type' =&gt; 'regular',
+    'can_create_exams' =&gt; false,
+    'can_correct_essays' =&gt; false,
+    'is_active' =&gt; false,
+    'assignment_type' =&gt; 'teaching',
+];
+
+  try {
+    final response = await dio.request(
+      url,
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'POST',
+        headers: headers,
+      ),
+    );
+    print(response.data);
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+
+<div class="Dio-example">
+    <pre><code class="language-javascript">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+
+  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/teachers");
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = [
+    'name' =&gt; 'Tarek Hesham Sayed ElFarmawy',
+    'email' =&gt; 'teacher@example.com',
+    'phone' =&gt; '01234567890',
+    'national_id' =&gt; '12345678901234',
+    'password' =&gt; 'password123',
+    'subject_id' =&gt; 5,
+    'teacher_type' =&gt; 'regular',
+    'can_create_exams' =&gt; false,
+    'can_correct_essays' =&gt; false,
+    'is_active' =&gt; false,
+    'assignment_type' =&gt; 'teaching',
+];
+
+  try {
+    final response = await dio.request(
+      url.toString(),
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'POST',
+        headers: headers,
+      ),
+    );
+    print('Response: ${response.data}');
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-admin-teachers">
+</span>
+<span id="execution-results-POSTapi-v1-admin-teachers" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-admin-teachers"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-admin-teachers"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-admin-teachers" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-admin-teachers">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-admin-teachers" data-method="POST"
+      data-path="api/v1/admin/teachers"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-admin-teachers', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-admin-teachers"
+                    onclick="tryItOut('POSTapi-v1-admin-teachers');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-admin-teachers"
+                    onclick="cancelTryOut('POSTapi-v1-admin-teachers');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-admin-teachers"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/admin/teachers</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-v1-admin-teachers"
+               value="Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-v1-admin-teachers"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-v1-admin-teachers"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="name"                data-endpoint="POSTapi-v1-admin-teachers"
+               value="Tarek Hesham Sayed ElFarmawy"
+               data-component="body">
+    <br>
+<p>Full name of the teacher. Must not be greater than 255 characters. Example: <code>Tarek Hesham Sayed ElFarmawy</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="email"                data-endpoint="POSTapi-v1-admin-teachers"
+               value="teacher@example.com"
+               data-component="body">
+    <br>
+<p>Email address of the teacher (must be unique). Must be a valid email address. Must not be greater than 100 characters. Example: <code>teacher@example.com</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>phone</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="phone"                data-endpoint="POSTapi-v1-admin-teachers"
+               value="01234567890"
+               data-component="body">
+    <br>
+<p>Phone number of the teacher (must be unique). Must not be greater than 20 characters. Example: <code>01234567890</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>national_id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="national_id"                data-endpoint="POSTapi-v1-admin-teachers"
+               value="12345678901234"
+               data-component="body">
+    <br>
+<p>National ID of the teacher (14 digits, unique). Must be 14 digits. Example: <code>12345678901234</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>password</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="password"                data-endpoint="POSTapi-v1-admin-teachers"
+               value="password123"
+               data-component="body">
+    <br>
+<p>Password for the teacher account. Must be at least 8 characters. Example: <code>password123</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>subject_id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="subject_id"                data-endpoint="POSTapi-v1-admin-teachers"
+               value="5"
+               data-component="body">
+    <br>
+<p>Subject ID or name assigned to the teacher. Must not be greater than 255 characters. Example: <code>5</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>teacher_type</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="teacher_type"                data-endpoint="POSTapi-v1-admin-teachers"
+               value="regular"
+               data-component="body">
+    <br>
+<p>Type of teacher (regular or supervisor). Example: <code>regular</code></p>
+Must be one of:
+<ul style="list-style-type: square;"><li><code>regular</code></li> <li><code>supervisor</code></li></ul>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>can_create_exams</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+<i>optional</i> &nbsp;
+                <label data-endpoint="POSTapi-v1-admin-teachers" style="display: none">
+            <input type="radio" name="can_create_exams"
+                   value="true"
+                   data-endpoint="POSTapi-v1-admin-teachers"
+                   data-component="body"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="POSTapi-v1-admin-teachers" style="display: none">
+            <input type="radio" name="can_create_exams"
+                   value="false"
+                   data-endpoint="POSTapi-v1-admin-teachers"
+                   data-component="body"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>Whether the teacher can create exams. Example: <code>false</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>can_correct_essays</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+<i>optional</i> &nbsp;
+                <label data-endpoint="POSTapi-v1-admin-teachers" style="display: none">
+            <input type="radio" name="can_correct_essays"
+                   value="true"
+                   data-endpoint="POSTapi-v1-admin-teachers"
+                   data-component="body"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="POSTapi-v1-admin-teachers" style="display: none">
+            <input type="radio" name="can_correct_essays"
+                   value="false"
+                   data-endpoint="POSTapi-v1-admin-teachers"
+                   data-component="body"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>Whether the teacher can correct essays. Example: <code>false</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>is_active</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+<i>optional</i> &nbsp;
+                <label data-endpoint="POSTapi-v1-admin-teachers" style="display: none">
+            <input type="radio" name="is_active"
+                   value="true"
+                   data-endpoint="POSTapi-v1-admin-teachers"
+                   data-component="body"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="POSTapi-v1-admin-teachers" style="display: none">
+            <input type="radio" name="is_active"
+                   value="false"
+                   data-endpoint="POSTapi-v1-admin-teachers"
+                   data-component="body"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>Indicates if the teacher account is active. Example: <code>false</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>school_ids</code></b>&nbsp;&nbsp;
+<small>string[]</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="school_ids[0]"                data-endpoint="POSTapi-v1-admin-teachers"
+               data-component="body">
+        <input type="text" style="display: none"
+               name="school_ids[1]"                data-endpoint="POSTapi-v1-admin-teachers"
+               data-component="body">
+    <br>
+<p>The <code>id</code> of an existing record in the schools table.</p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>assignment_type</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="assignment_type"                data-endpoint="POSTapi-v1-admin-teachers"
+               value="teaching"
+               data-component="body">
+    <br>
+<p>Type of assignment for the teacher (teaching, supervision, correction). Example: <code>teaching</code></p>
+Must be one of:
+<ul style="list-style-type: square;"><li><code>teaching</code></li> <li><code>supervision</code></li> <li><code>correction</code></li></ul>
+        </div>
+        </form>
+
                     <h2 id="endpoints-GETapi-v1-admin-teachers--id-">Show teacher details</h2>
 
 <p>
@@ -3247,7 +3514,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.134.74:8000/api/v1/admin/teachers/architecto"
+    "http://45.241.41.90:8000/api/v1/admin/teachers/architecto"
 );
 
 const headers = {
@@ -3264,7 +3531,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.134.74:8000/api/v1/admin/teachers/architecto';
+$url = 'http://45.241.41.90:8000/api/v1/admin/teachers/architecto';
 $response = $client-&gt;get(
     $url,
     [
@@ -3285,7 +3552,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.134.74:8000/api/v1/admin/teachers/architecto';
+  final url = 'http://45.241.41.90:8000/api/v1/admin/teachers/architecto';
 
     final queryParams = {};
 
@@ -3319,7 +3586,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.134.74:8000/api/v1/admin/teachers/architecto");
+  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/teachers/architecto");
 
     final queryParams = {};
 
@@ -3473,7 +3740,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.134.74:8000/api/v1/admin/teachers/architecto"
+    "http://45.241.41.90:8000/api/v1/admin/teachers/architecto"
 );
 
 const headers = {
@@ -3508,7 +3775,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.134.74:8000/api/v1/admin/teachers/architecto';
+$url = 'http://45.241.41.90:8000/api/v1/admin/teachers/architecto';
 $response = $client-&gt;put(
     $url,
     [
@@ -3545,7 +3812,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.134.74:8000/api/v1/admin/teachers/architecto';
+  final url = 'http://45.241.41.90:8000/api/v1/admin/teachers/architecto';
 
     final queryParams = {};
 
@@ -3594,7 +3861,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.134.74:8000/api/v1/admin/teachers/architecto");
+  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/teachers/architecto");
 
     final queryParams = {};
 
@@ -3920,7 +4187,7 @@ Must be one of:
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.134.74:8000/api/v1/admin/teachers/architecto"
+    "http://45.241.41.90:8000/api/v1/admin/teachers/architecto"
 );
 
 const headers = {
@@ -3937,7 +4204,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.134.74:8000/api/v1/admin/teachers/architecto';
+$url = 'http://45.241.41.90:8000/api/v1/admin/teachers/architecto';
 $response = $client-&gt;delete(
     $url,
     [
@@ -3958,7 +4225,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.134.74:8000/api/v1/admin/teachers/architecto';
+  final url = 'http://45.241.41.90:8000/api/v1/admin/teachers/architecto';
 
     final queryParams = {};
 
@@ -3992,7 +4259,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.134.74:8000/api/v1/admin/teachers/architecto");
+  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/teachers/architecto");
 
     final queryParams = {};
 
@@ -4130,7 +4397,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.134.74:8000/api/v1/admin/exams"
+    "http://45.241.41.90:8000/api/v1/admin/exams"
 );
 
 const headers = {
@@ -4147,7 +4414,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.134.74:8000/api/v1/admin/exams';
+$url = 'http://45.241.41.90:8000/api/v1/admin/exams';
 $response = $client-&gt;get(
     $url,
     [
@@ -4168,7 +4435,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.134.74:8000/api/v1/admin/exams';
+  final url = 'http://45.241.41.90:8000/api/v1/admin/exams';
 
     final queryParams = {};
 
@@ -4202,7 +4469,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.134.74:8000/api/v1/admin/exams");
+  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/exams");
 
     final queryParams = {};
 
@@ -4344,7 +4611,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.134.74:8000/api/v1/admin/exams"
+    "http://45.241.41.90:8000/api/v1/admin/exams"
 );
 
 const headers = {
@@ -4376,7 +4643,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.134.74:8000/api/v1/admin/exams';
+$url = 'http://45.241.41.90:8000/api/v1/admin/exams';
 $response = $client-&gt;post(
     $url,
     [
@@ -4410,7 +4677,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.134.74:8000/api/v1/admin/exams';
+  final url = 'http://45.241.41.90:8000/api/v1/admin/exams';
 
     final queryParams = {};
 
@@ -4456,7 +4723,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.134.74:8000/api/v1/admin/exams");
+  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/exams");
 
     final queryParams = {};
 
@@ -4730,7 +4997,7 @@ Must be one of:
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.134.74:8000/api/v1/admin/exams/architecto"
+    "http://45.241.41.90:8000/api/v1/admin/exams/architecto"
 );
 
 const headers = {
@@ -4747,7 +5014,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.134.74:8000/api/v1/admin/exams/architecto';
+$url = 'http://45.241.41.90:8000/api/v1/admin/exams/architecto';
 $response = $client-&gt;get(
     $url,
     [
@@ -4768,7 +5035,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.134.74:8000/api/v1/admin/exams/architecto';
+  final url = 'http://45.241.41.90:8000/api/v1/admin/exams/architecto';
 
     final queryParams = {};
 
@@ -4802,7 +5069,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.134.74:8000/api/v1/admin/exams/architecto");
+  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/exams/architecto");
 
     final queryParams = {};
 
@@ -4956,7 +5223,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.134.74:8000/api/v1/admin/exams/1"
+    "http://45.241.41.90:8000/api/v1/admin/exams/1"
 );
 
 const headers = {
@@ -4987,7 +5254,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.134.74:8000/api/v1/admin/exams/1';
+$url = 'http://45.241.41.90:8000/api/v1/admin/exams/1';
 $response = $client-&gt;put(
     $url,
     [
@@ -5020,7 +5287,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.134.74:8000/api/v1/admin/exams/1';
+  final url = 'http://45.241.41.90:8000/api/v1/admin/exams/1';
 
     final queryParams = {};
 
@@ -5065,7 +5332,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.134.74:8000/api/v1/admin/exams/1");
+  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/exams/1");
 
     final queryParams = {};
 
@@ -5355,7 +5622,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.134.74:8000/api/v1/admin/exams/architecto"
+    "http://45.241.41.90:8000/api/v1/admin/exams/architecto"
 );
 
 const headers = {
@@ -5372,7 +5639,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.134.74:8000/api/v1/admin/exams/architecto';
+$url = 'http://45.241.41.90:8000/api/v1/admin/exams/architecto';
 $response = $client-&gt;delete(
     $url,
     [
@@ -5393,7 +5660,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.134.74:8000/api/v1/admin/exams/architecto';
+  final url = 'http://45.241.41.90:8000/api/v1/admin/exams/architecto';
 
     final queryParams = {};
 
@@ -5427,7 +5694,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.134.74:8000/api/v1/admin/exams/architecto");
+  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/exams/architecto");
 
     final queryParams = {};
 
@@ -5565,7 +5832,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.134.74:8000/api/v1/admin/exams/architecto/duplicate"
+    "http://45.241.41.90:8000/api/v1/admin/exams/architecto/duplicate"
 );
 
 const headers = {
@@ -5582,7 +5849,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.134.74:8000/api/v1/admin/exams/architecto/duplicate';
+$url = 'http://45.241.41.90:8000/api/v1/admin/exams/architecto/duplicate';
 $response = $client-&gt;post(
     $url,
     [
@@ -5603,7 +5870,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.134.74:8000/api/v1/admin/exams/architecto/duplicate';
+  final url = 'http://45.241.41.90:8000/api/v1/admin/exams/architecto/duplicate';
 
     final queryParams = {};
 
@@ -5637,7 +5904,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.134.74:8000/api/v1/admin/exams/architecto/duplicate");
+  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/exams/architecto/duplicate");
 
     final queryParams = {};
 
@@ -5775,7 +6042,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.134.74:8000/api/v1/admin/exams/architecto/statistics"
+    "http://45.241.41.90:8000/api/v1/admin/exams/architecto/statistics"
 );
 
 const headers = {
@@ -5792,7 +6059,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.134.74:8000/api/v1/admin/exams/architecto/statistics';
+$url = 'http://45.241.41.90:8000/api/v1/admin/exams/architecto/statistics';
 $response = $client-&gt;get(
     $url,
     [
@@ -5813,7 +6080,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.134.74:8000/api/v1/admin/exams/architecto/statistics';
+  final url = 'http://45.241.41.90:8000/api/v1/admin/exams/architecto/statistics';
 
     final queryParams = {};
 
@@ -5847,7 +6114,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.134.74:8000/api/v1/admin/exams/architecto/statistics");
+  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/exams/architecto/statistics");
 
     final queryParams = {};
 
@@ -6001,7 +6268,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.134.74:8000/api/v1/admin/subjects"
+    "http://45.241.41.90:8000/api/v1/admin/subjects"
 );
 
 const headers = {
@@ -6018,7 +6285,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.134.74:8000/api/v1/admin/subjects';
+$url = 'http://45.241.41.90:8000/api/v1/admin/subjects';
 $response = $client-&gt;get(
     $url,
     [
@@ -6039,7 +6306,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.134.74:8000/api/v1/admin/subjects';
+  final url = 'http://45.241.41.90:8000/api/v1/admin/subjects';
 
     final queryParams = {};
 
@@ -6073,7 +6340,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.134.74:8000/api/v1/admin/subjects");
+  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/subjects");
 
     final queryParams = {};
 
@@ -6215,7 +6482,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.134.74:8000/api/v1/admin/subjects"
+    "http://45.241.41.90:8000/api/v1/admin/subjects"
 );
 
 const headers = {
@@ -6243,7 +6510,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.134.74:8000/api/v1/admin/subjects';
+$url = 'http://45.241.41.90:8000/api/v1/admin/subjects';
 $response = $client-&gt;post(
     $url,
     [
@@ -6273,7 +6540,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.134.74:8000/api/v1/admin/subjects';
+  final url = 'http://45.241.41.90:8000/api/v1/admin/subjects';
 
     final queryParams = {};
 
@@ -6315,7 +6582,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.134.74:8000/api/v1/admin/subjects");
+  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/subjects");
 
     final queryParams = {};
 
@@ -6547,7 +6814,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.134.74:8000/api/v1/admin/subjects/architecto"
+    "http://45.241.41.90:8000/api/v1/admin/subjects/architecto"
 );
 
 const headers = {
@@ -6564,7 +6831,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.134.74:8000/api/v1/admin/subjects/architecto';
+$url = 'http://45.241.41.90:8000/api/v1/admin/subjects/architecto';
 $response = $client-&gt;get(
     $url,
     [
@@ -6585,7 +6852,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.134.74:8000/api/v1/admin/subjects/architecto';
+  final url = 'http://45.241.41.90:8000/api/v1/admin/subjects/architecto';
 
     final queryParams = {};
 
@@ -6619,7 +6886,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.134.74:8000/api/v1/admin/subjects/architecto");
+  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/subjects/architecto");
 
     final queryParams = {};
 
@@ -6773,7 +7040,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.134.74:8000/api/v1/admin/subjects/architecto"
+    "http://45.241.41.90:8000/api/v1/admin/subjects/architecto"
 );
 
 const headers = {
@@ -6801,7 +7068,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.134.74:8000/api/v1/admin/subjects/architecto';
+$url = 'http://45.241.41.90:8000/api/v1/admin/subjects/architecto';
 $response = $client-&gt;put(
     $url,
     [
@@ -6831,7 +7098,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.134.74:8000/api/v1/admin/subjects/architecto';
+  final url = 'http://45.241.41.90:8000/api/v1/admin/subjects/architecto';
 
     final queryParams = {};
 
@@ -6873,7 +7140,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.134.74:8000/api/v1/admin/subjects/architecto");
+  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/subjects/architecto");
 
     final queryParams = {};
 
@@ -7121,7 +7388,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.134.74:8000/api/v1/admin/subjects/architecto"
+    "http://45.241.41.90:8000/api/v1/admin/subjects/architecto"
 );
 
 const headers = {
@@ -7138,7 +7405,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.134.74:8000/api/v1/admin/subjects/architecto';
+$url = 'http://45.241.41.90:8000/api/v1/admin/subjects/architecto';
 $response = $client-&gt;delete(
     $url,
     [
@@ -7159,7 +7426,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.134.74:8000/api/v1/admin/subjects/architecto';
+  final url = 'http://45.241.41.90:8000/api/v1/admin/subjects/architecto';
 
     final queryParams = {};
 
@@ -7193,7 +7460,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.134.74:8000/api/v1/admin/subjects/architecto");
+  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/subjects/architecto");
 
     final queryParams = {};
 
@@ -7331,7 +7598,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.134.74:8000/api/v1/admin/exam-questions"
+    "http://45.241.41.90:8000/api/v1/admin/exam-questions"
 );
 
 const headers = {
@@ -7348,7 +7615,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.134.74:8000/api/v1/admin/exam-questions';
+$url = 'http://45.241.41.90:8000/api/v1/admin/exam-questions';
 $response = $client-&gt;get(
     $url,
     [
@@ -7369,7 +7636,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.134.74:8000/api/v1/admin/exam-questions';
+  final url = 'http://45.241.41.90:8000/api/v1/admin/exam-questions';
 
     final queryParams = {};
 
@@ -7403,7 +7670,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.134.74:8000/api/v1/admin/exam-questions");
+  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/exam-questions");
 
     final queryParams = {};
 
@@ -7545,7 +7812,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.134.74:8000/api/v1/admin/exam-questions"
+    "http://45.241.41.90:8000/api/v1/admin/exam-questions"
 );
 
 const headers = {
@@ -7578,7 +7845,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.134.74:8000/api/v1/admin/exam-questions';
+$url = 'http://45.241.41.90:8000/api/v1/admin/exam-questions';
 $response = $client-&gt;post(
     $url,
     [
@@ -7613,7 +7880,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.134.74:8000/api/v1/admin/exam-questions';
+  final url = 'http://45.241.41.90:8000/api/v1/admin/exam-questions';
 
     final queryParams = {};
 
@@ -7660,7 +7927,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.134.74:8000/api/v1/admin/exam-questions");
+  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/exam-questions");
 
     final queryParams = {};
 
@@ -7924,7 +8191,7 @@ Must be one of:
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.134.74:8000/api/v1/admin/exam-questions/architecto"
+    "http://45.241.41.90:8000/api/v1/admin/exam-questions/architecto"
 );
 
 const headers = {
@@ -7941,7 +8208,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.134.74:8000/api/v1/admin/exam-questions/architecto';
+$url = 'http://45.241.41.90:8000/api/v1/admin/exam-questions/architecto';
 $response = $client-&gt;get(
     $url,
     [
@@ -7962,7 +8229,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.134.74:8000/api/v1/admin/exam-questions/architecto';
+  final url = 'http://45.241.41.90:8000/api/v1/admin/exam-questions/architecto';
 
     final queryParams = {};
 
@@ -7996,7 +8263,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.134.74:8000/api/v1/admin/exam-questions/architecto");
+  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/exam-questions/architecto");
 
     final queryParams = {};
 
@@ -8150,7 +8417,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.134.74:8000/api/v1/admin/exam-questions/architecto"
+    "http://45.241.41.90:8000/api/v1/admin/exam-questions/architecto"
 );
 
 const headers = {
@@ -8183,7 +8450,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.134.74:8000/api/v1/admin/exam-questions/architecto';
+$url = 'http://45.241.41.90:8000/api/v1/admin/exam-questions/architecto';
 $response = $client-&gt;put(
     $url,
     [
@@ -8218,7 +8485,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.134.74:8000/api/v1/admin/exam-questions/architecto';
+  final url = 'http://45.241.41.90:8000/api/v1/admin/exam-questions/architecto';
 
     final queryParams = {};
 
@@ -8265,7 +8532,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.134.74:8000/api/v1/admin/exam-questions/architecto");
+  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/exam-questions/architecto");
 
     final queryParams = {};
 
@@ -8545,7 +8812,7 @@ Must be one of:
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.134.74:8000/api/v1/admin/exam-questions/architecto"
+    "http://45.241.41.90:8000/api/v1/admin/exam-questions/architecto"
 );
 
 const headers = {
@@ -8562,7 +8829,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.134.74:8000/api/v1/admin/exam-questions/architecto';
+$url = 'http://45.241.41.90:8000/api/v1/admin/exam-questions/architecto';
 $response = $client-&gt;delete(
     $url,
     [
@@ -8583,7 +8850,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.134.74:8000/api/v1/admin/exam-questions/architecto';
+  final url = 'http://45.241.41.90:8000/api/v1/admin/exam-questions/architecto';
 
     final queryParams = {};
 
@@ -8617,7 +8884,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.134.74:8000/api/v1/admin/exam-questions/architecto");
+  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/exam-questions/architecto");
 
     final queryParams = {};
 
@@ -8755,7 +9022,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.134.74:8000/api/v1/admin/exams/architecto/questions"
+    "http://45.241.41.90:8000/api/v1/admin/exams/architecto/questions"
 );
 
 const headers = {
@@ -8772,7 +9039,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.134.74:8000/api/v1/admin/exams/architecto/questions';
+$url = 'http://45.241.41.90:8000/api/v1/admin/exams/architecto/questions';
 $response = $client-&gt;get(
     $url,
     [
@@ -8793,7 +9060,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.134.74:8000/api/v1/admin/exams/architecto/questions';
+  final url = 'http://45.241.41.90:8000/api/v1/admin/exams/architecto/questions';
 
     final queryParams = {};
 
@@ -8827,7 +9094,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.134.74:8000/api/v1/admin/exams/architecto/questions");
+  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/exams/architecto/questions");
 
     final queryParams = {};
 
@@ -8981,7 +9248,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.134.74:8000/api/v1/admin/exam-sections"
+    "http://45.241.41.90:8000/api/v1/admin/exam-sections"
 );
 
 const headers = {
@@ -8998,7 +9265,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.134.74:8000/api/v1/admin/exam-sections';
+$url = 'http://45.241.41.90:8000/api/v1/admin/exam-sections';
 $response = $client-&gt;get(
     $url,
     [
@@ -9019,7 +9286,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.134.74:8000/api/v1/admin/exam-sections';
+  final url = 'http://45.241.41.90:8000/api/v1/admin/exam-sections';
 
     final queryParams = {};
 
@@ -9053,7 +9320,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.134.74:8000/api/v1/admin/exam-sections");
+  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/exam-sections");
 
     final queryParams = {};
 
@@ -9195,7 +9462,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.134.74:8000/api/v1/admin/exam-sections"
+    "http://45.241.41.90:8000/api/v1/admin/exam-sections"
 );
 
 const headers = {
@@ -9220,7 +9487,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.134.74:8000/api/v1/admin/exam-sections';
+$url = 'http://45.241.41.90:8000/api/v1/admin/exam-sections';
 $response = $client-&gt;post(
     $url,
     [
@@ -9247,7 +9514,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.134.74:8000/api/v1/admin/exam-sections';
+  final url = 'http://45.241.41.90:8000/api/v1/admin/exam-sections';
 
     final queryParams = {};
 
@@ -9286,7 +9553,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.134.74:8000/api/v1/admin/exam-sections");
+  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/exam-sections");
 
     final queryParams = {};
 
@@ -9462,7 +9729,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.134.74:8000/api/v1/admin/exam-sections/architecto"
+    "http://45.241.41.90:8000/api/v1/admin/exam-sections/architecto"
 );
 
 const headers = {
@@ -9479,7 +9746,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.134.74:8000/api/v1/admin/exam-sections/architecto';
+$url = 'http://45.241.41.90:8000/api/v1/admin/exam-sections/architecto';
 $response = $client-&gt;get(
     $url,
     [
@@ -9500,7 +9767,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.134.74:8000/api/v1/admin/exam-sections/architecto';
+  final url = 'http://45.241.41.90:8000/api/v1/admin/exam-sections/architecto';
 
     final queryParams = {};
 
@@ -9534,7 +9801,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.134.74:8000/api/v1/admin/exam-sections/architecto");
+  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/exam-sections/architecto");
 
     final queryParams = {};
 
@@ -9688,7 +9955,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.134.74:8000/api/v1/admin/exam-sections/architecto"
+    "http://45.241.41.90:8000/api/v1/admin/exam-sections/architecto"
 );
 
 const headers = {
@@ -9713,7 +9980,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.134.74:8000/api/v1/admin/exam-sections/architecto';
+$url = 'http://45.241.41.90:8000/api/v1/admin/exam-sections/architecto';
 $response = $client-&gt;put(
     $url,
     [
@@ -9740,7 +10007,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.134.74:8000/api/v1/admin/exam-sections/architecto';
+  final url = 'http://45.241.41.90:8000/api/v1/admin/exam-sections/architecto';
 
     final queryParams = {};
 
@@ -9779,7 +10046,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.134.74:8000/api/v1/admin/exam-sections/architecto");
+  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/exam-sections/architecto");
 
     final queryParams = {};
 
@@ -9971,7 +10238,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.134.74:8000/api/v1/admin/exam-sections/architecto"
+    "http://45.241.41.90:8000/api/v1/admin/exam-sections/architecto"
 );
 
 const headers = {
@@ -9988,7 +10255,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.134.74:8000/api/v1/admin/exam-sections/architecto';
+$url = 'http://45.241.41.90:8000/api/v1/admin/exam-sections/architecto';
 $response = $client-&gt;delete(
     $url,
     [
@@ -10009,7 +10276,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.134.74:8000/api/v1/admin/exam-sections/architecto';
+  final url = 'http://45.241.41.90:8000/api/v1/admin/exam-sections/architecto';
 
     final queryParams = {};
 
@@ -10043,7 +10310,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.134.74:8000/api/v1/admin/exam-sections/architecto");
+  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/exam-sections/architecto");
 
     final queryParams = {};
 
@@ -10181,7 +10448,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.134.74:8000/api/v1/admin/school-admins"
+    "http://45.241.41.90:8000/api/v1/admin/school-admins"
 );
 
 const headers = {
@@ -10198,7 +10465,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.134.74:8000/api/v1/admin/school-admins';
+$url = 'http://45.241.41.90:8000/api/v1/admin/school-admins';
 $response = $client-&gt;get(
     $url,
     [
@@ -10219,7 +10486,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.134.74:8000/api/v1/admin/school-admins';
+  final url = 'http://45.241.41.90:8000/api/v1/admin/school-admins';
 
     final queryParams = {};
 
@@ -10253,7 +10520,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.134.74:8000/api/v1/admin/school-admins");
+  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/school-admins");
 
     final queryParams = {};
 
@@ -10395,7 +10662,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.134.74:8000/api/v1/admin/school-admins"
+    "http://45.241.41.90:8000/api/v1/admin/school-admins"
 );
 
 const headers = {
@@ -10429,7 +10696,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.134.74:8000/api/v1/admin/school-admins';
+$url = 'http://45.241.41.90:8000/api/v1/admin/school-admins';
 $response = $client-&gt;post(
     $url,
     [
@@ -10465,7 +10732,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.134.74:8000/api/v1/admin/school-admins';
+  final url = 'http://45.241.41.90:8000/api/v1/admin/school-admins';
 
     final queryParams = {};
 
@@ -10513,7 +10780,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.134.74:8000/api/v1/admin/school-admins");
+  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/school-admins");
 
     final queryParams = {};
 
@@ -10836,7 +11103,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.134.74:8000/api/v1/admin/school-admins/architecto"
+    "http://45.241.41.90:8000/api/v1/admin/school-admins/architecto"
 );
 
 const headers = {
@@ -10853,7 +11120,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.134.74:8000/api/v1/admin/school-admins/architecto';
+$url = 'http://45.241.41.90:8000/api/v1/admin/school-admins/architecto';
 $response = $client-&gt;get(
     $url,
     [
@@ -10874,7 +11141,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.134.74:8000/api/v1/admin/school-admins/architecto';
+  final url = 'http://45.241.41.90:8000/api/v1/admin/school-admins/architecto';
 
     final queryParams = {};
 
@@ -10908,7 +11175,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.134.74:8000/api/v1/admin/school-admins/architecto");
+  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/school-admins/architecto");
 
     final queryParams = {};
 
@@ -11062,7 +11329,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.134.74:8000/api/v1/admin/school-admins/architecto"
+    "http://45.241.41.90:8000/api/v1/admin/school-admins/architecto"
 );
 
 const headers = {
@@ -11091,7 +11358,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.134.74:8000/api/v1/admin/school-admins/architecto';
+$url = 'http://45.241.41.90:8000/api/v1/admin/school-admins/architecto';
 $response = $client-&gt;put(
     $url,
     [
@@ -11122,7 +11389,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.134.74:8000/api/v1/admin/school-admins/architecto';
+  final url = 'http://45.241.41.90:8000/api/v1/admin/school-admins/architecto';
 
     final queryParams = {};
 
@@ -11165,7 +11432,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.134.74:8000/api/v1/admin/school-admins/architecto");
+  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/school-admins/architecto");
 
     final queryParams = {};
 
@@ -11444,7 +11711,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.134.74:8000/api/v1/admin/school-admins/architecto"
+    "http://45.241.41.90:8000/api/v1/admin/school-admins/architecto"
 );
 
 const headers = {
@@ -11461,7 +11728,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.134.74:8000/api/v1/admin/school-admins/architecto';
+$url = 'http://45.241.41.90:8000/api/v1/admin/school-admins/architecto';
 $response = $client-&gt;delete(
     $url,
     [
@@ -11482,7 +11749,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.134.74:8000/api/v1/admin/school-admins/architecto';
+  final url = 'http://45.241.41.90:8000/api/v1/admin/school-admins/architecto';
 
     final queryParams = {};
 
@@ -11516,7 +11783,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.134.74:8000/api/v1/admin/school-admins/architecto");
+  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/school-admins/architecto");
 
     final queryParams = {};
 
@@ -11654,7 +11921,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.134.74:8000/api/v1/admin/schools"
+    "http://45.241.41.90:8000/api/v1/admin/schools"
 );
 
 const headers = {
@@ -11671,7 +11938,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.134.74:8000/api/v1/admin/schools';
+$url = 'http://45.241.41.90:8000/api/v1/admin/schools';
 $response = $client-&gt;get(
     $url,
     [
@@ -11692,7 +11959,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.134.74:8000/api/v1/admin/schools';
+  final url = 'http://45.241.41.90:8000/api/v1/admin/schools';
 
     final queryParams = {};
 
@@ -11726,7 +11993,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.134.74:8000/api/v1/admin/schools");
+  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/schools");
 
     final queryParams = {};
 
@@ -11868,7 +12135,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.134.74:8000/api/v1/admin/schools"
+    "http://45.241.41.90:8000/api/v1/admin/schools"
 );
 
 const headers = {
@@ -11898,7 +12165,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.134.74:8000/api/v1/admin/schools';
+$url = 'http://45.241.41.90:8000/api/v1/admin/schools';
 $response = $client-&gt;post(
     $url,
     [
@@ -11930,7 +12197,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.134.74:8000/api/v1/admin/schools';
+  final url = 'http://45.241.41.90:8000/api/v1/admin/schools';
 
     final queryParams = {};
 
@@ -11974,7 +12241,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.134.74:8000/api/v1/admin/schools");
+  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/schools");
 
     final queryParams = {};
 
@@ -12220,7 +12487,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.134.74:8000/api/v1/admin/schools/architecto"
+    "http://45.241.41.90:8000/api/v1/admin/schools/architecto"
 );
 
 const headers = {
@@ -12237,7 +12504,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.134.74:8000/api/v1/admin/schools/architecto';
+$url = 'http://45.241.41.90:8000/api/v1/admin/schools/architecto';
 $response = $client-&gt;get(
     $url,
     [
@@ -12258,7 +12525,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.134.74:8000/api/v1/admin/schools/architecto';
+  final url = 'http://45.241.41.90:8000/api/v1/admin/schools/architecto';
 
     final queryParams = {};
 
@@ -12292,7 +12559,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.134.74:8000/api/v1/admin/schools/architecto");
+  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/schools/architecto");
 
     final queryParams = {};
 
@@ -12446,7 +12713,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.134.74:8000/api/v1/admin/schools/architecto"
+    "http://45.241.41.90:8000/api/v1/admin/schools/architecto"
 );
 
 const headers = {
@@ -12476,7 +12743,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.134.74:8000/api/v1/admin/schools/architecto';
+$url = 'http://45.241.41.90:8000/api/v1/admin/schools/architecto';
 $response = $client-&gt;put(
     $url,
     [
@@ -12508,7 +12775,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.134.74:8000/api/v1/admin/schools/architecto';
+  final url = 'http://45.241.41.90:8000/api/v1/admin/schools/architecto';
 
     final queryParams = {};
 
@@ -12552,7 +12819,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.134.74:8000/api/v1/admin/schools/architecto");
+  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/schools/architecto");
 
     final queryParams = {};
 
@@ -12814,7 +13081,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.134.74:8000/api/v1/admin/schools/architecto"
+    "http://45.241.41.90:8000/api/v1/admin/schools/architecto"
 );
 
 const headers = {
@@ -12831,7 +13098,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.134.74:8000/api/v1/admin/schools/architecto';
+$url = 'http://45.241.41.90:8000/api/v1/admin/schools/architecto';
 $response = $client-&gt;delete(
     $url,
     [
@@ -12852,7 +13119,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.134.74:8000/api/v1/admin/schools/architecto';
+  final url = 'http://45.241.41.90:8000/api/v1/admin/schools/architecto';
 
     final queryParams = {};
 
@@ -12886,7 +13153,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.134.74:8000/api/v1/admin/schools/architecto");
+  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/schools/architecto");
 
     final queryParams = {};
 
@@ -13010,273 +13277,6 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                     </form>
 
-                    <h2 id="endpoints-POSTapi-v1-auth-login">Authenticate user and return access token</h2>
-
-<p>
-<small class="badge badge-darkred">requires authentication</small>
-</p>
-
-
-
-<span id="example-requests-POSTapi-v1-auth-login">
-<blockquote>Example request:</blockquote>
-
-
-<div class="JS-example">
-    <pre><code class="language-JS">const url = new URL(
-    "http://45.245.134.74:8000/api/v1/auth/login"
-);
-
-const headers = {
-    "Authorization": "Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d",
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-let body = {
-    "phone": "01010869000",
-    "national_id": "01234567891234",
-    "email": "tarek@digitopia.com",
-    "password": "12345678"
-};
-
-fetch(url, {
-    method: "POST",
-    headers,
-    body: JSON.stringify(body),
-}).then(response =&gt; response.json());</code></pre></div>
-
-
-<div class="Laravel-example">
-    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.134.74:8000/api/v1/auth/login';
-$response = $client-&gt;post(
-    $url,
-    [
-        'headers' =&gt; [
-            'Authorization' =&gt; 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d',
-            'Content-Type' =&gt; 'application/json',
-            'Accept' =&gt; 'application/json',
-        ],
-        'json' =&gt; [
-            'phone' =&gt; '01010869000',
-            'national_id' =&gt; '01234567891234',
-            'email' =&gt; 'tarek@digitopia.com',
-            'password' =&gt; '12345678',
-        ],
-    ]
-);
-$body = $response-&gt;getBody();
-print_r(json_decode((string) $body));</code></pre></div>
-
-
-<div class="DartPad-example">
-    <pre><code class="language-ts">import 'dart:convert';
-import 'package:dio/dio.dart';
-
-void main() async {
-  final dio = Dio();
-  final url = 'http://45.245.134.74:8000/api/v1/auth/login';
-
-    final queryParams = {};
-
-  final headers = {
-        'Authorization': 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
-
-  dynamic data;
-    data = [
-    'phone' =&gt; '01010869000',
-    'national_id' =&gt; '01234567891234',
-    'email' =&gt; 'tarek@digitopia.com',
-    'password' =&gt; '12345678',
-];
-
-  try {
-    final response = await dio.request(
-      url,
-      data: data,
-      queryParameters: queryParams,
-      options: Options(
-        method: 'POST',
-        headers: headers,
-      ),
-    );
-    print(response.data);
-  } catch (e) {
-    print('Request failed: $e');
-  }
-}</code></pre></div>
-
-
-<div class="Dio-example">
-    <pre><code class="language-javascript">import 'dart:convert';
-import 'package:dio/dio.dart';
-
-void main() async {
-  final dio = Dio();
-
-  final url = Uri.parse("http://45.245.134.74:8000/api/v1/auth/login");
-
-    final queryParams = {};
-
-  final headers = {
-        'Authorization': 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
-
-  dynamic data;
-    data = [
-    'phone' =&gt; '01010869000',
-    'national_id' =&gt; '01234567891234',
-    'email' =&gt; 'tarek@digitopia.com',
-    'password' =&gt; '12345678',
-];
-
-  try {
-    final response = await dio.request(
-      url.toString(),
-      data: data,
-      queryParameters: queryParams,
-      options: Options(
-        method: 'POST',
-        headers: headers,
-      ),
-    );
-    print('Response: ${response.data}');
-  } catch (e) {
-    print('Request failed: $e');
-  }
-}</code></pre></div>
-
-</span>
-
-<span id="example-responses-POSTapi-v1-auth-login">
-</span>
-<span id="execution-results-POSTapi-v1-auth-login" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-POSTapi-v1-auth-login"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-POSTapi-v1-auth-login"
-      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
-</span>
-<span id="execution-error-POSTapi-v1-auth-login" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-POSTapi-v1-auth-login">
-
-Tip: Check that you&#039;re properly connected to the network.
-If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
-You can check the Dev Tools console for debugging information.</code></pre>
-</span>
-<form id="form-POSTapi-v1-auth-login" data-method="POST"
-      data-path="api/v1/auth/login"
-      data-authed="1"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-auth-login', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-POSTapi-v1-auth-login"
-                    onclick="tryItOut('POSTapi-v1-auth-login');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-POSTapi-v1-auth-login"
-                    onclick="cancelTryOut('POSTapi-v1-auth-login');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-POSTapi-v1-auth-login"
-                    data-initial-text="Send Request 💥"
-                    data-loading-text="⏱ Sending..."
-                    hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-black">POST</small>
-            <b><code>api/v1/auth/login</code></b>
-        </p>
-                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-v1-auth-login"
-               value="Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"
-               data-component="header">
-    <br>
-<p>Example: <code>Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="POSTapi-v1-auth-login"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="POSTapi-v1-auth-login"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
-        <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>phone</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
-<i>optional</i> &nbsp;
-                <input type="text" style="display: none"
-                              name="phone"                data-endpoint="POSTapi-v1-auth-login"
-               value="01010869000"
-               data-component="body">
-    <br>
-<p>Phone number of the user (11 digits). Required if national_id and email are not provided. This field is required when none of <code>national_id</code> and <code>email</code> are present. Must be 11 digits. Example: <code>01010869000</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>national_id</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
-<i>optional</i> &nbsp;
-                <input type="text" style="display: none"
-                              name="national_id"                data-endpoint="POSTapi-v1-auth-login"
-               value="01234567891234"
-               data-component="body">
-    <br>
-<p>National ID of the user (14 digits). Required if phone and email are not provided. This field is required when none of <code>phone</code> and <code>email</code> are present. Must be 14 digits. Example: <code>01234567891234</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
-<i>optional</i> &nbsp;
-                <input type="text" style="display: none"
-                              name="email"                data-endpoint="POSTapi-v1-auth-login"
-               value="tarek@digitopia.com"
-               data-component="body">
-    <br>
-<p>Email address of the user. Required if phone and national_id are not provided. This field is required when none of <code>phone</code> and <code>national_id</code> are present. Must be a valid email address. Must not be greater than 255 characters. Example: <code>tarek@digitopia.com</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>password</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="password"                data-endpoint="POSTapi-v1-auth-login"
-               value="12345678"
-               data-component="body">
-    <br>
-<p>Password of the user (minimum 8 characters). Must be at least 8 characters. Example: <code>12345678</code></p>
-        </div>
-        </form>
-
                     <h2 id="endpoints-GETapi-v1-me">Get current authenticated user</h2>
 
 <p>
@@ -13291,7 +13291,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.134.74:8000/api/v1/me"
+    "http://45.241.41.90:8000/api/v1/me"
 );
 
 const headers = {
@@ -13308,7 +13308,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.134.74:8000/api/v1/me';
+$url = 'http://45.241.41.90:8000/api/v1/me';
 $response = $client-&gt;get(
     $url,
     [
@@ -13329,7 +13329,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.134.74:8000/api/v1/me';
+  final url = 'http://45.241.41.90:8000/api/v1/me';
 
     final queryParams = {};
 
@@ -13363,7 +13363,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.134.74:8000/api/v1/me");
+  final url = Uri.parse("http://45.241.41.90:8000/api/v1/me");
 
     final queryParams = {};
 
@@ -13505,7 +13505,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.134.74:8000/api/v1/logout"
+    "http://45.241.41.90:8000/api/v1/logout"
 );
 
 const headers = {
@@ -13522,7 +13522,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.134.74:8000/api/v1/logout';
+$url = 'http://45.241.41.90:8000/api/v1/logout';
 $response = $client-&gt;post(
     $url,
     [
@@ -13543,7 +13543,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.134.74:8000/api/v1/logout';
+  final url = 'http://45.241.41.90:8000/api/v1/logout';
 
     final queryParams = {};
 
@@ -13577,7 +13577,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.134.74:8000/api/v1/logout");
+  final url = Uri.parse("http://45.241.41.90:8000/api/v1/logout");
 
     final queryParams = {};
 
@@ -13703,7 +13703,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.134.74:8000/api/v1/governorates"
+    "http://45.241.41.90:8000/api/v1/governorates"
 );
 
 const headers = {
@@ -13720,7 +13720,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.134.74:8000/api/v1/governorates';
+$url = 'http://45.241.41.90:8000/api/v1/governorates';
 $response = $client-&gt;get(
     $url,
     [
@@ -13741,7 +13741,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.134.74:8000/api/v1/governorates';
+  final url = 'http://45.241.41.90:8000/api/v1/governorates';
 
     final queryParams = {};
 
@@ -13775,7 +13775,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.134.74:8000/api/v1/governorates");
+  final url = Uri.parse("http://45.241.41.90:8000/api/v1/governorates");
 
     final queryParams = {};
 
@@ -13917,7 +13917,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.134.74:8000/api/v1/governorates/architecto"
+    "http://45.241.41.90:8000/api/v1/governorates/architecto"
 );
 
 const headers = {
@@ -13934,7 +13934,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.134.74:8000/api/v1/governorates/architecto';
+$url = 'http://45.241.41.90:8000/api/v1/governorates/architecto';
 $response = $client-&gt;get(
     $url,
     [
@@ -13955,7 +13955,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.134.74:8000/api/v1/governorates/architecto';
+  final url = 'http://45.241.41.90:8000/api/v1/governorates/architecto';
 
     final queryParams = {};
 
@@ -13989,7 +13989,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.134.74:8000/api/v1/governorates/architecto");
+  final url = Uri.parse("http://45.241.41.90:8000/api/v1/governorates/architecto");
 
     final queryParams = {};
 
@@ -14143,7 +14143,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.134.74:8000/api/health"
+    "http://45.241.41.90:8000/api/health"
 );
 
 const headers = {
@@ -14160,7 +14160,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.134.74:8000/api/health';
+$url = 'http://45.241.41.90:8000/api/health';
 $response = $client-&gt;get(
     $url,
     [
@@ -14181,7 +14181,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.134.74:8000/api/health';
+  final url = 'http://45.241.41.90:8000/api/health';
 
     final queryParams = {};
 
@@ -14215,7 +14215,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.134.74:8000/api/health");
+  final url = Uri.parse("http://45.241.41.90:8000/api/health");
 
     final queryParams = {};
 
@@ -14258,7 +14258,7 @@ access-control-allow-origin: *
 
 <code class="language-json" style="max-height: 300px;">{
     &quot;status&quot;: &quot;ok&quot;,
-    &quot;timestamp&quot;: &quot;2025-09-27T14:07:59.347841Z&quot;,
+    &quot;timestamp&quot;: &quot;2025-09-27T17:39:38.644231Z&quot;,
     &quot;version&quot;: &quot;1.0.0&quot;
 }</code>
  </pre>

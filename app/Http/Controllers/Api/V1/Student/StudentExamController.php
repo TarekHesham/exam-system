@@ -76,8 +76,7 @@ class StudentExamController extends Controller
                 'time_remaining_minutes' => $timeRemainingMinutes,
             ], 'تم جلب الامتحان المتاح بنجاح');
         } catch (\Exception $e) {
-            logger()->error($e->getMessage());
-            return $this->errorResponse('حدث خطأ أثناء جلب الامتحان', 500);
+            return $this->errorResponse($e->getMessage(), 500);
         }
     }
 
@@ -104,7 +103,7 @@ class StudentExamController extends Controller
             }
 
             // Submit the session
-            $this->sessionService->submitSession($session, $data['answers']);
+            $this->sessionService->submitSession($session, $data);
 
             return $this->successResponse([], 'تم تسليم الامتحان بنجاح');
         } catch (\Exception $e) {

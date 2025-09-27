@@ -27,19 +27,27 @@ use Illuminate\Support\ServiceProvider;
 class AppServiceProvider extends ServiceProvider
 {
     /**
+     * All of the container singletons that should be registered.
+     * @var array
+     */
+    public $singletons = [
+        SchoolRepositoryInterface::class => SchoolRepository::class,
+        SchoolServiceInterface::class    => SchoolService::class,
+
+        SubjectRepositoryInterface::class => SubjectRepository::class,
+        SubjectServiceInterface::class    => SubjectService::class,
+
+        GovernorateRepositoryInterface::class => GovernorateRepository::class,
+        GovernorateServiceInterface::class    => GovernorateService::class,
+    ];
+
+
+    /**
      * Register any application services.
      */
     public function register(): void
     {
-        // Repositories & Services
-        $this->app->bind(SubjectRepositoryInterface::class, SubjectRepository::class);
-        $this->app->bind(SubjectServiceInterface::class, SubjectService::class);
-
-        $this->app->bind(GovernorateRepositoryInterface::class, GovernorateRepository::class);
-        $this->app->bind(GovernorateServiceInterface::class, GovernorateService::class);
-
-        $this->app->bind(SchoolRepositoryInterface::class, SchoolRepository::class);
-        $this->app->bind(SchoolServiceInterface::class, SchoolService::class);
+        // 
     }
 
     /**

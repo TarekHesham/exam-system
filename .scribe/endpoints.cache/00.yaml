@@ -5,6 +5,85 @@ description: ''
 endpoints:
   -
     httpMethods:
+      - POST
+    uri: api/v1/auth/login
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Authenticate user and return access token'
+      description: ''
+      authenticated: true
+      deprecated: false
+      custom: []
+    headers:
+      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      phone:
+        name: phone
+        description: 'Phone number of the user (11 digits). Required if national_id and email are not provided. This field is required when none of <code>national_id</code> and <code>email</code> are present. Must be 11 digits.'
+        required: false
+        example: '01010869000'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      national_id:
+        name: national_id
+        description: 'National ID of the user (14 digits). Required if phone and email are not provided. This field is required when none of <code>phone</code> and <code>email</code> are present. Must be 14 digits.'
+        required: false
+        example: '01234567891234'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      email:
+        name: email
+        description: 'Email address of the user. Required if phone and national_id are not provided. This field is required when none of <code>phone</code> and <code>national_id</code> are present. Must be a valid email address. Must not be greater than 255 characters.'
+        required: false
+        example: tarek@digitopia.com
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      password:
+        name: password
+        description: 'Password of the user (minimum 8 characters). Must be at least 8 characters.'
+        required: true
+        example: '12345678'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanBodyParameters:
+      phone: '01010869000'
+      national_id: '01234567891234'
+      email: tarek@digitopia.com
+      password: '12345678'
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer Bearer {YOUR_AUTH_KEY}'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
       - GET
     uri: api/v1/student/available-exam
     metadata:
@@ -44,7 +123,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+      - 'Bearer Bearer {YOUR_AUTH_KEY}'
     controller: null
     method: null
     route: null
@@ -184,7 +263,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+      - 'Bearer Bearer {YOUR_AUTH_KEY}'
     controller: null
     method: null
     route: null
@@ -261,7 +340,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+      - 'Bearer Bearer {YOUR_AUTH_KEY}'
     controller: null
     method: null
     route: null
@@ -305,7 +384,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+      - 'Bearer Bearer {YOUR_AUTH_KEY}'
     controller: null
     method: null
     route: null
@@ -468,7 +547,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+      - 'Bearer Bearer {YOUR_AUTH_KEY}'
     controller: null
     method: null
     route: null
@@ -523,7 +602,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+      - 'Bearer Bearer {YOUR_AUTH_KEY}'
     controller: null
     method: null
     route: null
@@ -731,7 +810,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+      - 'Bearer Bearer {YOUR_AUTH_KEY}'
     controller: null
     method: null
     route: null
@@ -777,7 +856,51 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+      - 'Bearer Bearer {YOUR_AUTH_KEY}'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/admin/teachers
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'List all teachers'
+      description: ''
+      authenticated: true
+      deprecated: false
+      custom: []
+    headers:
+      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer Bearer {YOUR_AUTH_KEY}'
     controller: null
     method: null
     route: null
@@ -785,7 +908,7 @@ endpoints:
   -
     httpMethods:
       - POST
-    uri: api/v1/admin/create-teacher
+    uri: api/v1/admin/teachers
     metadata:
       groupName: Endpoints
       groupDescription: ''
@@ -948,51 +1071,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - GET
-    uri: api/v1/admin/teachers
-    metadata:
-      groupName: Endpoints
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'List all teachers'
-      description: ''
-      authenticated: true
-      deprecated: false
-      custom: []
-    headers:
-      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        status: 401
-        content: '{"message":"Unauthenticated."}'
-        headers:
-          cache-control: 'no-cache, private'
-          content-type: application/json
-          access-control-allow-origin: '*'
-        description: null
-        custom: []
-    responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+      - 'Bearer Bearer {YOUR_AUTH_KEY}'
     controller: null
     method: null
     route: null
@@ -1047,7 +1126,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+      - 'Bearer Bearer {YOUR_AUTH_KEY}'
     controller: null
     method: null
     route: null
@@ -1233,7 +1312,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+      - 'Bearer Bearer {YOUR_AUTH_KEY}'
     controller: null
     method: null
     route: null
@@ -1279,7 +1358,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+      - 'Bearer Bearer {YOUR_AUTH_KEY}'
     controller: null
     method: null
     route: null
@@ -1323,7 +1402,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+      - 'Bearer Bearer {YOUR_AUTH_KEY}'
     controller: null
     method: null
     route: null
@@ -1484,7 +1563,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+      - 'Bearer Bearer {YOUR_AUTH_KEY}'
     controller: null
     method: null
     route: null
@@ -1539,7 +1618,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+      - 'Bearer Bearer {YOUR_AUTH_KEY}'
     controller: null
     method: null
     route: null
@@ -1695,7 +1774,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+      - 'Bearer Bearer {YOUR_AUTH_KEY}'
     controller: null
     method: null
     route: null
@@ -1741,7 +1820,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+      - 'Bearer Bearer {YOUR_AUTH_KEY}'
     controller: null
     method: null
     route: null
@@ -1787,7 +1866,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+      - 'Bearer Bearer {YOUR_AUTH_KEY}'
     controller: null
     method: null
     route: null
@@ -1842,7 +1921,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+      - 'Bearer Bearer {YOUR_AUTH_KEY}'
     controller: null
     method: null
     route: null
@@ -1886,7 +1965,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+      - 'Bearer Bearer {YOUR_AUTH_KEY}'
     controller: null
     method: null
     route: null
@@ -1998,7 +2077,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+      - 'Bearer Bearer {YOUR_AUTH_KEY}'
     controller: null
     method: null
     route: null
@@ -2053,7 +2132,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+      - 'Bearer Bearer {YOUR_AUTH_KEY}'
     controller: null
     method: null
     route: null
@@ -2177,7 +2256,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+      - 'Bearer Bearer {YOUR_AUTH_KEY}'
     controller: null
     method: null
     route: null
@@ -2223,7 +2302,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+      - 'Bearer Bearer {YOUR_AUTH_KEY}'
     controller: null
     method: null
     route: null
@@ -2267,7 +2346,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+      - 'Bearer Bearer {YOUR_AUTH_KEY}'
     controller: null
     method: null
     route: null
@@ -2418,7 +2497,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+      - 'Bearer Bearer {YOUR_AUTH_KEY}'
     controller: null
     method: null
     route: null
@@ -2473,7 +2552,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+      - 'Bearer Bearer {YOUR_AUTH_KEY}'
     controller: null
     method: null
     route: null
@@ -2636,7 +2715,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+      - 'Bearer Bearer {YOUR_AUTH_KEY}'
     controller: null
     method: null
     route: null
@@ -2682,7 +2761,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+      - 'Bearer Bearer {YOUR_AUTH_KEY}'
     controller: null
     method: null
     route: null
@@ -2737,7 +2816,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+      - 'Bearer Bearer {YOUR_AUTH_KEY}'
     controller: null
     method: null
     route: null
@@ -2781,7 +2860,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+      - 'Bearer Bearer {YOUR_AUTH_KEY}'
     controller: null
     method: null
     route: null
@@ -2860,7 +2939,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+      - 'Bearer Bearer {YOUR_AUTH_KEY}'
     controller: null
     method: null
     route: null
@@ -2915,7 +2994,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+      - 'Bearer Bearer {YOUR_AUTH_KEY}'
     controller: null
     method: null
     route: null
@@ -3006,7 +3085,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+      - 'Bearer Bearer {YOUR_AUTH_KEY}'
     controller: null
     method: null
     route: null
@@ -3052,7 +3131,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+      - 'Bearer Bearer {YOUR_AUTH_KEY}'
     controller: null
     method: null
     route: null
@@ -3096,7 +3175,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+      - 'Bearer Bearer {YOUR_AUTH_KEY}'
     controller: null
     method: null
     route: null
@@ -3267,7 +3346,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+      - 'Bearer Bearer {YOUR_AUTH_KEY}'
     controller: null
     method: null
     route: null
@@ -3322,7 +3401,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+      - 'Bearer Bearer {YOUR_AUTH_KEY}'
     controller: null
     method: null
     route: null
@@ -3450,7 +3529,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+      - 'Bearer Bearer {YOUR_AUTH_KEY}'
     controller: null
     method: null
     route: null
@@ -3496,7 +3575,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+      - 'Bearer Bearer {YOUR_AUTH_KEY}'
     controller: null
     method: null
     route: null
@@ -3540,7 +3619,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+      - 'Bearer Bearer {YOUR_AUTH_KEY}'
     controller: null
     method: null
     route: null
@@ -3674,7 +3753,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+      - 'Bearer Bearer {YOUR_AUTH_KEY}'
     controller: null
     method: null
     route: null
@@ -3729,7 +3808,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+      - 'Bearer Bearer {YOUR_AUTH_KEY}'
     controller: null
     method: null
     route: null
@@ -3875,7 +3954,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+      - 'Bearer Bearer {YOUR_AUTH_KEY}'
     controller: null
     method: null
     route: null
@@ -3921,86 +4000,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - POST
-    uri: api/v1/auth/login
-    metadata:
-      groupName: Endpoints
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Authenticate user and return access token'
-      description: ''
-      authenticated: true
-      deprecated: false
-      custom: []
-    headers:
-      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      phone:
-        name: phone
-        description: 'Phone number of the user (11 digits). Required if national_id and email are not provided. This field is required when none of <code>national_id</code> and <code>email</code> are present. Must be 11 digits.'
-        required: false
-        example: '01010869000'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      national_id:
-        name: national_id
-        description: 'National ID of the user (14 digits). Required if phone and email are not provided. This field is required when none of <code>phone</code> and <code>email</code> are present. Must be 14 digits.'
-        required: false
-        example: '01234567891234'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      email:
-        name: email
-        description: 'Email address of the user. Required if phone and national_id are not provided. This field is required when none of <code>phone</code> and <code>national_id</code> are present. Must be a valid email address. Must not be greater than 255 characters.'
-        required: false
-        example: tarek@digitopia.com
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      password:
-        name: password
-        description: 'Password of the user (minimum 8 characters). Must be at least 8 characters.'
-        required: true
-        example: '12345678'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-    cleanBodyParameters:
-      phone: '01010869000'
-      national_id: '01234567891234'
-      email: tarek@digitopia.com
-      password: '12345678'
-    fileParameters: []
-    responses: []
-    responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+      - 'Bearer Bearer {YOUR_AUTH_KEY}'
     controller: null
     method: null
     route: null
@@ -4044,7 +4044,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+      - 'Bearer Bearer {YOUR_AUTH_KEY}'
     controller: null
     method: null
     route: null
@@ -4079,7 +4079,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+      - 'Bearer Bearer {YOUR_AUTH_KEY}'
     controller: null
     method: null
     route: null
@@ -4123,7 +4123,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+      - 'Bearer Bearer {YOUR_AUTH_KEY}'
     controller: null
     method: null
     route: null
@@ -4178,7 +4178,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+      - 'Bearer Bearer {YOUR_AUTH_KEY}'
     controller: null
     method: null
     route: null
@@ -4211,7 +4211,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"status":"ok","timestamp":"2025-09-27T14:07:59.347841Z","version":"1.0.0"}'
+        content: '{"status":"ok","timestamp":"2025-09-27T17:39:38.644231Z","version":"1.0.0"}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -4222,7 +4222,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+      - 'Bearer Bearer {YOUR_AUTH_KEY}'
     controller: null
     method: null
     route: null

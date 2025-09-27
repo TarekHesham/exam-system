@@ -25,24 +25,29 @@ class StudentController extends Controller
     }
 
     /**
-     * List students for the school admin's school with filters and pagination.
+     * List students with filters and pagination.
+     * - School Admin: only students in their school
+     * - Ministry Admin: all students
      */
     public function index(Request $request): JsonResponse
     {
         $user = Auth::user();
 
-        if ($user->user_type !== 'school_admin') {
+        if (!in_array($user->user_type, ['school_admin', 'ministry_admin'])) {
             return $this->errorResponse('Unauthorized', 403);
         }
 
-        $schoolAdmin = $user->schoolAdmin()->active()->first();
-        if (!$schoolAdmin) {
-            return $this->errorResponse('School admin data not found or inactive', 400);
-        }
+        $filters = $request->only(['academic_year', 'section', 'search']);
 
-        $filters = array_merge($request->only(['academic_year', 'section', 'search']), [
-            'school_id' => $schoolAdmin->school_id,
-        ]);
+        if ($user->user_type === 'school_admin') {
+            $schoolAdmin = $user->schoolAdmin()->active()->first();
+
+            if (! $schoolAdmin) {
+                return $this->errorResponse('School admin data not found or inactive', 400);
+            }
+
+            $filters['school_id'] = $schoolAdmin->school_id;
+        }
 
         $perPage = (int) $request->get('per_page', 15);
         $paginate = $this->studentService->list($filters, $perPage);
@@ -68,7 +73,7 @@ class StudentController extends Controller
 
         // Get school admin record to find associated school
         $schoolAdmin = $user->schoolAdmin()->active()->first();
-        if (!$schoolAdmin) {
+        if (! $schoolAdmin) {
             return response()->json([
                 'status' => false,
                 'message' => 'لم يتم العثور على بيانات مدير المدرسة أو الحساب غير نشط',
@@ -77,7 +82,7 @@ class StudentController extends Controller
         }
 
         // Check if school admin has permission to create students
-        if (!$schoolAdmin->hasPermission('manage_students')) {
+        if (! $schoolAdmin->hasPermission('manage_students')) {
             return response()->json([
                 'status' => false,
                 'message' => 'ليس لديك صلاحية لإنشاء حسابات الطلاب',

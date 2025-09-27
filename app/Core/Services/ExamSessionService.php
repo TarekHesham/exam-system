@@ -585,7 +585,7 @@ class ExamSessionService
             'max_possible_score'  => $maxScore,
             'percentage'          => $needsManualCorrection ? null : $percentage,
             'result_status'       => $needsManualCorrection ? 'pending' : 'published',
-            'question_scores'     => $this->getQuestionScores($session),
+            'question_scores'     => json_encode($this->getQuestionScores($session)),
             'result_published_at' => $needsManualCorrection ? null : Carbon::now()
         ]);
     }
@@ -603,13 +603,13 @@ class ExamSessionService
             $isCorrect = $this->isAnswerCorrect($question, $answer);
 
             $scores[$question->id] = [
-                'question_id' => $question->id,
+                'question_id'   => $question->id,
                 'question_type' => $question->question_type,
-                'max_points' => $question->points,
+                'max_points'    => $question->points,
                 'earned_points' => in_array($question->question_type, ['multiple_choice', 'true_false'])
                     ? ($isCorrect ? $question->points : 0)
                     : null,
-                'is_correct' => in_array($question->question_type, ['multiple_choice', 'true_false'])
+                'is_correct'    => in_array($question->question_type, ['multiple_choice', 'true_false'])
                     ? $isCorrect
                     : null,
                 'needs_manual_review' => in_array($question->question_type, ['essay', 'fill_blank'])

@@ -4,6 +4,7 @@ namespace App\Core\Repositories;
 
 use App\Core\Contracts\Repositories\SchoolRepositoryInterface;
 use App\Modules\UserManagement\Models\School;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class SchoolRepository implements SchoolRepositoryInterface
@@ -11,6 +12,13 @@ class SchoolRepository implements SchoolRepositoryInterface
     public function allPaginated(int $perPage): LengthAwarePaginator
     {
         return School::with('governorate')->paginate($perPage);
+    }
+
+    public function findByGovernorateId(int $governorateId): Collection
+    {
+        return School::with('governorate')
+            ->where('governorate_id', $governorateId)
+            ->get();
     }
 
     public function find(int $id): ?School

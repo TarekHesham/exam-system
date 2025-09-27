@@ -16,10 +16,13 @@ use App\Http\Controllers\Api\V1\Admin\{
     SubjectController,
     TeacherController
 };
-use App\Http\Controllers\Api\V1\SchoolAdmin\StudentController;
+use App\Http\Controllers\Api\V1\SchoolAdmin\{StudentController};
 use App\Http\Controllers\Api\V1\Shared\{AuthController, GovernorateController};
 use App\Http\Controllers\Api\V1\Student\{StudentExamController};
 use App\Http\Controllers\Api\V1\Teacher\{TeacherExamController};
+
+// Authentication
+Route::post('auth/login', [AuthController::class, 'login'])->withoutMiddleware('auth:sanctum');
 
 // Authenticated routes
 Route::middleware('roles:student')->prefix('student')->group(function () {
@@ -41,13 +44,10 @@ Route::middleware('roles:school_admin')->prefix('admin')->group(function () {
 });
 
 Route::middleware('roles:ministry_admin|teacher')->prefix('admin')->group(function () {
-    // Account creation routes
-    Route::post('create-teacher', [AuthController::class, 'createTeacher']);
-
     // ============================================
     // Teachers Management
     // ============================================
-    Route::apiResource('teachers', TeacherController::class)->except('store');
+    Route::apiResource('teachers', TeacherController::class);
 
     // ============================================
     // Exam Management
@@ -91,9 +91,6 @@ Route::middleware('roles:ministry_admin|teacher')->prefix('admin')->group(functi
     // =============================================
     Route::apiResource('schools', SchoolController::class);
 });
-
-// Authentication
-Route::post('auth/login', [AuthController::class, 'login'])->withoutMiddleware('auth:sanctum');
 
 // Protected routes
 Route::get('me', [AuthController::class, 'me']);

@@ -19,6 +19,11 @@ class SchoolService implements SchoolServiceInterface
         return $this->repo->allPaginated($perPage);
     }
 
+    public function listByGovernorate(int $governorateId)
+    {
+        return $this->repo->findByGovernorateId($governorateId);
+    }
+
     public function get(int $id)
     {
         return $this->repo->find($id);
