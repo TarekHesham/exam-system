@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1;
+namespace App\Http\Controllers\Api\V1\Admin;
 
 use App\Core\Contracts\Services\ExamQuestionServiceInterface;
 use App\Core\DTOs\ExamQuestionData;
@@ -47,7 +47,6 @@ class ExamQuestionController extends Controller
     {
         $dto = ExamQuestionData::fromArray($request->validated());
         $question = $this->service->create($dto);
-
         return $this->successResponse($question, 'Question created', 201);
     }
 

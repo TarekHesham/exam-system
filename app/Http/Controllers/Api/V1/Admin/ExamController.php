@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1;
+namespace App\Http\Controllers\Api\V1\Admin;
 
 use App\Core\Contracts\Services\ExamServiceInterface;
 use App\Http\Controllers\Controller;

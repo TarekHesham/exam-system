@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1;
+namespace App\Http\Controllers\Api\V1\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateTeacherRequest;
@@ -92,27 +92,6 @@ class TeacherController extends Controller
         return $this->successResponse(
             new UserResource($teacher->user->load('teacher.schoolAssignments.school')),
             'Teacher updated successfully'
-        );
-    }
-
-    /**
-     * Toggle teacher active status
-     */
-    public function toggleStatus(int $id): JsonResponse
-    {
-        $teacher = Teacher::with('user')->findOrFail($id);
-
-        $teacher->user->is_active = !$teacher->user->is_active;
-        $teacher->user->save();
-
-        $this->authService->logActivity(Auth::id(), 'toggle_teacher_status', [
-            'teacher_id' => $teacher->id,
-            'new_status' => $teacher->user->is_active
-        ]);
-
-        return $this->successResponse(
-            new UserResource($teacher->user->load('teacher')),
-            'Teacher status updated successfully'
         );
     }
 

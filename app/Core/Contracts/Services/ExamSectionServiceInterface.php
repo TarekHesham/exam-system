@@ -9,7 +9,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 interface ExamSectionServiceInterface
 {
     public function list(int $perPage = 10): LengthAwarePaginator;
-    public function get(int $id): ?ExamSection;
+    public function getById(int $id): ?ExamSection;
     public function create(ExamSectionDTO $dto): ExamSection;
     public function update(int $id, ExamSectionDTO $dto): ?ExamSection;
     public function delete(int $id): bool;

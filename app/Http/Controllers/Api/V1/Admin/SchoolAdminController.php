@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1;
+namespace App\Http\Controllers\Api\V1\Admin;
 
-use App\Core\Contracts\Services\SchoolAdminServiceInterface;
 use App\Core\DTOs\{SchoolAdminDTO, UserDTO};
 use App\Core\Services\{AuthService, UserService};
+use App\Core\Contracts\Services\SchoolAdminServiceInterface;
 use App\Http\Requests\{StoreSchoolAdminRequest, UpdateSchoolAdminRequest};
-use App\Http\Controllers\Controller;
-use App\Http\Resources\UserResource;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\{Auth, DB, Hash, Log};
+use App\Http\Resources\UserResource;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\JsonResponse;
 
 class SchoolAdminController extends Controller
 {

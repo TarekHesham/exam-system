@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1;
+namespace App\Http\Controllers\Api\V1\Admin;
 
 use App\Core\Contracts\Services\ExamSectionServiceInterface;
 use App\Core\DTOs\ExamSectionDTO;
@@ -16,7 +16,9 @@ class ExamSectionController extends Controller
 {
     public function __construct(
         protected ExamSectionServiceInterface $service
-    ) {}
+    ) {
+        // 
+    }
 
     public function index(Request $request)
     {
@@ -31,8 +33,8 @@ class ExamSectionController extends Controller
 
     public function show($id)
     {
-        $section = $this->service->get($id);
-        if (!$section) {
+        $section = $this->service->getById($id);
+        if (! $section) {
             return $this->errorResponse('Exam Section not found', 404);
         }
         return $this->successResponse(
@@ -52,7 +54,7 @@ class ExamSectionController extends Controller
     {
         $dto = ExamSectionDTO::fromArray($request->validated());
         $section = $this->service->update($id, $dto);
-        if (!$section) {
+        if (! $section) {
             return $this->errorResponse('Exam Section not found', 404);
         }
         return $this->successResponse($section, 'Exam Section updated successfully');
@@ -61,7 +63,7 @@ class ExamSectionController extends Controller
     public function destroy($id)
     {
         $deleted = $this->service->delete($id);
-        if (!$deleted) {
+        if (! $deleted) {
             return $this->errorResponse('Exam Section not found', 404);
         }
         return $this->successResponse([], 'Exam Section deleted successfully');

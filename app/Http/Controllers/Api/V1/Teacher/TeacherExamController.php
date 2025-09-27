@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1;
+namespace App\Http\Controllers\Api\V1\Teacher;
 
 use App\Http\Controllers\Controller;
 use App\Core\Services\{ExamSessionService, StudentExamService};
@@ -16,7 +16,9 @@ class TeacherExamController extends Controller
     public function __construct(
         private ExamSessionService $sessionService,
         private StudentExamService $studentExamService
-    ) {}
+    ) {
+        // 
+    }
 
     /**
      * Teacher scans QR code with student_id and creates session
@@ -31,11 +33,7 @@ class TeacherExamController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json([
-                'status' => false,
-                'message' => 'بيانات غير صحيحة',
-                'errors' => $validator->errors()
-            ], 422);
+            return $this->errorResponse($validator->errors(), 422);
         }
 
         try {
@@ -44,7 +42,7 @@ class TeacherExamController extends Controller
 
             // Find available exam for the student
             $availableExam = $this->findAvailableExamForStudent($request->student_id);
-
+            logger($availableExam);
             if (! $availableExam) {
                 return response()->json([
                     'status' => false,

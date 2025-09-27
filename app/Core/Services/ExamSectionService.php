@@ -19,7 +19,7 @@ class ExamSectionService implements ExamSectionServiceInterface
         return $this->repository->paginate($perPage);
     }
 
-    public function get(int $id): ?ExamSection
+    public function getById(int $id): ?ExamSection
     {
         return $this->repository->find($id);
     }

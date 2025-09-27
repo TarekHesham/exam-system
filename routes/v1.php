@@ -1,59 +1,33 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
 | API Routes v1
 |--------------------------------------------------------------------------
 */
-
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\V1\{
-    AuthController,
+use App\Http\Controllers\Api\V1\Admin\{
     ExamController,
     ExamQuestionController,
     ExamSectionController,
-    ExamSessionController,
-    GovernorateController,
     SchoolAdminController,
     SchoolController,
-    StudentExamController,
     SubjectController,
-    TeacherController,
-    TeacherExamController
+    TeacherController
 };
+use App\Http\Controllers\Api\V1\SchoolAdmin\StudentController;
+use App\Http\Controllers\Api\V1\Shared\{AuthController, GovernorateController};
+use App\Http\Controllers\Api\V1\Student\{StudentExamController};
+use App\Http\Controllers\Api\V1\Teacher\{TeacherExamController};
 
-// Authentication
-Route::withoutMiddleware('auth:sanctum')->prefix('auth')->group(function () {
-    Route::post('login', [AuthController::class, 'login']);
-});
-
-// Protected routes
-Route::get('me', [AuthController::class, 'me']);
-Route::post('logout', [AuthController::class, 'logout']);
-Route::prefix('governorates')->group(function () {
-    Route::get('/', [GovernorateController::class, 'index']);
-    Route::get('{id}', [GovernorateController::class, 'show']);
-});
-
+// Authenticated routes
 Route::middleware('roles:student')->prefix('student')->group(function () {
     // ============================================
     // Exam Session Management
     // ============================================
-    Route::prefix('exam-sessions')->group(function () {
-        Route::post('/{sessionId}/submit', [ExamSessionController::class, 'submitSession']);
-
-        // Session Monitoring
-        Route::post('/{sessionId}/heartbeat', [ExamSessionController::class, 'heartbeat']);
-        Route::get('/{sessionId}/time-remaining', [ExamSessionController::class, 'timeRemaining']);
-    });
-
     Route::get('available-exam', [StudentExamController::class, 'getAvailableExam']);
-
-    // These routes remain from ExamSessionService for answer management
-    Route::post('/exam/save-answer', [StudentExamController::class, 'saveAnswer']);
-    Route::post('/exam/submit', [StudentExamController::class, 'submitExam']);
-    Route::post('/exam/heartbeat', [StudentExamController::class, 'sendHeartbeat']);
+    Route::post('exam/submit', [StudentExamController::class, 'submitExam']);
 });
 
 Route::middleware('roles:teacher')->prefix('teacher')->group(function () {
@@ -63,7 +37,7 @@ Route::middleware('roles:teacher')->prefix('teacher')->group(function () {
 
 Route::middleware('roles:school_admin')->prefix('admin')->group(function () {
     // Account creation routes
-    Route::post('create-student', [AuthController::class, 'createStudent']);
+    Route::apiResource('students', StudentController::class);
 });
 
 Route::middleware('roles:ministry_admin|teacher')->prefix('admin')->group(function () {
@@ -74,7 +48,6 @@ Route::middleware('roles:ministry_admin|teacher')->prefix('admin')->group(functi
     // Teachers Management
     // ============================================
     Route::apiResource('teachers', TeacherController::class)->except('store');
-    Route::patch('teachers/{id}/toggle-status', [TeacherController::class, 'toggleStatus']);
 
     // ============================================
     // Exam Management
@@ -118,3 +91,11 @@ Route::middleware('roles:ministry_admin|teacher')->prefix('admin')->group(functi
     // =============================================
     Route::apiResource('schools', SchoolController::class);
 });
+
+// Authentication
+Route::post('auth/login', [AuthController::class, 'login'])->withoutMiddleware('auth:sanctum');
+
+// Protected routes
+Route::get('me', [AuthController::class, 'me']);
+Route::post('logout', [AuthController::class, 'logout']);
+Route::apiResource('governorates', GovernorateController::class)->only('index', 'show');

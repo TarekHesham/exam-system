@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1;
+namespace App\Http\Controllers\Api\V1\Shared;
 
 use App\Core\Services\{AuthService, UserService};
 use App\Http\Controllers\Controller;
@@ -39,12 +39,12 @@ class AuthController extends Controller
             $user = $this->authService->findUserByIdentifier($identifier);
 
             if (!$user || !$user->is_active) {
-                return $this->errorResponse('حساب غير نشط أو غير موجود', 401);
+                return $this->errorResponse('حساب غير نشط أو غير موجود', 403);
             }
 
             // Verify password
             if (!Hash::check($credentials['password'], $user->password)) {
-                return $this->errorResponse('بيانات الدخول غير صحيحة', 401);
+                return $this->errorResponse('بيانات الدخول غير صحيحة', 403);
             }
 
             // Generate access token
@@ -124,106 +124,6 @@ class AuthController extends Controller
     }
 
     /**
-     * Create student account (School Admin only)
-     * @param Request $request
-     */
-    public function createStudent(StoreStudentRequest $request): JsonResponse
-    {
-        $user = Auth::user();
-
-        if ($user->user_type !== 'school_admin') {
-            throw new UnauthorizedException('غير مصرح لك بإنشاء حسابات الطلاب');
-        }
-
-        // Get school admin record to find associated school
-        $schoolAdmin = $user->schoolAdmin()->active()->first();
-        if (!$schoolAdmin) {
-            return response()->json([
-                'status' => false,
-                'message' => 'لم يتم العثور على بيانات مدير المدرسة أو الحساب غير نشط',
-                'errors'  => ['school_admin' => ['بيانات مدير المدرسة غير موجودة']]
-            ], 400);
-        }
-
-        // Check if school admin has permission to create students
-        if (!$schoolAdmin->hasPermission('manage_students')) {
-            return response()->json([
-                'status' => false,
-                'message' => 'ليس لديك صلاحية لإنشاء حسابات الطلاب',
-                'errors'  => ['permission' => ['صلاحية غير كافية']]
-            ], 403);
-        }
-
-        DB::beginTransaction();
-
-        try {
-            $userData = UserDTO::fromArray([
-                'name'        => $request->name,
-                'email'       => $request->email,
-                'phone'       => $request->phone,
-                'national_id' => $request->national_id,
-                'user_type'   => 'student',
-                'password'    => Hash::make($request->password),
-                'is_active'   => true
-            ]);
-
-            // Create user
-            $newUser = $this->userService->createUser($userData);
-
-            // Create student profile
-            $student = $this->userService->createStudentProfile($newUser->id, [
-                'school_id'      => $schoolAdmin->school_id,
-                'student_code'   => $this->generateStudentCode($schoolAdmin->school_id),
-                'seat_number'    => $request->seat_number,
-                'academic_year'  => $request->academic_year,
-                'section'        => $request->section,
-                'birth_date'     => $request->birth_date,
-                'gender'         => $request->gender,
-                'guardian_phone' => $request->guardian_phone,
-                'is_banned'      => false
-            ]);
-
-            // Log activity
-            $this->authService->logActivity(Auth::id(), 'create_student', [
-                'student_id'   => $student->id,
-                'student_code' => $student->student_code,
-                'school_id'    => $schoolAdmin->school_id,
-                'school_name'  => $schoolAdmin->school->name
-            ]);
-
-            DB::commit();
-
-            return response()->json([
-                'status' => true,
-                'message' => 'تم إنشاء حساب الطالب بنجاح',
-                'data' => [
-                    'user' => new UserResource($newUser->load('student.school')),
-                    'student_code' => $student->student_code,
-                    'school' => [
-                        'id'   => $schoolAdmin->school->id,
-                        'name' => $schoolAdmin->school->name,
-                        'code' => $schoolAdmin->school->code
-                    ]
-                ]
-            ], 201);
-        } catch (\Exception $e) {
-            DB::rollBack();
-            Log::error('Create student error: ' . $e->getMessage(), [
-                'request_data'    => $request->all(),
-                'created_by'      => Auth::id(),
-                'school_admin_id' => $schoolAdmin->id ?? null,
-                'school_id'       => $schoolAdmin->school_id ?? null
-            ]);
-
-            return response()->json([
-                'status' => false,
-                'message' => 'حدث خطأ أثناء إنشاء حساب الطالب',
-                'errors' => ['server' => ['خطأ في الخادم']]
-            ], 500);
-        }
-    }
-
-    /**
      * Create school admin account (Ministry Admin only)
      * @param Request $request
      */
@@ -283,7 +183,7 @@ class AuthController extends Controller
     /**
      * Get current authenticated user
      */
-    public function me(Request $request): JsonResponse
+    public function me(): JsonResponse
     {
         try {
             $user = Auth::user();
@@ -301,19 +201,16 @@ class AuthController extends Controller
                     break;
             }
 
-            return response()->json([
-                'status' => true,
-                'data' => new UserResource($user)
-            ]);
+            return $this->successResponse(UserResource::make($user));
         } catch (\Exception $e) {
             Log::error('Get user profile error: ' . $e->getMessage(), [
                 'user_id' => Auth::id()
             ]);
 
             return response()->json([
-                'status' => false,
+                'status'  => false,
                 'message' => 'حدث خطأ أثناء جلب بيانات المستخدم',
-                'errors' => ['server' => ['خطأ في الخادم']]
+                'errors'  => ['server' => ['خطأ في الخادم']]
             ], 500);
         }
     }
@@ -328,7 +225,7 @@ class AuthController extends Controller
             $user = Auth::user();
 
             // Revoke current tokens
-            $user->token()->delete();
+            $user->tokens()->delete();
 
             // Log activity
             $this->authService->logActivity($user->id, 'logout', [
@@ -359,21 +256,6 @@ class AuthController extends Controller
         do {
             $code = 'T' . date('Y') . str_pad(rand(1, 9999), 4, '0', STR_PAD_LEFT);
         } while ($this->userService->teacherCodeExists($code));
-
-        return $code;
-    }
-
-    /**
-     * Generate unique student code for school
-     */
-    private function generateStudentCode(int $schoolId): string
-    {
-        $school = $this->userService->findSchoolById($schoolId);
-        $schoolCode = $school->code ?? str_pad($schoolId, 3, '0', STR_PAD_LEFT);
-
-        do {
-            $code = 'S' . $schoolCode . date('y') . str_pad(rand(1, 999), 3, '0', STR_PAD_LEFT);
-        } while ($this->userService->studentCodeExists($code));
 
         return $code;
     }

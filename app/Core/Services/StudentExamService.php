@@ -292,11 +292,10 @@ class StudentExamService
 
     private function isTimingValid(Exam $exam, Carbon $now): bool
     {
-        if ($now >= $exam->start_time && $now <= $exam->end_time) {
-            return true;
-        }
+        $allowedStart = $exam->start_time->copy()->subMinutes(30);
+        $allowedEnd   = $exam->end_time;
 
-        return false;
+        return $now >= $allowedStart && $now <= $allowedEnd;
     }
 
     private function getTimingMessage(Exam $exam, Carbon $now): string

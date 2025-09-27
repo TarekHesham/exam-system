@@ -1,436 +1,24 @@
 name: Endpoints
-description: ""
+description: ''
 endpoints:
-  - httpMethods:
-      - POST
-    uri: api/v1/auth/login
-    metadata:
-      groupName: Endpoints
-      groupDescription: ""
-      subgroup: ""
-      subgroupDescription: ""
-      title: "Authenticate user and return access token"
-      description: ""
-      authenticated: true
-      deprecated: false
-      custom: []
-    headers:
-      Authorization: "Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      phone:
-        name: phone
-        description: "Phone number of the user (11 digits). Required if national_id and email are not provided. This field is required when none of <code>national_id</code> and <code>email</code> are present. Must be 11 digits."
-        required: false
-        example: "01010869000"
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      national_id:
-        name: national_id
-        description: "National ID of the user (14 digits). Required if phone and email are not provided. This field is required when none of <code>phone</code> and <code>email</code> are present. Must be 14 digits."
-        required: false
-        example: "01234567891234"
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      email:
-        name: email
-        description: "Email address of the user. Required if phone and national_id are not provided. This field is required when none of <code>phone</code> and <code>national_id</code> are present. Must be a valid email address. Must not be greater than 255 characters."
-        required: false
-        example: tarek@digitopia.com
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      password:
-        name: password
-        description: "Password of the user (minimum 8 characters). Must be at least 8 characters."
-        required: true
-        example: "12345678"
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-    cleanBodyParameters:
-      phone: "01010869000"
-      national_id: "01234567891234"
-      email: tarek@digitopia.com
-      password: "12345678"
-    fileParameters: []
-    responses: []
-    responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - "Bearer 6g43cv8PD1aE5beadkZfhV6"
-    controller: null
-    method: null
-    route: null
-    custom: []
-  - httpMethods:
-      - GET
-    uri: api/v1/me
-    metadata:
-      groupName: Endpoints
-      groupDescription: ""
-      subgroup: ""
-      subgroupDescription: ""
-      title: "Get current authenticated user"
-      description: ""
-      authenticated: true
-      deprecated: false
-      custom: []
-    headers:
-      Authorization: "Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      - status: 401
-        content: '{"message":"Unauthenticated."}'
-        headers:
-          cache-control: "no-cache, private"
-          content-type: application/json
-          access-control-allow-origin: "*"
-        description: null
-        custom: []
-    responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - "Bearer 6g43cv8PD1aE5beadkZfhV6"
-    controller: null
-    method: null
-    route: null
-    custom: []
-  - httpMethods:
-      - POST
-    uri: api/v1/logout
-    metadata:
-      groupName: Endpoints
-      groupDescription: ""
-      subgroup: ""
-      subgroupDescription: ""
-      title: "Logout user and revoke token"
-      description: ""
-      authenticated: true
-      deprecated: false
-      custom: []
-    headers:
-      Authorization: "Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses: []
-    responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - "Bearer 6g43cv8PD1aE5beadkZfhV6"
-    controller: null
-    method: null
-    route: null
-    custom: []
-  - httpMethods:
-      - GET
-    uri: api/v1/governorates
-    metadata:
-      groupName: Endpoints
-      groupDescription: ""
-      subgroup: ""
-      subgroupDescription: ""
-      title: ""
-      description: ""
-      authenticated: true
-      deprecated: false
-      custom: []
-    headers:
-      Authorization: "Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      - status: 401
-        content: '{"message":"Unauthenticated."}'
-        headers:
-          cache-control: "no-cache, private"
-          content-type: application/json
-          access-control-allow-origin: "*"
-        description: null
-        custom: []
-    responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - "Bearer 6g43cv8PD1aE5beadkZfhV6"
-    controller: null
-    method: null
-    route: null
-    custom: []
-  - httpMethods:
-      - GET
-    uri: "api/v1/governorates/{id}"
-    metadata:
-      groupName: Endpoints
-      groupDescription: ""
-      subgroup: ""
-      subgroupDescription: ""
-      title: ""
-      description: ""
-      authenticated: true
-      deprecated: false
-      custom: []
-    headers:
-      Authorization: "Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      id:
-        name: id
-        description: "The ID of the governorate."
-        required: true
-        example: 1
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-    cleanUrlParameters:
-      id: 1
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      - status: 401
-        content: '{"message":"Unauthenticated."}'
-        headers:
-          cache-control: "no-cache, private"
-          content-type: application/json
-          access-control-allow-origin: "*"
-        description: null
-        custom: []
-    responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - "Bearer 6g43cv8PD1aE5beadkZfhV6"
-    controller: null
-    method: null
-    route: null
-    custom: []
-  - httpMethods:
-      - POST
-    uri: "api/v1/student/exam-sessions/{sessionId}/submit"
-    metadata:
-      groupName: Endpoints
-      groupDescription: ""
-      subgroup: ""
-      subgroupDescription: ""
-      title: ""
-      description: ""
-      authenticated: true
-      deprecated: false
-      custom: []
-    headers:
-      Authorization: "Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      sessionId:
-        name: sessionId
-        description: ""
-        required: true
-        example: 1
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-    cleanUrlParameters:
-      sessionId: 1
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      final_answers:
-        name: final_answers
-        description: ""
-        required: false
-        example: null
-        type: object
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      submit_confirmation:
-        name: submit_confirmation
-        description: "Must be accepted."
-        required: true
-        example: true
-        type: boolean
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-    cleanBodyParameters:
-      submit_confirmation: true
-    fileParameters: []
-    responses: []
-    responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - "Bearer 6g43cv8PD1aE5beadkZfhV6"
-    controller: null
-    method: null
-    route: null
-    custom: []
-  - httpMethods:
-      - POST
-    uri: "api/v1/student/exam-sessions/{sessionId}/heartbeat"
-    metadata:
-      groupName: Endpoints
-      groupDescription: ""
-      subgroup: ""
-      subgroupDescription: ""
-      title: ""
-      description: ""
-      authenticated: true
-      deprecated: false
-      custom: []
-    headers:
-      Authorization: "Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      sessionId:
-        name: sessionId
-        description: ""
-        required: true
-        example: 1
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-    cleanUrlParameters:
-      sessionId: 1
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses: []
-    responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - "Bearer 6g43cv8PD1aE5beadkZfhV6"
-    controller: null
-    method: null
-    route: null
-    custom: []
-  - httpMethods:
-      - GET
-    uri: "api/v1/student/exam-sessions/{sessionId}/time-remaining"
-    metadata:
-      groupName: Endpoints
-      groupDescription: ""
-      subgroup: ""
-      subgroupDescription: ""
-      title: ""
-      description: ""
-      authenticated: true
-      deprecated: false
-      custom: []
-    headers:
-      Authorization: "Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      sessionId:
-        name: sessionId
-        description: ""
-        required: true
-        example: 1
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-    cleanUrlParameters:
-      sessionId: 1
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      - status: 401
-        content: '{"message":"Unauthenticated."}'
-        headers:
-          cache-control: "no-cache, private"
-          content-type: application/json
-          access-control-allow-origin: "*"
-        description: null
-        custom: []
-    responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - "Bearer 6g43cv8PD1aE5beadkZfhV6"
-    controller: null
-    method: null
-    route: null
-    custom: []
-  - httpMethods:
+  -
+    httpMethods:
       - GET
     uri: api/v1/student/available-exam
     metadata:
       groupName: Endpoints
-      groupDescription: ""
-      subgroup: ""
-      subgroupDescription: ""
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
       title: |-
         Student gets available exam if session exists
         Student can only start exam during exam time window
-      description: ""
+      description: ''
       authenticated: true
       deprecated: false
       custom: []
     headers:
-      Authorization: "Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"
+      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -441,126 +29,40 @@ endpoints:
     cleanBodyParameters: []
     fileParameters: []
     responses:
-      - status: 401
+      -
+        status: 401
         content: '{"message":"Unauthenticated."}'
         headers:
-          cache-control: "no-cache, private"
+          cache-control: 'no-cache, private'
           content-type: application/json
-          access-control-allow-origin: "*"
+          access-control-allow-origin: '*'
         description: null
         custom: []
     responseFields: []
     auth:
       - headers
       - Authorization
-      - "Bearer 6g43cv8PD1aE5beadkZfhV6"
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
     controller: null
     method: null
     route: null
     custom: []
-  - httpMethods:
-      - POST
-    uri: api/v1/student/exam/save-answer
-    metadata:
-      groupName: Endpoints
-      groupDescription: ""
-      subgroup: ""
-      subgroupDescription: ""
-      title: "Save student answer for a question"
-      description: ""
-      authenticated: true
-      deprecated: false
-      custom: []
-    headers:
-      Authorization: "Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      question_id:
-        name: question_id
-        description: "The <code>id</code> of an existing record in the exam_questions table."
-        required: true
-        example: 16
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      answer_text:
-        name: answer_text
-        description: ""
-        required: false
-        example: 1
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        custom: []
-      answer_image:
-        name: answer_image
-        description: ""
-        required: false
-        example: 1
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        custom: []
-      answer_data:
-        name: answer_data
-        description: ""
-        required: false
-        example: null
-        type: object
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        custom: []
-      time_spent_seconds:
-        name: time_spent_seconds
-        description: "Must be at least 0."
-        required: false
-        example: 39
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        custom: []
-    cleanBodyParameters:
-      question_id: 16
-      answer_text: 1
-      answer_image: 1
-      time_spent_seconds: 39
-    fileParameters: []
-    responses: []
-    responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - "Bearer 6g43cv8PD1aE5beadkZfhV6"
-    controller: null
-    method: null
-    route: null
-    custom: []
-  - httpMethods:
+  -
+    httpMethods:
       - POST
     uri: api/v1/student/exam/submit
     metadata:
       groupName: Endpoints
-      groupDescription: ""
-      subgroup: ""
-      subgroupDescription: ""
-      title: "Submit complete exam with all answers at once"
-      description: ""
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Submit complete exam with all answers at once'
+      description: ''
       authenticated: true
       deprecated: false
       custom: []
     headers:
-      Authorization: "Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"
+      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -570,70 +72,86 @@ endpoints:
     bodyParameters:
       answers:
         name: answers
-        description: "Must have at least 1 items."
+        description: 'List of answers submitted by the student. Must have at least 1 items.'
         required: true
         example:
-          - []
-        type: "object[]"
+          -
+            question_id: 1
+            answer_text: 'The capital of Egypt is Cairo.'
+            answer_image: base64_encoded_image_string
+            answer_data:
+              choice: A
+            time_spent_seconds: 45
+          -
+            question_id: 2
+            answer_text: null
+            answer_image: null
+            answer_data:
+              selected_options:
+                - 1
+                - 3
+            time_spent_seconds: 30
+        type: 'object[]'
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
       notes:
         name: notes
-        description: "Must not be greater than 500 characters."
+        description: 'Optional notes provided by the student about the exam. Must not be greater than 500 characters.'
         required: false
-        example: b
+        example: 'I had trouble with question 3 due to formatting.'
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: true
         custom: []
-      "answers[].question_id":
-        name: "answers[].question_id"
-        description: "The <code>id</code> of an existing record in the exam_questions table."
+      'answers[].question_id':
+        name: 'answers[].question_id'
+        description: 'The ID of the exam question being answered. The <code>id</code> of an existing record in the exam_questions table.'
         required: true
-        example: 16
+        example: 1
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
-      "answers[].answer_text":
-        name: "answers[].answer_text"
-        description: ""
+      'answers[].answer_text':
+        name: 'answers[].answer_text'
+        description: 'The textual answer provided by the student (if applicable).'
         required: false
-        example: 1
+        example: Cairo
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: true
         custom: []
-      "answers[].answer_image":
-        name: "answers[].answer_image"
-        description: ""
+      'answers[].answer_image':
+        name: 'answers[].answer_image'
+        description: 'Base64 encoded image string for image-based answers (optional).'
         required: false
-        example: 1
+        example: iVBORw0KGgoAAAANSUhEUgAA...
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: true
         custom: []
-      "answers[].answer_data":
-        name: "answers[].answer_data"
-        description: ""
+      'answers[].answer_data':
+        name: 'answers[].answer_data'
+        description: 'Extra structured data for complex answers (e.g., multiple choices).'
         required: false
-        example: null
+        example:
+          choice: B
         type: object
         enumValues: []
         exampleWasSpecified: false
         nullable: true
         custom: []
-      "answers[].time_spent_seconds":
-        name: "answers[].time_spent_seconds"
-        description: "Must be at least 0."
+      'answers[].time_spent_seconds':
+        name: 'answers[].time_spent_seconds'
+        description: 'Number of seconds the student spent on this question (optional). Must be at least 0.'
         required: false
-        example: 39
+        example: 42
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -641,106 +159,50 @@ endpoints:
         custom: []
     cleanBodyParameters:
       answers:
-        - question_id: 16
-          answer_text: 1
-          answer_image: 1
-          time_spent_seconds: 39
-      notes: b
+        -
+          question_id: 1
+          answer_text: 'The capital of Egypt is Cairo.'
+          answer_image: base64_encoded_image_string
+          answer_data:
+            choice: A
+          time_spent_seconds: 45
+        -
+          question_id: 2
+          answer_text: null
+          answer_image: null
+          answer_data:
+            selected_options:
+              - 1
+              - 3
+          time_spent_seconds: 30
+      notes: 'I had trouble with question 3 due to formatting.'
     fileParameters: []
     responses: []
     responseFields: []
     auth:
       - headers
       - Authorization
-      - "Bearer 6g43cv8PD1aE5beadkZfhV6"
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
     controller: null
     method: null
     route: null
     custom: []
-  - httpMethods:
-      - POST
-    uri: api/v1/student/exam/heartbeat
-    metadata:
-      groupName: Endpoints
-      groupDescription: ""
-      subgroup: ""
-      subgroupDescription: ""
-      title: "Send heartbeat to keep session alive"
-      description: ""
-      authenticated: true
-      deprecated: false
-      custom: []
-    headers:
-      Authorization: "Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      battery_level:
-        name: battery_level
-        description: "Must be at least 0. Must not be greater than 100."
-        required: false
-        example: 1
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        custom: []
-      connection_status:
-        name: connection_status
-        description: ""
-        required: false
-        example: reconnected
-        type: string
-        enumValues:
-          - stable
-          - unstable
-          - reconnected
-        exampleWasSpecified: false
-        nullable: true
-        custom: []
-      active_apps:
-        name: active_apps
-        description: ""
-        required: false
-        example: null
-        type: object
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        custom: []
-    cleanBodyParameters:
-      battery_level: 1
-      connection_status: reconnected
-    fileParameters: []
-    responses: []
-    responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - "Bearer 6g43cv8PD1aE5beadkZfhV6"
-    controller: null
-    method: null
-    route: null
-    custom: []
-  - httpMethods:
+  -
+    httpMethods:
       - POST
     uri: api/v1/teacher/scan-qr-create-session
     metadata:
       groupName: Endpoints
-      groupDescription: ""
-      subgroup: ""
-      subgroupDescription: ""
-      title: "Teacher scans QR code with student_id and creates session"
-      description: ""
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Teacher scans QR code with student_id and creates session'
+      description: ''
       authenticated: true
       deprecated: false
       custom: []
     headers:
-      Authorization: "Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"
+      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -750,7 +212,7 @@ endpoints:
     bodyParameters:
       student_id:
         name: student_id
-        description: "The <code>id</code> of an existing record in the students table."
+        description: 'The <code>id</code> of an existing record in the students table.'
         required: true
         example: 16
         type: integer
@@ -760,7 +222,7 @@ endpoints:
         custom: []
       device_info:
         name: device_info
-        description: ""
+        description: ''
         required: false
         example: null
         type: object
@@ -770,7 +232,7 @@ endpoints:
         custom: []
       battery_level:
         name: battery_level
-        description: "Must be at least 0. Must not be greater than 100."
+        description: 'Must be at least 0. Must not be greater than 100.'
         required: false
         example: 22
         type: integer
@@ -780,7 +242,7 @@ endpoints:
         custom: []
       location:
         name: location
-        description: ""
+        description: ''
         required: false
         example: null
         type: object
@@ -797,26 +259,71 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - "Bearer 6g43cv8PD1aE5beadkZfhV6"
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
     controller: null
     method: null
     route: null
     custom: []
-  - httpMethods:
-      - POST
-    uri: api/v1/admin/create-student
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/admin/students
     metadata:
       groupName: Endpoints
-      groupDescription: ""
-      subgroup: ""
-      subgroupDescription: ""
-      title: "Create student account (School Admin only)"
-      description: ""
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: "List students for the school admin's school with filters and pagination."
+      description: ''
       authenticated: true
       deprecated: false
       custom: []
     headers:
-      Authorization: "Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"
+      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/admin/students
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Create student account (School Admin only)'
+      description: ''
+      authenticated: true
+      deprecated: false
+      custom: []
+    headers:
+      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -826,9 +333,9 @@ endpoints:
     bodyParameters:
       name:
         name: name
-        description: "Full name of the student. Must not be greater than 255 characters."
+        description: 'Full name of the student. Must not be greater than 255 characters.'
         required: true
-        example: "Tarek Hesham Sayed ElFarmawy"
+        example: 'Tarek Hesham Sayed ElFarmawy'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -836,7 +343,7 @@ endpoints:
         custom: []
       email:
         name: email
-        description: "Email address of the student (must be unique). Must be a valid email address. Must not be greater than 255 characters."
+        description: 'Email address of the student (must be unique). Must be a valid email address. Must not be greater than 255 characters.'
         required: true
         example: student@example.com
         type: string
@@ -846,9 +353,9 @@ endpoints:
         custom: []
       phone:
         name: phone
-        description: "Phone number of the student (must be unique). Must not be greater than 20 characters."
+        description: 'Phone number of the student (must be unique). Must not be greater than 20 characters.'
         required: true
-        example: "01234567890"
+        example: '01234567890'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -856,9 +363,9 @@ endpoints:
         custom: []
       national_id:
         name: national_id
-        description: "National ID of the student (14 digits, unique). Must be 14 digits."
+        description: 'National ID of the student (14 digits, unique). Must be 14 digits.'
         required: true
-        example: "12345678901234"
+        example: '12345678901234'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -866,7 +373,7 @@ endpoints:
         custom: []
       password:
         name: password
-        description: "Password for the student account. Must be at least 8 characters."
+        description: 'Password for the student account. Must be at least 8 characters.'
         required: true
         example: password123
         type: string
@@ -876,7 +383,7 @@ endpoints:
         custom: []
       seat_number:
         name: seat_number
-        description: "Seat number of the student (optional). Must not be greater than 20 characters."
+        description: 'Seat number of the student (optional). Must not be greater than 20 characters.'
         required: false
         example: A23
         type: string
@@ -886,7 +393,7 @@ endpoints:
         custom: []
       academic_year:
         name: academic_year
-        description: "Academic year of the student."
+        description: 'Academic year of the student.'
         required: true
         example: second
         type: string
@@ -899,7 +406,7 @@ endpoints:
         custom: []
       section:
         name: section
-        description: "Student section (scientific or literature)."
+        description: 'Student section (scientific or literature).'
         required: true
         example: scientific
         type: string
@@ -911,9 +418,9 @@ endpoints:
         custom: []
       birth_date:
         name: birth_date
-        description: "Date of birth of the student. Must be a valid date. Must be a date before <code>today</code>."
+        description: 'Date of birth of the student. Must be a valid date. Must be a date before <code>today</code>.'
         required: true
-        example: "2025-05-15"
+        example: '2025-05-15'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -921,7 +428,7 @@ endpoints:
         custom: []
       gender:
         name: gender
-        description: "Gender of the student."
+        description: 'Gender of the student.'
         required: true
         example: male
         type: string
@@ -933,52 +440,362 @@ endpoints:
         custom: []
       guardian_phone:
         name: guardian_phone
-        description: "Phone number of the guardian. Must not be greater than 20 characters."
+        description: 'Phone number of the guardian. Must not be greater than 20 characters.'
         required: true
-        example: "01098765432"
+        example: '01098765432'
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanBodyParameters:
-      name: "Tarek Hesham Sayed ElFarmawy"
+      name: 'Tarek Hesham Sayed ElFarmawy'
       email: student@example.com
-      phone: "01234567890"
-      national_id: "12345678901234"
+      phone: '01234567890'
+      national_id: '12345678901234'
       password: password123
       seat_number: A23
       academic_year: second
       section: scientific
-      birth_date: "2025-05-15"
+      birth_date: '2025-05-15'
       gender: male
-      guardian_phone: "01098765432"
+      guardian_phone: '01098765432'
     fileParameters: []
     responses: []
     responseFields: []
     auth:
       - headers
       - Authorization
-      - "Bearer 6g43cv8PD1aE5beadkZfhV6"
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
     controller: null
     method: null
     route: null
     custom: []
-  - httpMethods:
-      - POST
-    uri: api/v1/admin/create-teacher
+  -
+    httpMethods:
+      - GET
+    uri: 'api/v1/admin/students/{id}'
     metadata:
       groupName: Endpoints
-      groupDescription: ""
-      subgroup: ""
-      subgroupDescription: ""
-      title: "Create teacher account (Ministry Admin only)"
-      description: ""
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: "Show a student's details."
+      description: ''
       authenticated: true
       deprecated: false
       custom: []
     headers:
-      Authorization: "Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"
+      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the student.'
+        required: true
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      id: architecto
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - PUT
+      - PATCH
+    uri: 'api/v1/admin/students/{id}'
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Update student (School Admin only)'
+      description: ''
+      authenticated: true
+      deprecated: false
+      custom: []
+    headers:
+      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the student.'
+        required: true
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      id: architecto
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: 'Full name of the student. Must not be greater than 255 characters.'
+        required: true
+        example: 'Tarek Hesham Sayed ElFarmawy'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      email:
+        name: email
+        description: 'Unique email address of the student. Must be a valid email address. Must not be greater than 255 characters.'
+        required: true
+        example: tarek@example.com
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      phone:
+        name: phone
+        description: 'Unique phone number of the student. Must not be greater than 20 characters.'
+        required: true
+        example: '+201234567890'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      national_id:
+        name: national_id
+        description: 'National ID (14 digits). Must be 14 digits.'
+        required: true
+        example: '29801012345678'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      password:
+        name: password
+        description: 'Password (if updating). Must be confirmed with `password_confirmation`. Must be at least 8 characters.'
+        required: false
+        example: Secret1234
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      seat_number:
+        name: seat_number
+        description: 'Seat number assigned to the student (optional). Must not be greater than 20 characters.'
+        required: false
+        example: 2025-001
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      academic_year:
+        name: academic_year
+        description: 'Academic year of the student.'
+        required: true
+        example: first
+        type: string
+        enumValues:
+          - first
+          - second
+          - third
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      section:
+        name: section
+        description: 'Section of the student.'
+        required: true
+        example: scientific
+        type: string
+        enumValues:
+          - scientific
+          - literature
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      birth_date:
+        name: birth_date
+        description: 'Birth date of the student. Must be a valid date. Must be a date before <code>today</code>.'
+        required: true
+        example: '2005-05-20'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      gender:
+        name: gender
+        description: 'Gender of the student.'
+        required: true
+        example: male
+        type: string
+        enumValues:
+          - male
+          - female
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      guardian_phone:
+        name: guardian_phone
+        description: 'Phone number of the guardian. Must not be greater than 20 characters.'
+        required: true
+        example: '01112223334'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      is_banned:
+        name: is_banned
+        description: 'Whether the student is banned from the system.'
+        required: false
+        example: false
+        type: boolean
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      ban_until:
+        name: ban_until
+        description: 'Date until which the student is banned (optional). Must be a valid date. Must be a date after <code>now</code>.'
+        required: false
+        example: '2025-12-31'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      ban_reason:
+        name: ban_reason
+        description: 'Reason for banning the student (optional). Must not be greater than 1000 characters.'
+        required: false
+        example: 'Misconduct in exam.'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+    cleanBodyParameters:
+      name: 'Tarek Hesham Sayed ElFarmawy'
+      email: tarek@example.com
+      phone: '+201234567890'
+      national_id: '29801012345678'
+      password: Secret1234
+      seat_number: 2025-001
+      academic_year: first
+      section: scientific
+      birth_date: '2005-05-20'
+      gender: male
+      guardian_phone: '01112223334'
+      is_banned: false
+      ban_until: '2025-12-31'
+      ban_reason: 'Misconduct in exam.'
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - DELETE
+    uri: 'api/v1/admin/students/{id}'
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Remove a student (soft-delete) and associated user.'
+      description: ''
+      authenticated: true
+      deprecated: false
+      custom: []
+    headers:
+      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the student.'
+        required: true
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      id: architecto
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/admin/create-teacher
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Create teacher account (Ministry Admin only)'
+      description: ''
+      authenticated: true
+      deprecated: false
+      custom: []
+    headers:
+      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -988,9 +805,9 @@ endpoints:
     bodyParameters:
       name:
         name: name
-        description: "Full name of the teacher. Must not be greater than 255 characters."
+        description: 'Full name of the teacher. Must not be greater than 255 characters.'
         required: true
-        example: "Tarek Hesham Sayed ElFarmawy"
+        example: 'Tarek Hesham Sayed ElFarmawy'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -998,7 +815,7 @@ endpoints:
         custom: []
       email:
         name: email
-        description: "Email address of the teacher (must be unique). Must be a valid email address. Must not be greater than 100 characters."
+        description: 'Email address of the teacher (must be unique). Must be a valid email address. Must not be greater than 100 characters.'
         required: true
         example: teacher@example.com
         type: string
@@ -1008,9 +825,9 @@ endpoints:
         custom: []
       phone:
         name: phone
-        description: "Phone number of the teacher (must be unique). Must not be greater than 20 characters."
+        description: 'Phone number of the teacher (must be unique). Must not be greater than 20 characters.'
         required: true
-        example: "01234567890"
+        example: '01234567890'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -1018,9 +835,9 @@ endpoints:
         custom: []
       national_id:
         name: national_id
-        description: "National ID of the teacher (14 digits, unique). Must be 14 digits."
+        description: 'National ID of the teacher (14 digits, unique). Must be 14 digits.'
         required: true
-        example: "12345678901234"
+        example: '12345678901234'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -1028,7 +845,7 @@ endpoints:
         custom: []
       password:
         name: password
-        description: "Password for the teacher account. Must be at least 8 characters."
+        description: 'Password for the teacher account. Must be at least 8 characters.'
         required: true
         example: password123
         type: string
@@ -1038,7 +855,7 @@ endpoints:
         custom: []
       subject_id:
         name: subject_id
-        description: "Subject ID or name assigned to the teacher. Must not be greater than 255 characters."
+        description: 'Subject ID or name assigned to the teacher. Must not be greater than 255 characters.'
         required: true
         example: 5
         type: string
@@ -1048,7 +865,7 @@ endpoints:
         custom: []
       teacher_type:
         name: teacher_type
-        description: "Type of teacher (regular or supervisor)."
+        description: 'Type of teacher (regular or supervisor).'
         required: false
         example: regular
         type: string
@@ -1060,7 +877,7 @@ endpoints:
         custom: []
       can_create_exams:
         name: can_create_exams
-        description: "Whether the teacher can create exams."
+        description: 'Whether the teacher can create exams.'
         required: false
         example: false
         type: boolean
@@ -1070,7 +887,7 @@ endpoints:
         custom: []
       can_correct_essays:
         name: can_correct_essays
-        description: "Whether the teacher can correct essays."
+        description: 'Whether the teacher can correct essays.'
         required: false
         example: false
         type: boolean
@@ -1080,7 +897,7 @@ endpoints:
         custom: []
       is_active:
         name: is_active
-        description: "Indicates if the teacher account is active."
+        description: 'Indicates if the teacher account is active.'
         required: false
         example: false
         type: boolean
@@ -1090,17 +907,17 @@ endpoints:
         custom: []
       school_ids:
         name: school_ids
-        description: "The <code>id</code> of an existing record in the schools table."
+        description: 'The <code>id</code> of an existing record in the schools table.'
         required: false
         example: null
-        type: "string[]"
+        type: 'string[]'
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
       assignment_type:
         name: assignment_type
-        description: "Type of assignment for the teacher (teaching, supervision, correction)."
+        description: 'Type of assignment for the teacher (teaching, supervision, correction).'
         required: false
         example: teaching
         type: string
@@ -1112,10 +929,10 @@ endpoints:
         nullable: false
         custom: []
     cleanBodyParameters:
-      name: "Tarek Hesham Sayed ElFarmawy"
+      name: 'Tarek Hesham Sayed ElFarmawy'
       email: teacher@example.com
-      phone: "01234567890"
-      national_id: "12345678901234"
+      phone: '01234567890'
+      national_id: '12345678901234'
       password: password123
       subject_id: 5
       teacher_type: regular
@@ -1129,26 +946,27 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - "Bearer 6g43cv8PD1aE5beadkZfhV6"
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
     controller: null
     method: null
     route: null
     custom: []
-  - httpMethods:
+  -
+    httpMethods:
       - GET
     uri: api/v1/admin/teachers
     metadata:
       groupName: Endpoints
-      groupDescription: ""
-      subgroup: ""
-      subgroupDescription: ""
-      title: "List all teachers"
-      description: ""
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'List all teachers'
+      description: ''
       authenticated: true
       deprecated: false
       custom: []
     headers:
-      Authorization: "Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"
+      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -1159,115 +977,119 @@ endpoints:
     cleanBodyParameters: []
     fileParameters: []
     responses:
-      - status: 401
+      -
+        status: 401
         content: '{"message":"Unauthenticated."}'
         headers:
-          cache-control: "no-cache, private"
+          cache-control: 'no-cache, private'
           content-type: application/json
-          access-control-allow-origin: "*"
+          access-control-allow-origin: '*'
         description: null
         custom: []
     responseFields: []
     auth:
       - headers
       - Authorization
-      - "Bearer 6g43cv8PD1aE5beadkZfhV6"
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
     controller: null
     method: null
     route: null
     custom: []
-  - httpMethods:
+  -
+    httpMethods:
       - GET
-    uri: "api/v1/admin/teachers/{id}"
+    uri: 'api/v1/admin/teachers/{id}'
     metadata:
       groupName: Endpoints
-      groupDescription: ""
-      subgroup: ""
-      subgroupDescription: ""
-      title: "Show teacher details"
-      description: ""
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Show teacher details'
+      description: ''
       authenticated: true
       deprecated: false
       custom: []
     headers:
-      Authorization: "Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"
+      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
       id:
         name: id
-        description: "The ID of the teacher."
+        description: 'The ID of the teacher.'
         required: true
-        example: 1
+        example: architecto
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: 1
+      id: architecto
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
     responses:
-      - status: 401
+      -
+        status: 401
         content: '{"message":"Unauthenticated."}'
         headers:
-          cache-control: "no-cache, private"
+          cache-control: 'no-cache, private'
           content-type: application/json
-          access-control-allow-origin: "*"
+          access-control-allow-origin: '*'
         description: null
         custom: []
     responseFields: []
     auth:
       - headers
       - Authorization
-      - "Bearer 6g43cv8PD1aE5beadkZfhV6"
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
     controller: null
     method: null
     route: null
     custom: []
-  - httpMethods:
+  -
+    httpMethods:
       - PUT
       - PATCH
-    uri: "api/v1/admin/teachers/{id}"
+    uri: 'api/v1/admin/teachers/{id}'
     metadata:
       groupName: Endpoints
-      groupDescription: ""
-      subgroup: ""
-      subgroupDescription: ""
-      title: "Update teacher information"
-      description: ""
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Update teacher information'
+      description: ''
       authenticated: true
       deprecated: false
       custom: []
     headers:
-      Authorization: "Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"
+      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
       id:
         name: id
-        description: "The ID of the teacher."
+        description: 'The ID of the teacher.'
         required: true
-        example: 1
+        example: architecto
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: 1
+      id: architecto
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
       name:
         name: name
-        description: "Full name of the teacher. Must not be greater than 255 characters."
+        description: 'Full name of the teacher. Must not be greater than 255 characters.'
         required: false
-        example: "John Doe"
+        example: 'John Doe'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -1275,7 +1097,7 @@ endpoints:
         custom: []
       email:
         name: email
-        description: "Email address of the teacher (must be unique). Must be a valid email address. Must not be greater than 255 characters."
+        description: 'Email address of the teacher (must be unique). Must be a valid email address. Must not be greater than 255 characters.'
         required: false
         example: teacher@example.com
         type: string
@@ -1285,9 +1107,9 @@ endpoints:
         custom: []
       phone:
         name: phone
-        description: "Phone number of the teacher (must be unique). Must not be greater than 20 characters."
+        description: 'Phone number of the teacher (must be unique). Must not be greater than 20 characters.'
         required: false
-        example: "01234567890"
+        example: '01234567890'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -1295,9 +1117,9 @@ endpoints:
         custom: []
       national_id:
         name: national_id
-        description: "National ID of the teacher (14 digits, unique). Must be 14 digits."
+        description: 'National ID of the teacher (14 digits, unique). Must be 14 digits.'
         required: false
-        example: "12345678901234"
+        example: '12345678901234'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -1305,7 +1127,7 @@ endpoints:
         custom: []
       password:
         name: password
-        description: "Password for the teacher account (minimum 8 characters). Must be at least 8 characters."
+        description: 'Password for the teacher account (minimum 8 characters). Must be at least 8 characters.'
         required: false
         example: password123
         type: string
@@ -1315,7 +1137,7 @@ endpoints:
         custom: []
       subject_id:
         name: subject_id
-        description: "ID or code of the subject assigned to the teacher. Must not be greater than 255 characters."
+        description: 'ID or code of the subject assigned to the teacher. Must not be greater than 255 characters.'
         required: false
         example: MATH101
         type: string
@@ -1325,7 +1147,7 @@ endpoints:
         custom: []
       teacher_type:
         name: teacher_type
-        description: "Type of teacher."
+        description: 'Type of teacher.'
         required: false
         example: regular
         type: string
@@ -1337,7 +1159,7 @@ endpoints:
         custom: []
       can_create_exams:
         name: can_create_exams
-        description: "Whether the teacher can create exams."
+        description: 'Whether the teacher can create exams.'
         required: false
         example: false
         type: boolean
@@ -1347,7 +1169,7 @@ endpoints:
         custom: []
       can_correct_essays:
         name: can_correct_essays
-        description: "Whether the teacher can correct essay questions."
+        description: 'Whether the teacher can correct essay questions.'
         required: false
         example: false
         type: boolean
@@ -1357,7 +1179,7 @@ endpoints:
         custom: []
       is_active:
         name: is_active
-        description: "Indicates if the teacher account is active."
+        description: 'Indicates if the teacher account is active.'
         required: false
         example: false
         type: boolean
@@ -1367,18 +1189,18 @@ endpoints:
         custom: []
       school_ids:
         name: school_ids
-        description: "Individual school ID assigned to the teacher. The <code>id</code> of an existing record in the schools table."
+        description: 'Individual school ID assigned to the teacher. The <code>id</code> of an existing record in the schools table.'
         required: false
         example:
           - 1
-        type: "string[]"
+        type: 'string[]'
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
       assignment_type:
         name: assignment_type
-        description: "Type of assignment for the teacher in schools."
+        description: 'Type of assignment for the teacher in schools.'
         required: false
         example: teaching
         type: string
@@ -1390,10 +1212,10 @@ endpoints:
         nullable: false
         custom: []
     cleanBodyParameters:
-      name: "John Doe"
+      name: 'John Doe'
       email: teacher@example.com
-      phone: "01234567890"
-      national_id: "12345678901234"
+      phone: '01234567890'
+      national_id: '12345678901234'
       password: password123
       subject_id: MATH101
       teacher_type: regular
@@ -1409,41 +1231,42 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - "Bearer 6g43cv8PD1aE5beadkZfhV6"
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
     controller: null
     method: null
     route: null
     custom: []
-  - httpMethods:
+  -
+    httpMethods:
       - DELETE
-    uri: "api/v1/admin/teachers/{id}"
+    uri: 'api/v1/admin/teachers/{id}'
     metadata:
       groupName: Endpoints
-      groupDescription: ""
-      subgroup: ""
-      subgroupDescription: ""
-      title: "Delete teacher"
-      description: ""
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Delete teacher'
+      description: ''
       authenticated: true
       deprecated: false
       custom: []
     headers:
-      Authorization: "Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"
+      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
       id:
         name: id
-        description: "The ID of the teacher."
+        description: 'The ID of the teacher.'
         required: true
-        example: 1
+        example: architecto
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: 1
+      id: architecto
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -1454,71 +1277,27 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - "Bearer 6g43cv8PD1aE5beadkZfhV6"
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
     controller: null
     method: null
     route: null
     custom: []
-  - httpMethods:
-      - PATCH
-    uri: "api/v1/admin/teachers/{id}/toggle-status"
-    metadata:
-      groupName: Endpoints
-      groupDescription: ""
-      subgroup: ""
-      subgroupDescription: ""
-      title: "Toggle teacher active status"
-      description: ""
-      authenticated: true
-      deprecated: false
-      custom: []
-    headers:
-      Authorization: "Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      id:
-        name: id
-        description: "The ID of the teacher."
-        required: true
-        example: 1
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-    cleanUrlParameters:
-      id: 1
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses: []
-    responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - "Bearer 6g43cv8PD1aE5beadkZfhV6"
-    controller: null
-    method: null
-    route: null
-    custom: []
-  - httpMethods:
+  -
+    httpMethods:
       - GET
     uri: api/v1/admin/exams
     metadata:
       groupName: Endpoints
-      groupDescription: ""
-      subgroup: ""
-      subgroupDescription: ""
-      title: ""
-      description: ""
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
       authenticated: true
       deprecated: false
       custom: []
     headers:
-      Authorization: "Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"
+      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -1529,38 +1308,40 @@ endpoints:
     cleanBodyParameters: []
     fileParameters: []
     responses:
-      - status: 401
+      -
+        status: 401
         content: '{"message":"Unauthenticated."}'
         headers:
-          cache-control: "no-cache, private"
+          cache-control: 'no-cache, private'
           content-type: application/json
-          access-control-allow-origin: "*"
+          access-control-allow-origin: '*'
         description: null
         custom: []
     responseFields: []
     auth:
       - headers
       - Authorization
-      - "Bearer 6g43cv8PD1aE5beadkZfhV6"
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
     controller: null
     method: null
     route: null
     custom: []
-  - httpMethods:
+  -
+    httpMethods:
       - POST
     uri: api/v1/admin/exams
     metadata:
       groupName: Endpoints
-      groupDescription: ""
-      subgroup: ""
-      subgroupDescription: ""
-      title: ""
-      description: ""
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
       authenticated: true
       deprecated: false
       custom: []
     headers:
-      Authorization: "Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"
+      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -1570,7 +1351,7 @@ endpoints:
     bodyParameters:
       subject_id:
         name: subject_id
-        description: "ID of the subject related to the exam. The <code>id</code> of an existing record in the subjects table."
+        description: 'ID of the subject related to the exam. The <code>id</code> of an existing record in the subjects table.'
         required: true
         example: 3
         type: integer
@@ -1580,9 +1361,9 @@ endpoints:
         custom: []
       title:
         name: title
-        description: "Title of the exam. Must not be greater than 255 characters."
+        description: 'Title of the exam. Must not be greater than 255 characters.'
         required: true
-        example: "Midterm Exam"
+        example: 'Midterm Exam'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -1590,9 +1371,9 @@ endpoints:
         custom: []
       description:
         name: description
-        description: "Short description of the exam (optional). Must not be greater than 1000 characters."
+        description: 'Short description of the exam (optional). Must not be greater than 1000 characters.'
         required: false
-        example: "Covers chapters 1 to 3."
+        example: 'Covers chapters 1 to 3.'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -1600,7 +1381,7 @@ endpoints:
         custom: []
       exam_type:
         name: exam_type
-        description: "Type of the exam (practice or final)."
+        description: 'Type of the exam (practice or final).'
         required: true
         example: final
         type: string
@@ -1612,7 +1393,7 @@ endpoints:
         custom: []
       academic_year:
         name: academic_year
-        description: "Target academic year (first, second, third)."
+        description: 'Target academic year (first, second, third).'
         required: true
         example: second
         type: string
@@ -1625,9 +1406,9 @@ endpoints:
         custom: []
       start_time:
         name: start_time
-        description: "Start date and time of the exam (must be in the future). Must be a valid date. Must be a date after <code>now</code>."
+        description: 'Start date and time of the exam (must be in the future). Must be a valid date. Must be a date after <code>now</code>.'
         required: true
-        example: "2025-10-01 09:00:00"
+        example: '2025-10-01 09:00:00'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -1635,9 +1416,9 @@ endpoints:
         custom: []
       end_time:
         name: end_time
-        description: "End date and time of the exam (must be after start_time). Must be a valid date. Must be a date after <code>start_time</code>."
+        description: 'End date and time of the exam (must be after start_time). Must be a valid date. Must be a date after <code>start_time</code>.'
         required: true
-        example: "2025-10-01 11:00:00"
+        example: '2025-10-01 11:00:00'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -1645,7 +1426,7 @@ endpoints:
         custom: []
       duration_minutes:
         name: duration_minutes
-        description: "Duration of the exam in minutes (1 to 480). Must be at least 1. Must not be greater than 480."
+        description: 'Duration of the exam in minutes (1 to 480). Must be at least 1. Must not be greater than 480.'
         required: true
         example: 120
         type: integer
@@ -1655,7 +1436,7 @@ endpoints:
         custom: []
       total_score:
         name: total_score
-        description: "Total score of the exam. Must be at least 1."
+        description: 'Total score of the exam. Must be at least 1.'
         required: true
         example: 100
         type: integer
@@ -1665,7 +1446,7 @@ endpoints:
         custom: []
       minimum_battery_percentage:
         name: minimum_battery_percentage
-        description: "Minimum allowed battery percentage to enter the exam (0 to 100). Must be at least 0. Must not be greater than 100."
+        description: 'Minimum allowed battery percentage to enter the exam (0 to 100). Must be at least 0. Must not be greater than 100.'
         required: false
         example: 30
         type: integer
@@ -1675,7 +1456,7 @@ endpoints:
         custom: []
       require_video_recording:
         name: require_video_recording
-        description: "Whether video recording is required during the exam (true/false)."
+        description: 'Whether video recording is required during the exam (true/false).'
         required: false
         example: false
         type: boolean
@@ -1685,12 +1466,12 @@ endpoints:
         custom: []
     cleanBodyParameters:
       subject_id: 3
-      title: "Midterm Exam"
-      description: "Covers chapters 1 to 3."
+      title: 'Midterm Exam'
+      description: 'Covers chapters 1 to 3.'
       exam_type: final
       academic_year: second
-      start_time: "2025-10-01 09:00:00"
-      end_time: "2025-10-01 11:00:00"
+      start_time: '2025-10-01 09:00:00'
+      end_time: '2025-10-01 11:00:00'
       duration_minutes: 120
       total_score: 100
       minimum_battery_percentage: 30
@@ -1701,85 +1482,88 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - "Bearer 6g43cv8PD1aE5beadkZfhV6"
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
     controller: null
     method: null
     route: null
     custom: []
-  - httpMethods:
+  -
+    httpMethods:
       - GET
-    uri: "api/v1/admin/exams/{id}"
+    uri: 'api/v1/admin/exams/{id}'
     metadata:
       groupName: Endpoints
-      groupDescription: ""
-      subgroup: ""
-      subgroupDescription: ""
-      title: ""
-      description: ""
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
       authenticated: true
       deprecated: false
       custom: []
     headers:
-      Authorization: "Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"
+      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
       id:
         name: id
-        description: "The ID of the exam."
+        description: 'The ID of the exam.'
         required: true
-        example: 1
+        example: architecto
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: 1
+      id: architecto
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
     responses:
-      - status: 401
+      -
+        status: 401
         content: '{"message":"Unauthenticated."}'
         headers:
-          cache-control: "no-cache, private"
+          cache-control: 'no-cache, private'
           content-type: application/json
-          access-control-allow-origin: "*"
+          access-control-allow-origin: '*'
         description: null
         custom: []
     responseFields: []
     auth:
       - headers
       - Authorization
-      - "Bearer 6g43cv8PD1aE5beadkZfhV6"
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
     controller: null
     method: null
     route: null
     custom: []
-  - httpMethods:
+  -
+    httpMethods:
       - PUT
-    uri: "api/v1/admin/exams/{exam_id}"
+    uri: 'api/v1/admin/exams/{exam_id}'
     metadata:
       groupName: Endpoints
-      groupDescription: ""
-      subgroup: ""
-      subgroupDescription: ""
-      title: ""
-      description: ""
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
       authenticated: true
       deprecated: false
       custom: []
     headers:
-      Authorization: "Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"
+      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
       exam_id:
         name: exam_id
-        description: "The ID of the exam."
+        description: 'The ID of the exam.'
         required: true
         example: 1
         type: integer
@@ -1794,9 +1578,9 @@ endpoints:
     bodyParameters:
       title:
         name: title
-        description: "Title of the exam. Must not be greater than 255 characters."
+        description: 'Title of the exam. Must not be greater than 255 characters.'
         required: false
-        example: "Final Exam - Mathematics"
+        example: 'Final Exam - Mathematics'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -1804,9 +1588,9 @@ endpoints:
         custom: []
       description:
         name: description
-        description: "Short description of the exam. Must not be greater than 1000 characters."
+        description: 'Short description of the exam. Must not be greater than 1000 characters.'
         required: false
-        example: "Covers chapters 1 to 5."
+        example: 'Covers chapters 1 to 5.'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -1814,9 +1598,9 @@ endpoints:
         custom: []
       start_time:
         name: start_time
-        description: "Start date and time of the exam (must be in the future if exam not started). Must be a valid date. Must be a date after <code>now</code>."
+        description: 'Start date and time of the exam (must be in the future if exam not started). Must be a valid date. Must be a date after <code>now</code>.'
         required: false
-        example: "2025-10-01 09:00:00"
+        example: '2025-10-01 09:00:00'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -1824,9 +1608,9 @@ endpoints:
         custom: []
       end_time:
         name: end_time
-        description: "End date and time of the exam (must be after start_time). Must be a valid date. Must be a date after <code>start_time</code>."
+        description: 'End date and time of the exam (must be after start_time). Must be a valid date. Must be a date after <code>start_time</code>.'
         required: false
-        example: "2025-10-01 11:00:00"
+        example: '2025-10-01 11:00:00'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -1834,7 +1618,7 @@ endpoints:
         custom: []
       duration_minutes:
         name: duration_minutes
-        description: "Duration of the exam in minutes. Must be at least 1. Must not be greater than 480."
+        description: 'Duration of the exam in minutes. Must be at least 1. Must not be greater than 480.'
         required: false
         example: 120
         type: integer
@@ -1844,7 +1628,7 @@ endpoints:
         custom: []
       total_score:
         name: total_score
-        description: "Total score of the exam. Must be at least 1."
+        description: 'Total score of the exam. Must be at least 1.'
         required: false
         example: 100
         type: integer
@@ -1854,7 +1638,7 @@ endpoints:
         custom: []
       minimum_battery_percentage:
         name: minimum_battery_percentage
-        description: "Minimum allowed battery percentage to enter the exam. Must be at least 0. Must not be greater than 100."
+        description: 'Minimum allowed battery percentage to enter the exam. Must be at least 0. Must not be greater than 100.'
         required: false
         example: 30
         type: integer
@@ -1864,7 +1648,7 @@ endpoints:
         custom: []
       require_video_recording:
         name: require_video_recording
-        description: "Whether video recording is required during the exam."
+        description: 'Whether video recording is required during the exam.'
         required: false
         example: false
         type: boolean
@@ -1874,7 +1658,7 @@ endpoints:
         custom: []
       is_published:
         name: is_published
-        description: "Indicates if the exam is published."
+        description: 'Indicates if the exam is published.'
         required: false
         example: false
         type: boolean
@@ -1884,7 +1668,7 @@ endpoints:
         custom: []
       is_active:
         name: is_active
-        description: "Indicates if the exam is active."
+        description: 'Indicates if the exam is active.'
         required: false
         example: false
         type: boolean
@@ -1893,10 +1677,10 @@ endpoints:
         nullable: false
         custom: []
     cleanBodyParameters:
-      title: "Final Exam - Mathematics"
-      description: "Covers chapters 1 to 5."
-      start_time: "2025-10-01 09:00:00"
-      end_time: "2025-10-01 11:00:00"
+      title: 'Final Exam - Mathematics'
+      description: 'Covers chapters 1 to 5.'
+      start_time: '2025-10-01 09:00:00'
+      end_time: '2025-10-01 11:00:00'
       duration_minutes: 120
       total_score: 100
       minimum_battery_percentage: 30
@@ -1909,41 +1693,42 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - "Bearer 6g43cv8PD1aE5beadkZfhV6"
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
     controller: null
     method: null
     route: null
     custom: []
-  - httpMethods:
+  -
+    httpMethods:
       - DELETE
-    uri: "api/v1/admin/exams/{id}"
+    uri: 'api/v1/admin/exams/{id}'
     metadata:
       groupName: Endpoints
-      groupDescription: ""
-      subgroup: ""
-      subgroupDescription: ""
-      title: ""
-      description: ""
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
       authenticated: true
       deprecated: false
       custom: []
     headers:
-      Authorization: "Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"
+      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
       id:
         name: id
-        description: "The ID of the exam."
+        description: 'The ID of the exam.'
         required: true
-        example: 1
+        example: architecto
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: 1
+      id: architecto
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -1954,41 +1739,42 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - "Bearer 6g43cv8PD1aE5beadkZfhV6"
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
     controller: null
     method: null
     route: null
     custom: []
-  - httpMethods:
+  -
+    httpMethods:
       - POST
-    uri: "api/v1/admin/exams/{id}/duplicate"
+    uri: 'api/v1/admin/exams/{id}/duplicate'
     metadata:
       groupName: Endpoints
-      groupDescription: ""
-      subgroup: ""
-      subgroupDescription: ""
-      title: ""
-      description: ""
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
       authenticated: true
       deprecated: false
       custom: []
     headers:
-      Authorization: "Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"
+      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
       id:
         name: id
-        description: "The ID of the exam."
+        description: 'The ID of the exam.'
         required: true
-        example: 1
+        example: architecto
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: 1
+      id: architecto
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -1999,79 +1785,82 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - "Bearer 6g43cv8PD1aE5beadkZfhV6"
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
     controller: null
     method: null
     route: null
     custom: []
-  - httpMethods:
+  -
+    httpMethods:
       - GET
-    uri: "api/v1/admin/exams/{id}/statistics"
+    uri: 'api/v1/admin/exams/{id}/statistics'
     metadata:
       groupName: Endpoints
-      groupDescription: ""
-      subgroup: ""
-      subgroupDescription: ""
-      title: ""
-      description: ""
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
       authenticated: true
       deprecated: false
       custom: []
     headers:
-      Authorization: "Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"
+      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
       id:
         name: id
-        description: "The ID of the exam."
+        description: 'The ID of the exam.'
         required: true
-        example: 1
+        example: architecto
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: 1
+      id: architecto
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
     responses:
-      - status: 401
+      -
+        status: 401
         content: '{"message":"Unauthenticated."}'
         headers:
-          cache-control: "no-cache, private"
+          cache-control: 'no-cache, private'
           content-type: application/json
-          access-control-allow-origin: "*"
+          access-control-allow-origin: '*'
         description: null
         custom: []
     responseFields: []
     auth:
       - headers
       - Authorization
-      - "Bearer 6g43cv8PD1aE5beadkZfhV6"
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
     controller: null
     method: null
     route: null
     custom: []
-  - httpMethods:
+  -
+    httpMethods:
       - GET
     uri: api/v1/admin/subjects
     metadata:
       groupName: Endpoints
-      groupDescription: ""
-      subgroup: ""
-      subgroupDescription: ""
-      title: "Display a listing of the resource."
-      description: ""
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Display a listing of the resource.'
+      description: ''
       authenticated: true
       deprecated: false
       custom: []
     headers:
-      Authorization: "Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"
+      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -2082,38 +1871,40 @@ endpoints:
     cleanBodyParameters: []
     fileParameters: []
     responses:
-      - status: 401
+      -
+        status: 401
         content: '{"message":"Unauthenticated."}'
         headers:
-          cache-control: "no-cache, private"
+          cache-control: 'no-cache, private'
           content-type: application/json
-          access-control-allow-origin: "*"
+          access-control-allow-origin: '*'
         description: null
         custom: []
     responseFields: []
     auth:
       - headers
       - Authorization
-      - "Bearer 6g43cv8PD1aE5beadkZfhV6"
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
     controller: null
     method: null
     route: null
     custom: []
-  - httpMethods:
+  -
+    httpMethods:
       - POST
     uri: api/v1/admin/subjects
     metadata:
       groupName: Endpoints
-      groupDescription: ""
-      subgroup: ""
-      subgroupDescription: ""
-      title: "Store a newly created resource in storage."
-      description: ""
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Store a newly created resource in storage.'
+      description: ''
       authenticated: true
       deprecated: false
       custom: []
     headers:
-      Authorization: "Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"
+      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -2123,7 +1914,7 @@ endpoints:
     bodyParameters:
       name:
         name: name
-        description: "Name of the subject. Must not be greater than 255 characters."
+        description: 'Name of the subject. Must not be greater than 255 characters.'
         required: true
         example: Mathematics
         type: string
@@ -2133,7 +1924,7 @@ endpoints:
         custom: []
       code:
         name: code
-        description: "Unique code of the subject. Must not be greater than 50 characters."
+        description: 'Unique code of the subject. Must not be greater than 50 characters.'
         required: true
         example: MATH101
         type: string
@@ -2143,7 +1934,7 @@ endpoints:
         custom: []
       section:
         name: section
-        description: "Section or category of the subject (optional). Must not be greater than 255 characters."
+        description: 'Section or category of the subject (optional). Must not be greater than 255 characters.'
         required: false
         example: Science
         type: string
@@ -2153,7 +1944,7 @@ endpoints:
         custom: []
       duration_minutes:
         name: duration_minutes
-        description: "Default duration of exams for this subject in minutes. Must be at least 1."
+        description: 'Default duration of exams for this subject in minutes. Must be at least 1.'
         required: true
         example: 90
         type: integer
@@ -2163,7 +1954,7 @@ endpoints:
         custom: []
       max_score:
         name: max_score
-        description: "Maximum score achievable in this subject. Must be at least 1."
+        description: 'Maximum score achievable in this subject. Must be at least 1.'
         required: true
         example: 100
         type: integer
@@ -2173,7 +1964,7 @@ endpoints:
         custom: []
       has_essay_questions:
         name: has_essay_questions
-        description: "Indicates if the subject includes essay questions."
+        description: 'Indicates if the subject includes essay questions.'
         required: true
         example: false
         type: boolean
@@ -2183,7 +1974,7 @@ endpoints:
         custom: []
       is_active:
         name: is_active
-        description: "Whether the subject is active."
+        description: 'Whether the subject is active.'
         required: true
         example: false
         type: boolean
@@ -2205,101 +1996,104 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - "Bearer 6g43cv8PD1aE5beadkZfhV6"
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
     controller: null
     method: null
     route: null
     custom: []
-  - httpMethods:
+  -
+    httpMethods:
       - GET
-    uri: "api/v1/admin/subjects/{id}"
+    uri: 'api/v1/admin/subjects/{id}'
     metadata:
       groupName: Endpoints
-      groupDescription: ""
-      subgroup: ""
-      subgroupDescription: ""
-      title: "Display the specified resource."
-      description: ""
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Display the specified resource.'
+      description: ''
       authenticated: true
       deprecated: false
       custom: []
     headers:
-      Authorization: "Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"
+      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
       id:
         name: id
-        description: "The ID of the subject."
+        description: 'The ID of the subject.'
         required: true
-        example: 1
+        example: architecto
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: 1
+      id: architecto
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
     responses:
-      - status: 401
+      -
+        status: 401
         content: '{"message":"Unauthenticated."}'
         headers:
-          cache-control: "no-cache, private"
+          cache-control: 'no-cache, private'
           content-type: application/json
-          access-control-allow-origin: "*"
+          access-control-allow-origin: '*'
         description: null
         custom: []
     responseFields: []
     auth:
       - headers
       - Authorization
-      - "Bearer 6g43cv8PD1aE5beadkZfhV6"
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
     controller: null
     method: null
     route: null
     custom: []
-  - httpMethods:
+  -
+    httpMethods:
       - PUT
       - PATCH
-    uri: "api/v1/admin/subjects/{id}"
+    uri: 'api/v1/admin/subjects/{id}'
     metadata:
       groupName: Endpoints
-      groupDescription: ""
-      subgroup: ""
-      subgroupDescription: ""
-      title: "Update the specified resource in storage."
-      description: ""
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Update the specified resource in storage.'
+      description: ''
       authenticated: true
       deprecated: false
       custom: []
     headers:
-      Authorization: "Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"
+      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
       id:
         name: id
-        description: "The ID of the subject."
+        description: 'The ID of the subject.'
         required: true
-        example: 1
+        example: architecto
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: 1
+      id: architecto
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
       name:
         name: name
-        description: "Name of the subject. Must not be greater than 255 characters."
+        description: 'Name of the subject. Must not be greater than 255 characters.'
         required: false
         example: Physics
         type: string
@@ -2309,7 +2103,7 @@ endpoints:
         custom: []
       code:
         name: code
-        description: "Unique code of the subject. Must not be greater than 50 characters."
+        description: 'Unique code of the subject. Must not be greater than 50 characters.'
         required: false
         example: PHYS101
         type: string
@@ -2319,7 +2113,7 @@ endpoints:
         custom: []
       section:
         name: section
-        description: "Section or category of the subject (optional). Must not be greater than 255 characters."
+        description: 'Section or category of the subject (optional). Must not be greater than 255 characters.'
         required: false
         example: Science
         type: string
@@ -2329,7 +2123,7 @@ endpoints:
         custom: []
       duration_minutes:
         name: duration_minutes
-        description: "Default duration of exams for this subject in minutes. Must be at least 1."
+        description: 'Default duration of exams for this subject in minutes. Must be at least 1.'
         required: false
         example: 90
         type: integer
@@ -2339,7 +2133,7 @@ endpoints:
         custom: []
       max_score:
         name: max_score
-        description: "Maximum score achievable in this subject. Must be at least 1."
+        description: 'Maximum score achievable in this subject. Must be at least 1.'
         required: false
         example: 100
         type: integer
@@ -2349,7 +2143,7 @@ endpoints:
         custom: []
       has_essay_questions:
         name: has_essay_questions
-        description: "Indicates if the subject includes essay questions."
+        description: 'Indicates if the subject includes essay questions.'
         required: false
         example: false
         type: boolean
@@ -2359,7 +2153,7 @@ endpoints:
         custom: []
       is_active:
         name: is_active
-        description: "Whether the subject is active."
+        description: 'Whether the subject is active.'
         required: false
         example: false
         type: boolean
@@ -2381,41 +2175,42 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - "Bearer 6g43cv8PD1aE5beadkZfhV6"
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
     controller: null
     method: null
     route: null
     custom: []
-  - httpMethods:
+  -
+    httpMethods:
       - DELETE
-    uri: "api/v1/admin/subjects/{id}"
+    uri: 'api/v1/admin/subjects/{id}'
     metadata:
       groupName: Endpoints
-      groupDescription: ""
-      subgroup: ""
-      subgroupDescription: ""
-      title: "Remove the specified resource from storage."
-      description: ""
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Remove the specified resource from storage.'
+      description: ''
       authenticated: true
       deprecated: false
       custom: []
     headers:
-      Authorization: "Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"
+      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
       id:
         name: id
-        description: "The ID of the subject."
+        description: 'The ID of the subject.'
         required: true
-        example: 1
+        example: architecto
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: 1
+      id: architecto
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -2426,26 +2221,27 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - "Bearer 6g43cv8PD1aE5beadkZfhV6"
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
     controller: null
     method: null
     route: null
     custom: []
-  - httpMethods:
+  -
+    httpMethods:
       - GET
     uri: api/v1/admin/exam-questions
     metadata:
       groupName: Endpoints
-      groupDescription: ""
-      subgroup: ""
-      subgroupDescription: ""
-      title: "Display a paginated listing of exam questions."
-      description: ""
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Display a paginated listing of exam questions.'
+      description: ''
       authenticated: true
       deprecated: false
       custom: []
     headers:
-      Authorization: "Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"
+      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -2456,38 +2252,40 @@ endpoints:
     cleanBodyParameters: []
     fileParameters: []
     responses:
-      - status: 401
+      -
+        status: 401
         content: '{"message":"Unauthenticated."}'
         headers:
-          cache-control: "no-cache, private"
+          cache-control: 'no-cache, private'
           content-type: application/json
-          access-control-allow-origin: "*"
+          access-control-allow-origin: '*'
         description: null
         custom: []
     responseFields: []
     auth:
       - headers
       - Authorization
-      - "Bearer 6g43cv8PD1aE5beadkZfhV6"
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
     controller: null
     method: null
     route: null
     custom: []
-  - httpMethods:
+  -
+    httpMethods:
       - POST
     uri: api/v1/admin/exam-questions
     metadata:
       groupName: Endpoints
-      groupDescription: ""
-      subgroup: ""
-      subgroupDescription: ""
-      title: "Store a newly created exam question."
-      description: ""
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Store a newly created exam question.'
+      description: ''
       authenticated: true
       deprecated: false
       custom: []
     headers:
-      Authorization: "Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"
+      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -2497,7 +2295,7 @@ endpoints:
     bodyParameters:
       exam_id:
         name: exam_id
-        description: "ID of the exam this question belongs to. The <code>id</code> of an existing record in the exams table."
+        description: 'ID of the exam this question belongs to. The <code>id</code> of an existing record in the exams table.'
         required: true
         example: 1
         type: integer
@@ -2507,9 +2305,9 @@ endpoints:
         custom: []
       question_text:
         name: question_text
-        description: "Text content of the question (optional if question_image is provided)."
+        description: 'Text content of the question (optional if question_image is provided).'
         required: false
-        example: "What is the capital of France?"
+        example: 'What is the capital of France?'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -2517,9 +2315,9 @@ endpoints:
         custom: []
       question_image:
         name: question_image
-        description: "URL or path of an image for the question (optional)."
+        description: 'URL or path of an image for the question (optional).'
         required: false
-        example: "https://example.com/question1.png"
+        example: 'https://example.com/question1.png'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -2527,7 +2325,7 @@ endpoints:
         custom: []
       question_type:
         name: question_type
-        description: "Type of the question."
+        description: 'Type of the question.'
         required: true
         example: multiple_choice
         type: string
@@ -2541,18 +2339,18 @@ endpoints:
         custom: []
       options:
         name: options
-        description: "Individual option for multiple_choice question."
+        description: 'Individual option for multiple_choice question.'
         required: false
         example:
           - Paris
-        type: "string[]"
+        type: 'string[]'
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
       correct_answer:
         name: correct_answer
-        description: "Correct answer for the question (format depends on question_type)."
+        description: 'Correct answer for the question (format depends on question_type).'
         required: false
         example: Paris
         type: string
@@ -2562,7 +2360,7 @@ endpoints:
         custom: []
       points:
         name: points
-        description: "Points assigned to the question. Must be at least 0."
+        description: 'Points assigned to the question. Must be at least 0.'
         required: true
         example: 5
         type: integer
@@ -2572,7 +2370,7 @@ endpoints:
         custom: []
       is_required:
         name: is_required
-        description: "Indicates if answering the question is mandatory."
+        description: 'Indicates if answering the question is mandatory.'
         required: false
         example: false
         type: boolean
@@ -2582,9 +2380,9 @@ endpoints:
         custom: []
       help_text:
         name: help_text
-        description: "Optional hint or guidance for the question."
+        description: 'Optional hint or guidance for the question.'
         required: false
-        example: "Remember to check European capitals."
+        example: 'Remember to check European capitals.'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -2592,7 +2390,7 @@ endpoints:
         custom: []
       section_id:
         name: section_id
-        description: "ID of the exam section this question belongs to (optional). The <code>id</code> of an existing record in the exam_sections table."
+        description: 'ID of the exam section this question belongs to (optional). The <code>id</code> of an existing record in the exam_sections table.'
         required: false
         example: 2
         type: integer
@@ -2602,15 +2400,15 @@ endpoints:
         custom: []
     cleanBodyParameters:
       exam_id: 1
-      question_text: "What is the capital of France?"
-      question_image: "https://example.com/question1.png"
+      question_text: 'What is the capital of France?'
+      question_image: 'https://example.com/question1.png'
       question_type: multiple_choice
       options:
         - Paris
       correct_answer: Paris
       points: 5
       is_required: false
-      help_text: "Remember to check European capitals."
+      help_text: 'Remember to check European capitals.'
       section_id: 2
     fileParameters: []
     responses: []
@@ -2618,101 +2416,104 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - "Bearer 6g43cv8PD1aE5beadkZfhV6"
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
     controller: null
     method: null
     route: null
     custom: []
-  - httpMethods:
+  -
+    httpMethods:
       - GET
-    uri: "api/v1/admin/exam-questions/{id}"
+    uri: 'api/v1/admin/exam-questions/{id}'
     metadata:
       groupName: Endpoints
-      groupDescription: ""
-      subgroup: ""
-      subgroupDescription: ""
-      title: "Display the specified exam question."
-      description: ""
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Display the specified exam question.'
+      description: ''
       authenticated: true
       deprecated: false
       custom: []
     headers:
-      Authorization: "Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"
+      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
       id:
         name: id
-        description: "The ID of the exam question."
+        description: 'The ID of the exam question.'
         required: true
-        example: 1
+        example: architecto
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: 1
+      id: architecto
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
     responses:
-      - status: 401
+      -
+        status: 401
         content: '{"message":"Unauthenticated."}'
         headers:
-          cache-control: "no-cache, private"
+          cache-control: 'no-cache, private'
           content-type: application/json
-          access-control-allow-origin: "*"
+          access-control-allow-origin: '*'
         description: null
         custom: []
     responseFields: []
     auth:
       - headers
       - Authorization
-      - "Bearer 6g43cv8PD1aE5beadkZfhV6"
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
     controller: null
     method: null
     route: null
     custom: []
-  - httpMethods:
+  -
+    httpMethods:
       - PUT
       - PATCH
-    uri: "api/v1/admin/exam-questions/{id}"
+    uri: 'api/v1/admin/exam-questions/{id}'
     metadata:
       groupName: Endpoints
-      groupDescription: ""
-      subgroup: ""
-      subgroupDescription: ""
-      title: "Update the specified exam question in storage."
-      description: ""
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Update the specified exam question in storage.'
+      description: ''
       authenticated: true
       deprecated: false
       custom: []
     headers:
-      Authorization: "Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"
+      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
       id:
         name: id
-        description: "The ID of the exam question."
+        description: 'The ID of the exam question.'
         required: true
-        example: 1
+        example: architecto
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: 1
+      id: architecto
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
       exam_id:
         name: exam_id
-        description: "ID of the exam this question belongs to. The <code>id</code> of an existing record in the exams table."
+        description: 'ID of the exam this question belongs to. The <code>id</code> of an existing record in the exams table.'
         required: false
         example: 1
         type: integer
@@ -2722,9 +2523,9 @@ endpoints:
         custom: []
       question_text:
         name: question_text
-        description: "Text content of the question (optional if question_image is provided)."
+        description: 'Text content of the question (optional if question_image is provided).'
         required: false
-        example: "What is the capital of Germany?"
+        example: 'What is the capital of Germany?'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -2732,9 +2533,9 @@ endpoints:
         custom: []
       question_image:
         name: question_image
-        description: "URL or path of an image for the question (optional)."
+        description: 'URL or path of an image for the question (optional).'
         required: false
-        example: "https://example.com/question1.png"
+        example: 'https://example.com/question1.png'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -2742,7 +2543,7 @@ endpoints:
         custom: []
       question_type:
         name: question_type
-        description: "Type of the question."
+        description: 'Type of the question.'
         required: false
         example: multiple_choice
         type: string
@@ -2756,18 +2557,18 @@ endpoints:
         custom: []
       options:
         name: options
-        description: "Individual option for multiple_choice question."
+        description: 'Individual option for multiple_choice question.'
         required: false
         example:
           - Berlin
-        type: "string[]"
+        type: 'string[]'
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
       correct_answer:
         name: correct_answer
-        description: "Correct answer for the question (format depends on question_type)."
+        description: 'Correct answer for the question (format depends on question_type).'
         required: false
         example: Berlin
         type: string
@@ -2777,7 +2578,7 @@ endpoints:
         custom: []
       points:
         name: points
-        description: "Points assigned to the question. Must be at least 0."
+        description: 'Points assigned to the question. Must be at least 0.'
         required: false
         example: 5
         type: integer
@@ -2787,7 +2588,7 @@ endpoints:
         custom: []
       is_required:
         name: is_required
-        description: "Indicates if answering the question is mandatory."
+        description: 'Indicates if answering the question is mandatory.'
         required: false
         example: false
         type: boolean
@@ -2797,9 +2598,9 @@ endpoints:
         custom: []
       help_text:
         name: help_text
-        description: "Optional hint or guidance for the question."
+        description: 'Optional hint or guidance for the question.'
         required: false
-        example: "Consider European capitals."
+        example: 'Consider European capitals.'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -2807,7 +2608,7 @@ endpoints:
         custom: []
       section_id:
         name: section_id
-        description: "ID of the exam section this question belongs to (optional). The <code>id</code> of an existing record in the exam_sections table."
+        description: 'ID of the exam section this question belongs to (optional). The <code>id</code> of an existing record in the exam_sections table.'
         required: false
         example: 2
         type: integer
@@ -2817,15 +2618,15 @@ endpoints:
         custom: []
     cleanBodyParameters:
       exam_id: 1
-      question_text: "What is the capital of Germany?"
-      question_image: "https://example.com/question1.png"
+      question_text: 'What is the capital of Germany?'
+      question_image: 'https://example.com/question1.png'
       question_type: multiple_choice
       options:
         - Berlin
       correct_answer: Berlin
       points: 5
       is_required: false
-      help_text: "Consider European capitals."
+      help_text: 'Consider European capitals.'
       section_id: 2
     fileParameters: []
     responses: []
@@ -2833,41 +2634,42 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - "Bearer 6g43cv8PD1aE5beadkZfhV6"
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
     controller: null
     method: null
     route: null
     custom: []
-  - httpMethods:
+  -
+    httpMethods:
       - DELETE
-    uri: "api/v1/admin/exam-questions/{id}"
+    uri: 'api/v1/admin/exam-questions/{id}'
     metadata:
       groupName: Endpoints
-      groupDescription: ""
-      subgroup: ""
-      subgroupDescription: ""
-      title: "Remove the specified exam question from storage."
-      description: ""
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Remove the specified exam question from storage.'
+      description: ''
       authenticated: true
       deprecated: false
       custom: []
     headers:
-      Authorization: "Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"
+      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
       id:
         name: id
-        description: "The ID of the exam question."
+        description: 'The ID of the exam question.'
         required: true
-        example: 1
+        example: architecto
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: 1
+      id: architecto
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -2878,79 +2680,82 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - "Bearer 6g43cv8PD1aE5beadkZfhV6"
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
     controller: null
     method: null
     route: null
     custom: []
-  - httpMethods:
+  -
+    httpMethods:
       - GET
-    uri: "api/v1/admin/exams/{id}/questions"
+    uri: 'api/v1/admin/exams/{id}/questions'
     metadata:
       groupName: Endpoints
-      groupDescription: ""
-      subgroup: ""
-      subgroupDescription: ""
-      title: "Get sections (with questions) and unsectioned questions of an exam."
-      description: ""
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Get sections (with questions) and unsectioned questions of an exam.'
+      description: ''
       authenticated: true
       deprecated: false
       custom: []
     headers:
-      Authorization: "Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"
+      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
       id:
         name: id
-        description: "The ID of the exam."
+        description: 'The ID of the exam.'
         required: true
-        example: 1
+        example: architecto
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: 1
+      id: architecto
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
     responses:
-      - status: 401
+      -
+        status: 401
         content: '{"message":"Unauthenticated."}'
         headers:
-          cache-control: "no-cache, private"
+          cache-control: 'no-cache, private'
           content-type: application/json
-          access-control-allow-origin: "*"
+          access-control-allow-origin: '*'
         description: null
         custom: []
     responseFields: []
     auth:
       - headers
       - Authorization
-      - "Bearer 6g43cv8PD1aE5beadkZfhV6"
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
     controller: null
     method: null
     route: null
     custom: []
-  - httpMethods:
+  -
+    httpMethods:
       - GET
     uri: api/v1/admin/exam-sections
     metadata:
       groupName: Endpoints
-      groupDescription: ""
-      subgroup: ""
-      subgroupDescription: ""
-      title: ""
-      description: ""
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
       authenticated: true
       deprecated: false
       custom: []
     headers:
-      Authorization: "Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"
+      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -2961,38 +2766,40 @@ endpoints:
     cleanBodyParameters: []
     fileParameters: []
     responses:
-      - status: 401
+      -
+        status: 401
         content: '{"message":"Unauthenticated."}'
         headers:
-          cache-control: "no-cache, private"
+          cache-control: 'no-cache, private'
           content-type: application/json
-          access-control-allow-origin: "*"
+          access-control-allow-origin: '*'
         description: null
         custom: []
     responseFields: []
     auth:
       - headers
       - Authorization
-      - "Bearer 6g43cv8PD1aE5beadkZfhV6"
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
     controller: null
     method: null
     route: null
     custom: []
-  - httpMethods:
+  -
+    httpMethods:
       - POST
     uri: api/v1/admin/exam-sections
     metadata:
       groupName: Endpoints
-      groupDescription: ""
-      subgroup: ""
-      subgroupDescription: ""
-      title: ""
-      description: ""
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
       authenticated: true
       deprecated: false
       custom: []
     headers:
-      Authorization: "Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"
+      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -3002,7 +2809,7 @@ endpoints:
     bodyParameters:
       exam_id:
         name: exam_id
-        description: "ID of the exam this section belongs to. The <code>id</code> of an existing record in the exams table."
+        description: 'ID of the exam this section belongs to. The <code>id</code> of an existing record in the exams table.'
         required: true
         example: 1
         type: integer
@@ -3012,7 +2819,7 @@ endpoints:
         custom: []
       code:
         name: code
-        description: "Unique code for the exam section. Must not be greater than 255 characters."
+        description: 'Unique code for the exam section. Must not be greater than 255 characters.'
         required: true
         example: SEC-A
         type: string
@@ -3022,9 +2829,9 @@ endpoints:
         custom: []
       name:
         name: name
-        description: "Name of the exam section. Must not be greater than 255 characters."
+        description: 'Name of the exam section. Must not be greater than 255 characters.'
         required: true
-        example: "Mathematics Section"
+        example: 'Mathematics Section'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -3032,7 +2839,7 @@ endpoints:
         custom: []
       order_number:
         name: order_number
-        description: "Order of the section within the exam."
+        description: 'Order of the section within the exam.'
         required: true
         example: 1
         type: integer
@@ -3043,7 +2850,7 @@ endpoints:
     cleanBodyParameters:
       exam_id: 1
       code: SEC-A
-      name: "Mathematics Section"
+      name: 'Mathematics Section'
       order_number: 1
     fileParameters: []
     responses: []
@@ -3051,101 +2858,104 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - "Bearer 6g43cv8PD1aE5beadkZfhV6"
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
     controller: null
     method: null
     route: null
     custom: []
-  - httpMethods:
+  -
+    httpMethods:
       - GET
-    uri: "api/v1/admin/exam-sections/{id}"
+    uri: 'api/v1/admin/exam-sections/{id}'
     metadata:
       groupName: Endpoints
-      groupDescription: ""
-      subgroup: ""
-      subgroupDescription: ""
-      title: ""
-      description: ""
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
       authenticated: true
       deprecated: false
       custom: []
     headers:
-      Authorization: "Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"
+      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
       id:
         name: id
-        description: "The ID of the exam section."
+        description: 'The ID of the exam section.'
         required: true
-        example: 1
+        example: architecto
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: 1
+      id: architecto
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
     responses:
-      - status: 401
+      -
+        status: 401
         content: '{"message":"Unauthenticated."}'
         headers:
-          cache-control: "no-cache, private"
+          cache-control: 'no-cache, private'
           content-type: application/json
-          access-control-allow-origin: "*"
+          access-control-allow-origin: '*'
         description: null
         custom: []
     responseFields: []
     auth:
       - headers
       - Authorization
-      - "Bearer 6g43cv8PD1aE5beadkZfhV6"
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
     controller: null
     method: null
     route: null
     custom: []
-  - httpMethods:
+  -
+    httpMethods:
       - PUT
       - PATCH
-    uri: "api/v1/admin/exam-sections/{id}"
+    uri: 'api/v1/admin/exam-sections/{id}'
     metadata:
       groupName: Endpoints
-      groupDescription: ""
-      subgroup: ""
-      subgroupDescription: ""
-      title: ""
-      description: ""
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
       authenticated: true
       deprecated: false
       custom: []
     headers:
-      Authorization: "Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"
+      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
       id:
         name: id
-        description: "The ID of the exam section."
+        description: 'The ID of the exam section.'
         required: true
-        example: 1
+        example: architecto
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: 1
+      id: architecto
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
       exam_id:
         name: exam_id
-        description: "ID of the exam this section belongs to. The <code>id</code> of an existing record in the exams table."
+        description: 'ID of the exam this section belongs to. The <code>id</code> of an existing record in the exams table.'
         required: true
         example: 1
         type: integer
@@ -3155,7 +2965,7 @@ endpoints:
         custom: []
       code:
         name: code
-        description: "Unique code for the exam section. Must not be greater than 255 characters."
+        description: 'Unique code for the exam section. Must not be greater than 255 characters.'
         required: true
         example: SEC-B
         type: string
@@ -3165,9 +2975,9 @@ endpoints:
         custom: []
       name:
         name: name
-        description: "Name of the exam section. Must not be greater than 255 characters."
+        description: 'Name of the exam section. Must not be greater than 255 characters.'
         required: true
-        example: "Physics Section"
+        example: 'Physics Section'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -3175,7 +2985,7 @@ endpoints:
         custom: []
       order_number:
         name: order_number
-        description: "Order of the section within the exam."
+        description: 'Order of the section within the exam.'
         required: true
         example: 2
         type: integer
@@ -3186,7 +2996,7 @@ endpoints:
     cleanBodyParameters:
       exam_id: 1
       code: SEC-B
-      name: "Physics Section"
+      name: 'Physics Section'
       order_number: 2
     fileParameters: []
     responses: []
@@ -3194,41 +3004,42 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - "Bearer 6g43cv8PD1aE5beadkZfhV6"
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
     controller: null
     method: null
     route: null
     custom: []
-  - httpMethods:
+  -
+    httpMethods:
       - DELETE
-    uri: "api/v1/admin/exam-sections/{id}"
+    uri: 'api/v1/admin/exam-sections/{id}'
     metadata:
       groupName: Endpoints
-      groupDescription: ""
-      subgroup: ""
-      subgroupDescription: ""
-      title: ""
-      description: ""
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
       authenticated: true
       deprecated: false
       custom: []
     headers:
-      Authorization: "Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"
+      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
       id:
         name: id
-        description: "The ID of the exam section."
+        description: 'The ID of the exam section.'
         required: true
-        example: 1
+        example: architecto
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: 1
+      id: architecto
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -3239,26 +3050,27 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - "Bearer 6g43cv8PD1aE5beadkZfhV6"
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
     controller: null
     method: null
     route: null
     custom: []
-  - httpMethods:
+  -
+    httpMethods:
       - GET
     uri: api/v1/admin/school-admins
     metadata:
       groupName: Endpoints
-      groupDescription: ""
-      subgroup: ""
-      subgroupDescription: ""
-      title: "List paginated school admins"
-      description: ""
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'List paginated school admins'
+      description: ''
       authenticated: true
       deprecated: false
       custom: []
     headers:
-      Authorization: "Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"
+      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -3269,38 +3081,40 @@ endpoints:
     cleanBodyParameters: []
     fileParameters: []
     responses:
-      - status: 401
+      -
+        status: 401
         content: '{"message":"Unauthenticated."}'
         headers:
-          cache-control: "no-cache, private"
+          cache-control: 'no-cache, private'
           content-type: application/json
-          access-control-allow-origin: "*"
+          access-control-allow-origin: '*'
         description: null
         custom: []
     responseFields: []
     auth:
       - headers
       - Authorization
-      - "Bearer 6g43cv8PD1aE5beadkZfhV6"
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
     controller: null
     method: null
     route: null
     custom: []
-  - httpMethods:
+  -
+    httpMethods:
       - POST
     uri: api/v1/admin/school-admins
     metadata:
       groupName: Endpoints
-      groupDescription: ""
-      subgroup: ""
-      subgroupDescription: ""
-      title: "Create school admin: create user first then create school admin profile"
-      description: ""
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Create school admin: create user first then create school admin profile'
+      description: ''
       authenticated: true
       deprecated: false
       custom: []
     headers:
-      Authorization: "Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"
+      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -3310,9 +3124,9 @@ endpoints:
     bodyParameters:
       name:
         name: name
-        description: "Full name of the school admin. Must not be greater than 255 characters."
+        description: 'Full name of the school admin. Must not be greater than 255 characters.'
         required: true
-        example: "Tarek Hesham Sayed ElFarmawy"
+        example: 'Tarek Hesham Sayed ElFarmawy'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -3320,7 +3134,7 @@ endpoints:
         custom: []
       email:
         name: email
-        description: "Email address of the school admin (must be unique). Must be a valid email address. Must not be greater than 255 characters."
+        description: 'Email address of the school admin (must be unique). Must be a valid email address. Must not be greater than 255 characters.'
         required: true
         example: schooladmin@example.com
         type: string
@@ -3330,9 +3144,9 @@ endpoints:
         custom: []
       phone:
         name: phone
-        description: "Phone number of the school admin (must be unique). Must not be greater than 20 characters."
+        description: 'Phone number of the school admin (must be unique). Must not be greater than 20 characters.'
         required: true
-        example: "01234567890"
+        example: '01234567890'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -3340,9 +3154,9 @@ endpoints:
         custom: []
       national_id:
         name: national_id
-        description: "National ID of the school admin (14 digits, unique). Must be 14 digits."
+        description: 'National ID of the school admin (14 digits, unique). Must be 14 digits.'
         required: true
-        example: "12345678901234"
+        example: '12345678901234'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -3350,7 +3164,7 @@ endpoints:
         custom: []
       password:
         name: password
-        description: "Password for the school admin account. Must be at least 8 characters."
+        description: 'Password for the school admin account. Must be at least 8 characters.'
         required: true
         example: password123
         type: string
@@ -3360,7 +3174,7 @@ endpoints:
         custom: []
       school_id:
         name: school_id
-        description: "ID of the school to assign the admin to. The <code>id</code> of an existing record in the schools table."
+        description: 'ID of the school to assign the admin to. The <code>id</code> of an existing record in the schools table.'
         required: true
         example: 1
         type: string
@@ -3370,7 +3184,7 @@ endpoints:
         custom: []
       is_active:
         name: is_active
-        description: "Whether the school admin account should be active."
+        description: 'Whether the school admin account should be active.'
         required: false
         example: false
         type: boolean
@@ -3380,7 +3194,7 @@ endpoints:
         custom: []
       admin_permissions:
         name: admin_permissions
-        description: "Permissions assigned to the school admin (optional)."
+        description: 'Permissions assigned to the school admin (optional).'
         required: false
         example:
           manage_students: true
@@ -3394,7 +3208,7 @@ endpoints:
         custom: []
       admin_permissions.manage_students:
         name: admin_permissions.manage_students
-        description: "Allow managing students."
+        description: 'Allow managing students.'
         required: false
         example: false
         type: boolean
@@ -3404,7 +3218,7 @@ endpoints:
         custom: []
       admin_permissions.view_reports:
         name: admin_permissions.view_reports
-        description: "Allow viewing reports."
+        description: 'Allow viewing reports.'
         required: false
         example: false
         type: boolean
@@ -3414,7 +3228,7 @@ endpoints:
         custom: []
       admin_permissions.manage_school_settings:
         name: admin_permissions.manage_school_settings
-        description: "Allow managing school settings."
+        description: 'Allow managing school settings.'
         required: false
         example: false
         type: boolean
@@ -3424,7 +3238,7 @@ endpoints:
         custom: []
       admin_permissions.manage_exams:
         name: admin_permissions.manage_exams
-        description: "Allow managing exams."
+        description: 'Allow managing exams.'
         required: false
         example: false
         type: boolean
@@ -3433,10 +3247,10 @@ endpoints:
         nullable: false
         custom: []
     cleanBodyParameters:
-      name: "Tarek Hesham Sayed ElFarmawy"
+      name: 'Tarek Hesham Sayed ElFarmawy'
       email: schooladmin@example.com
-      phone: "01234567890"
-      national_id: "12345678901234"
+      phone: '01234567890'
+      national_id: '12345678901234'
       password: password123
       school_id: 1
       is_active: false
@@ -3451,101 +3265,104 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - "Bearer 6g43cv8PD1aE5beadkZfhV6"
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
     controller: null
     method: null
     route: null
     custom: []
-  - httpMethods:
+  -
+    httpMethods:
       - GET
-    uri: "api/v1/admin/school-admins/{id}"
+    uri: 'api/v1/admin/school-admins/{id}'
     metadata:
       groupName: Endpoints
-      groupDescription: ""
-      subgroup: ""
-      subgroupDescription: ""
-      title: "Show school admin details"
-      description: ""
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Show school admin details'
+      description: ''
       authenticated: true
       deprecated: false
       custom: []
     headers:
-      Authorization: "Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"
+      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
       id:
         name: id
-        description: "The ID of the school admin."
+        description: 'The ID of the school admin.'
         required: true
-        example: 1
+        example: architecto
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: 1
+      id: architecto
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
     responses:
-      - status: 401
+      -
+        status: 401
         content: '{"message":"Unauthenticated."}'
         headers:
-          cache-control: "no-cache, private"
+          cache-control: 'no-cache, private'
           content-type: application/json
-          access-control-allow-origin: "*"
+          access-control-allow-origin: '*'
         description: null
         custom: []
     responseFields: []
     auth:
       - headers
       - Authorization
-      - "Bearer 6g43cv8PD1aE5beadkZfhV6"
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
     controller: null
     method: null
     route: null
     custom: []
-  - httpMethods:
+  -
+    httpMethods:
       - PUT
       - PATCH
-    uri: "api/v1/admin/school-admins/{id}"
+    uri: 'api/v1/admin/school-admins/{id}'
     metadata:
       groupName: Endpoints
-      groupDescription: ""
-      subgroup: ""
-      subgroupDescription: ""
-      title: "Update school admin and optionally its user"
-      description: ""
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Update school admin and optionally its user'
+      description: ''
       authenticated: true
       deprecated: false
       custom: []
     headers:
-      Authorization: "Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"
+      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
       id:
         name: id
-        description: "The ID of the school admin."
+        description: 'The ID of the school admin.'
         required: true
-        example: 1
+        example: architecto
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: 1
+      id: architecto
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
       school_id:
         name: school_id
-        description: "ID of the school to assign the admin to. The <code>id</code> of an existing record in the schools table."
+        description: 'ID of the school to assign the admin to. The <code>id</code> of an existing record in the schools table.'
         required: false
         example: 1
         type: string
@@ -3555,7 +3372,7 @@ endpoints:
         custom: []
       is_active:
         name: is_active
-        description: "Indicates whether the school admin account is active."
+        description: 'Indicates whether the school admin account is active.'
         required: false
         example: false
         type: boolean
@@ -3565,7 +3382,7 @@ endpoints:
         custom: []
       admin_permissions:
         name: admin_permissions
-        description: "Permissions assigned to the school admin (optional)."
+        description: 'Permissions assigned to the school admin (optional).'
         required: false
         example:
           manage_students: true
@@ -3579,7 +3396,7 @@ endpoints:
         custom: []
       admin_permissions.manage_students:
         name: admin_permissions.manage_students
-        description: "Allow managing students."
+        description: 'Allow managing students.'
         required: false
         example: false
         type: boolean
@@ -3589,7 +3406,7 @@ endpoints:
         custom: []
       admin_permissions.view_reports:
         name: admin_permissions.view_reports
-        description: "Allow viewing reports."
+        description: 'Allow viewing reports.'
         required: false
         example: false
         type: boolean
@@ -3599,7 +3416,7 @@ endpoints:
         custom: []
       admin_permissions.manage_school_settings:
         name: admin_permissions.manage_school_settings
-        description: "Allow managing school settings."
+        description: 'Allow managing school settings.'
         required: false
         example: false
         type: boolean
@@ -3609,7 +3426,7 @@ endpoints:
         custom: []
       admin_permissions.manage_exams:
         name: admin_permissions.manage_exams
-        description: "Allow managing exams."
+        description: 'Allow managing exams.'
         required: false
         example: false
         type: boolean
@@ -3631,41 +3448,42 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - "Bearer 6g43cv8PD1aE5beadkZfhV6"
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
     controller: null
     method: null
     route: null
     custom: []
-  - httpMethods:
+  -
+    httpMethods:
       - DELETE
-    uri: "api/v1/admin/school-admins/{id}"
+    uri: 'api/v1/admin/school-admins/{id}'
     metadata:
       groupName: Endpoints
-      groupDescription: ""
-      subgroup: ""
-      subgroupDescription: ""
-      title: "Delete school admin and its user (soft delete user)"
-      description: ""
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Delete school admin and its user (soft delete user)'
+      description: ''
       authenticated: true
       deprecated: false
       custom: []
     headers:
-      Authorization: "Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"
+      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
       id:
         name: id
-        description: "The ID of the school admin."
+        description: 'The ID of the school admin.'
         required: true
-        example: 1
+        example: architecto
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: 1
+      id: architecto
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -3676,26 +3494,27 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - "Bearer 6g43cv8PD1aE5beadkZfhV6"
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
     controller: null
     method: null
     route: null
     custom: []
-  - httpMethods:
+  -
+    httpMethods:
       - GET
     uri: api/v1/admin/schools
     metadata:
       groupName: Endpoints
-      groupDescription: ""
-      subgroup: ""
-      subgroupDescription: ""
-      title: ""
-      description: ""
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
       authenticated: true
       deprecated: false
       custom: []
     headers:
-      Authorization: "Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"
+      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -3706,38 +3525,40 @@ endpoints:
     cleanBodyParameters: []
     fileParameters: []
     responses:
-      - status: 401
+      -
+        status: 401
         content: '{"message":"Unauthenticated."}'
         headers:
-          cache-control: "no-cache, private"
+          cache-control: 'no-cache, private'
           content-type: application/json
-          access-control-allow-origin: "*"
+          access-control-allow-origin: '*'
         description: null
         custom: []
     responseFields: []
     auth:
       - headers
       - Authorization
-      - "Bearer 6g43cv8PD1aE5beadkZfhV6"
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
     controller: null
     method: null
     route: null
     custom: []
-  - httpMethods:
+  -
+    httpMethods:
       - POST
     uri: api/v1/admin/schools
     metadata:
       groupName: Endpoints
-      groupDescription: ""
-      subgroup: ""
-      subgroupDescription: ""
-      title: ""
-      description: ""
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
       authenticated: true
       deprecated: false
       custom: []
     headers:
-      Authorization: "Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"
+      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -3747,7 +3568,7 @@ endpoints:
     bodyParameters:
       governorate_id:
         name: governorate_id
-        description: "ID of the governorate. The <code>id</code> of an existing record in the governorates table."
+        description: 'ID of the governorate. The <code>id</code> of an existing record in the governorates table.'
         required: true
         example: 1
         type: string
@@ -3757,9 +3578,9 @@ endpoints:
         custom: []
       name:
         name: name
-        description: "Name of the school. Must not be greater than 255 characters."
+        description: 'Name of the school. Must not be greater than 255 characters.'
         required: true
-        example: "Al Azhar School"
+        example: 'Al Azhar School'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -3767,7 +3588,7 @@ endpoints:
         custom: []
       code:
         name: code
-        description: "Unique code of the school. Must not be greater than 50 characters."
+        description: 'Unique code of the school. Must not be greater than 50 characters.'
         required: true
         example: S001
         type: string
@@ -3777,9 +3598,9 @@ endpoints:
         custom: []
       address:
         name: address
-        description: "Address of the school (optional). Must not be greater than 500 characters."
+        description: 'Address of the school (optional). Must not be greater than 500 characters.'
         required: false
-        example: "123 Main St"
+        example: '123 Main St'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -3787,9 +3608,9 @@ endpoints:
         custom: []
       phone:
         name: phone
-        description: "Phone number of the school (optional). Must not be greater than 20 characters."
+        description: 'Phone number of the school (optional). Must not be greater than 20 characters.'
         required: false
-        example: "+201234567890"
+        example: '+201234567890'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -3797,7 +3618,7 @@ endpoints:
         custom: []
       latitude:
         name: latitude
-        description: "Latitude coordinate of the school (optional)."
+        description: 'Latitude coordinate of the school (optional).'
         required: false
         example: 30.123456
         type: number
@@ -3807,7 +3628,7 @@ endpoints:
         custom: []
       longitude:
         name: longitude
-        description: "Longitude coordinate of the school (optional)."
+        description: 'Longitude coordinate of the school (optional).'
         required: false
         example: 31.654321
         type: number
@@ -3817,7 +3638,7 @@ endpoints:
         custom: []
       allowed_ip_range:
         name: allowed_ip_range
-        description: "Allowed IP range for the school (optional). Must not be greater than 100 characters."
+        description: 'Allowed IP range for the school (optional). Must not be greater than 100 characters.'
         required: false
         example: 192.168.1.1-192.168.1.255
         type: string
@@ -3827,7 +3648,7 @@ endpoints:
         custom: []
       is_active:
         name: is_active
-        description: "Whether the school is active (optional)."
+        description: 'Whether the school is active (optional).'
         required: false
         example: false
         type: boolean
@@ -3837,10 +3658,10 @@ endpoints:
         custom: []
     cleanBodyParameters:
       governorate_id: 1
-      name: "Al Azhar School"
+      name: 'Al Azhar School'
       code: S001
-      address: "123 Main St"
-      phone: "+201234567890"
+      address: '123 Main St'
+      phone: '+201234567890'
       latitude: 30.123456
       longitude: 31.654321
       allowed_ip_range: 192.168.1.1-192.168.1.255
@@ -3851,101 +3672,104 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - "Bearer 6g43cv8PD1aE5beadkZfhV6"
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
     controller: null
     method: null
     route: null
     custom: []
-  - httpMethods:
+  -
+    httpMethods:
       - GET
-    uri: "api/v1/admin/schools/{id}"
+    uri: 'api/v1/admin/schools/{id}'
     metadata:
       groupName: Endpoints
-      groupDescription: ""
-      subgroup: ""
-      subgroupDescription: ""
-      title: ""
-      description: ""
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
       authenticated: true
       deprecated: false
       custom: []
     headers:
-      Authorization: "Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"
+      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
       id:
         name: id
-        description: "The ID of the school."
+        description: 'The ID of the school.'
         required: true
-        example: 1
+        example: architecto
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: 1
+      id: architecto
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
     responses:
-      - status: 401
+      -
+        status: 401
         content: '{"message":"Unauthenticated."}'
         headers:
-          cache-control: "no-cache, private"
+          cache-control: 'no-cache, private'
           content-type: application/json
-          access-control-allow-origin: "*"
+          access-control-allow-origin: '*'
         description: null
         custom: []
     responseFields: []
     auth:
       - headers
       - Authorization
-      - "Bearer 6g43cv8PD1aE5beadkZfhV6"
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
     controller: null
     method: null
     route: null
     custom: []
-  - httpMethods:
+  -
+    httpMethods:
       - PUT
       - PATCH
-    uri: "api/v1/admin/schools/{id}"
+    uri: 'api/v1/admin/schools/{id}'
     metadata:
       groupName: Endpoints
-      groupDescription: ""
-      subgroup: ""
-      subgroupDescription: ""
-      title: ""
-      description: ""
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
       authenticated: true
       deprecated: false
       custom: []
     headers:
-      Authorization: "Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"
+      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
       id:
         name: id
-        description: "The ID of the school."
+        description: 'The ID of the school.'
         required: true
-        example: 1
+        example: architecto
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: 1
+      id: architecto
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
       governorate_id:
         name: governorate_id
-        description: "ID of the governorate. The <code>id</code> of an existing record in the governorates table."
+        description: 'ID of the governorate. The <code>id</code> of an existing record in the governorates table.'
         required: false
         example: 1
         type: string
@@ -3955,9 +3779,9 @@ endpoints:
         custom: []
       name:
         name: name
-        description: "Name of the school. Must not be greater than 255 characters."
+        description: 'Name of the school. Must not be greater than 255 characters.'
         required: false
-        example: "Al Azhar School"
+        example: 'Al Azhar School'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -3965,7 +3789,7 @@ endpoints:
         custom: []
       code:
         name: code
-        description: "Unique code of the school. Must not be greater than 50 characters."
+        description: 'Unique code of the school. Must not be greater than 50 characters.'
         required: false
         example: S001
         type: string
@@ -3975,9 +3799,9 @@ endpoints:
         custom: []
       address:
         name: address
-        description: "Address of the school (optional). Must not be greater than 500 characters."
+        description: 'Address of the school (optional). Must not be greater than 500 characters.'
         required: false
-        example: "123 Main St"
+        example: '123 Main St'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -3985,9 +3809,9 @@ endpoints:
         custom: []
       phone:
         name: phone
-        description: "Phone number of the school (optional). Must not be greater than 20 characters."
+        description: 'Phone number of the school (optional). Must not be greater than 20 characters.'
         required: false
-        example: "+201234567890"
+        example: '+201234567890'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -3995,7 +3819,7 @@ endpoints:
         custom: []
       latitude:
         name: latitude
-        description: "Latitude coordinate of the school (optional)."
+        description: 'Latitude coordinate of the school (optional).'
         required: false
         example: 30.123456
         type: number
@@ -4005,7 +3829,7 @@ endpoints:
         custom: []
       longitude:
         name: longitude
-        description: "Longitude coordinate of the school (optional)."
+        description: 'Longitude coordinate of the school (optional).'
         required: false
         example: 31.654321
         type: number
@@ -4015,7 +3839,7 @@ endpoints:
         custom: []
       allowed_ip_range:
         name: allowed_ip_range
-        description: "Allowed IP range for the school (optional). Must not be greater than 100 characters."
+        description: 'Allowed IP range for the school (optional). Must not be greater than 100 characters.'
         required: false
         example: 192.168.1.1-192.168.1.255
         type: string
@@ -4025,7 +3849,7 @@ endpoints:
         custom: []
       is_active:
         name: is_active
-        description: "Whether the school is active."
+        description: 'Whether the school is active.'
         required: false
         example: false
         type: boolean
@@ -4035,10 +3859,10 @@ endpoints:
         custom: []
     cleanBodyParameters:
       governorate_id: 1
-      name: "Al Azhar School"
+      name: 'Al Azhar School'
       code: S001
-      address: "123 Main St"
-      phone: "+201234567890"
+      address: '123 Main St'
+      phone: '+201234567890'
       latitude: 30.123456
       longitude: 31.654321
       allowed_ip_range: 192.168.1.1-192.168.1.255
@@ -4049,41 +3873,42 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - "Bearer 6g43cv8PD1aE5beadkZfhV6"
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
     controller: null
     method: null
     route: null
     custom: []
-  - httpMethods:
+  -
+    httpMethods:
       - DELETE
-    uri: "api/v1/admin/schools/{id}"
+    uri: 'api/v1/admin/schools/{id}'
     metadata:
       groupName: Endpoints
-      groupDescription: ""
-      subgroup: ""
-      subgroupDescription: ""
-      title: ""
-      description: ""
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
       authenticated: true
       deprecated: false
       custom: []
     headers:
-      Authorization: "Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"
+      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
       id:
         name: id
-        description: "The ID of the school."
+        description: 'The ID of the school.'
         required: true
-        example: 1
+        example: architecto
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      id: 1
+      id: architecto
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -4094,26 +3919,284 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - "Bearer 6g43cv8PD1aE5beadkZfhV6"
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
     controller: null
     method: null
     route: null
     custom: []
-  - httpMethods:
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/auth/login
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Authenticate user and return access token'
+      description: ''
+      authenticated: true
+      deprecated: false
+      custom: []
+    headers:
+      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      phone:
+        name: phone
+        description: 'Phone number of the user (11 digits). Required if national_id and email are not provided. This field is required when none of <code>national_id</code> and <code>email</code> are present. Must be 11 digits.'
+        required: false
+        example: '01010869000'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      national_id:
+        name: national_id
+        description: 'National ID of the user (14 digits). Required if phone and email are not provided. This field is required when none of <code>phone</code> and <code>email</code> are present. Must be 14 digits.'
+        required: false
+        example: '01234567891234'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      email:
+        name: email
+        description: 'Email address of the user. Required if phone and national_id are not provided. This field is required when none of <code>phone</code> and <code>national_id</code> are present. Must be a valid email address. Must not be greater than 255 characters.'
+        required: false
+        example: tarek@digitopia.com
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      password:
+        name: password
+        description: 'Password of the user (minimum 8 characters). Must be at least 8 characters.'
+        required: true
+        example: '12345678'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanBodyParameters:
+      phone: '01010869000'
+      national_id: '01234567891234'
+      email: tarek@digitopia.com
+      password: '12345678'
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/me
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Get current authenticated user'
+      description: ''
+      authenticated: true
+      deprecated: false
+      custom: []
+    headers:
+      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/logout
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Logout user and revoke token'
+      description: ''
+      authenticated: true
+      deprecated: false
+      custom: []
+    headers:
+      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/governorates
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: true
+      deprecated: false
+      custom: []
+    headers:
+      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/v1/governorates/{id}'
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: true
+      deprecated: false
+      custom: []
+    headers:
+      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the governorate.'
+        required: true
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      id: architecto
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
       - GET
     uri: api/health
     metadata:
       groupName: Endpoints
-      groupDescription: ""
-      subgroup: ""
-      subgroupDescription: ""
-      title: ""
-      description: ""
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
       authenticated: true
       deprecated: false
       custom: []
     headers:
-      Authorization: "Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"
+      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -4124,19 +4207,20 @@ endpoints:
     cleanBodyParameters: []
     fileParameters: []
     responses:
-      - status: 200
-        content: '{"status":"ok","timestamp":"2025-09-25T22:21:10.127183Z","version":"1.0.0"}'
+      -
+        status: 200
+        content: '{"status":"ok","timestamp":"2025-09-27T14:07:59.347841Z","version":"1.0.0"}'
         headers:
-          cache-control: "no-cache, private"
+          cache-control: 'no-cache, private'
           content-type: application/json
-          access-control-allow-origin: "*"
+          access-control-allow-origin: '*'
         description: null
         custom: []
     responseFields: []
     auth:
       - headers
       - Authorization
-      - "Bearer 6g43cv8PD1aE5beadkZfhV6"
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
     controller: null
     method: null
     route: null

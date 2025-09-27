@@ -351,43 +351,19 @@ class ExamService implements ExamServiceInterface
         return Cache::remember($cacheKey, 3600, function () use ($examId) {
             $exam = Exam::with([
                 'subject:id,name,section',
-                'sections' => function ($query) {
-                    $query->select([
-                        'id',
-                        'exam_id',
-                        'code',
-                        'name',
-                        'order_number',
-                        'shuffle_questions'
-                    ])->orderBy('order_number');
-                },
-                'sections.questions' => function ($query) {
-                    $query->select([
-                        'id',
-                        'exam_id',
-                        'section_id',
-                        'question_text',
-                        'question_image',
-                        'question_type',
-                        'options',
-                        'points',
-                        'is_required',
-                        'help_text'
-                    ])->orderBy('id'); // Keep original order - frontend will shuffle if needed
-                }
-            ])->select([
-                'id',
-                'subject_id',
-                'title',
-                'description',
-                'exam_type',
-                'academic_year',
-                'start_time',
-                'end_time',
-                'duration_minutes',
-                'total_score',
-                'minimum_battery_percentage',
-                'require_video_recording'
+                'sections'           => fn($q) => $q->select(['id', 'name', 'exam_id']),
+                'sections.questions' => fn($q) => $q->select([
+                    'id',
+                    'exam_id',
+                    'section_id',
+                    'question_text',
+                    'question_image',
+                    'question_type',
+                    'options',
+                    'points',
+                    'is_required',
+                    'help_text'
+                ]),
             ])->findOrFail($examId);
 
             $totalQuestions = 0;
@@ -396,46 +372,39 @@ class ExamService implements ExamServiceInterface
                 $totalQuestions += $questions->count();
 
                 return [
-                    'id' => $section->id,
+                    'id'   => $section->id,
                     'code' => $section->code,
                     'name' => $section->name,
                     'total_points' => $questions->sum('points'),
-                    'questions' => $questions->map(function ($question) {
+                    'questions'    => $questions->map(function ($question) {
                         return [
-                            'id' => $question->id,
-                            'question_text' => $question->question_text,
+                            'id'             => $question->id,
+                            'question_text'  => $question->question_text,
                             'question_image' => $question->question_image,
-                            'question_type' => $question->question_type,
-                            'options' => json_decode($question->options),
-                            'points' => $question->points,
-                            'is_required' => (bool) $question->is_required,
-                            'help_text' => $question->help_text,
+                            'question_type'  => $question->question_type,
+                            'options'        => $question->options && is_array($question->options) ? $question->options : json_decode($question->options),
+                            'points'         => $question->points,
+                            'is_required'    => (bool) $question->is_required,
+                            'help_text'      => $question->help_text,
                         ];
                     })
                 ];
             });
 
             return [
-                'id' => $exam->id,
-                'title' => $exam->title,
-                'description' => $exam->description,
-                'exam_type' => $exam->exam_type,
-                'academic_year' => $exam->academic_year,
-                'total_score' => $exam->total_score,
+                'id'              => $exam->id,
+                'title'           => $exam->title,
+                'description'     => $exam->description,
+                'exam_type'       => $exam->exam_type,
+                'academic_year'   => $exam->academic_year,
+                'total_score'     => $exam->total_score,
                 'total_questions' => $totalQuestions,
-                'sections_count' => $exam->sections->count(),
-                'sections' => $sections, // All sections with all questions
-                // 'instructions' => $this->getExamInstructions($exam),
-                // 'requirements' => [
-                //     'minimum_battery' => $exam->minimum_battery_percentage,
-                //     'video_recording' => $exam->require_video_recording,
-                // ],
-                'timing' => [
-                    'start_time' => $exam->start_time,
-                    'end_time' => $exam->end_time,
-                    'duration_minutes' => $exam->duration_minutes,
-                    'current_time' => Carbon::now(),
-                ]
+                'sections_count'  => $exam->sections->count(),
+                'sections'        => $sections,
+                'requirements' => [
+                    'minimum_battery' => $exam->minimum_battery_percentage,
+                    'video_recording' => $exam->require_video_recording,
+                ],
             ];
         });
     }

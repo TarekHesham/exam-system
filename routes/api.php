@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('v1')->middleware(['auth:sanctum'])->group(base_path('routes/v1.php'));
+Route::prefix('v1')->middleware('auth:sanctum')->group(base_path('routes/v1.php'));
 
 // Health check endpoint
 Route::get('health', function () {

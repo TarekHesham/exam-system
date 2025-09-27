@@ -3,14 +3,9 @@
 namespace App\Core\Services;
 
 use App\Core\DTOs\UserDTO;
-use App\Core\Repositories\UserRepository;
-use App\Core\Repositories\TeacherRepository;
-use App\Core\Repositories\StudentRepository;
-use App\Core\Repositories\SchoolRepository;
+use App\Core\Repositories\{UserRepository, TeacherRepository, StudentRepository, SchoolRepository};
+use App\Modules\UserManagement\Models\{Student, Teacher, SchoolAdmin};
 use App\Modules\Authentication\Models\User;
-use App\Modules\UserManagement\Models\SchoolAdmin;
-use App\Modules\UserManagement\Models\Teacher;
-use App\Modules\UserManagement\Models\Student;
 
 class UserService
 {
@@ -19,7 +14,9 @@ class UserService
         private TeacherRepository $teacherRepository,
         private StudentRepository $studentRepository,
         private SchoolRepository $schoolRepository
-    ) {}
+    ) {
+        // 
+    }
 
     /**
      * Create a new user

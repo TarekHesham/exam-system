@@ -82,7 +82,25 @@ class ExamSessionService
         $session = ExamSession::with(['exam', 'student'])->find($sessionId);
 
         if (!$session) {
-            throw new InvalidArgumentException('الجلسة غير موجودة');
+            throw new InvalidArgumentException('غير مسموح لك بدخول الامتحان حتى يسمح لك المراقب.');
+        }
+
+        if ($session->session_status === 'expired') {
+            throw new InvalidArgumentException('انتهت صلاحية الجلسة');
+        }
+
+        return $session;
+    }
+
+    public function getSessionByStudentId(string $studentId): ExamSession
+    {
+        $session = ExamSession::with(['exam.subject', 'exam.questions'])
+            ->where('session_status', 'not_started')
+            ->where('student_id', $studentId)
+            ->first();
+
+        if (!$session) {
+            throw new InvalidArgumentException('غير مسموح لك بدخول الامتحان حتى يسمح لك المراقب.');
         }
 
         if ($session->session_status === 'expired') {

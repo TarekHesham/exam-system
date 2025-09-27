@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1;
+namespace App\Http\Controllers\Api\V1\Admin;
 
 use App\Core\Contracts\Services\SchoolServiceInterface;
 use App\Core\DTOs\SchoolDTO;
@@ -11,7 +11,11 @@ use App\Http\Resources\IndexSchoolResource;
 
 class SchoolController extends Controller
 {
-    public function __construct(private SchoolServiceInterface $service) {}
+    public function __construct(
+        private SchoolServiceInterface $service
+    ) {
+        // 
+    }
 
     public function index()
     {

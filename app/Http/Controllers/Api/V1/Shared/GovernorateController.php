@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1;
+namespace App\Http\Controllers\Api\V1\Shared;
 
 use App\Core\Contracts\Services\GovernorateServiceInterface;
 use App\Http\Controllers\Controller;
