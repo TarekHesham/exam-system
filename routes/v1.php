@@ -14,12 +14,16 @@ use App\Http\Controllers\Api\V1\Admin\{
     SchoolAdminController,
     SchoolController,
     SubjectController,
-    TeacherController
+    TeacherController,
+    TeacherSchoolAssignmentController
 };
 use App\Http\Controllers\Api\V1\SchoolAdmin\{StudentController};
 use App\Http\Controllers\Api\V1\Shared\{AuthController, GovernorateController};
 use App\Http\Controllers\Api\V1\Student\{StudentExamController};
-use App\Http\Controllers\Api\V1\Teacher\{TeacherExamController};
+use App\Http\Controllers\Api\V1\Teacher\{
+    SchoolController as TeacherSchoolController,
+    TeacherExamController
+};
 
 // Authentication
 Route::post('auth/login', [AuthController::class, 'login'])->withoutMiddleware('auth:sanctum');
@@ -31,11 +35,13 @@ Route::middleware('roles:student')->prefix('student')->group(function () {
     // ============================================
     Route::get('available-exam', [StudentExamController::class, 'getAvailableExam']);
     Route::post('exam/submit', [StudentExamController::class, 'submitExam']);
+    Route::get('exam/results', [StudentExamController::class, 'myExamResults']);
 });
 
 Route::middleware('roles:teacher')->prefix('teacher')->group(function () {
     // Students
-    Route::post('/scan-qr-create-session', [TeacherExamController::class, 'scanQRAndCreateSession']);
+    Route::post('scan-qr-create-session', [TeacherExamController::class, 'scanQRAndCreateSession']);
+    Route::get('my-schools', TeacherSchoolController::class);
 });
 
 Route::middleware('roles:school_admin')->prefix('admin')->group(function () {
@@ -48,6 +54,9 @@ Route::middleware('roles:ministry_admin|teacher')->prefix('admin')->group(functi
     // Teachers Management
     // ============================================
     Route::apiResource('teachers', TeacherController::class);
+    Route::post('teachers/{teacherId}/assign-schools', [TeacherSchoolAssignmentController::class, 'assignToSchools']);
+    Route::get('teachers/by-school/{schoolId}', [TeacherSchoolAssignmentController::class, 'getBySchool']);
+    Route::apiResource('teacher-school-assignments', TeacherSchoolAssignmentController::class);
 
     // ============================================
     // Exam Management

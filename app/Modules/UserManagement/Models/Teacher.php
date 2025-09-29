@@ -37,6 +37,12 @@ class Teacher extends BaseModel
         return $this->hasMany(TeacherSchoolAssignment::class);
     }
 
+    public function schools()
+    {
+        return $this->belongsToMany(School::class, 'teacher_school_assignments')
+            ->withPivot('assignment_type');
+    }
+
     public function createdExams(): HasMany
     {
         return $this->hasMany(Exam::class, 'created_by', 'user_id');

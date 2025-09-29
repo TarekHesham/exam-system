@@ -3,7 +3,7 @@
 This documentation aims to provide all the information you need to work with our API.
 
 <aside>
-    <strong>Base URL</strong>: <code>http://45.241.41.90:8000</code>
+    <strong>Base URL</strong>: <code>http://45.245.146.33:8000</code>
 </aside>
 
     This documentation aims to provide all the information you need to work with our API.

@@ -42,7 +42,6 @@ class TeacherExamController extends Controller
 
             // Find available exam for the student
             $availableExam = $this->findAvailableExamForStudent($request->student_id);
-            logger($availableExam);
             if (! $availableExam) {
                 return response()->json([
                     'status' => false,
@@ -62,11 +61,11 @@ class TeacherExamController extends Controller
                 'status' => true,
                 'message' => 'تم السماح للطالب بدخول الامتحان',
                 'data' => [
-                    'session_id' => $session->id,
-                    'student_name' => $session->student->user->name,
-                    'exam_title' => $session->exam->title,
+                    'session_id'    => $session->id,
+                    'student_name'  => $session->student->user->name,
+                    'exam_title'    => $session->exam->title,
                     'exam_duration' => $session->exam->duration_minutes,
-                    'created_at' => $session->created_at
+                    'created_at'    => $session->created_at
                 ]
             ]);
         } catch (ExamAccessDeniedException $e) {

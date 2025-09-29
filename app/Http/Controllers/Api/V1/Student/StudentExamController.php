@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\V1\Student;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SubmitExamRequest;
 use App\Core\Services\{StudentExamService, ExamService, ExamSessionService};
+use App\Http\Resources\ExamResultResource;
 use App\Modules\ExamManagement\Models\ExamSession;
 use Illuminate\Http\{JsonResponse, Request};
 use Illuminate\Support\Facades\{Auth, Cache};
@@ -177,5 +178,17 @@ class StudentExamController extends Controller
         ];
 
         Cache::put($cacheKey, $cacheData, $session->exam->duration_minutes * 60 + 300);
+    }
+
+    public function myExamResults()
+    {
+        $student = Auth::user()->student;
+
+        $results = $student->examResults()
+            ->with(['exam.subject'])
+            ->whereHas('exam', fn($q) => $q->where('academic_year', $student->academic_year))
+            ->get();
+
+        return $this->successResponse($results);
     }
 }

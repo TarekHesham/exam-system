@@ -57,4 +57,14 @@ class Student extends BaseModel
     {
         return $this->hasMany(Appeal::class);
     }
+
+    // Scope
+    public function examsWithResultsThisYear()
+    {
+        return $this->examResults()
+            ->with('exam.subject')
+            ->whereHas('exam', function ($query) {
+                $query->where('academic_year', $this->academic_year);
+            });
+    }
 }

@@ -48,18 +48,11 @@ class UserResource extends JsonResource
                 $data += [
                     'teacher_id'             => $this->teacher?->id,
                     'teacher_code'           => $this->teacher?->teacher_code,
-                    'subject_id' => $this->teacher?->subject_id,
+                    'subject_id'             => $this->teacher?->subject_id,
                     'teacher_type'           => $this->teacher?->teacher_type,
                     'can_create_exams'       => $this->teacher?->can_create_exams,
                     'can_correct_essays'     => $this->teacher?->can_correct_essays,
-                    'schools' => $this->teacher?->schoolAssignments?->map(function ($assignment) {
-                        return [
-                            'id'              => $assignment->school->id,
-                            'name'            => $assignment->school->name,
-                            'assignment_type' => $assignment->assignment_type,
-                            'is_active'       => $assignment->is_active,
-                        ];
-                    })->values()->toArray() ?? [],
+                    'schools'                => TeacherSchoolResource::collection($this->teacher?->schoolAssignments),
                 ];
                 break;
 

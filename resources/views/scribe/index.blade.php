@@ -28,7 +28,7 @@
             </style>
 
     <script>
-        var tryItOutBaseUrl = "http://45.241.41.90:8000";
+        var tryItOutBaseUrl = "http://45.245.146.33:8000";
         var useCsrf = Boolean();
         var csrfUrl = "/sanctum/csrf-cookie";
     </script>
@@ -85,11 +85,17 @@ Student can only start exam during exam time window</a>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-student-exam-submit">
                                 <a href="#endpoints-POSTapi-v1-student-exam-submit">Submit complete exam with all answers at once</a>
                             </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-student-exam-results">
+                                <a href="#endpoints-GETapi-v1-student-exam-results">GET api/v1/student/exam/results</a>
+                            </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-teacher-scan-qr-create-session">
                                 <a href="#endpoints-POSTapi-v1-teacher-scan-qr-create-session">Teacher scans QR code with student_id and creates session</a>
                             </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-teacher-my-schools">
+                                <a href="#endpoints-GETapi-v1-teacher-my-schools">GET api/v1/teacher/my-schools</a>
+                            </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-admin-students">
-                                <a href="#endpoints-GETapi-v1-admin-students">List students for the school admin's school with filters and pagination.</a>
+                                <a href="#endpoints-GETapi-v1-admin-students">List students with filters and pagination.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-admin-students">
                                 <a href="#endpoints-POSTapi-v1-admin-students">Create student account (School Admin only)</a>
@@ -117,6 +123,27 @@ Student can only start exam during exam time window</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-DELETEapi-v1-admin-teachers--id-">
                                 <a href="#endpoints-DELETEapi-v1-admin-teachers--id-">Delete teacher</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-admin-teachers--teacherId--assign-schools">
+                                <a href="#endpoints-POSTapi-v1-admin-teachers--teacherId--assign-schools">POST api/v1/admin/teachers/{teacherId}/assign-schools</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-admin-teachers-by-school--schoolId-">
+                                <a href="#endpoints-GETapi-v1-admin-teachers-by-school--schoolId-">Get teachers by school</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-admin-teacher-school-assignments">
+                                <a href="#endpoints-GETapi-v1-admin-teacher-school-assignments">GET api/v1/admin/teacher-school-assignments</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-admin-teacher-school-assignments">
+                                <a href="#endpoints-POSTapi-v1-admin-teacher-school-assignments">POST api/v1/admin/teacher-school-assignments</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-admin-teacher-school-assignments--id-">
+                                <a href="#endpoints-GETapi-v1-admin-teacher-school-assignments--id-">GET api/v1/admin/teacher-school-assignments/{id}</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-PUTapi-v1-admin-teacher-school-assignments--id-">
+                                <a href="#endpoints-PUTapi-v1-admin-teacher-school-assignments--id-">PUT api/v1/admin/teacher-school-assignments/{id}</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-DELETEapi-v1-admin-teacher-school-assignments--id-">
+                                <a href="#endpoints-DELETEapi-v1-admin-teacher-school-assignments--id-">DELETE api/v1/admin/teacher-school-assignments/{id}</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-admin-exams">
                                 <a href="#endpoints-GETapi-v1-admin-exams">GET api/v1/admin/exams</a>
@@ -243,7 +270,7 @@ Student can only start exam during exam time window</a>
     </ul>
 
     <ul class="toc-footer" id="last-updated">
-        <li>Last updated: September 27, 2025</li>
+        <li>Last updated: September 29, 2025</li>
     </ul>
 </div>
 
@@ -253,7 +280,7 @@ Student can only start exam during exam time window</a>
         <h1 id="introduction">Introduction</h1>
 <p>This documentation aims to provide all the information you need to work with our API.</p>
 <aside>
-    <strong>Base URL</strong>: <code>http://45.241.41.90:8000</code>
+    <strong>Base URL</strong>: <code>http://45.245.146.33:8000</code>
 </aside>
 <pre><code>This documentation aims to provide all the information you need to work with our API.
 
@@ -283,7 +310,7 @@ You can switch the language used with the tabs at the top right (or from the nav
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.241.41.90:8000/api/v1/auth/login"
+    "http://45.245.146.33:8000/api/v1/auth/login"
 );
 
 const headers = {
@@ -308,7 +335,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.241.41.90:8000/api/v1/auth/login';
+$url = 'http://45.245.146.33:8000/api/v1/auth/login';
 $response = $client-&gt;post(
     $url,
     [
@@ -335,7 +362,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.241.41.90:8000/api/v1/auth/login';
+  final url = 'http://45.245.146.33:8000/api/v1/auth/login';
 
     final queryParams = {};
 
@@ -374,7 +401,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.241.41.90:8000/api/v1/auth/login");
+  final url = Uri.parse("http://45.245.146.33:8000/api/v1/auth/login");
 
     final queryParams = {};
 
@@ -551,7 +578,7 @@ Student can only start exam during exam time window</h2>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.241.41.90:8000/api/v1/student/available-exam"
+    "http://45.245.146.33:8000/api/v1/student/available-exam"
 );
 
 const headers = {
@@ -568,7 +595,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.241.41.90:8000/api/v1/student/available-exam';
+$url = 'http://45.245.146.33:8000/api/v1/student/available-exam';
 $response = $client-&gt;get(
     $url,
     [
@@ -589,7 +616,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.241.41.90:8000/api/v1/student/available-exam';
+  final url = 'http://45.245.146.33:8000/api/v1/student/available-exam';
 
     final queryParams = {};
 
@@ -623,7 +650,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.241.41.90:8000/api/v1/student/available-exam");
+  final url = Uri.parse("http://45.245.146.33:8000/api/v1/student/available-exam");
 
     final queryParams = {};
 
@@ -765,7 +792,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.241.41.90:8000/api/v1/student/exam/submit"
+    "http://45.245.146.33:8000/api/v1/student/exam/submit"
 );
 
 const headers = {
@@ -810,7 +837,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.241.41.90:8000/api/v1/student/exam/submit';
+$url = 'http://45.245.146.33:8000/api/v1/student/exam/submit';
 $response = $client-&gt;post(
     $url,
     [
@@ -857,7 +884,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.241.41.90:8000/api/v1/student/exam/submit';
+  final url = 'http://45.245.146.33:8000/api/v1/student/exam/submit';
 
     final queryParams = {};
 
@@ -916,7 +943,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.241.41.90:8000/api/v1/student/exam/submit");
+  final url = Uri.parse("http://45.245.146.33:8000/api/v1/student/exam/submit");
 
     final queryParams = {};
 
@@ -1131,6 +1158,220 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </div>
         </form>
 
+                    <h2 id="endpoints-GETapi-v1-student-exam-results">GET api/v1/student/exam/results</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-student-exam-results">
+<blockquote>Example request:</blockquote>
+
+
+<div class="JS-example">
+    <pre><code class="language-JS">const url = new URL(
+    "http://45.245.146.33:8000/api/v1/student/exam/results"
+);
+
+const headers = {
+    "Authorization": "Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="Laravel-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://45.245.146.33:8000/api/v1/student/exam/results';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="DartPad-example">
+    <pre><code class="language-ts">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+  final url = 'http://45.245.146.33:8000/api/v1/student/exam/results';
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url,
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'GET',
+        headers: headers,
+      ),
+    );
+    print(response.data);
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+
+<div class="Dio-example">
+    <pre><code class="language-javascript">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+
+  final url = Uri.parse("http://45.245.146.33:8000/api/v1/student/exam/results");
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url.toString(),
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'GET',
+        headers: headers,
+      ),
+    );
+    print('Response: ${response.data}');
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-student-exam-results">
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: *
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-student-exam-results" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-student-exam-results"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-student-exam-results"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-student-exam-results" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-student-exam-results">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-student-exam-results" data-method="GET"
+      data-path="api/v1/student/exam/results"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-student-exam-results', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-student-exam-results"
+                    onclick="tryItOut('GETapi-v1-student-exam-results');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-student-exam-results"
+                    onclick="cancelTryOut('GETapi-v1-student-exam-results');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-student-exam-results"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/student/exam/results</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-v1-student-exam-results"
+               value="Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-student-exam-results"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-student-exam-results"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
                     <h2 id="endpoints-POSTapi-v1-teacher-scan-qr-create-session">Teacher scans QR code with student_id and creates session</h2>
 
 <p>
@@ -1145,7 +1386,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.241.41.90:8000/api/v1/teacher/scan-qr-create-session"
+    "http://45.245.146.33:8000/api/v1/teacher/scan-qr-create-session"
 );
 
 const headers = {
@@ -1168,7 +1409,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.241.41.90:8000/api/v1/teacher/scan-qr-create-session';
+$url = 'http://45.245.146.33:8000/api/v1/teacher/scan-qr-create-session';
 $response = $client-&gt;post(
     $url,
     [
@@ -1193,7 +1434,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.241.41.90:8000/api/v1/teacher/scan-qr-create-session';
+  final url = 'http://45.245.146.33:8000/api/v1/teacher/scan-qr-create-session';
 
     final queryParams = {};
 
@@ -1230,7 +1471,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.241.41.90:8000/api/v1/teacher/scan-qr-create-session");
+  final url = Uri.parse("http://45.245.146.33:8000/api/v1/teacher/scan-qr-create-session");
 
     final queryParams = {};
 
@@ -1390,7 +1631,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </div>
         </form>
 
-                    <h2 id="endpoints-GETapi-v1-admin-students">List students for the school admin&#039;s school with filters and pagination.</h2>
+                    <h2 id="endpoints-GETapi-v1-teacher-my-schools">GET api/v1/teacher/my-schools</h2>
 
 <p>
 <small class="badge badge-darkred">requires authentication</small>
@@ -1398,13 +1639,13 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 
 
-<span id="example-requests-GETapi-v1-admin-students">
+<span id="example-requests-GETapi-v1-teacher-my-schools">
 <blockquote>Example request:</blockquote>
 
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.241.41.90:8000/api/v1/admin/students"
+    "http://45.245.146.33:8000/api/v1/teacher/my-schools"
 );
 
 const headers = {
@@ -1421,7 +1662,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.241.41.90:8000/api/v1/admin/students';
+$url = 'http://45.245.146.33:8000/api/v1/teacher/my-schools';
 $response = $client-&gt;get(
     $url,
     [
@@ -1442,7 +1683,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.241.41.90:8000/api/v1/admin/students';
+  final url = 'http://45.245.146.33:8000/api/v1/teacher/my-schools';
 
     final queryParams = {};
 
@@ -1476,7 +1717,224 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/students");
+  final url = Uri.parse("http://45.245.146.33:8000/api/v1/teacher/my-schools");
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url.toString(),
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'GET',
+        headers: headers,
+      ),
+    );
+    print('Response: ${response.data}');
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-teacher-my-schools">
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: *
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-teacher-my-schools" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-teacher-my-schools"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-teacher-my-schools"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-teacher-my-schools" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-teacher-my-schools">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-teacher-my-schools" data-method="GET"
+      data-path="api/v1/teacher/my-schools"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-teacher-my-schools', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-teacher-my-schools"
+                    onclick="tryItOut('GETapi-v1-teacher-my-schools');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-teacher-my-schools"
+                    onclick="cancelTryOut('GETapi-v1-teacher-my-schools');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-teacher-my-schools"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/teacher/my-schools</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-v1-teacher-my-schools"
+               value="Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-teacher-my-schools"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-teacher-my-schools"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                    <h2 id="endpoints-GETapi-v1-admin-students">List students with filters and pagination.</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<ul>
+<li>School Admin: only students in their school</li>
+<li>Ministry Admin: all students</li>
+</ul>
+
+<span id="example-requests-GETapi-v1-admin-students">
+<blockquote>Example request:</blockquote>
+
+
+<div class="JS-example">
+    <pre><code class="language-JS">const url = new URL(
+    "http://45.245.146.33:8000/api/v1/admin/students"
+);
+
+const headers = {
+    "Authorization": "Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="Laravel-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://45.245.146.33:8000/api/v1/admin/students';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="DartPad-example">
+    <pre><code class="language-ts">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+  final url = 'http://45.245.146.33:8000/api/v1/admin/students';
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url,
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'GET',
+        headers: headers,
+      ),
+    );
+    print(response.data);
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+
+<div class="Dio-example">
+    <pre><code class="language-javascript">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+
+  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/students");
 
     final queryParams = {};
 
@@ -1618,7 +2076,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.241.41.90:8000/api/v1/admin/students"
+    "http://45.245.146.33:8000/api/v1/admin/students"
 );
 
 const headers = {
@@ -1650,7 +2108,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.241.41.90:8000/api/v1/admin/students';
+$url = 'http://45.245.146.33:8000/api/v1/admin/students';
 $response = $client-&gt;post(
     $url,
     [
@@ -1684,7 +2142,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.241.41.90:8000/api/v1/admin/students';
+  final url = 'http://45.245.146.33:8000/api/v1/admin/students';
 
     final queryParams = {};
 
@@ -1730,7 +2188,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/students");
+  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/students");
 
     final queryParams = {};
 
@@ -1996,7 +2454,7 @@ Must be one of:
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.241.41.90:8000/api/v1/admin/students/architecto"
+    "http://45.245.146.33:8000/api/v1/admin/students/architecto"
 );
 
 const headers = {
@@ -2013,7 +2471,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.241.41.90:8000/api/v1/admin/students/architecto';
+$url = 'http://45.245.146.33:8000/api/v1/admin/students/architecto';
 $response = $client-&gt;get(
     $url,
     [
@@ -2034,7 +2492,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.241.41.90:8000/api/v1/admin/students/architecto';
+  final url = 'http://45.245.146.33:8000/api/v1/admin/students/architecto';
 
     final queryParams = {};
 
@@ -2068,7 +2526,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/students/architecto");
+  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/students/architecto");
 
     final queryParams = {};
 
@@ -2222,7 +2680,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.241.41.90:8000/api/v1/admin/students/architecto"
+    "http://45.245.146.33:8000/api/v1/admin/students/architecto"
 );
 
 const headers = {
@@ -2257,7 +2715,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.241.41.90:8000/api/v1/admin/students/architecto';
+$url = 'http://45.245.146.33:8000/api/v1/admin/students/architecto';
 $response = $client-&gt;put(
     $url,
     [
@@ -2294,7 +2752,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.241.41.90:8000/api/v1/admin/students/architecto';
+  final url = 'http://45.245.146.33:8000/api/v1/admin/students/architecto';
 
     final queryParams = {};
 
@@ -2343,7 +2801,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/students/architecto");
+  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/students/architecto");
 
     final queryParams = {};
 
@@ -2671,7 +3129,7 @@ Must be one of:
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.241.41.90:8000/api/v1/admin/students/architecto"
+    "http://45.245.146.33:8000/api/v1/admin/students/architecto"
 );
 
 const headers = {
@@ -2688,7 +3146,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.241.41.90:8000/api/v1/admin/students/architecto';
+$url = 'http://45.245.146.33:8000/api/v1/admin/students/architecto';
 $response = $client-&gt;delete(
     $url,
     [
@@ -2709,7 +3167,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.241.41.90:8000/api/v1/admin/students/architecto';
+  final url = 'http://45.245.146.33:8000/api/v1/admin/students/architecto';
 
     final queryParams = {};
 
@@ -2743,7 +3201,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/students/architecto");
+  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/students/architecto");
 
     final queryParams = {};
 
@@ -2881,7 +3339,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.241.41.90:8000/api/v1/admin/teachers"
+    "http://45.245.146.33:8000/api/v1/admin/teachers"
 );
 
 const headers = {
@@ -2898,7 +3356,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.241.41.90:8000/api/v1/admin/teachers';
+$url = 'http://45.245.146.33:8000/api/v1/admin/teachers';
 $response = $client-&gt;get(
     $url,
     [
@@ -2919,7 +3377,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.241.41.90:8000/api/v1/admin/teachers';
+  final url = 'http://45.245.146.33:8000/api/v1/admin/teachers';
 
     final queryParams = {};
 
@@ -2953,7 +3411,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/teachers");
+  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/teachers");
 
     final queryParams = {};
 
@@ -3095,7 +3553,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.241.41.90:8000/api/v1/admin/teachers"
+    "http://45.245.146.33:8000/api/v1/admin/teachers"
 );
 
 const headers = {
@@ -3127,7 +3585,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.241.41.90:8000/api/v1/admin/teachers';
+$url = 'http://45.245.146.33:8000/api/v1/admin/teachers';
 $response = $client-&gt;post(
     $url,
     [
@@ -3161,7 +3619,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.241.41.90:8000/api/v1/admin/teachers';
+  final url = 'http://45.245.146.33:8000/api/v1/admin/teachers';
 
     final queryParams = {};
 
@@ -3207,7 +3665,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/teachers");
+  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/teachers");
 
     final queryParams = {};
 
@@ -3514,7 +3972,7 @@ Must be one of:
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.241.41.90:8000/api/v1/admin/teachers/architecto"
+    "http://45.245.146.33:8000/api/v1/admin/teachers/architecto"
 );
 
 const headers = {
@@ -3531,7 +3989,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.241.41.90:8000/api/v1/admin/teachers/architecto';
+$url = 'http://45.245.146.33:8000/api/v1/admin/teachers/architecto';
 $response = $client-&gt;get(
     $url,
     [
@@ -3552,7 +4010,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.241.41.90:8000/api/v1/admin/teachers/architecto';
+  final url = 'http://45.245.146.33:8000/api/v1/admin/teachers/architecto';
 
     final queryParams = {};
 
@@ -3586,7 +4044,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/teachers/architecto");
+  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/teachers/architecto");
 
     final queryParams = {};
 
@@ -3740,7 +4198,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.241.41.90:8000/api/v1/admin/teachers/architecto"
+    "http://45.245.146.33:8000/api/v1/admin/teachers/architecto"
 );
 
 const headers = {
@@ -3775,7 +4233,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.241.41.90:8000/api/v1/admin/teachers/architecto';
+$url = 'http://45.245.146.33:8000/api/v1/admin/teachers/architecto';
 $response = $client-&gt;put(
     $url,
     [
@@ -3812,7 +4270,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.241.41.90:8000/api/v1/admin/teachers/architecto';
+  final url = 'http://45.245.146.33:8000/api/v1/admin/teachers/architecto';
 
     final queryParams = {};
 
@@ -3861,7 +4319,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/teachers/architecto");
+  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/teachers/architecto");
 
     final queryParams = {};
 
@@ -4187,7 +4645,7 @@ Must be one of:
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.241.41.90:8000/api/v1/admin/teachers/architecto"
+    "http://45.245.146.33:8000/api/v1/admin/teachers/architecto"
 );
 
 const headers = {
@@ -4204,7 +4662,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.241.41.90:8000/api/v1/admin/teachers/architecto';
+$url = 'http://45.245.146.33:8000/api/v1/admin/teachers/architecto';
 $response = $client-&gt;delete(
     $url,
     [
@@ -4225,7 +4683,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.241.41.90:8000/api/v1/admin/teachers/architecto';
+  final url = 'http://45.245.146.33:8000/api/v1/admin/teachers/architecto';
 
     final queryParams = {};
 
@@ -4259,7 +4717,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/teachers/architecto");
+  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/teachers/architecto");
 
     final queryParams = {};
 
@@ -4383,7 +4841,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                     </form>
 
-                    <h2 id="endpoints-GETapi-v1-admin-exams">GET api/v1/admin/exams</h2>
+                    <h2 id="endpoints-POSTapi-v1-admin-teachers--teacherId--assign-schools">POST api/v1/admin/teachers/{teacherId}/assign-schools</h2>
 
 <p>
 <small class="badge badge-darkred">requires authentication</small>
@@ -4391,13 +4849,274 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 
 
-<span id="example-requests-GETapi-v1-admin-exams">
+<span id="example-requests-POSTapi-v1-admin-teachers--teacherId--assign-schools">
 <blockquote>Example request:</blockquote>
 
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.241.41.90:8000/api/v1/admin/exams"
+    "http://45.245.146.33:8000/api/v1/admin/teachers/architecto/assign-schools"
+);
+
+const headers = {
+    "Authorization": "Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "school_ids": [
+        1
+    ],
+    "assignment_type": "supervision"
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="Laravel-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://45.245.146.33:8000/api/v1/admin/teachers/architecto/assign-schools';
+$response = $client-&gt;post(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+        'json' =&gt; [
+            'school_ids' =&gt; [
+                1,
+            ],
+            'assignment_type' =&gt; 'supervision',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="DartPad-example">
+    <pre><code class="language-ts">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+  final url = 'http://45.245.146.33:8000/api/v1/admin/teachers/architecto/assign-schools';
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = [
+    'school_ids' =&gt; [
+        1,
+    ],
+    'assignment_type' =&gt; 'supervision',
+];
+
+  try {
+    final response = await dio.request(
+      url,
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'POST',
+        headers: headers,
+      ),
+    );
+    print(response.data);
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+
+<div class="Dio-example">
+    <pre><code class="language-javascript">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+
+  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/teachers/architecto/assign-schools");
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = [
+    'school_ids' =&gt; [
+        1,
+    ],
+    'assignment_type' =&gt; 'supervision',
+];
+
+  try {
+    final response = await dio.request(
+      url.toString(),
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'POST',
+        headers: headers,
+      ),
+    );
+    print('Response: ${response.data}');
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-admin-teachers--teacherId--assign-schools">
+</span>
+<span id="execution-results-POSTapi-v1-admin-teachers--teacherId--assign-schools" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-admin-teachers--teacherId--assign-schools"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-admin-teachers--teacherId--assign-schools"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-admin-teachers--teacherId--assign-schools" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-admin-teachers--teacherId--assign-schools">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-admin-teachers--teacherId--assign-schools" data-method="POST"
+      data-path="api/v1/admin/teachers/{teacherId}/assign-schools"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-admin-teachers--teacherId--assign-schools', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-admin-teachers--teacherId--assign-schools"
+                    onclick="tryItOut('POSTapi-v1-admin-teachers--teacherId--assign-schools');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-admin-teachers--teacherId--assign-schools"
+                    onclick="cancelTryOut('POSTapi-v1-admin-teachers--teacherId--assign-schools');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-admin-teachers--teacherId--assign-schools"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/admin/teachers/{teacherId}/assign-schools</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-v1-admin-teachers--teacherId--assign-schools"
+               value="Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-v1-admin-teachers--teacherId--assign-schools"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-v1-admin-teachers--teacherId--assign-schools"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>teacherId</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="teacherId"                data-endpoint="POSTapi-v1-admin-teachers--teacherId--assign-schools"
+               value="architecto"
+               data-component="url">
+    <br>
+<p>Example: <code>architecto</code></p>
+            </div>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>school_ids</code></b>&nbsp;&nbsp;
+<small>string[]</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="school_ids[0]"                data-endpoint="POSTapi-v1-admin-teachers--teacherId--assign-schools"
+               data-component="body">
+        <input type="text" style="display: none"
+               name="school_ids[1]"                data-endpoint="POSTapi-v1-admin-teachers--teacherId--assign-schools"
+               data-component="body">
+    <br>
+<p>Individual school ID where the teacher will be assigned. The <code>id</code> of an existing record in the schools table.</p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>assignment_type</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="assignment_type"                data-endpoint="POSTapi-v1-admin-teachers--teacherId--assign-schools"
+               value="supervision"
+               data-component="body">
+    <br>
+<p>Type of assignment for the teacher across the selected schools. Defaults to &quot;teaching&quot; if not provided. Example: <code>supervision</code></p>
+Must be one of:
+<ul style="list-style-type: square;"><li><code>teaching</code></li> <li><code>supervision</code></li> <li><code>correction</code></li></ul>
+        </div>
+        </form>
+
+                    <h2 id="endpoints-GETapi-v1-admin-teachers-by-school--schoolId-">Get teachers by school</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-admin-teachers-by-school--schoolId-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="JS-example">
+    <pre><code class="language-JS">const url = new URL(
+    "http://45.245.146.33:8000/api/v1/admin/teachers/by-school/architecto"
 );
 
 const headers = {
@@ -4414,7 +5133,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.241.41.90:8000/api/v1/admin/exams';
+$url = 'http://45.245.146.33:8000/api/v1/admin/teachers/by-school/architecto';
 $response = $client-&gt;get(
     $url,
     [
@@ -4435,7 +5154,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.241.41.90:8000/api/v1/admin/exams';
+  final url = 'http://45.245.146.33:8000/api/v1/admin/teachers/by-school/architecto';
 
     final queryParams = {};
 
@@ -4469,7 +5188,1457 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/exams");
+  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/teachers/by-school/architecto");
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url.toString(),
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'GET',
+        headers: headers,
+      ),
+    );
+    print('Response: ${response.data}');
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-admin-teachers-by-school--schoolId-">
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: *
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-admin-teachers-by-school--schoolId-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-admin-teachers-by-school--schoolId-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-admin-teachers-by-school--schoolId-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-admin-teachers-by-school--schoolId-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-admin-teachers-by-school--schoolId-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-admin-teachers-by-school--schoolId-" data-method="GET"
+      data-path="api/v1/admin/teachers/by-school/{schoolId}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-admin-teachers-by-school--schoolId-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-admin-teachers-by-school--schoolId-"
+                    onclick="tryItOut('GETapi-v1-admin-teachers-by-school--schoolId-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-admin-teachers-by-school--schoolId-"
+                    onclick="cancelTryOut('GETapi-v1-admin-teachers-by-school--schoolId-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-admin-teachers-by-school--schoolId-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/admin/teachers/by-school/{schoolId}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-v1-admin-teachers-by-school--schoolId-"
+               value="Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-admin-teachers-by-school--schoolId-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-admin-teachers-by-school--schoolId-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>schoolId</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="schoolId"                data-endpoint="GETapi-v1-admin-teachers-by-school--schoolId-"
+               value="architecto"
+               data-component="url">
+    <br>
+<p>Example: <code>architecto</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="endpoints-GETapi-v1-admin-teacher-school-assignments">GET api/v1/admin/teacher-school-assignments</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-admin-teacher-school-assignments">
+<blockquote>Example request:</blockquote>
+
+
+<div class="JS-example">
+    <pre><code class="language-JS">const url = new URL(
+    "http://45.245.146.33:8000/api/v1/admin/teacher-school-assignments"
+);
+
+const headers = {
+    "Authorization": "Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="Laravel-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://45.245.146.33:8000/api/v1/admin/teacher-school-assignments';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="DartPad-example">
+    <pre><code class="language-ts">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+  final url = 'http://45.245.146.33:8000/api/v1/admin/teacher-school-assignments';
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url,
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'GET',
+        headers: headers,
+      ),
+    );
+    print(response.data);
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+
+<div class="Dio-example">
+    <pre><code class="language-javascript">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+
+  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/teacher-school-assignments");
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url.toString(),
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'GET',
+        headers: headers,
+      ),
+    );
+    print('Response: ${response.data}');
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-admin-teacher-school-assignments">
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: *
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-admin-teacher-school-assignments" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-admin-teacher-school-assignments"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-admin-teacher-school-assignments"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-admin-teacher-school-assignments" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-admin-teacher-school-assignments">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-admin-teacher-school-assignments" data-method="GET"
+      data-path="api/v1/admin/teacher-school-assignments"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-admin-teacher-school-assignments', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-admin-teacher-school-assignments"
+                    onclick="tryItOut('GETapi-v1-admin-teacher-school-assignments');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-admin-teacher-school-assignments"
+                    onclick="cancelTryOut('GETapi-v1-admin-teacher-school-assignments');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-admin-teacher-school-assignments"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/admin/teacher-school-assignments</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-v1-admin-teacher-school-assignments"
+               value="Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-admin-teacher-school-assignments"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-admin-teacher-school-assignments"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                    <h2 id="endpoints-POSTapi-v1-admin-teacher-school-assignments">POST api/v1/admin/teacher-school-assignments</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-admin-teacher-school-assignments">
+<blockquote>Example request:</blockquote>
+
+
+<div class="JS-example">
+    <pre><code class="language-JS">const url = new URL(
+    "http://45.245.146.33:8000/api/v1/admin/teacher-school-assignments"
+);
+
+const headers = {
+    "Authorization": "Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "teacher_id": 5,
+    "school_id": 12,
+    "assignment_type": "teaching",
+    "is_active": false,
+    "assigned_at": "2025-09-29"
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="Laravel-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://45.245.146.33:8000/api/v1/admin/teacher-school-assignments';
+$response = $client-&gt;post(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+        'json' =&gt; [
+            'teacher_id' =&gt; 5,
+            'school_id' =&gt; 12,
+            'assignment_type' =&gt; 'teaching',
+            'is_active' =&gt; false,
+            'assigned_at' =&gt; '2025-09-29',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="DartPad-example">
+    <pre><code class="language-ts">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+  final url = 'http://45.245.146.33:8000/api/v1/admin/teacher-school-assignments';
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = [
+    'teacher_id' =&gt; 5,
+    'school_id' =&gt; 12,
+    'assignment_type' =&gt; 'teaching',
+    'is_active' =&gt; false,
+    'assigned_at' =&gt; '2025-09-29',
+];
+
+  try {
+    final response = await dio.request(
+      url,
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'POST',
+        headers: headers,
+      ),
+    );
+    print(response.data);
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+
+<div class="Dio-example">
+    <pre><code class="language-javascript">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+
+  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/teacher-school-assignments");
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = [
+    'teacher_id' =&gt; 5,
+    'school_id' =&gt; 12,
+    'assignment_type' =&gt; 'teaching',
+    'is_active' =&gt; false,
+    'assigned_at' =&gt; '2025-09-29',
+];
+
+  try {
+    final response = await dio.request(
+      url.toString(),
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'POST',
+        headers: headers,
+      ),
+    );
+    print('Response: ${response.data}');
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-admin-teacher-school-assignments">
+</span>
+<span id="execution-results-POSTapi-v1-admin-teacher-school-assignments" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-admin-teacher-school-assignments"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-admin-teacher-school-assignments"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-admin-teacher-school-assignments" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-admin-teacher-school-assignments">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-admin-teacher-school-assignments" data-method="POST"
+      data-path="api/v1/admin/teacher-school-assignments"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-admin-teacher-school-assignments', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-admin-teacher-school-assignments"
+                    onclick="tryItOut('POSTapi-v1-admin-teacher-school-assignments');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-admin-teacher-school-assignments"
+                    onclick="cancelTryOut('POSTapi-v1-admin-teacher-school-assignments');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-admin-teacher-school-assignments"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/admin/teacher-school-assignments</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-v1-admin-teacher-school-assignments"
+               value="Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-v1-admin-teacher-school-assignments"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-v1-admin-teacher-school-assignments"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>teacher_id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="teacher_id"                data-endpoint="POSTapi-v1-admin-teacher-school-assignments"
+               value="5"
+               data-component="body">
+    <br>
+<p>ID of the teacher to assign. The <code>id</code> of an existing record in the teachers table. Example: <code>5</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>school_id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="school_id"                data-endpoint="POSTapi-v1-admin-teacher-school-assignments"
+               value="12"
+               data-component="body">
+    <br>
+<p>ID of the school to assign the teacher to. The <code>id</code> of an existing record in the schools table. Example: <code>12</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>assignment_type</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="assignment_type"                data-endpoint="POSTapi-v1-admin-teacher-school-assignments"
+               value="teaching"
+               data-component="body">
+    <br>
+<p>Type of assignment for the teacher in this school. Example: <code>teaching</code></p>
+Must be one of:
+<ul style="list-style-type: square;"><li><code>teaching</code></li> <li><code>supervision</code></li> <li><code>correction</code></li></ul>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>is_active</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+<i>optional</i> &nbsp;
+                <label data-endpoint="POSTapi-v1-admin-teacher-school-assignments" style="display: none">
+            <input type="radio" name="is_active"
+                   value="true"
+                   data-endpoint="POSTapi-v1-admin-teacher-school-assignments"
+                   data-component="body"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="POSTapi-v1-admin-teacher-school-assignments" style="display: none">
+            <input type="radio" name="is_active"
+                   value="false"
+                   data-endpoint="POSTapi-v1-admin-teacher-school-assignments"
+                   data-component="body"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>Indicates if this assignment is currently active. Example: <code>false</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>assigned_at</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="assigned_at"                data-endpoint="POSTapi-v1-admin-teacher-school-assignments"
+               value="2025-09-29"
+               data-component="body">
+    <br>
+<p>Date when the teacher was assigned to the school (optional). Must be a valid date. Example: <code>2025-09-29</code></p>
+        </div>
+        </form>
+
+                    <h2 id="endpoints-GETapi-v1-admin-teacher-school-assignments--id-">GET api/v1/admin/teacher-school-assignments/{id}</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-admin-teacher-school-assignments--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="JS-example">
+    <pre><code class="language-JS">const url = new URL(
+    "http://45.245.146.33:8000/api/v1/admin/teacher-school-assignments/architecto"
+);
+
+const headers = {
+    "Authorization": "Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="Laravel-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://45.245.146.33:8000/api/v1/admin/teacher-school-assignments/architecto';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="DartPad-example">
+    <pre><code class="language-ts">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+  final url = 'http://45.245.146.33:8000/api/v1/admin/teacher-school-assignments/architecto';
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url,
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'GET',
+        headers: headers,
+      ),
+    );
+    print(response.data);
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+
+<div class="Dio-example">
+    <pre><code class="language-javascript">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+
+  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/teacher-school-assignments/architecto");
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url.toString(),
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'GET',
+        headers: headers,
+      ),
+    );
+    print('Response: ${response.data}');
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-admin-teacher-school-assignments--id-">
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: *
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-admin-teacher-school-assignments--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-admin-teacher-school-assignments--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-admin-teacher-school-assignments--id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-admin-teacher-school-assignments--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-admin-teacher-school-assignments--id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-admin-teacher-school-assignments--id-" data-method="GET"
+      data-path="api/v1/admin/teacher-school-assignments/{id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-admin-teacher-school-assignments--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-admin-teacher-school-assignments--id-"
+                    onclick="tryItOut('GETapi-v1-admin-teacher-school-assignments--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-admin-teacher-school-assignments--id-"
+                    onclick="cancelTryOut('GETapi-v1-admin-teacher-school-assignments--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-admin-teacher-school-assignments--id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/admin/teacher-school-assignments/{id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-v1-admin-teacher-school-assignments--id-"
+               value="Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-admin-teacher-school-assignments--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-admin-teacher-school-assignments--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="id"                data-endpoint="GETapi-v1-admin-teacher-school-assignments--id-"
+               value="architecto"
+               data-component="url">
+    <br>
+<p>The ID of the teacher school assignment. Example: <code>architecto</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="endpoints-PUTapi-v1-admin-teacher-school-assignments--id-">PUT api/v1/admin/teacher-school-assignments/{id}</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-PUTapi-v1-admin-teacher-school-assignments--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="JS-example">
+    <pre><code class="language-JS">const url = new URL(
+    "http://45.245.146.33:8000/api/v1/admin/teacher-school-assignments/architecto"
+);
+
+const headers = {
+    "Authorization": "Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "assignment_type": "supervision",
+    "is_active": false,
+    "assigned_at": "2025-10-01"
+};
+
+fetch(url, {
+    method: "PUT",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="Laravel-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://45.245.146.33:8000/api/v1/admin/teacher-school-assignments/architecto';
+$response = $client-&gt;put(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+        'json' =&gt; [
+            'assignment_type' =&gt; 'supervision',
+            'is_active' =&gt; false,
+            'assigned_at' =&gt; '2025-10-01',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="DartPad-example">
+    <pre><code class="language-ts">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+  final url = 'http://45.245.146.33:8000/api/v1/admin/teacher-school-assignments/architecto';
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = [
+    'assignment_type' =&gt; 'supervision',
+    'is_active' =&gt; false,
+    'assigned_at' =&gt; '2025-10-01',
+];
+
+  try {
+    final response = await dio.request(
+      url,
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'PUT',
+        headers: headers,
+      ),
+    );
+    print(response.data);
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+
+<div class="Dio-example">
+    <pre><code class="language-javascript">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+
+  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/teacher-school-assignments/architecto");
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = [
+    'assignment_type' =&gt; 'supervision',
+    'is_active' =&gt; false,
+    'assigned_at' =&gt; '2025-10-01',
+];
+
+  try {
+    final response = await dio.request(
+      url.toString(),
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'PUT',
+        headers: headers,
+      ),
+    );
+    print('Response: ${response.data}');
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+</span>
+
+<span id="example-responses-PUTapi-v1-admin-teacher-school-assignments--id-">
+</span>
+<span id="execution-results-PUTapi-v1-admin-teacher-school-assignments--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-PUTapi-v1-admin-teacher-school-assignments--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-PUTapi-v1-admin-teacher-school-assignments--id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-PUTapi-v1-admin-teacher-school-assignments--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-PUTapi-v1-admin-teacher-school-assignments--id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-PUTapi-v1-admin-teacher-school-assignments--id-" data-method="PUT"
+      data-path="api/v1/admin/teacher-school-assignments/{id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('PUTapi-v1-admin-teacher-school-assignments--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-PUTapi-v1-admin-teacher-school-assignments--id-"
+                    onclick="tryItOut('PUTapi-v1-admin-teacher-school-assignments--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-PUTapi-v1-admin-teacher-school-assignments--id-"
+                    onclick="cancelTryOut('PUTapi-v1-admin-teacher-school-assignments--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-PUTapi-v1-admin-teacher-school-assignments--id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-darkblue">PUT</small>
+            <b><code>api/v1/admin/teacher-school-assignments/{id}</code></b>
+        </p>
+            <p>
+            <small class="badge badge-purple">PATCH</small>
+            <b><code>api/v1/admin/teacher-school-assignments/{id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="PUTapi-v1-admin-teacher-school-assignments--id-"
+               value="Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="PUTapi-v1-admin-teacher-school-assignments--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="PUTapi-v1-admin-teacher-school-assignments--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="id"                data-endpoint="PUTapi-v1-admin-teacher-school-assignments--id-"
+               value="architecto"
+               data-component="url">
+    <br>
+<p>The ID of the teacher school assignment. Example: <code>architecto</code></p>
+            </div>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>assignment_type</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="assignment_type"                data-endpoint="PUTapi-v1-admin-teacher-school-assignments--id-"
+               value="supervision"
+               data-component="body">
+    <br>
+<p>Updated type of assignment for the teacher. Example: <code>supervision</code></p>
+Must be one of:
+<ul style="list-style-type: square;"><li><code>teaching</code></li> <li><code>supervision</code></li> <li><code>correction</code></li></ul>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>is_active</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+<i>optional</i> &nbsp;
+                <label data-endpoint="PUTapi-v1-admin-teacher-school-assignments--id-" style="display: none">
+            <input type="radio" name="is_active"
+                   value="true"
+                   data-endpoint="PUTapi-v1-admin-teacher-school-assignments--id-"
+                   data-component="body"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="PUTapi-v1-admin-teacher-school-assignments--id-" style="display: none">
+            <input type="radio" name="is_active"
+                   value="false"
+                   data-endpoint="PUTapi-v1-admin-teacher-school-assignments--id-"
+                   data-component="body"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>Whether the assignment is active or not. Example: <code>false</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>assigned_at</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="assigned_at"                data-endpoint="PUTapi-v1-admin-teacher-school-assignments--id-"
+               value="2025-10-01"
+               data-component="body">
+    <br>
+<p>Date when the teacher was (re)assigned (optional). Must be a valid date. Example: <code>2025-10-01</code></p>
+        </div>
+        </form>
+
+                    <h2 id="endpoints-DELETEapi-v1-admin-teacher-school-assignments--id-">DELETE api/v1/admin/teacher-school-assignments/{id}</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-DELETEapi-v1-admin-teacher-school-assignments--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="JS-example">
+    <pre><code class="language-JS">const url = new URL(
+    "http://45.245.146.33:8000/api/v1/admin/teacher-school-assignments/architecto"
+);
+
+const headers = {
+    "Authorization": "Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="Laravel-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://45.245.146.33:8000/api/v1/admin/teacher-school-assignments/architecto';
+$response = $client-&gt;delete(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="DartPad-example">
+    <pre><code class="language-ts">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+  final url = 'http://45.245.146.33:8000/api/v1/admin/teacher-school-assignments/architecto';
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url,
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'DELETE',
+        headers: headers,
+      ),
+    );
+    print(response.data);
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+
+<div class="Dio-example">
+    <pre><code class="language-javascript">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+
+  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/teacher-school-assignments/architecto");
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url.toString(),
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'DELETE',
+        headers: headers,
+      ),
+    );
+    print('Response: ${response.data}');
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+</span>
+
+<span id="example-responses-DELETEapi-v1-admin-teacher-school-assignments--id-">
+</span>
+<span id="execution-results-DELETEapi-v1-admin-teacher-school-assignments--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-DELETEapi-v1-admin-teacher-school-assignments--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-DELETEapi-v1-admin-teacher-school-assignments--id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-DELETEapi-v1-admin-teacher-school-assignments--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-DELETEapi-v1-admin-teacher-school-assignments--id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-DELETEapi-v1-admin-teacher-school-assignments--id-" data-method="DELETE"
+      data-path="api/v1/admin/teacher-school-assignments/{id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('DELETEapi-v1-admin-teacher-school-assignments--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-DELETEapi-v1-admin-teacher-school-assignments--id-"
+                    onclick="tryItOut('DELETEapi-v1-admin-teacher-school-assignments--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-DELETEapi-v1-admin-teacher-school-assignments--id-"
+                    onclick="cancelTryOut('DELETEapi-v1-admin-teacher-school-assignments--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-DELETEapi-v1-admin-teacher-school-assignments--id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-red">DELETE</small>
+            <b><code>api/v1/admin/teacher-school-assignments/{id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="DELETEapi-v1-admin-teacher-school-assignments--id-"
+               value="Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="DELETEapi-v1-admin-teacher-school-assignments--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="DELETEapi-v1-admin-teacher-school-assignments--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="id"                data-endpoint="DELETEapi-v1-admin-teacher-school-assignments--id-"
+               value="architecto"
+               data-component="url">
+    <br>
+<p>The ID of the teacher school assignment. Example: <code>architecto</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="endpoints-GETapi-v1-admin-exams">GET api/v1/admin/exams</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-admin-exams">
+<blockquote>Example request:</blockquote>
+
+
+<div class="JS-example">
+    <pre><code class="language-JS">const url = new URL(
+    "http://45.245.146.33:8000/api/v1/admin/exams"
+);
+
+const headers = {
+    "Authorization": "Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="Laravel-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://45.245.146.33:8000/api/v1/admin/exams';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="DartPad-example">
+    <pre><code class="language-ts">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+  final url = 'http://45.245.146.33:8000/api/v1/admin/exams';
+
+    final queryParams = {};
+
+  final headers = {
+        'Authorization': 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d',        'Content-Type': 'application/json',        'Accept': 'application/json'      };
+
+  dynamic data;
+    data = null;
+
+  try {
+    final response = await dio.request(
+      url,
+      data: data,
+      queryParameters: queryParams,
+      options: Options(
+        method: 'GET',
+        headers: headers,
+      ),
+    );
+    print(response.data);
+  } catch (e) {
+    print('Request failed: $e');
+  }
+}</code></pre></div>
+
+
+<div class="Dio-example">
+    <pre><code class="language-javascript">import 'dart:convert';
+import 'package:dio/dio.dart';
+
+void main() async {
+  final dio = Dio();
+
+  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/exams");
 
     final queryParams = {};
 
@@ -4611,7 +6780,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.241.41.90:8000/api/v1/admin/exams"
+    "http://45.245.146.33:8000/api/v1/admin/exams"
 );
 
 const headers = {
@@ -4643,7 +6812,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.241.41.90:8000/api/v1/admin/exams';
+$url = 'http://45.245.146.33:8000/api/v1/admin/exams';
 $response = $client-&gt;post(
     $url,
     [
@@ -4677,7 +6846,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.241.41.90:8000/api/v1/admin/exams';
+  final url = 'http://45.245.146.33:8000/api/v1/admin/exams';
 
     final queryParams = {};
 
@@ -4723,7 +6892,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/exams");
+  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/exams");
 
     final queryParams = {};
 
@@ -4997,7 +7166,7 @@ Must be one of:
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.241.41.90:8000/api/v1/admin/exams/architecto"
+    "http://45.245.146.33:8000/api/v1/admin/exams/architecto"
 );
 
 const headers = {
@@ -5014,7 +7183,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.241.41.90:8000/api/v1/admin/exams/architecto';
+$url = 'http://45.245.146.33:8000/api/v1/admin/exams/architecto';
 $response = $client-&gt;get(
     $url,
     [
@@ -5035,7 +7204,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.241.41.90:8000/api/v1/admin/exams/architecto';
+  final url = 'http://45.245.146.33:8000/api/v1/admin/exams/architecto';
 
     final queryParams = {};
 
@@ -5069,7 +7238,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/exams/architecto");
+  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/exams/architecto");
 
     final queryParams = {};
 
@@ -5223,7 +7392,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.241.41.90:8000/api/v1/admin/exams/1"
+    "http://45.245.146.33:8000/api/v1/admin/exams/1"
 );
 
 const headers = {
@@ -5254,7 +7423,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.241.41.90:8000/api/v1/admin/exams/1';
+$url = 'http://45.245.146.33:8000/api/v1/admin/exams/1';
 $response = $client-&gt;put(
     $url,
     [
@@ -5287,7 +7456,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.241.41.90:8000/api/v1/admin/exams/1';
+  final url = 'http://45.245.146.33:8000/api/v1/admin/exams/1';
 
     final queryParams = {};
 
@@ -5332,7 +7501,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/exams/1");
+  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/exams/1");
 
     final queryParams = {};
 
@@ -5622,7 +7791,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.241.41.90:8000/api/v1/admin/exams/architecto"
+    "http://45.245.146.33:8000/api/v1/admin/exams/architecto"
 );
 
 const headers = {
@@ -5639,7 +7808,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.241.41.90:8000/api/v1/admin/exams/architecto';
+$url = 'http://45.245.146.33:8000/api/v1/admin/exams/architecto';
 $response = $client-&gt;delete(
     $url,
     [
@@ -5660,7 +7829,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.241.41.90:8000/api/v1/admin/exams/architecto';
+  final url = 'http://45.245.146.33:8000/api/v1/admin/exams/architecto';
 
     final queryParams = {};
 
@@ -5694,7 +7863,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/exams/architecto");
+  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/exams/architecto");
 
     final queryParams = {};
 
@@ -5832,7 +8001,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.241.41.90:8000/api/v1/admin/exams/architecto/duplicate"
+    "http://45.245.146.33:8000/api/v1/admin/exams/architecto/duplicate"
 );
 
 const headers = {
@@ -5849,7 +8018,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.241.41.90:8000/api/v1/admin/exams/architecto/duplicate';
+$url = 'http://45.245.146.33:8000/api/v1/admin/exams/architecto/duplicate';
 $response = $client-&gt;post(
     $url,
     [
@@ -5870,7 +8039,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.241.41.90:8000/api/v1/admin/exams/architecto/duplicate';
+  final url = 'http://45.245.146.33:8000/api/v1/admin/exams/architecto/duplicate';
 
     final queryParams = {};
 
@@ -5904,7 +8073,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/exams/architecto/duplicate");
+  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/exams/architecto/duplicate");
 
     final queryParams = {};
 
@@ -6042,7 +8211,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.241.41.90:8000/api/v1/admin/exams/architecto/statistics"
+    "http://45.245.146.33:8000/api/v1/admin/exams/architecto/statistics"
 );
 
 const headers = {
@@ -6059,7 +8228,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.241.41.90:8000/api/v1/admin/exams/architecto/statistics';
+$url = 'http://45.245.146.33:8000/api/v1/admin/exams/architecto/statistics';
 $response = $client-&gt;get(
     $url,
     [
@@ -6080,7 +8249,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.241.41.90:8000/api/v1/admin/exams/architecto/statistics';
+  final url = 'http://45.245.146.33:8000/api/v1/admin/exams/architecto/statistics';
 
     final queryParams = {};
 
@@ -6114,7 +8283,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/exams/architecto/statistics");
+  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/exams/architecto/statistics");
 
     final queryParams = {};
 
@@ -6268,7 +8437,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.241.41.90:8000/api/v1/admin/subjects"
+    "http://45.245.146.33:8000/api/v1/admin/subjects"
 );
 
 const headers = {
@@ -6285,7 +8454,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.241.41.90:8000/api/v1/admin/subjects';
+$url = 'http://45.245.146.33:8000/api/v1/admin/subjects';
 $response = $client-&gt;get(
     $url,
     [
@@ -6306,7 +8475,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.241.41.90:8000/api/v1/admin/subjects';
+  final url = 'http://45.245.146.33:8000/api/v1/admin/subjects';
 
     final queryParams = {};
 
@@ -6340,7 +8509,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/subjects");
+  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/subjects");
 
     final queryParams = {};
 
@@ -6482,7 +8651,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.241.41.90:8000/api/v1/admin/subjects"
+    "http://45.245.146.33:8000/api/v1/admin/subjects"
 );
 
 const headers = {
@@ -6510,7 +8679,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.241.41.90:8000/api/v1/admin/subjects';
+$url = 'http://45.245.146.33:8000/api/v1/admin/subjects';
 $response = $client-&gt;post(
     $url,
     [
@@ -6540,7 +8709,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.241.41.90:8000/api/v1/admin/subjects';
+  final url = 'http://45.245.146.33:8000/api/v1/admin/subjects';
 
     final queryParams = {};
 
@@ -6582,7 +8751,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/subjects");
+  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/subjects");
 
     final queryParams = {};
 
@@ -6814,7 +8983,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.241.41.90:8000/api/v1/admin/subjects/architecto"
+    "http://45.245.146.33:8000/api/v1/admin/subjects/architecto"
 );
 
 const headers = {
@@ -6831,7 +9000,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.241.41.90:8000/api/v1/admin/subjects/architecto';
+$url = 'http://45.245.146.33:8000/api/v1/admin/subjects/architecto';
 $response = $client-&gt;get(
     $url,
     [
@@ -6852,7 +9021,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.241.41.90:8000/api/v1/admin/subjects/architecto';
+  final url = 'http://45.245.146.33:8000/api/v1/admin/subjects/architecto';
 
     final queryParams = {};
 
@@ -6886,7 +9055,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/subjects/architecto");
+  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/subjects/architecto");
 
     final queryParams = {};
 
@@ -7040,7 +9209,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.241.41.90:8000/api/v1/admin/subjects/architecto"
+    "http://45.245.146.33:8000/api/v1/admin/subjects/architecto"
 );
 
 const headers = {
@@ -7068,7 +9237,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.241.41.90:8000/api/v1/admin/subjects/architecto';
+$url = 'http://45.245.146.33:8000/api/v1/admin/subjects/architecto';
 $response = $client-&gt;put(
     $url,
     [
@@ -7098,7 +9267,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.241.41.90:8000/api/v1/admin/subjects/architecto';
+  final url = 'http://45.245.146.33:8000/api/v1/admin/subjects/architecto';
 
     final queryParams = {};
 
@@ -7140,7 +9309,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/subjects/architecto");
+  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/subjects/architecto");
 
     final queryParams = {};
 
@@ -7388,7 +9557,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.241.41.90:8000/api/v1/admin/subjects/architecto"
+    "http://45.245.146.33:8000/api/v1/admin/subjects/architecto"
 );
 
 const headers = {
@@ -7405,7 +9574,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.241.41.90:8000/api/v1/admin/subjects/architecto';
+$url = 'http://45.245.146.33:8000/api/v1/admin/subjects/architecto';
 $response = $client-&gt;delete(
     $url,
     [
@@ -7426,7 +9595,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.241.41.90:8000/api/v1/admin/subjects/architecto';
+  final url = 'http://45.245.146.33:8000/api/v1/admin/subjects/architecto';
 
     final queryParams = {};
 
@@ -7460,7 +9629,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/subjects/architecto");
+  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/subjects/architecto");
 
     final queryParams = {};
 
@@ -7598,7 +9767,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.241.41.90:8000/api/v1/admin/exam-questions"
+    "http://45.245.146.33:8000/api/v1/admin/exam-questions"
 );
 
 const headers = {
@@ -7615,7 +9784,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.241.41.90:8000/api/v1/admin/exam-questions';
+$url = 'http://45.245.146.33:8000/api/v1/admin/exam-questions';
 $response = $client-&gt;get(
     $url,
     [
@@ -7636,7 +9805,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.241.41.90:8000/api/v1/admin/exam-questions';
+  final url = 'http://45.245.146.33:8000/api/v1/admin/exam-questions';
 
     final queryParams = {};
 
@@ -7670,7 +9839,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/exam-questions");
+  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/exam-questions");
 
     final queryParams = {};
 
@@ -7812,7 +9981,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.241.41.90:8000/api/v1/admin/exam-questions"
+    "http://45.245.146.33:8000/api/v1/admin/exam-questions"
 );
 
 const headers = {
@@ -7845,7 +10014,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.241.41.90:8000/api/v1/admin/exam-questions';
+$url = 'http://45.245.146.33:8000/api/v1/admin/exam-questions';
 $response = $client-&gt;post(
     $url,
     [
@@ -7880,7 +10049,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.241.41.90:8000/api/v1/admin/exam-questions';
+  final url = 'http://45.245.146.33:8000/api/v1/admin/exam-questions';
 
     final queryParams = {};
 
@@ -7927,7 +10096,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/exam-questions");
+  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/exam-questions");
 
     final queryParams = {};
 
@@ -8191,7 +10360,7 @@ Must be one of:
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.241.41.90:8000/api/v1/admin/exam-questions/architecto"
+    "http://45.245.146.33:8000/api/v1/admin/exam-questions/architecto"
 );
 
 const headers = {
@@ -8208,7 +10377,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.241.41.90:8000/api/v1/admin/exam-questions/architecto';
+$url = 'http://45.245.146.33:8000/api/v1/admin/exam-questions/architecto';
 $response = $client-&gt;get(
     $url,
     [
@@ -8229,7 +10398,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.241.41.90:8000/api/v1/admin/exam-questions/architecto';
+  final url = 'http://45.245.146.33:8000/api/v1/admin/exam-questions/architecto';
 
     final queryParams = {};
 
@@ -8263,7 +10432,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/exam-questions/architecto");
+  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/exam-questions/architecto");
 
     final queryParams = {};
 
@@ -8417,7 +10586,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.241.41.90:8000/api/v1/admin/exam-questions/architecto"
+    "http://45.245.146.33:8000/api/v1/admin/exam-questions/architecto"
 );
 
 const headers = {
@@ -8450,7 +10619,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.241.41.90:8000/api/v1/admin/exam-questions/architecto';
+$url = 'http://45.245.146.33:8000/api/v1/admin/exam-questions/architecto';
 $response = $client-&gt;put(
     $url,
     [
@@ -8485,7 +10654,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.241.41.90:8000/api/v1/admin/exam-questions/architecto';
+  final url = 'http://45.245.146.33:8000/api/v1/admin/exam-questions/architecto';
 
     final queryParams = {};
 
@@ -8532,7 +10701,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/exam-questions/architecto");
+  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/exam-questions/architecto");
 
     final queryParams = {};
 
@@ -8812,7 +10981,7 @@ Must be one of:
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.241.41.90:8000/api/v1/admin/exam-questions/architecto"
+    "http://45.245.146.33:8000/api/v1/admin/exam-questions/architecto"
 );
 
 const headers = {
@@ -8829,7 +10998,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.241.41.90:8000/api/v1/admin/exam-questions/architecto';
+$url = 'http://45.245.146.33:8000/api/v1/admin/exam-questions/architecto';
 $response = $client-&gt;delete(
     $url,
     [
@@ -8850,7 +11019,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.241.41.90:8000/api/v1/admin/exam-questions/architecto';
+  final url = 'http://45.245.146.33:8000/api/v1/admin/exam-questions/architecto';
 
     final queryParams = {};
 
@@ -8884,7 +11053,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/exam-questions/architecto");
+  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/exam-questions/architecto");
 
     final queryParams = {};
 
@@ -9022,7 +11191,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.241.41.90:8000/api/v1/admin/exams/architecto/questions"
+    "http://45.245.146.33:8000/api/v1/admin/exams/architecto/questions"
 );
 
 const headers = {
@@ -9039,7 +11208,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.241.41.90:8000/api/v1/admin/exams/architecto/questions';
+$url = 'http://45.245.146.33:8000/api/v1/admin/exams/architecto/questions';
 $response = $client-&gt;get(
     $url,
     [
@@ -9060,7 +11229,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.241.41.90:8000/api/v1/admin/exams/architecto/questions';
+  final url = 'http://45.245.146.33:8000/api/v1/admin/exams/architecto/questions';
 
     final queryParams = {};
 
@@ -9094,7 +11263,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/exams/architecto/questions");
+  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/exams/architecto/questions");
 
     final queryParams = {};
 
@@ -9248,7 +11417,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.241.41.90:8000/api/v1/admin/exam-sections"
+    "http://45.245.146.33:8000/api/v1/admin/exam-sections"
 );
 
 const headers = {
@@ -9265,7 +11434,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.241.41.90:8000/api/v1/admin/exam-sections';
+$url = 'http://45.245.146.33:8000/api/v1/admin/exam-sections';
 $response = $client-&gt;get(
     $url,
     [
@@ -9286,7 +11455,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.241.41.90:8000/api/v1/admin/exam-sections';
+  final url = 'http://45.245.146.33:8000/api/v1/admin/exam-sections';
 
     final queryParams = {};
 
@@ -9320,7 +11489,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/exam-sections");
+  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/exam-sections");
 
     final queryParams = {};
 
@@ -9462,7 +11631,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.241.41.90:8000/api/v1/admin/exam-sections"
+    "http://45.245.146.33:8000/api/v1/admin/exam-sections"
 );
 
 const headers = {
@@ -9487,7 +11656,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.241.41.90:8000/api/v1/admin/exam-sections';
+$url = 'http://45.245.146.33:8000/api/v1/admin/exam-sections';
 $response = $client-&gt;post(
     $url,
     [
@@ -9514,7 +11683,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.241.41.90:8000/api/v1/admin/exam-sections';
+  final url = 'http://45.245.146.33:8000/api/v1/admin/exam-sections';
 
     final queryParams = {};
 
@@ -9553,7 +11722,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/exam-sections");
+  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/exam-sections");
 
     final queryParams = {};
 
@@ -9729,7 +11898,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.241.41.90:8000/api/v1/admin/exam-sections/architecto"
+    "http://45.245.146.33:8000/api/v1/admin/exam-sections/architecto"
 );
 
 const headers = {
@@ -9746,7 +11915,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.241.41.90:8000/api/v1/admin/exam-sections/architecto';
+$url = 'http://45.245.146.33:8000/api/v1/admin/exam-sections/architecto';
 $response = $client-&gt;get(
     $url,
     [
@@ -9767,7 +11936,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.241.41.90:8000/api/v1/admin/exam-sections/architecto';
+  final url = 'http://45.245.146.33:8000/api/v1/admin/exam-sections/architecto';
 
     final queryParams = {};
 
@@ -9801,7 +11970,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/exam-sections/architecto");
+  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/exam-sections/architecto");
 
     final queryParams = {};
 
@@ -9955,7 +12124,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.241.41.90:8000/api/v1/admin/exam-sections/architecto"
+    "http://45.245.146.33:8000/api/v1/admin/exam-sections/architecto"
 );
 
 const headers = {
@@ -9980,7 +12149,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.241.41.90:8000/api/v1/admin/exam-sections/architecto';
+$url = 'http://45.245.146.33:8000/api/v1/admin/exam-sections/architecto';
 $response = $client-&gt;put(
     $url,
     [
@@ -10007,7 +12176,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.241.41.90:8000/api/v1/admin/exam-sections/architecto';
+  final url = 'http://45.245.146.33:8000/api/v1/admin/exam-sections/architecto';
 
     final queryParams = {};
 
@@ -10046,7 +12215,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/exam-sections/architecto");
+  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/exam-sections/architecto");
 
     final queryParams = {};
 
@@ -10238,7 +12407,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.241.41.90:8000/api/v1/admin/exam-sections/architecto"
+    "http://45.245.146.33:8000/api/v1/admin/exam-sections/architecto"
 );
 
 const headers = {
@@ -10255,7 +12424,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.241.41.90:8000/api/v1/admin/exam-sections/architecto';
+$url = 'http://45.245.146.33:8000/api/v1/admin/exam-sections/architecto';
 $response = $client-&gt;delete(
     $url,
     [
@@ -10276,7 +12445,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.241.41.90:8000/api/v1/admin/exam-sections/architecto';
+  final url = 'http://45.245.146.33:8000/api/v1/admin/exam-sections/architecto';
 
     final queryParams = {};
 
@@ -10310,7 +12479,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/exam-sections/architecto");
+  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/exam-sections/architecto");
 
     final queryParams = {};
 
@@ -10448,7 +12617,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.241.41.90:8000/api/v1/admin/school-admins"
+    "http://45.245.146.33:8000/api/v1/admin/school-admins"
 );
 
 const headers = {
@@ -10465,7 +12634,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.241.41.90:8000/api/v1/admin/school-admins';
+$url = 'http://45.245.146.33:8000/api/v1/admin/school-admins';
 $response = $client-&gt;get(
     $url,
     [
@@ -10486,7 +12655,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.241.41.90:8000/api/v1/admin/school-admins';
+  final url = 'http://45.245.146.33:8000/api/v1/admin/school-admins';
 
     final queryParams = {};
 
@@ -10520,7 +12689,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/school-admins");
+  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/school-admins");
 
     final queryParams = {};
 
@@ -10662,7 +12831,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.241.41.90:8000/api/v1/admin/school-admins"
+    "http://45.245.146.33:8000/api/v1/admin/school-admins"
 );
 
 const headers = {
@@ -10696,7 +12865,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.241.41.90:8000/api/v1/admin/school-admins';
+$url = 'http://45.245.146.33:8000/api/v1/admin/school-admins';
 $response = $client-&gt;post(
     $url,
     [
@@ -10732,7 +12901,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.241.41.90:8000/api/v1/admin/school-admins';
+  final url = 'http://45.245.146.33:8000/api/v1/admin/school-admins';
 
     final queryParams = {};
 
@@ -10780,7 +12949,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/school-admins");
+  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/school-admins");
 
     final queryParams = {};
 
@@ -11103,7 +13272,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.241.41.90:8000/api/v1/admin/school-admins/architecto"
+    "http://45.245.146.33:8000/api/v1/admin/school-admins/architecto"
 );
 
 const headers = {
@@ -11120,7 +13289,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.241.41.90:8000/api/v1/admin/school-admins/architecto';
+$url = 'http://45.245.146.33:8000/api/v1/admin/school-admins/architecto';
 $response = $client-&gt;get(
     $url,
     [
@@ -11141,7 +13310,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.241.41.90:8000/api/v1/admin/school-admins/architecto';
+  final url = 'http://45.245.146.33:8000/api/v1/admin/school-admins/architecto';
 
     final queryParams = {};
 
@@ -11175,7 +13344,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/school-admins/architecto");
+  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/school-admins/architecto");
 
     final queryParams = {};
 
@@ -11329,7 +13498,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.241.41.90:8000/api/v1/admin/school-admins/architecto"
+    "http://45.245.146.33:8000/api/v1/admin/school-admins/architecto"
 );
 
 const headers = {
@@ -11358,7 +13527,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.241.41.90:8000/api/v1/admin/school-admins/architecto';
+$url = 'http://45.245.146.33:8000/api/v1/admin/school-admins/architecto';
 $response = $client-&gt;put(
     $url,
     [
@@ -11389,7 +13558,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.241.41.90:8000/api/v1/admin/school-admins/architecto';
+  final url = 'http://45.245.146.33:8000/api/v1/admin/school-admins/architecto';
 
     final queryParams = {};
 
@@ -11432,7 +13601,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/school-admins/architecto");
+  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/school-admins/architecto");
 
     final queryParams = {};
 
@@ -11711,7 +13880,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.241.41.90:8000/api/v1/admin/school-admins/architecto"
+    "http://45.245.146.33:8000/api/v1/admin/school-admins/architecto"
 );
 
 const headers = {
@@ -11728,7 +13897,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.241.41.90:8000/api/v1/admin/school-admins/architecto';
+$url = 'http://45.245.146.33:8000/api/v1/admin/school-admins/architecto';
 $response = $client-&gt;delete(
     $url,
     [
@@ -11749,7 +13918,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.241.41.90:8000/api/v1/admin/school-admins/architecto';
+  final url = 'http://45.245.146.33:8000/api/v1/admin/school-admins/architecto';
 
     final queryParams = {};
 
@@ -11783,7 +13952,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/school-admins/architecto");
+  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/school-admins/architecto");
 
     final queryParams = {};
 
@@ -11921,7 +14090,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.241.41.90:8000/api/v1/admin/schools"
+    "http://45.245.146.33:8000/api/v1/admin/schools"
 );
 
 const headers = {
@@ -11938,7 +14107,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.241.41.90:8000/api/v1/admin/schools';
+$url = 'http://45.245.146.33:8000/api/v1/admin/schools';
 $response = $client-&gt;get(
     $url,
     [
@@ -11959,7 +14128,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.241.41.90:8000/api/v1/admin/schools';
+  final url = 'http://45.245.146.33:8000/api/v1/admin/schools';
 
     final queryParams = {};
 
@@ -11993,7 +14162,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/schools");
+  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/schools");
 
     final queryParams = {};
 
@@ -12135,7 +14304,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.241.41.90:8000/api/v1/admin/schools"
+    "http://45.245.146.33:8000/api/v1/admin/schools"
 );
 
 const headers = {
@@ -12165,7 +14334,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.241.41.90:8000/api/v1/admin/schools';
+$url = 'http://45.245.146.33:8000/api/v1/admin/schools';
 $response = $client-&gt;post(
     $url,
     [
@@ -12197,7 +14366,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.241.41.90:8000/api/v1/admin/schools';
+  final url = 'http://45.245.146.33:8000/api/v1/admin/schools';
 
     final queryParams = {};
 
@@ -12241,7 +14410,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/schools");
+  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/schools");
 
     final queryParams = {};
 
@@ -12487,7 +14656,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.241.41.90:8000/api/v1/admin/schools/architecto"
+    "http://45.245.146.33:8000/api/v1/admin/schools/architecto"
 );
 
 const headers = {
@@ -12504,7 +14673,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.241.41.90:8000/api/v1/admin/schools/architecto';
+$url = 'http://45.245.146.33:8000/api/v1/admin/schools/architecto';
 $response = $client-&gt;get(
     $url,
     [
@@ -12525,7 +14694,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.241.41.90:8000/api/v1/admin/schools/architecto';
+  final url = 'http://45.245.146.33:8000/api/v1/admin/schools/architecto';
 
     final queryParams = {};
 
@@ -12559,7 +14728,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/schools/architecto");
+  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/schools/architecto");
 
     final queryParams = {};
 
@@ -12713,7 +14882,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.241.41.90:8000/api/v1/admin/schools/architecto"
+    "http://45.245.146.33:8000/api/v1/admin/schools/architecto"
 );
 
 const headers = {
@@ -12743,7 +14912,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.241.41.90:8000/api/v1/admin/schools/architecto';
+$url = 'http://45.245.146.33:8000/api/v1/admin/schools/architecto';
 $response = $client-&gt;put(
     $url,
     [
@@ -12775,7 +14944,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.241.41.90:8000/api/v1/admin/schools/architecto';
+  final url = 'http://45.245.146.33:8000/api/v1/admin/schools/architecto';
 
     final queryParams = {};
 
@@ -12819,7 +14988,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/schools/architecto");
+  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/schools/architecto");
 
     final queryParams = {};
 
@@ -13081,7 +15250,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.241.41.90:8000/api/v1/admin/schools/architecto"
+    "http://45.245.146.33:8000/api/v1/admin/schools/architecto"
 );
 
 const headers = {
@@ -13098,7 +15267,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.241.41.90:8000/api/v1/admin/schools/architecto';
+$url = 'http://45.245.146.33:8000/api/v1/admin/schools/architecto';
 $response = $client-&gt;delete(
     $url,
     [
@@ -13119,7 +15288,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.241.41.90:8000/api/v1/admin/schools/architecto';
+  final url = 'http://45.245.146.33:8000/api/v1/admin/schools/architecto';
 
     final queryParams = {};
 
@@ -13153,7 +15322,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.241.41.90:8000/api/v1/admin/schools/architecto");
+  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/schools/architecto");
 
     final queryParams = {};
 
@@ -13291,7 +15460,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.241.41.90:8000/api/v1/me"
+    "http://45.245.146.33:8000/api/v1/me"
 );
 
 const headers = {
@@ -13308,7 +15477,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.241.41.90:8000/api/v1/me';
+$url = 'http://45.245.146.33:8000/api/v1/me';
 $response = $client-&gt;get(
     $url,
     [
@@ -13329,7 +15498,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.241.41.90:8000/api/v1/me';
+  final url = 'http://45.245.146.33:8000/api/v1/me';
 
     final queryParams = {};
 
@@ -13363,7 +15532,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.241.41.90:8000/api/v1/me");
+  final url = Uri.parse("http://45.245.146.33:8000/api/v1/me");
 
     final queryParams = {};
 
@@ -13505,7 +15674,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.241.41.90:8000/api/v1/logout"
+    "http://45.245.146.33:8000/api/v1/logout"
 );
 
 const headers = {
@@ -13522,7 +15691,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.241.41.90:8000/api/v1/logout';
+$url = 'http://45.245.146.33:8000/api/v1/logout';
 $response = $client-&gt;post(
     $url,
     [
@@ -13543,7 +15712,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.241.41.90:8000/api/v1/logout';
+  final url = 'http://45.245.146.33:8000/api/v1/logout';
 
     final queryParams = {};
 
@@ -13577,7 +15746,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.241.41.90:8000/api/v1/logout");
+  final url = Uri.parse("http://45.245.146.33:8000/api/v1/logout");
 
     final queryParams = {};
 
@@ -13703,7 +15872,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.241.41.90:8000/api/v1/governorates"
+    "http://45.245.146.33:8000/api/v1/governorates"
 );
 
 const headers = {
@@ -13720,7 +15889,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.241.41.90:8000/api/v1/governorates';
+$url = 'http://45.245.146.33:8000/api/v1/governorates';
 $response = $client-&gt;get(
     $url,
     [
@@ -13741,7 +15910,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.241.41.90:8000/api/v1/governorates';
+  final url = 'http://45.245.146.33:8000/api/v1/governorates';
 
     final queryParams = {};
 
@@ -13775,7 +15944,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.241.41.90:8000/api/v1/governorates");
+  final url = Uri.parse("http://45.245.146.33:8000/api/v1/governorates");
 
     final queryParams = {};
 
@@ -13917,7 +16086,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.241.41.90:8000/api/v1/governorates/architecto"
+    "http://45.245.146.33:8000/api/v1/governorates/architecto"
 );
 
 const headers = {
@@ -13934,7 +16103,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.241.41.90:8000/api/v1/governorates/architecto';
+$url = 'http://45.245.146.33:8000/api/v1/governorates/architecto';
 $response = $client-&gt;get(
     $url,
     [
@@ -13955,7 +16124,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.241.41.90:8000/api/v1/governorates/architecto';
+  final url = 'http://45.245.146.33:8000/api/v1/governorates/architecto';
 
     final queryParams = {};
 
@@ -13989,7 +16158,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.241.41.90:8000/api/v1/governorates/architecto");
+  final url = Uri.parse("http://45.245.146.33:8000/api/v1/governorates/architecto");
 
     final queryParams = {};
 
@@ -14143,7 +16312,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.241.41.90:8000/api/health"
+    "http://45.245.146.33:8000/api/health"
 );
 
 const headers = {
@@ -14160,7 +16329,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.241.41.90:8000/api/health';
+$url = 'http://45.245.146.33:8000/api/health';
 $response = $client-&gt;get(
     $url,
     [
@@ -14181,7 +16350,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.241.41.90:8000/api/health';
+  final url = 'http://45.245.146.33:8000/api/health';
 
     final queryParams = {};
 
@@ -14215,7 +16384,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.241.41.90:8000/api/health");
+  final url = Uri.parse("http://45.245.146.33:8000/api/health");
 
     final queryParams = {};
 
@@ -14258,7 +16427,7 @@ access-control-allow-origin: *
 
 <code class="language-json" style="max-height: 300px;">{
     &quot;status&quot;: &quot;ok&quot;,
-    &quot;timestamp&quot;: &quot;2025-09-27T17:39:38.644231Z&quot;,
+    &quot;timestamp&quot;: &quot;2025-09-29T17:03:20.389315Z&quot;,
     &quot;version&quot;: &quot;1.0.0&quot;
 }</code>
  </pre>

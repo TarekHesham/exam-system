@@ -13,7 +13,9 @@ class ExamSessionController extends Controller
     public function __construct(
         private ExamSessionService $sessionService,
         private ExamService $examService
-    ) {}
+    ) {
+        // 
+    }
 
     public function startSession(Request $request): JsonResponse
     {
@@ -86,13 +88,13 @@ class ExamSessionController extends Controller
                 'status' => true,
                 'message' => 'تم إرسال الامتحان بنجاح',
                 'data' => [
-                    'session_id' => $session->id,
-                    'submitted_at' => $session->submitted_at,
-                    'total_questions' => $result['total_questions'],
-                    'answered_questions' => $result['answered_questions'],
-                    'preliminary_score' => $result['preliminary_score'] ?? null,
+                    'session_id'              => $session->id,
+                    'submitted_at'            => $session->submitted_at,
+                    'total_questions'         => $result['total_questions'],
+                    'answered_questions'      => $result['answered_questions'],
+                    'preliminary_score'       => $result['preliminary_score'] ?? null,
                     'needs_manual_correction' => $result['needs_manual_correction'],
-                    'result_available_at' => $result['result_available_at']
+                    'result_available_at'     => $result['result_available_at']
                 ]
             ]);
         } catch (\Exception $e) {
