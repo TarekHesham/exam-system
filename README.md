@@ -1,61 +1,161 @@
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# Exam Management System API
 
-## About Laravel
+An exam management system built with **Laravel 12**, using **Sanctum** for authentication and **Scribe** for API documentation.  
+The project is designed with modular architecture, supporting versioned APIs to serve both web applications and mobile clients.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Features
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+-   User management (students, teachers, school admins, ministry admins).
+-   Schools and administrators management.
+-   Subjects and exams management (practice/final).
+-   Exam sections and multiple question types:
+    -   Multiple Choice
+    -   True/False
+    -   Essay
+    -   Fill in the blanks
+-   Exam sessions with monitoring and anti-cheating features.
+-   Student answers and essay corrections.
+-   Results publishing and appeals management.
+-   Appeal payments with multiple payment methods.
+-   System settings and activity logging.
+-   Auto-generated API documentation with **Scribe**.
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Tech Stack
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+-   **Backend**: Laravel 12 (PHP 8.4+)
+-   **Authentication**: Laravel Sanctum
+-   **API Documentation**: Scribe
+-   **Database**: MySQL
+-   **Architecture**:
+    -   Contracts & DTOs
+    -   Repositories & Services (with interfaces)
+    -   Events
+    -   Modular structure (each feature as a separate module)
+-   **Versioned APIs** (v1, v2, ...) Supported
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-## Laravel Sponsors
+## Project Structure
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+```
 
-### Premium Partners
+app/
+├── Console/
+│   └── Commands/         # Custom Artisan commands
+│
+├── Core/
+│   ├── Contracts/        # Interfaces
+│   ├── DTOs/             # Data Transfer Objects
+│   ├── Models/           # Core Models
+│   ├── Repositories/     # Data access layer
+│   ├── Services/         # Business logic
+│   └── Exceptions/       # Custom exceptions
+│
+├── Http/
+│   ├── Controllers/      # API controllers
+│   ├── Middleware/       # Middlewares
+│   ├── Requests/         # Form request validation
+│   └── Resources/        # API Resources
+│
+├── Jobs/                 # Queue jobs
+│
+├── Modules/              # Feature-based modules
+│   ├── Appeals/
+│   ├── Authentication/
+│   ├── ExamManagement/
+│   ├── Monitoring/
+│   ├── Results/
+│   └── UserManagement/
+│
+└── Providers/            # Service providers
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+```
 
-## Contributing
+---
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## ERD
 
-## Code of Conduct
+The database schema covers users, schools, exams, students, results, appeals, monitoring, payments, and system logs.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Entity Relationship Diagram
 
-## Security Vulnerabilities
+<img src="./public/ERD.png" alt="ERD"/>
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+---
+
+## Installation
+
+```bash
+# Clone repository
+git clone https://github.com/TarekHesham/exam-system.git
+
+cd exam-system
+
+# Install dependencies
+composer install
+
+# Copy environment file
+cp .env.example .env
+
+# Generate app key
+php artisan key:generate
+
+# Run migrations and seeders
+php artisan migrate --seed
+
+# Start local server
+php artisan serve
+```
+
+---
+
+## Authentication
+
+The system uses **Laravel Sanctum** for authentication.
+Each request must include a valid Bearer Token in the header:
+
+```http
+Authorization: Bearer <token>
+```
+
+---
+
+## API Documentation
+
+API documentation is generated automatically using **Scribe**.
+After running the project, you can access it at:
+
+```
+/docs
+```
+
+<img src="./public/DOC.png"/>
+
+---
+
+## Versioning
+
+The project is structured to support API versioning.
+Each version (v1, v2, etc.) can evolve independently without breaking existing clients.
+
+---
+
+## Contribution
+
+1. Fork the repository
+2. Create a new feature branch (`git checkout -b feature/new-feature`)
+3. Commit changes (`git commit -m "Add new feature"`)
+4. Push to branch (`git push origin feature/new-feature`)
+5. Create a pull request
+
+---
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This project is licensed under the MIT License.
