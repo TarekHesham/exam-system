@@ -3,7 +3,7 @@
 This documentation aims to provide all the information you need to work with our API.
 
 <aside>
-    <strong>Base URL</strong>: <code>http://45.245.140.75:8000</code>
+    <strong>Base URL</strong>: <code>https://exam-api.koyeb.app</code>
 </aside>
 
     This documentation aims to provide all the information you need to work with our API.

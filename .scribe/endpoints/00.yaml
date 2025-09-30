@@ -12,11 +12,10 @@ endpoints:
       subgroupDescription: ''
       title: 'Authenticate user and return access token'
       description: ''
-      authenticated: true
+      authenticated: false
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -72,10 +71,7 @@ endpoints:
     fileParameters: []
     responses: []
     responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {YOUR_AUTH_KEY}'
+    auth: []
     controller: null
     method: null
     route: null
@@ -93,11 +89,10 @@ endpoints:
         Student gets available exam if session exists
         Student can only start exam during exam time window
       description: ''
-      authenticated: true
+      authenticated: false
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -118,10 +113,7 @@ endpoints:
         description: null
         custom: []
     responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {YOUR_AUTH_KEY}'
+    auth: []
     controller: null
     method: null
     route: null
@@ -137,11 +129,10 @@ endpoints:
       subgroupDescription: ''
       title: 'Submit complete exam with all answers at once'
       description: ''
-      authenticated: true
+      authenticated: false
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -234,10 +225,7 @@ endpoints:
     fileParameters: []
     responses: []
     responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {YOUR_AUTH_KEY}'
+    auth: []
     controller: null
     method: null
     route: null
@@ -253,11 +241,10 @@ endpoints:
       subgroupDescription: ''
       title: ''
       description: ''
-      authenticated: true
+      authenticated: false
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -278,10 +265,7 @@ endpoints:
         description: null
         custom: []
     responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {YOUR_AUTH_KEY}'
+    auth: []
     controller: null
     method: null
     route: null
@@ -297,11 +281,10 @@ endpoints:
       subgroupDescription: ''
       title: 'Teacher scans QR code with student_id and creates session'
       description: ''
-      authenticated: true
+      authenticated: false
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -355,10 +338,7 @@ endpoints:
     fileParameters: []
     responses: []
     responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {YOUR_AUTH_KEY}'
+    auth: []
     controller: null
     method: null
     route: null
@@ -374,11 +354,10 @@ endpoints:
       subgroupDescription: ''
       title: ''
       description: ''
-      authenticated: true
+      authenticated: false
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -399,10 +378,7 @@ endpoints:
         description: null
         custom: []
     responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {YOUR_AUTH_KEY}'
+    auth: []
     controller: null
     method: null
     route: null
@@ -420,11 +396,10 @@ endpoints:
       description: |-
         - School Admin: only students in their school
         - Ministry Admin: all students
-      authenticated: true
+      authenticated: false
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -445,10 +420,7 @@ endpoints:
         description: null
         custom: []
     responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {YOUR_AUTH_KEY}'
+    auth: []
     controller: null
     method: null
     route: null
@@ -464,11 +436,10 @@ endpoints:
       subgroupDescription: ''
       title: 'Create student account (School Admin only)'
       description: ''
-      authenticated: true
+      authenticated: false
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -608,10 +579,7 @@ endpoints:
     fileParameters: []
     responses: []
     responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {YOUR_AUTH_KEY}'
+    auth: []
     controller: null
     method: null
     route: null
@@ -627,11 +595,10 @@ endpoints:
       subgroupDescription: ''
       title: "Show a student's details."
       description: ''
-      authenticated: true
+      authenticated: false
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -663,10 +630,7 @@ endpoints:
         description: null
         custom: []
     responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {YOUR_AUTH_KEY}'
+    auth: []
     controller: null
     method: null
     route: null
@@ -683,11 +647,10 @@ endpoints:
       subgroupDescription: ''
       title: 'Update student (School Admin only)'
       description: ''
-      authenticated: true
+      authenticated: false
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -871,10 +834,7 @@ endpoints:
     fileParameters: []
     responses: []
     responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {YOUR_AUTH_KEY}'
+    auth: []
     controller: null
     method: null
     route: null
@@ -890,11 +850,10 @@ endpoints:
       subgroupDescription: ''
       title: 'Remove a student (soft-delete) and associated user.'
       description: ''
-      authenticated: true
+      authenticated: false
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -917,10 +876,7 @@ endpoints:
     fileParameters: []
     responses: []
     responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {YOUR_AUTH_KEY}'
+    auth: []
     controller: null
     method: null
     route: null
@@ -936,11 +892,10 @@ endpoints:
       subgroupDescription: ''
       title: 'List all teachers'
       description: ''
-      authenticated: true
+      authenticated: false
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -961,10 +916,7 @@ endpoints:
         description: null
         custom: []
     responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {YOUR_AUTH_KEY}'
+    auth: []
     controller: null
     method: null
     route: null
@@ -980,11 +932,10 @@ endpoints:
       subgroupDescription: ''
       title: 'Create teacher account (Ministry Admin only)'
       description: ''
-      authenticated: true
+      authenticated: false
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -1132,10 +1083,7 @@ endpoints:
     fileParameters: []
     responses: []
     responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {YOUR_AUTH_KEY}'
+    auth: []
     controller: null
     method: null
     route: null
@@ -1151,11 +1099,10 @@ endpoints:
       subgroupDescription: ''
       title: 'Show teacher details'
       description: ''
-      authenticated: true
+      authenticated: false
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -1187,10 +1134,7 @@ endpoints:
         description: null
         custom: []
     responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {YOUR_AUTH_KEY}'
+    auth: []
     controller: null
     method: null
     route: null
@@ -1207,11 +1151,10 @@ endpoints:
       subgroupDescription: ''
       title: 'Update teacher information'
       description: ''
-      authenticated: true
+      authenticated: false
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -1373,10 +1316,7 @@ endpoints:
     fileParameters: []
     responses: []
     responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {YOUR_AUTH_KEY}'
+    auth: []
     controller: null
     method: null
     route: null
@@ -1392,11 +1332,10 @@ endpoints:
       subgroupDescription: ''
       title: 'Delete teacher'
       description: ''
-      authenticated: true
+      authenticated: false
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -1419,10 +1358,7 @@ endpoints:
     fileParameters: []
     responses: []
     responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {YOUR_AUTH_KEY}'
+    auth: []
     controller: null
     method: null
     route: null
@@ -1438,11 +1374,10 @@ endpoints:
       subgroupDescription: ''
       title: ''
       description: ''
-      authenticated: true
+      authenticated: false
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -1492,10 +1427,7 @@ endpoints:
     fileParameters: []
     responses: []
     responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {YOUR_AUTH_KEY}'
+    auth: []
     controller: null
     method: null
     route: null
@@ -1511,11 +1443,10 @@ endpoints:
       subgroupDescription: ''
       title: 'Get teachers by school'
       description: ''
-      authenticated: true
+      authenticated: false
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -1547,10 +1478,7 @@ endpoints:
         description: null
         custom: []
     responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {YOUR_AUTH_KEY}'
+    auth: []
     controller: null
     method: null
     route: null
@@ -1566,11 +1494,10 @@ endpoints:
       subgroupDescription: ''
       title: ''
       description: ''
-      authenticated: true
+      authenticated: false
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -1591,10 +1518,7 @@ endpoints:
         description: null
         custom: []
     responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {YOUR_AUTH_KEY}'
+    auth: []
     controller: null
     method: null
     route: null
@@ -1610,11 +1534,10 @@ endpoints:
       subgroupDescription: ''
       title: ''
       description: ''
-      authenticated: true
+      authenticated: false
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -1684,10 +1607,7 @@ endpoints:
     fileParameters: []
     responses: []
     responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {YOUR_AUTH_KEY}'
+    auth: []
     controller: null
     method: null
     route: null
@@ -1703,11 +1623,10 @@ endpoints:
       subgroupDescription: ''
       title: ''
       description: ''
-      authenticated: true
+      authenticated: false
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -1739,10 +1658,7 @@ endpoints:
         description: null
         custom: []
     responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {YOUR_AUTH_KEY}'
+    auth: []
     controller: null
     method: null
     route: null
@@ -1759,11 +1675,10 @@ endpoints:
       subgroupDescription: ''
       title: ''
       description: ''
-      authenticated: true
+      authenticated: false
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -1822,10 +1737,7 @@ endpoints:
     fileParameters: []
     responses: []
     responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {YOUR_AUTH_KEY}'
+    auth: []
     controller: null
     method: null
     route: null
@@ -1841,11 +1753,10 @@ endpoints:
       subgroupDescription: ''
       title: ''
       description: ''
-      authenticated: true
+      authenticated: false
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -1868,10 +1779,7 @@ endpoints:
     fileParameters: []
     responses: []
     responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {YOUR_AUTH_KEY}'
+    auth: []
     controller: null
     method: null
     route: null
@@ -1887,11 +1795,10 @@ endpoints:
       subgroupDescription: ''
       title: ''
       description: ''
-      authenticated: true
+      authenticated: false
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -1912,10 +1819,7 @@ endpoints:
         description: null
         custom: []
     responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {YOUR_AUTH_KEY}'
+    auth: []
     controller: null
     method: null
     route: null
@@ -1931,11 +1835,10 @@ endpoints:
       subgroupDescription: ''
       title: ''
       description: ''
-      authenticated: true
+      authenticated: false
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -2073,10 +1976,7 @@ endpoints:
     fileParameters: []
     responses: []
     responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {YOUR_AUTH_KEY}'
+    auth: []
     controller: null
     method: null
     route: null
@@ -2092,11 +1992,10 @@ endpoints:
       subgroupDescription: ''
       title: ''
       description: ''
-      authenticated: true
+      authenticated: false
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -2128,10 +2027,7 @@ endpoints:
         description: null
         custom: []
     responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {YOUR_AUTH_KEY}'
+    auth: []
     controller: null
     method: null
     route: null
@@ -2147,11 +2043,10 @@ endpoints:
       subgroupDescription: ''
       title: ''
       description: ''
-      authenticated: true
+      authenticated: false
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -2284,10 +2179,7 @@ endpoints:
     fileParameters: []
     responses: []
     responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {YOUR_AUTH_KEY}'
+    auth: []
     controller: null
     method: null
     route: null
@@ -2303,11 +2195,10 @@ endpoints:
       subgroupDescription: ''
       title: ''
       description: ''
-      authenticated: true
+      authenticated: false
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -2330,10 +2221,7 @@ endpoints:
     fileParameters: []
     responses: []
     responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {YOUR_AUTH_KEY}'
+    auth: []
     controller: null
     method: null
     route: null
@@ -2349,11 +2237,10 @@ endpoints:
       subgroupDescription: ''
       title: ''
       description: ''
-      authenticated: true
+      authenticated: false
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -2376,10 +2263,7 @@ endpoints:
     fileParameters: []
     responses: []
     responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {YOUR_AUTH_KEY}'
+    auth: []
     controller: null
     method: null
     route: null
@@ -2395,11 +2279,10 @@ endpoints:
       subgroupDescription: ''
       title: ''
       description: ''
-      authenticated: true
+      authenticated: false
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -2431,10 +2314,7 @@ endpoints:
         description: null
         custom: []
     responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {YOUR_AUTH_KEY}'
+    auth: []
     controller: null
     method: null
     route: null
@@ -2450,11 +2330,10 @@ endpoints:
       subgroupDescription: ''
       title: 'Display a listing of the resource.'
       description: ''
-      authenticated: true
+      authenticated: false
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -2475,10 +2354,7 @@ endpoints:
         description: null
         custom: []
     responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {YOUR_AUTH_KEY}'
+    auth: []
     controller: null
     method: null
     route: null
@@ -2494,11 +2370,10 @@ endpoints:
       subgroupDescription: ''
       title: 'Store a newly created resource in storage.'
       description: ''
-      authenticated: true
+      authenticated: false
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -2587,10 +2462,7 @@ endpoints:
     fileParameters: []
     responses: []
     responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {YOUR_AUTH_KEY}'
+    auth: []
     controller: null
     method: null
     route: null
@@ -2606,11 +2478,10 @@ endpoints:
       subgroupDescription: ''
       title: 'Display the specified resource.'
       description: ''
-      authenticated: true
+      authenticated: false
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -2642,10 +2513,7 @@ endpoints:
         description: null
         custom: []
     responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {YOUR_AUTH_KEY}'
+    auth: []
     controller: null
     method: null
     route: null
@@ -2662,11 +2530,10 @@ endpoints:
       subgroupDescription: ''
       title: 'Update the specified resource in storage.'
       description: ''
-      authenticated: true
+      authenticated: false
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -2766,10 +2633,7 @@ endpoints:
     fileParameters: []
     responses: []
     responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {YOUR_AUTH_KEY}'
+    auth: []
     controller: null
     method: null
     route: null
@@ -2785,11 +2649,10 @@ endpoints:
       subgroupDescription: ''
       title: 'Remove the specified resource from storage.'
       description: ''
-      authenticated: true
+      authenticated: false
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -2812,10 +2675,7 @@ endpoints:
     fileParameters: []
     responses: []
     responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {YOUR_AUTH_KEY}'
+    auth: []
     controller: null
     method: null
     route: null
@@ -2831,11 +2691,10 @@ endpoints:
       subgroupDescription: ''
       title: 'Display a paginated listing of exam questions.'
       description: ''
-      authenticated: true
+      authenticated: false
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -2856,10 +2715,7 @@ endpoints:
         description: null
         custom: []
     responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {YOUR_AUTH_KEY}'
+    auth: []
     controller: null
     method: null
     route: null
@@ -2875,11 +2731,10 @@ endpoints:
       subgroupDescription: ''
       title: 'Store a newly created exam question.'
       description: ''
-      authenticated: true
+      authenticated: false
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -3007,10 +2862,7 @@ endpoints:
     fileParameters: []
     responses: []
     responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {YOUR_AUTH_KEY}'
+    auth: []
     controller: null
     method: null
     route: null
@@ -3026,11 +2878,10 @@ endpoints:
       subgroupDescription: ''
       title: 'Display the specified exam question.'
       description: ''
-      authenticated: true
+      authenticated: false
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -3062,10 +2913,7 @@ endpoints:
         description: null
         custom: []
     responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {YOUR_AUTH_KEY}'
+    auth: []
     controller: null
     method: null
     route: null
@@ -3082,11 +2930,10 @@ endpoints:
       subgroupDescription: ''
       title: 'Update the specified exam question in storage.'
       description: ''
-      authenticated: true
+      authenticated: false
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -3225,10 +3072,7 @@ endpoints:
     fileParameters: []
     responses: []
     responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {YOUR_AUTH_KEY}'
+    auth: []
     controller: null
     method: null
     route: null
@@ -3244,11 +3088,10 @@ endpoints:
       subgroupDescription: ''
       title: 'Remove the specified exam question from storage.'
       description: ''
-      authenticated: true
+      authenticated: false
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -3271,10 +3114,7 @@ endpoints:
     fileParameters: []
     responses: []
     responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {YOUR_AUTH_KEY}'
+    auth: []
     controller: null
     method: null
     route: null
@@ -3290,11 +3130,10 @@ endpoints:
       subgroupDescription: ''
       title: 'Get sections (with questions) and unsectioned questions of an exam.'
       description: ''
-      authenticated: true
+      authenticated: false
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -3326,10 +3165,7 @@ endpoints:
         description: null
         custom: []
     responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {YOUR_AUTH_KEY}'
+    auth: []
     controller: null
     method: null
     route: null
@@ -3345,11 +3181,10 @@ endpoints:
       subgroupDescription: ''
       title: ''
       description: ''
-      authenticated: true
+      authenticated: false
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -3370,10 +3205,7 @@ endpoints:
         description: null
         custom: []
     responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {YOUR_AUTH_KEY}'
+    auth: []
     controller: null
     method: null
     route: null
@@ -3389,11 +3221,10 @@ endpoints:
       subgroupDescription: ''
       title: ''
       description: ''
-      authenticated: true
+      authenticated: false
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -3449,10 +3280,7 @@ endpoints:
     fileParameters: []
     responses: []
     responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {YOUR_AUTH_KEY}'
+    auth: []
     controller: null
     method: null
     route: null
@@ -3468,11 +3296,10 @@ endpoints:
       subgroupDescription: ''
       title: ''
       description: ''
-      authenticated: true
+      authenticated: false
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -3504,10 +3331,7 @@ endpoints:
         description: null
         custom: []
     responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {YOUR_AUTH_KEY}'
+    auth: []
     controller: null
     method: null
     route: null
@@ -3524,11 +3348,10 @@ endpoints:
       subgroupDescription: ''
       title: ''
       description: ''
-      authenticated: true
+      authenticated: false
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -3595,10 +3418,7 @@ endpoints:
     fileParameters: []
     responses: []
     responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {YOUR_AUTH_KEY}'
+    auth: []
     controller: null
     method: null
     route: null
@@ -3614,11 +3434,10 @@ endpoints:
       subgroupDescription: ''
       title: ''
       description: ''
-      authenticated: true
+      authenticated: false
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -3641,10 +3460,7 @@ endpoints:
     fileParameters: []
     responses: []
     responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {YOUR_AUTH_KEY}'
+    auth: []
     controller: null
     method: null
     route: null
@@ -3660,11 +3476,10 @@ endpoints:
       subgroupDescription: ''
       title: 'List paginated school admins'
       description: ''
-      authenticated: true
+      authenticated: false
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -3685,10 +3500,7 @@ endpoints:
         description: null
         custom: []
     responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {YOUR_AUTH_KEY}'
+    auth: []
     controller: null
     method: null
     route: null
@@ -3704,11 +3516,10 @@ endpoints:
       subgroupDescription: ''
       title: 'Create school admin: create user first then create school admin profile'
       description: ''
-      authenticated: true
+      authenticated: false
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -3856,10 +3667,7 @@ endpoints:
     fileParameters: []
     responses: []
     responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {YOUR_AUTH_KEY}'
+    auth: []
     controller: null
     method: null
     route: null
@@ -3875,11 +3683,10 @@ endpoints:
       subgroupDescription: ''
       title: 'Show school admin details'
       description: ''
-      authenticated: true
+      authenticated: false
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -3911,10 +3718,7 @@ endpoints:
         description: null
         custom: []
     responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {YOUR_AUTH_KEY}'
+    auth: []
     controller: null
     method: null
     route: null
@@ -3931,11 +3735,10 @@ endpoints:
       subgroupDescription: ''
       title: 'Update school admin and optionally its user'
       description: ''
-      authenticated: true
+      authenticated: false
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -4039,10 +3842,7 @@ endpoints:
     fileParameters: []
     responses: []
     responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {YOUR_AUTH_KEY}'
+    auth: []
     controller: null
     method: null
     route: null
@@ -4058,11 +3858,10 @@ endpoints:
       subgroupDescription: ''
       title: 'Delete school admin and its user (soft delete user)'
       description: ''
-      authenticated: true
+      authenticated: false
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -4085,10 +3884,7 @@ endpoints:
     fileParameters: []
     responses: []
     responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {YOUR_AUTH_KEY}'
+    auth: []
     controller: null
     method: null
     route: null
@@ -4104,11 +3900,10 @@ endpoints:
       subgroupDescription: ''
       title: ''
       description: ''
-      authenticated: true
+      authenticated: false
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -4129,10 +3924,7 @@ endpoints:
         description: null
         custom: []
     responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {YOUR_AUTH_KEY}'
+    auth: []
     controller: null
     method: null
     route: null
@@ -4148,11 +3940,10 @@ endpoints:
       subgroupDescription: ''
       title: ''
       description: ''
-      authenticated: true
+      authenticated: false
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -4263,10 +4054,7 @@ endpoints:
     fileParameters: []
     responses: []
     responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {YOUR_AUTH_KEY}'
+    auth: []
     controller: null
     method: null
     route: null
@@ -4282,11 +4070,10 @@ endpoints:
       subgroupDescription: ''
       title: ''
       description: ''
-      authenticated: true
+      authenticated: false
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -4318,10 +4105,7 @@ endpoints:
         description: null
         custom: []
     responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {YOUR_AUTH_KEY}'
+    auth: []
     controller: null
     method: null
     route: null
@@ -4338,11 +4122,10 @@ endpoints:
       subgroupDescription: ''
       title: ''
       description: ''
-      authenticated: true
+      authenticated: false
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -4464,10 +4247,7 @@ endpoints:
     fileParameters: []
     responses: []
     responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {YOUR_AUTH_KEY}'
+    auth: []
     controller: null
     method: null
     route: null
@@ -4483,11 +4263,10 @@ endpoints:
       subgroupDescription: ''
       title: ''
       description: ''
-      authenticated: true
+      authenticated: false
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -4510,10 +4289,7 @@ endpoints:
     fileParameters: []
     responses: []
     responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {YOUR_AUTH_KEY}'
+    auth: []
     controller: null
     method: null
     route: null
@@ -4529,11 +4305,10 @@ endpoints:
       subgroupDescription: ''
       title: 'Get current authenticated user'
       description: ''
-      authenticated: true
+      authenticated: false
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -4554,10 +4329,7 @@ endpoints:
         description: null
         custom: []
     responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {YOUR_AUTH_KEY}'
+    auth: []
     controller: null
     method: null
     route: null
@@ -4573,11 +4345,10 @@ endpoints:
       subgroupDescription: ''
       title: 'Logout user and revoke token'
       description: ''
-      authenticated: true
+      authenticated: false
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -4589,10 +4360,7 @@ endpoints:
     fileParameters: []
     responses: []
     responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {YOUR_AUTH_KEY}'
+    auth: []
     controller: null
     method: null
     route: null
@@ -4608,11 +4376,10 @@ endpoints:
       subgroupDescription: ''
       title: ''
       description: ''
-      authenticated: true
+      authenticated: false
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -4633,10 +4400,7 @@ endpoints:
         description: null
         custom: []
     responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {YOUR_AUTH_KEY}'
+    auth: []
     controller: null
     method: null
     route: null
@@ -4652,11 +4416,10 @@ endpoints:
       subgroupDescription: ''
       title: ''
       description: ''
-      authenticated: true
+      authenticated: false
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -4688,10 +4451,7 @@ endpoints:
         description: null
         custom: []
     responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {YOUR_AUTH_KEY}'
+    auth: []
     controller: null
     method: null
     route: null
@@ -4707,11 +4467,10 @@ endpoints:
       subgroupDescription: ''
       title: ''
       description: ''
-      authenticated: true
+      authenticated: false
       deprecated: false
       custom: []
     headers:
-      Authorization: 'Bearer 38|ht7IhxN0YrfU2R4hQQkMwMgkLMiXPXunNR0tm29uafe1763d'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -4724,7 +4483,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"status":"ok","timestamp":"2025-09-30T16:12:32.062421Z","version":"1.0.0"}'
+        content: '{"status":"ok","timestamp":"2025-09-30T18:06:56.986444Z","version":"1.0.0"}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -4732,10 +4491,7 @@ endpoints:
         description: null
         custom: []
     responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer Bearer {YOUR_AUTH_KEY}'
+    auth: []
     controller: null
     method: null
     route: null
