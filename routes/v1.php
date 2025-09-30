@@ -54,6 +54,7 @@ Route::middleware('roles:ministry_admin|teacher')->prefix('admin')->group(functi
     // Teachers Management
     // ============================================
     Route::apiResource('teachers', TeacherController::class);
+    Route::patch('teachers/{id}/toggle-status', [TeacherController::class, 'toggleStatus']);
     Route::post('teachers/{teacherId}/assign-schools', [TeacherSchoolAssignmentController::class, 'assignToSchools']);
     Route::get('teachers/by-school/{schoolId}', [TeacherSchoolAssignmentController::class, 'getBySchool']);
     Route::apiResource('teacher-school-assignments', TeacherSchoolAssignmentController::class);
