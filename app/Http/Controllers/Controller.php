@@ -4,17 +4,17 @@ namespace App\Http\Controllers;
 
 abstract class Controller
 {
-    public function successResponsePaginate($data = [], $paginate, $message = null, $code = 200)
+    public function successResponsePaginate($data = [], $paginate = null, $message = null, $code = 200)
     {
         return response()->json([
             'status'  => true,
             'message' => $message,
             'data'    => $data,
             'meta' => [
-                'current_page' => $paginate->currentPage(),
-                'last_page'    => $paginate->lastPage(),
-                'per_page'     => $paginate->perPage(),
-                'total'        => $paginate->total(),
+                'current_page' => $paginate?->currentPage(),
+                'last_page'    => $paginate?->lastPage(),
+                'per_page'     => $paginate?->perPage(),
+                'total'        => $paginate?->total(),
             ],
         ], $code);
     }
