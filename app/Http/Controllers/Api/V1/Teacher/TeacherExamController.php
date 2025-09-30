@@ -58,7 +58,7 @@ class TeacherExamController extends Controller
             );
 
             return response()->json([
-                'status' => true,
+                'status'  => true,
                 'message' => 'تم السماح للطالب بدخول الامتحان',
                 'data' => [
                     'session_id'    => $session->id,
@@ -70,13 +70,13 @@ class TeacherExamController extends Controller
             ]);
         } catch (ExamAccessDeniedException $e) {
             return response()->json([
-                'status' => false,
+                'status'  => false,
                 'message' => $e->getMessage(),
                 'reasons' => $e->getReasons()
             ], 403);
         } catch (\Exception $e) {
             return response()->json([
-                'status' => false,
+                'status'  => false,
                 'message' => $e->getMessage()
             ], 400);
         }
@@ -112,7 +112,7 @@ class TeacherExamController extends Controller
             // Student shouldn't have existing active session
             ->whereDoesntHave('sessions', function ($query) use ($studentId) {
                 $query->where('student_id', $studentId)
-                    ->whereIn('session_status', ['submitted', 'in_progress', 'not_started']);
+                    ->whereIn('session_status', ['submitted', 'in_progress']);
             })
             ->with(['subject', 'questions'])
             ->orderBy('start_time', 'asc')

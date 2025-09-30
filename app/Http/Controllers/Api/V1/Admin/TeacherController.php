@@ -29,7 +29,8 @@ class TeacherController extends Controller
 
         return $this->successResponsePaginate(
             UserResource::collection($teachers->pluck('user')),
-            $teachers
+            $teachers,
+            'Teachers fetched successfully'
         );
     }
 

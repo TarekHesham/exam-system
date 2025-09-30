@@ -175,23 +175,6 @@ class StudentExamService
         return [
             'can_access' => $canAccess,
             'checks' => $checks,
-            'exam' => [
-                'id' => $exam->id,
-                'title' => $exam->title,
-                'start_time' => $exam->start_time,
-                'duration_minutes' => $exam->duration_minutes,
-                'requirements' => [
-                    'minimum_battery' => $exam->minimum_battery_percentage,
-                    'video_recording' => $exam->require_video_recording,
-                ]
-            ],
-            'student' => [
-                'id' => $student->id,
-                'name' => $student->user->name,
-                'academic_year' => $student->academic_year,
-                'section' => $student->section,
-                'is_banned' => $student->is_banned
-            ]
         ];
     }
 

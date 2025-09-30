@@ -33,7 +33,7 @@ class SchoolController extends Controller
 
         return $governorateId
             ? $this->successResponse($resource, 'Schools found')
-            : $this->successResponsePaginate($resource, $schools);
+            : $this->successResponsePaginate($resource, $schools, 'Schools found');
     }
 
     public function show(int $id)

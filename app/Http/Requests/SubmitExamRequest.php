@@ -59,23 +59,20 @@ class SubmitExamRequest extends FormRequest
     {
         return [
             'answers' => [
-                'description' => 'List of answers submitted by the student.',
-                'example' => [
-                    [
-                        'question_id'  => 1,
-                        'answer_text'  => 'The capital of Egypt is Cairo.',
-                        'answer_image' => 'base64_encoded_image_string',
-                        'answer_data'  => ['choice' => 'A'],
-                        'time_spent_seconds' => 45,
-                    ],
-                    [
-                        'question_id'  => 2,
-                        'answer_text'  => null,
-                        'answer_image' => null,
-                        'answer_data'  => ['selected_options' => [1, 3]],
-                        'time_spent_seconds' => 30,
-                    ]
+                [
+                    'question_id'  => 1,
+                    'answer_text'  => 'The capital of Egypt is Cairo.',
+                    'answer_image' => 'https://example.com/image.jpg',
+                    'answer_data'  => ['choice' => 'A'],
+                    'time_spent_seconds' => 45,
                 ],
+                [
+                    'question_id'  => 2,
+                    'answer_text'  => null,
+                    'answer_image' => null,
+                    'answer_data'  => ['choice' => 'C'],
+                    'time_spent_seconds' => 30,
+                ]
             ],
             'answers.*.question_id' => [
                 'description' => 'The ID of the exam question being answered.',

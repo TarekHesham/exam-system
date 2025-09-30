@@ -53,7 +53,7 @@ class StudentController extends Controller
         $paginate = $this->studentService->list($filters, $perPage);
 
         return $this->successResponsePaginate(
-            StudentResource::collection($paginate->items()),
+            StudentResource::collection($paginate),
             $paginate,
             'Students retrieved successfully'
         );

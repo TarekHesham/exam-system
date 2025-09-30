@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api\V1\Student;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SubmitExamRequest;
 use App\Core\Services\{StudentExamService, ExamService, ExamSessionService};
-use App\Http\Resources\ExamResultResource;
 use App\Modules\ExamManagement\Models\ExamSession;
 use Illuminate\Http\{JsonResponse, Request};
 use Illuminate\Support\Facades\{Auth, Cache};
@@ -71,10 +70,12 @@ class StudentExamController extends Controller
 
             return $this->successResponse([
                 ...$examData,
-                'start_time'             => $examStartTime,
-                'end_time'               => $examEndTime,
-                'duration_minutes'       => $studentSession->exam->duration_minutes,
-                'time_remaining_minutes' => $timeRemainingMinutes,
+                'timing_info' => [
+                    'start_time'             => $examStartTime,
+                    'end_time'               => $examEndTime,
+                    'duration_minutes'       => $studentSession->exam->duration_minutes,
+                    'time_remaining_minutes' => $timeRemainingMinutes,
+                ]
             ], 'تم جلب الامتحان المتاح بنجاح');
         } catch (\Exception $e) {
             return $this->errorResponse($e->getMessage(), 500);
@@ -104,9 +105,9 @@ class StudentExamController extends Controller
             }
 
             // Submit the session
-            $this->sessionService->submitSession($session, $data);
+            $res = $this->sessionService->submitSession($session, $data);
 
-            return $this->successResponse([], 'تم تسليم الامتحان بنجاح');
+            return $this->successResponse($res, 'تم تسليم الامتحان بنجاح');
         } catch (\Exception $e) {
             logger()->error($e->getMessage());
             return $this->errorResponse('حدث خطأ أثناء تسليم الامتحان', 500);

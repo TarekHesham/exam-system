@@ -9,7 +9,7 @@ class TeacherSchoolAssignment extends BaseModel
     protected $fillable = [
         'teacher_id',
         'school_id',
-        'assignment_type', // 'teaching', 'supervision', 'correction'
+        'assignment_type', // teaching, supervision, correction
         'is_active',
         'assigned_at'
     ];

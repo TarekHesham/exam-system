@@ -28,7 +28,7 @@
             </style>
 
     <script>
-        var tryItOutBaseUrl = "http://45.245.146.33:8000";
+        var tryItOutBaseUrl = "http://45.245.140.75:8000";
         var useCsrf = Boolean();
         var csrfUrl = "/sanctum/csrf-cookie";
     </script>
@@ -270,7 +270,7 @@ Student can only start exam during exam time window</a>
     </ul>
 
     <ul class="toc-footer" id="last-updated">
-        <li>Last updated: September 29, 2025</li>
+        <li>Last updated: September 30, 2025</li>
     </ul>
 </div>
 
@@ -280,7 +280,7 @@ Student can only start exam during exam time window</a>
         <h1 id="introduction">Introduction</h1>
 <p>This documentation aims to provide all the information you need to work with our API.</p>
 <aside>
-    <strong>Base URL</strong>: <code>http://45.245.146.33:8000</code>
+    <strong>Base URL</strong>: <code>http://45.245.140.75:8000</code>
 </aside>
 <pre><code>This documentation aims to provide all the information you need to work with our API.
 
@@ -310,7 +310,7 @@ You can switch the language used with the tabs at the top right (or from the nav
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.146.33:8000/api/v1/auth/login"
+    "http://45.245.140.75:8000/api/v1/auth/login"
 );
 
 const headers = {
@@ -335,7 +335,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.146.33:8000/api/v1/auth/login';
+$url = 'http://45.245.140.75:8000/api/v1/auth/login';
 $response = $client-&gt;post(
     $url,
     [
@@ -362,7 +362,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.146.33:8000/api/v1/auth/login';
+  final url = 'http://45.245.140.75:8000/api/v1/auth/login';
 
     final queryParams = {};
 
@@ -401,7 +401,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.146.33:8000/api/v1/auth/login");
+  final url = Uri.parse("http://45.245.140.75:8000/api/v1/auth/login");
 
     final queryParams = {};
 
@@ -578,7 +578,7 @@ Student can only start exam during exam time window</h2>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.146.33:8000/api/v1/student/available-exam"
+    "http://45.245.140.75:8000/api/v1/student/available-exam"
 );
 
 const headers = {
@@ -595,7 +595,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.146.33:8000/api/v1/student/available-exam';
+$url = 'http://45.245.140.75:8000/api/v1/student/available-exam';
 $response = $client-&gt;get(
     $url,
     [
@@ -616,7 +616,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.146.33:8000/api/v1/student/available-exam';
+  final url = 'http://45.245.140.75:8000/api/v1/student/available-exam';
 
     final queryParams = {};
 
@@ -650,7 +650,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.146.33:8000/api/v1/student/available-exam");
+  final url = Uri.parse("http://45.245.140.75:8000/api/v1/student/available-exam");
 
     final queryParams = {};
 
@@ -792,7 +792,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.146.33:8000/api/v1/student/exam/submit"
+    "http://45.245.140.75:8000/api/v1/student/exam/submit"
 );
 
 const headers = {
@@ -805,24 +805,12 @@ let body = {
     "answers": [
         {
             "question_id": 1,
-            "answer_text": "The capital of Egypt is Cairo.",
-            "answer_image": "base64_encoded_image_string",
+            "answer_text": "Cairo",
+            "answer_image": "iVBORw0KGgoAAAANSUhEUgAA...",
             "answer_data": {
-                "choice": "A"
+                "choice": "B"
             },
-            "time_spent_seconds": 45
-        },
-        {
-            "question_id": 2,
-            "answer_text": null,
-            "answer_image": null,
-            "answer_data": {
-                "selected_options": [
-                    1,
-                    3
-                ]
-            },
-            "time_spent_seconds": 30
+            "time_spent_seconds": 42
         }
     ],
     "notes": "I had trouble with question 3 due to formatting."
@@ -837,7 +825,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.146.33:8000/api/v1/student/exam/submit';
+$url = 'http://45.245.140.75:8000/api/v1/student/exam/submit';
 $response = $client-&gt;post(
     $url,
     [
@@ -850,24 +838,12 @@ $response = $client-&gt;post(
             'answers' =&gt; [
                 [
                     'question_id' =&gt; 1,
-                    'answer_text' =&gt; 'The capital of Egypt is Cairo.',
-                    'answer_image' =&gt; 'base64_encoded_image_string',
+                    'answer_text' =&gt; 'Cairo',
+                    'answer_image' =&gt; 'iVBORw0KGgoAAAANSUhEUgAA...',
                     'answer_data' =&gt; [
-                        'choice' =&gt; 'A',
+                        'choice' =&gt; 'B',
                     ],
-                    'time_spent_seconds' =&gt; 45,
-                ],
-                [
-                    'question_id' =&gt; 2,
-                    'answer_text' =&gt; null,
-                    'answer_image' =&gt; null,
-                    'answer_data' =&gt; [
-                        'selected_options' =&gt; [
-                            1,
-                            3,
-                        ],
-                    ],
-                    'time_spent_seconds' =&gt; 30,
+                    'time_spent_seconds' =&gt; 42,
                 ],
             ],
             'notes' =&gt; 'I had trouble with question 3 due to formatting.',
@@ -884,7 +860,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.146.33:8000/api/v1/student/exam/submit';
+  final url = 'http://45.245.140.75:8000/api/v1/student/exam/submit';
 
     final queryParams = {};
 
@@ -896,24 +872,12 @@ void main() async {
     'answers' =&gt; [
         [
             'question_id' =&gt; 1,
-            'answer_text' =&gt; 'The capital of Egypt is Cairo.',
-            'answer_image' =&gt; 'base64_encoded_image_string',
+            'answer_text' =&gt; 'Cairo',
+            'answer_image' =&gt; 'iVBORw0KGgoAAAANSUhEUgAA...',
             'answer_data' =&gt; [
-                'choice' =&gt; 'A',
+                'choice' =&gt; 'B',
             ],
-            'time_spent_seconds' =&gt; 45,
-        ],
-        [
-            'question_id' =&gt; 2,
-            'answer_text' =&gt; null,
-            'answer_image' =&gt; null,
-            'answer_data' =&gt; [
-                'selected_options' =&gt; [
-                    1,
-                    3,
-                ],
-            ],
-            'time_spent_seconds' =&gt; 30,
+            'time_spent_seconds' =&gt; 42,
         ],
     ],
     'notes' =&gt; 'I had trouble with question 3 due to formatting.',
@@ -943,7 +907,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.146.33:8000/api/v1/student/exam/submit");
+  final url = Uri.parse("http://45.245.140.75:8000/api/v1/student/exam/submit");
 
     final queryParams = {};
 
@@ -955,24 +919,12 @@ void main() async {
     'answers' =&gt; [
         [
             'question_id' =&gt; 1,
-            'answer_text' =&gt; 'The capital of Egypt is Cairo.',
-            'answer_image' =&gt; 'base64_encoded_image_string',
+            'answer_text' =&gt; 'Cairo',
+            'answer_image' =&gt; 'iVBORw0KGgoAAAANSUhEUgAA...',
             'answer_data' =&gt; [
-                'choice' =&gt; 'A',
+                'choice' =&gt; 'B',
             ],
-            'time_spent_seconds' =&gt; 45,
-        ],
-        [
-            'question_id' =&gt; 2,
-            'answer_text' =&gt; null,
-            'answer_image' =&gt; null,
-            'answer_data' =&gt; [
-                'selected_options' =&gt; [
-                    1,
-                    3,
-                ],
-            ],
-            'time_spent_seconds' =&gt; 30,
+            'time_spent_seconds' =&gt; 42,
         ],
     ],
     'notes' =&gt; 'I had trouble with question 3 due to formatting.',
@@ -1086,7 +1038,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <small>object[]</small>&nbsp;
  &nbsp;
 <br>
-<p>List of answers submitted by the student. Must have at least 1 items.</p>
+<p>Must have at least 1 items.</p>
             </summary>
                                                 <div style="margin-left: 14px; clear: unset;">
                         <b style="line-height: 2;"><code>question_id</code></b>&nbsp;&nbsp;
@@ -1172,7 +1124,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.146.33:8000/api/v1/student/exam/results"
+    "http://45.245.140.75:8000/api/v1/student/exam/results"
 );
 
 const headers = {
@@ -1189,7 +1141,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.146.33:8000/api/v1/student/exam/results';
+$url = 'http://45.245.140.75:8000/api/v1/student/exam/results';
 $response = $client-&gt;get(
     $url,
     [
@@ -1210,7 +1162,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.146.33:8000/api/v1/student/exam/results';
+  final url = 'http://45.245.140.75:8000/api/v1/student/exam/results';
 
     final queryParams = {};
 
@@ -1244,7 +1196,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.146.33:8000/api/v1/student/exam/results");
+  final url = Uri.parse("http://45.245.140.75:8000/api/v1/student/exam/results");
 
     final queryParams = {};
 
@@ -1386,7 +1338,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.146.33:8000/api/v1/teacher/scan-qr-create-session"
+    "http://45.245.140.75:8000/api/v1/teacher/scan-qr-create-session"
 );
 
 const headers = {
@@ -1409,7 +1361,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.146.33:8000/api/v1/teacher/scan-qr-create-session';
+$url = 'http://45.245.140.75:8000/api/v1/teacher/scan-qr-create-session';
 $response = $client-&gt;post(
     $url,
     [
@@ -1434,7 +1386,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.146.33:8000/api/v1/teacher/scan-qr-create-session';
+  final url = 'http://45.245.140.75:8000/api/v1/teacher/scan-qr-create-session';
 
     final queryParams = {};
 
@@ -1471,7 +1423,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.146.33:8000/api/v1/teacher/scan-qr-create-session");
+  final url = Uri.parse("http://45.245.140.75:8000/api/v1/teacher/scan-qr-create-session");
 
     final queryParams = {};
 
@@ -1645,7 +1597,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.146.33:8000/api/v1/teacher/my-schools"
+    "http://45.245.140.75:8000/api/v1/teacher/my-schools"
 );
 
 const headers = {
@@ -1662,7 +1614,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.146.33:8000/api/v1/teacher/my-schools';
+$url = 'http://45.245.140.75:8000/api/v1/teacher/my-schools';
 $response = $client-&gt;get(
     $url,
     [
@@ -1683,7 +1635,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.146.33:8000/api/v1/teacher/my-schools';
+  final url = 'http://45.245.140.75:8000/api/v1/teacher/my-schools';
 
     final queryParams = {};
 
@@ -1717,7 +1669,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.146.33:8000/api/v1/teacher/my-schools");
+  final url = Uri.parse("http://45.245.140.75:8000/api/v1/teacher/my-schools");
 
     final queryParams = {};
 
@@ -1862,7 +1814,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.146.33:8000/api/v1/admin/students"
+    "http://45.245.140.75:8000/api/v1/admin/students"
 );
 
 const headers = {
@@ -1879,7 +1831,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.146.33:8000/api/v1/admin/students';
+$url = 'http://45.245.140.75:8000/api/v1/admin/students';
 $response = $client-&gt;get(
     $url,
     [
@@ -1900,7 +1852,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.146.33:8000/api/v1/admin/students';
+  final url = 'http://45.245.140.75:8000/api/v1/admin/students';
 
     final queryParams = {};
 
@@ -1934,7 +1886,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/students");
+  final url = Uri.parse("http://45.245.140.75:8000/api/v1/admin/students");
 
     final queryParams = {};
 
@@ -2076,7 +2028,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.146.33:8000/api/v1/admin/students"
+    "http://45.245.140.75:8000/api/v1/admin/students"
 );
 
 const headers = {
@@ -2108,7 +2060,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.146.33:8000/api/v1/admin/students';
+$url = 'http://45.245.140.75:8000/api/v1/admin/students';
 $response = $client-&gt;post(
     $url,
     [
@@ -2142,7 +2094,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.146.33:8000/api/v1/admin/students';
+  final url = 'http://45.245.140.75:8000/api/v1/admin/students';
 
     final queryParams = {};
 
@@ -2188,7 +2140,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/students");
+  final url = Uri.parse("http://45.245.140.75:8000/api/v1/admin/students");
 
     final queryParams = {};
 
@@ -2454,7 +2406,7 @@ Must be one of:
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.146.33:8000/api/v1/admin/students/architecto"
+    "http://45.245.140.75:8000/api/v1/admin/students/architecto"
 );
 
 const headers = {
@@ -2471,7 +2423,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.146.33:8000/api/v1/admin/students/architecto';
+$url = 'http://45.245.140.75:8000/api/v1/admin/students/architecto';
 $response = $client-&gt;get(
     $url,
     [
@@ -2492,7 +2444,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.146.33:8000/api/v1/admin/students/architecto';
+  final url = 'http://45.245.140.75:8000/api/v1/admin/students/architecto';
 
     final queryParams = {};
 
@@ -2526,7 +2478,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/students/architecto");
+  final url = Uri.parse("http://45.245.140.75:8000/api/v1/admin/students/architecto");
 
     final queryParams = {};
 
@@ -2680,7 +2632,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.146.33:8000/api/v1/admin/students/architecto"
+    "http://45.245.140.75:8000/api/v1/admin/students/architecto"
 );
 
 const headers = {
@@ -2715,7 +2667,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.146.33:8000/api/v1/admin/students/architecto';
+$url = 'http://45.245.140.75:8000/api/v1/admin/students/architecto';
 $response = $client-&gt;put(
     $url,
     [
@@ -2752,7 +2704,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.146.33:8000/api/v1/admin/students/architecto';
+  final url = 'http://45.245.140.75:8000/api/v1/admin/students/architecto';
 
     final queryParams = {};
 
@@ -2801,7 +2753,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/students/architecto");
+  final url = Uri.parse("http://45.245.140.75:8000/api/v1/admin/students/architecto");
 
     final queryParams = {};
 
@@ -3129,7 +3081,7 @@ Must be one of:
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.146.33:8000/api/v1/admin/students/architecto"
+    "http://45.245.140.75:8000/api/v1/admin/students/architecto"
 );
 
 const headers = {
@@ -3146,7 +3098,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.146.33:8000/api/v1/admin/students/architecto';
+$url = 'http://45.245.140.75:8000/api/v1/admin/students/architecto';
 $response = $client-&gt;delete(
     $url,
     [
@@ -3167,7 +3119,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.146.33:8000/api/v1/admin/students/architecto';
+  final url = 'http://45.245.140.75:8000/api/v1/admin/students/architecto';
 
     final queryParams = {};
 
@@ -3201,7 +3153,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/students/architecto");
+  final url = Uri.parse("http://45.245.140.75:8000/api/v1/admin/students/architecto");
 
     final queryParams = {};
 
@@ -3339,7 +3291,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.146.33:8000/api/v1/admin/teachers"
+    "http://45.245.140.75:8000/api/v1/admin/teachers"
 );
 
 const headers = {
@@ -3356,7 +3308,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.146.33:8000/api/v1/admin/teachers';
+$url = 'http://45.245.140.75:8000/api/v1/admin/teachers';
 $response = $client-&gt;get(
     $url,
     [
@@ -3377,7 +3329,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.146.33:8000/api/v1/admin/teachers';
+  final url = 'http://45.245.140.75:8000/api/v1/admin/teachers';
 
     final queryParams = {};
 
@@ -3411,7 +3363,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/teachers");
+  final url = Uri.parse("http://45.245.140.75:8000/api/v1/admin/teachers");
 
     final queryParams = {};
 
@@ -3553,7 +3505,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.146.33:8000/api/v1/admin/teachers"
+    "http://45.245.140.75:8000/api/v1/admin/teachers"
 );
 
 const headers = {
@@ -3585,7 +3537,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.146.33:8000/api/v1/admin/teachers';
+$url = 'http://45.245.140.75:8000/api/v1/admin/teachers';
 $response = $client-&gt;post(
     $url,
     [
@@ -3619,7 +3571,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.146.33:8000/api/v1/admin/teachers';
+  final url = 'http://45.245.140.75:8000/api/v1/admin/teachers';
 
     final queryParams = {};
 
@@ -3665,7 +3617,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/teachers");
+  final url = Uri.parse("http://45.245.140.75:8000/api/v1/admin/teachers");
 
     final queryParams = {};
 
@@ -3972,7 +3924,7 @@ Must be one of:
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.146.33:8000/api/v1/admin/teachers/architecto"
+    "http://45.245.140.75:8000/api/v1/admin/teachers/architecto"
 );
 
 const headers = {
@@ -3989,7 +3941,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.146.33:8000/api/v1/admin/teachers/architecto';
+$url = 'http://45.245.140.75:8000/api/v1/admin/teachers/architecto';
 $response = $client-&gt;get(
     $url,
     [
@@ -4010,7 +3962,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.146.33:8000/api/v1/admin/teachers/architecto';
+  final url = 'http://45.245.140.75:8000/api/v1/admin/teachers/architecto';
 
     final queryParams = {};
 
@@ -4044,7 +3996,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/teachers/architecto");
+  final url = Uri.parse("http://45.245.140.75:8000/api/v1/admin/teachers/architecto");
 
     final queryParams = {};
 
@@ -4198,7 +4150,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.146.33:8000/api/v1/admin/teachers/architecto"
+    "http://45.245.140.75:8000/api/v1/admin/teachers/architecto"
 );
 
 const headers = {
@@ -4233,7 +4185,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.146.33:8000/api/v1/admin/teachers/architecto';
+$url = 'http://45.245.140.75:8000/api/v1/admin/teachers/architecto';
 $response = $client-&gt;put(
     $url,
     [
@@ -4270,7 +4222,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.146.33:8000/api/v1/admin/teachers/architecto';
+  final url = 'http://45.245.140.75:8000/api/v1/admin/teachers/architecto';
 
     final queryParams = {};
 
@@ -4319,7 +4271,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/teachers/architecto");
+  final url = Uri.parse("http://45.245.140.75:8000/api/v1/admin/teachers/architecto");
 
     final queryParams = {};
 
@@ -4645,7 +4597,7 @@ Must be one of:
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.146.33:8000/api/v1/admin/teachers/architecto"
+    "http://45.245.140.75:8000/api/v1/admin/teachers/architecto"
 );
 
 const headers = {
@@ -4662,7 +4614,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.146.33:8000/api/v1/admin/teachers/architecto';
+$url = 'http://45.245.140.75:8000/api/v1/admin/teachers/architecto';
 $response = $client-&gt;delete(
     $url,
     [
@@ -4683,7 +4635,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.146.33:8000/api/v1/admin/teachers/architecto';
+  final url = 'http://45.245.140.75:8000/api/v1/admin/teachers/architecto';
 
     final queryParams = {};
 
@@ -4717,7 +4669,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/teachers/architecto");
+  final url = Uri.parse("http://45.245.140.75:8000/api/v1/admin/teachers/architecto");
 
     final queryParams = {};
 
@@ -4855,7 +4807,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.146.33:8000/api/v1/admin/teachers/architecto/assign-schools"
+    "http://45.245.140.75:8000/api/v1/admin/teachers/architecto/assign-schools"
 );
 
 const headers = {
@@ -4880,7 +4832,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.146.33:8000/api/v1/admin/teachers/architecto/assign-schools';
+$url = 'http://45.245.140.75:8000/api/v1/admin/teachers/architecto/assign-schools';
 $response = $client-&gt;post(
     $url,
     [
@@ -4907,7 +4859,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.146.33:8000/api/v1/admin/teachers/architecto/assign-schools';
+  final url = 'http://45.245.140.75:8000/api/v1/admin/teachers/architecto/assign-schools';
 
     final queryParams = {};
 
@@ -4946,7 +4898,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/teachers/architecto/assign-schools");
+  final url = Uri.parse("http://45.245.140.75:8000/api/v1/admin/teachers/architecto/assign-schools");
 
     final queryParams = {};
 
@@ -5116,7 +5068,7 @@ Must be one of:
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.146.33:8000/api/v1/admin/teachers/by-school/architecto"
+    "http://45.245.140.75:8000/api/v1/admin/teachers/by-school/architecto"
 );
 
 const headers = {
@@ -5133,7 +5085,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.146.33:8000/api/v1/admin/teachers/by-school/architecto';
+$url = 'http://45.245.140.75:8000/api/v1/admin/teachers/by-school/architecto';
 $response = $client-&gt;get(
     $url,
     [
@@ -5154,7 +5106,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.146.33:8000/api/v1/admin/teachers/by-school/architecto';
+  final url = 'http://45.245.140.75:8000/api/v1/admin/teachers/by-school/architecto';
 
     final queryParams = {};
 
@@ -5188,7 +5140,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/teachers/by-school/architecto");
+  final url = Uri.parse("http://45.245.140.75:8000/api/v1/admin/teachers/by-school/architecto");
 
     final queryParams = {};
 
@@ -5342,7 +5294,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.146.33:8000/api/v1/admin/teacher-school-assignments"
+    "http://45.245.140.75:8000/api/v1/admin/teacher-school-assignments"
 );
 
 const headers = {
@@ -5359,7 +5311,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.146.33:8000/api/v1/admin/teacher-school-assignments';
+$url = 'http://45.245.140.75:8000/api/v1/admin/teacher-school-assignments';
 $response = $client-&gt;get(
     $url,
     [
@@ -5380,7 +5332,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.146.33:8000/api/v1/admin/teacher-school-assignments';
+  final url = 'http://45.245.140.75:8000/api/v1/admin/teacher-school-assignments';
 
     final queryParams = {};
 
@@ -5414,7 +5366,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/teacher-school-assignments");
+  final url = Uri.parse("http://45.245.140.75:8000/api/v1/admin/teacher-school-assignments");
 
     final queryParams = {};
 
@@ -5556,7 +5508,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.146.33:8000/api/v1/admin/teacher-school-assignments"
+    "http://45.245.140.75:8000/api/v1/admin/teacher-school-assignments"
 );
 
 const headers = {
@@ -5582,7 +5534,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.146.33:8000/api/v1/admin/teacher-school-assignments';
+$url = 'http://45.245.140.75:8000/api/v1/admin/teacher-school-assignments';
 $response = $client-&gt;post(
     $url,
     [
@@ -5610,7 +5562,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.146.33:8000/api/v1/admin/teacher-school-assignments';
+  final url = 'http://45.245.140.75:8000/api/v1/admin/teacher-school-assignments';
 
     final queryParams = {};
 
@@ -5650,7 +5602,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/teacher-school-assignments");
+  final url = Uri.parse("http://45.245.140.75:8000/api/v1/admin/teacher-school-assignments");
 
     final queryParams = {};
 
@@ -5850,7 +5802,7 @@ Must be one of:
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.146.33:8000/api/v1/admin/teacher-school-assignments/architecto"
+    "http://45.245.140.75:8000/api/v1/admin/teacher-school-assignments/architecto"
 );
 
 const headers = {
@@ -5867,7 +5819,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.146.33:8000/api/v1/admin/teacher-school-assignments/architecto';
+$url = 'http://45.245.140.75:8000/api/v1/admin/teacher-school-assignments/architecto';
 $response = $client-&gt;get(
     $url,
     [
@@ -5888,7 +5840,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.146.33:8000/api/v1/admin/teacher-school-assignments/architecto';
+  final url = 'http://45.245.140.75:8000/api/v1/admin/teacher-school-assignments/architecto';
 
     final queryParams = {};
 
@@ -5922,7 +5874,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/teacher-school-assignments/architecto");
+  final url = Uri.parse("http://45.245.140.75:8000/api/v1/admin/teacher-school-assignments/architecto");
 
     final queryParams = {};
 
@@ -6076,7 +6028,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.146.33:8000/api/v1/admin/teacher-school-assignments/architecto"
+    "http://45.245.140.75:8000/api/v1/admin/teacher-school-assignments/architecto"
 );
 
 const headers = {
@@ -6100,7 +6052,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.146.33:8000/api/v1/admin/teacher-school-assignments/architecto';
+$url = 'http://45.245.140.75:8000/api/v1/admin/teacher-school-assignments/architecto';
 $response = $client-&gt;put(
     $url,
     [
@@ -6126,7 +6078,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.146.33:8000/api/v1/admin/teacher-school-assignments/architecto';
+  final url = 'http://45.245.140.75:8000/api/v1/admin/teacher-school-assignments/architecto';
 
     final queryParams = {};
 
@@ -6164,7 +6116,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/teacher-school-assignments/architecto");
+  final url = Uri.parse("http://45.245.140.75:8000/api/v1/admin/teacher-school-assignments/architecto");
 
     final queryParams = {};
 
@@ -6356,7 +6308,7 @@ Must be one of:
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.146.33:8000/api/v1/admin/teacher-school-assignments/architecto"
+    "http://45.245.140.75:8000/api/v1/admin/teacher-school-assignments/architecto"
 );
 
 const headers = {
@@ -6373,7 +6325,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.146.33:8000/api/v1/admin/teacher-school-assignments/architecto';
+$url = 'http://45.245.140.75:8000/api/v1/admin/teacher-school-assignments/architecto';
 $response = $client-&gt;delete(
     $url,
     [
@@ -6394,7 +6346,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.146.33:8000/api/v1/admin/teacher-school-assignments/architecto';
+  final url = 'http://45.245.140.75:8000/api/v1/admin/teacher-school-assignments/architecto';
 
     final queryParams = {};
 
@@ -6428,7 +6380,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/teacher-school-assignments/architecto");
+  final url = Uri.parse("http://45.245.140.75:8000/api/v1/admin/teacher-school-assignments/architecto");
 
     final queryParams = {};
 
@@ -6566,7 +6518,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.146.33:8000/api/v1/admin/exams"
+    "http://45.245.140.75:8000/api/v1/admin/exams"
 );
 
 const headers = {
@@ -6583,7 +6535,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.146.33:8000/api/v1/admin/exams';
+$url = 'http://45.245.140.75:8000/api/v1/admin/exams';
 $response = $client-&gt;get(
     $url,
     [
@@ -6604,7 +6556,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.146.33:8000/api/v1/admin/exams';
+  final url = 'http://45.245.140.75:8000/api/v1/admin/exams';
 
     final queryParams = {};
 
@@ -6638,7 +6590,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/exams");
+  final url = Uri.parse("http://45.245.140.75:8000/api/v1/admin/exams");
 
     final queryParams = {};
 
@@ -6780,7 +6732,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.146.33:8000/api/v1/admin/exams"
+    "http://45.245.140.75:8000/api/v1/admin/exams"
 );
 
 const headers = {
@@ -6812,7 +6764,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.146.33:8000/api/v1/admin/exams';
+$url = 'http://45.245.140.75:8000/api/v1/admin/exams';
 $response = $client-&gt;post(
     $url,
     [
@@ -6846,7 +6798,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.146.33:8000/api/v1/admin/exams';
+  final url = 'http://45.245.140.75:8000/api/v1/admin/exams';
 
     final queryParams = {};
 
@@ -6892,7 +6844,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/exams");
+  final url = Uri.parse("http://45.245.140.75:8000/api/v1/admin/exams");
 
     final queryParams = {};
 
@@ -7166,7 +7118,7 @@ Must be one of:
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.146.33:8000/api/v1/admin/exams/architecto"
+    "http://45.245.140.75:8000/api/v1/admin/exams/architecto"
 );
 
 const headers = {
@@ -7183,7 +7135,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.146.33:8000/api/v1/admin/exams/architecto';
+$url = 'http://45.245.140.75:8000/api/v1/admin/exams/architecto';
 $response = $client-&gt;get(
     $url,
     [
@@ -7204,7 +7156,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.146.33:8000/api/v1/admin/exams/architecto';
+  final url = 'http://45.245.140.75:8000/api/v1/admin/exams/architecto';
 
     final queryParams = {};
 
@@ -7238,7 +7190,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/exams/architecto");
+  final url = Uri.parse("http://45.245.140.75:8000/api/v1/admin/exams/architecto");
 
     final queryParams = {};
 
@@ -7392,7 +7344,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.146.33:8000/api/v1/admin/exams/1"
+    "http://45.245.140.75:8000/api/v1/admin/exams/1"
 );
 
 const headers = {
@@ -7423,7 +7375,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.146.33:8000/api/v1/admin/exams/1';
+$url = 'http://45.245.140.75:8000/api/v1/admin/exams/1';
 $response = $client-&gt;put(
     $url,
     [
@@ -7456,7 +7408,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.146.33:8000/api/v1/admin/exams/1';
+  final url = 'http://45.245.140.75:8000/api/v1/admin/exams/1';
 
     final queryParams = {};
 
@@ -7501,7 +7453,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/exams/1");
+  final url = Uri.parse("http://45.245.140.75:8000/api/v1/admin/exams/1");
 
     final queryParams = {};
 
@@ -7791,7 +7743,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.146.33:8000/api/v1/admin/exams/architecto"
+    "http://45.245.140.75:8000/api/v1/admin/exams/architecto"
 );
 
 const headers = {
@@ -7808,7 +7760,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.146.33:8000/api/v1/admin/exams/architecto';
+$url = 'http://45.245.140.75:8000/api/v1/admin/exams/architecto';
 $response = $client-&gt;delete(
     $url,
     [
@@ -7829,7 +7781,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.146.33:8000/api/v1/admin/exams/architecto';
+  final url = 'http://45.245.140.75:8000/api/v1/admin/exams/architecto';
 
     final queryParams = {};
 
@@ -7863,7 +7815,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/exams/architecto");
+  final url = Uri.parse("http://45.245.140.75:8000/api/v1/admin/exams/architecto");
 
     final queryParams = {};
 
@@ -8001,7 +7953,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.146.33:8000/api/v1/admin/exams/architecto/duplicate"
+    "http://45.245.140.75:8000/api/v1/admin/exams/architecto/duplicate"
 );
 
 const headers = {
@@ -8018,7 +7970,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.146.33:8000/api/v1/admin/exams/architecto/duplicate';
+$url = 'http://45.245.140.75:8000/api/v1/admin/exams/architecto/duplicate';
 $response = $client-&gt;post(
     $url,
     [
@@ -8039,7 +7991,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.146.33:8000/api/v1/admin/exams/architecto/duplicate';
+  final url = 'http://45.245.140.75:8000/api/v1/admin/exams/architecto/duplicate';
 
     final queryParams = {};
 
@@ -8073,7 +8025,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/exams/architecto/duplicate");
+  final url = Uri.parse("http://45.245.140.75:8000/api/v1/admin/exams/architecto/duplicate");
 
     final queryParams = {};
 
@@ -8211,7 +8163,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.146.33:8000/api/v1/admin/exams/architecto/statistics"
+    "http://45.245.140.75:8000/api/v1/admin/exams/architecto/statistics"
 );
 
 const headers = {
@@ -8228,7 +8180,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.146.33:8000/api/v1/admin/exams/architecto/statistics';
+$url = 'http://45.245.140.75:8000/api/v1/admin/exams/architecto/statistics';
 $response = $client-&gt;get(
     $url,
     [
@@ -8249,7 +8201,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.146.33:8000/api/v1/admin/exams/architecto/statistics';
+  final url = 'http://45.245.140.75:8000/api/v1/admin/exams/architecto/statistics';
 
     final queryParams = {};
 
@@ -8283,7 +8235,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/exams/architecto/statistics");
+  final url = Uri.parse("http://45.245.140.75:8000/api/v1/admin/exams/architecto/statistics");
 
     final queryParams = {};
 
@@ -8437,7 +8389,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.146.33:8000/api/v1/admin/subjects"
+    "http://45.245.140.75:8000/api/v1/admin/subjects"
 );
 
 const headers = {
@@ -8454,7 +8406,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.146.33:8000/api/v1/admin/subjects';
+$url = 'http://45.245.140.75:8000/api/v1/admin/subjects';
 $response = $client-&gt;get(
     $url,
     [
@@ -8475,7 +8427,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.146.33:8000/api/v1/admin/subjects';
+  final url = 'http://45.245.140.75:8000/api/v1/admin/subjects';
 
     final queryParams = {};
 
@@ -8509,7 +8461,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/subjects");
+  final url = Uri.parse("http://45.245.140.75:8000/api/v1/admin/subjects");
 
     final queryParams = {};
 
@@ -8651,7 +8603,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.146.33:8000/api/v1/admin/subjects"
+    "http://45.245.140.75:8000/api/v1/admin/subjects"
 );
 
 const headers = {
@@ -8679,7 +8631,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.146.33:8000/api/v1/admin/subjects';
+$url = 'http://45.245.140.75:8000/api/v1/admin/subjects';
 $response = $client-&gt;post(
     $url,
     [
@@ -8709,7 +8661,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.146.33:8000/api/v1/admin/subjects';
+  final url = 'http://45.245.140.75:8000/api/v1/admin/subjects';
 
     final queryParams = {};
 
@@ -8751,7 +8703,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/subjects");
+  final url = Uri.parse("http://45.245.140.75:8000/api/v1/admin/subjects");
 
     final queryParams = {};
 
@@ -8983,7 +8935,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.146.33:8000/api/v1/admin/subjects/architecto"
+    "http://45.245.140.75:8000/api/v1/admin/subjects/architecto"
 );
 
 const headers = {
@@ -9000,7 +8952,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.146.33:8000/api/v1/admin/subjects/architecto';
+$url = 'http://45.245.140.75:8000/api/v1/admin/subjects/architecto';
 $response = $client-&gt;get(
     $url,
     [
@@ -9021,7 +8973,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.146.33:8000/api/v1/admin/subjects/architecto';
+  final url = 'http://45.245.140.75:8000/api/v1/admin/subjects/architecto';
 
     final queryParams = {};
 
@@ -9055,7 +9007,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/subjects/architecto");
+  final url = Uri.parse("http://45.245.140.75:8000/api/v1/admin/subjects/architecto");
 
     final queryParams = {};
 
@@ -9209,7 +9161,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.146.33:8000/api/v1/admin/subjects/architecto"
+    "http://45.245.140.75:8000/api/v1/admin/subjects/architecto"
 );
 
 const headers = {
@@ -9237,7 +9189,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.146.33:8000/api/v1/admin/subjects/architecto';
+$url = 'http://45.245.140.75:8000/api/v1/admin/subjects/architecto';
 $response = $client-&gt;put(
     $url,
     [
@@ -9267,7 +9219,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.146.33:8000/api/v1/admin/subjects/architecto';
+  final url = 'http://45.245.140.75:8000/api/v1/admin/subjects/architecto';
 
     final queryParams = {};
 
@@ -9309,7 +9261,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/subjects/architecto");
+  final url = Uri.parse("http://45.245.140.75:8000/api/v1/admin/subjects/architecto");
 
     final queryParams = {};
 
@@ -9557,7 +9509,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.146.33:8000/api/v1/admin/subjects/architecto"
+    "http://45.245.140.75:8000/api/v1/admin/subjects/architecto"
 );
 
 const headers = {
@@ -9574,7 +9526,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.146.33:8000/api/v1/admin/subjects/architecto';
+$url = 'http://45.245.140.75:8000/api/v1/admin/subjects/architecto';
 $response = $client-&gt;delete(
     $url,
     [
@@ -9595,7 +9547,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.146.33:8000/api/v1/admin/subjects/architecto';
+  final url = 'http://45.245.140.75:8000/api/v1/admin/subjects/architecto';
 
     final queryParams = {};
 
@@ -9629,7 +9581,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/subjects/architecto");
+  final url = Uri.parse("http://45.245.140.75:8000/api/v1/admin/subjects/architecto");
 
     final queryParams = {};
 
@@ -9767,7 +9719,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.146.33:8000/api/v1/admin/exam-questions"
+    "http://45.245.140.75:8000/api/v1/admin/exam-questions"
 );
 
 const headers = {
@@ -9784,7 +9736,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.146.33:8000/api/v1/admin/exam-questions';
+$url = 'http://45.245.140.75:8000/api/v1/admin/exam-questions';
 $response = $client-&gt;get(
     $url,
     [
@@ -9805,7 +9757,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.146.33:8000/api/v1/admin/exam-questions';
+  final url = 'http://45.245.140.75:8000/api/v1/admin/exam-questions';
 
     final queryParams = {};
 
@@ -9839,7 +9791,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/exam-questions");
+  final url = Uri.parse("http://45.245.140.75:8000/api/v1/admin/exam-questions");
 
     final queryParams = {};
 
@@ -9981,7 +9933,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.146.33:8000/api/v1/admin/exam-questions"
+    "http://45.245.140.75:8000/api/v1/admin/exam-questions"
 );
 
 const headers = {
@@ -10014,7 +9966,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.146.33:8000/api/v1/admin/exam-questions';
+$url = 'http://45.245.140.75:8000/api/v1/admin/exam-questions';
 $response = $client-&gt;post(
     $url,
     [
@@ -10049,7 +10001,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.146.33:8000/api/v1/admin/exam-questions';
+  final url = 'http://45.245.140.75:8000/api/v1/admin/exam-questions';
 
     final queryParams = {};
 
@@ -10096,7 +10048,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/exam-questions");
+  final url = Uri.parse("http://45.245.140.75:8000/api/v1/admin/exam-questions");
 
     final queryParams = {};
 
@@ -10360,7 +10312,7 @@ Must be one of:
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.146.33:8000/api/v1/admin/exam-questions/architecto"
+    "http://45.245.140.75:8000/api/v1/admin/exam-questions/architecto"
 );
 
 const headers = {
@@ -10377,7 +10329,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.146.33:8000/api/v1/admin/exam-questions/architecto';
+$url = 'http://45.245.140.75:8000/api/v1/admin/exam-questions/architecto';
 $response = $client-&gt;get(
     $url,
     [
@@ -10398,7 +10350,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.146.33:8000/api/v1/admin/exam-questions/architecto';
+  final url = 'http://45.245.140.75:8000/api/v1/admin/exam-questions/architecto';
 
     final queryParams = {};
 
@@ -10432,7 +10384,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/exam-questions/architecto");
+  final url = Uri.parse("http://45.245.140.75:8000/api/v1/admin/exam-questions/architecto");
 
     final queryParams = {};
 
@@ -10586,7 +10538,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.146.33:8000/api/v1/admin/exam-questions/architecto"
+    "http://45.245.140.75:8000/api/v1/admin/exam-questions/architecto"
 );
 
 const headers = {
@@ -10619,7 +10571,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.146.33:8000/api/v1/admin/exam-questions/architecto';
+$url = 'http://45.245.140.75:8000/api/v1/admin/exam-questions/architecto';
 $response = $client-&gt;put(
     $url,
     [
@@ -10654,7 +10606,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.146.33:8000/api/v1/admin/exam-questions/architecto';
+  final url = 'http://45.245.140.75:8000/api/v1/admin/exam-questions/architecto';
 
     final queryParams = {};
 
@@ -10701,7 +10653,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/exam-questions/architecto");
+  final url = Uri.parse("http://45.245.140.75:8000/api/v1/admin/exam-questions/architecto");
 
     final queryParams = {};
 
@@ -10981,7 +10933,7 @@ Must be one of:
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.146.33:8000/api/v1/admin/exam-questions/architecto"
+    "http://45.245.140.75:8000/api/v1/admin/exam-questions/architecto"
 );
 
 const headers = {
@@ -10998,7 +10950,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.146.33:8000/api/v1/admin/exam-questions/architecto';
+$url = 'http://45.245.140.75:8000/api/v1/admin/exam-questions/architecto';
 $response = $client-&gt;delete(
     $url,
     [
@@ -11019,7 +10971,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.146.33:8000/api/v1/admin/exam-questions/architecto';
+  final url = 'http://45.245.140.75:8000/api/v1/admin/exam-questions/architecto';
 
     final queryParams = {};
 
@@ -11053,7 +11005,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/exam-questions/architecto");
+  final url = Uri.parse("http://45.245.140.75:8000/api/v1/admin/exam-questions/architecto");
 
     final queryParams = {};
 
@@ -11191,7 +11143,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.146.33:8000/api/v1/admin/exams/architecto/questions"
+    "http://45.245.140.75:8000/api/v1/admin/exams/architecto/questions"
 );
 
 const headers = {
@@ -11208,7 +11160,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.146.33:8000/api/v1/admin/exams/architecto/questions';
+$url = 'http://45.245.140.75:8000/api/v1/admin/exams/architecto/questions';
 $response = $client-&gt;get(
     $url,
     [
@@ -11229,7 +11181,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.146.33:8000/api/v1/admin/exams/architecto/questions';
+  final url = 'http://45.245.140.75:8000/api/v1/admin/exams/architecto/questions';
 
     final queryParams = {};
 
@@ -11263,7 +11215,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/exams/architecto/questions");
+  final url = Uri.parse("http://45.245.140.75:8000/api/v1/admin/exams/architecto/questions");
 
     final queryParams = {};
 
@@ -11417,7 +11369,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.146.33:8000/api/v1/admin/exam-sections"
+    "http://45.245.140.75:8000/api/v1/admin/exam-sections"
 );
 
 const headers = {
@@ -11434,7 +11386,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.146.33:8000/api/v1/admin/exam-sections';
+$url = 'http://45.245.140.75:8000/api/v1/admin/exam-sections';
 $response = $client-&gt;get(
     $url,
     [
@@ -11455,7 +11407,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.146.33:8000/api/v1/admin/exam-sections';
+  final url = 'http://45.245.140.75:8000/api/v1/admin/exam-sections';
 
     final queryParams = {};
 
@@ -11489,7 +11441,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/exam-sections");
+  final url = Uri.parse("http://45.245.140.75:8000/api/v1/admin/exam-sections");
 
     final queryParams = {};
 
@@ -11631,7 +11583,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.146.33:8000/api/v1/admin/exam-sections"
+    "http://45.245.140.75:8000/api/v1/admin/exam-sections"
 );
 
 const headers = {
@@ -11656,7 +11608,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.146.33:8000/api/v1/admin/exam-sections';
+$url = 'http://45.245.140.75:8000/api/v1/admin/exam-sections';
 $response = $client-&gt;post(
     $url,
     [
@@ -11683,7 +11635,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.146.33:8000/api/v1/admin/exam-sections';
+  final url = 'http://45.245.140.75:8000/api/v1/admin/exam-sections';
 
     final queryParams = {};
 
@@ -11722,7 +11674,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/exam-sections");
+  final url = Uri.parse("http://45.245.140.75:8000/api/v1/admin/exam-sections");
 
     final queryParams = {};
 
@@ -11898,7 +11850,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.146.33:8000/api/v1/admin/exam-sections/architecto"
+    "http://45.245.140.75:8000/api/v1/admin/exam-sections/architecto"
 );
 
 const headers = {
@@ -11915,7 +11867,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.146.33:8000/api/v1/admin/exam-sections/architecto';
+$url = 'http://45.245.140.75:8000/api/v1/admin/exam-sections/architecto';
 $response = $client-&gt;get(
     $url,
     [
@@ -11936,7 +11888,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.146.33:8000/api/v1/admin/exam-sections/architecto';
+  final url = 'http://45.245.140.75:8000/api/v1/admin/exam-sections/architecto';
 
     final queryParams = {};
 
@@ -11970,7 +11922,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/exam-sections/architecto");
+  final url = Uri.parse("http://45.245.140.75:8000/api/v1/admin/exam-sections/architecto");
 
     final queryParams = {};
 
@@ -12124,7 +12076,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.146.33:8000/api/v1/admin/exam-sections/architecto"
+    "http://45.245.140.75:8000/api/v1/admin/exam-sections/architecto"
 );
 
 const headers = {
@@ -12149,7 +12101,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.146.33:8000/api/v1/admin/exam-sections/architecto';
+$url = 'http://45.245.140.75:8000/api/v1/admin/exam-sections/architecto';
 $response = $client-&gt;put(
     $url,
     [
@@ -12176,7 +12128,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.146.33:8000/api/v1/admin/exam-sections/architecto';
+  final url = 'http://45.245.140.75:8000/api/v1/admin/exam-sections/architecto';
 
     final queryParams = {};
 
@@ -12215,7 +12167,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/exam-sections/architecto");
+  final url = Uri.parse("http://45.245.140.75:8000/api/v1/admin/exam-sections/architecto");
 
     final queryParams = {};
 
@@ -12407,7 +12359,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.146.33:8000/api/v1/admin/exam-sections/architecto"
+    "http://45.245.140.75:8000/api/v1/admin/exam-sections/architecto"
 );
 
 const headers = {
@@ -12424,7 +12376,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.146.33:8000/api/v1/admin/exam-sections/architecto';
+$url = 'http://45.245.140.75:8000/api/v1/admin/exam-sections/architecto';
 $response = $client-&gt;delete(
     $url,
     [
@@ -12445,7 +12397,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.146.33:8000/api/v1/admin/exam-sections/architecto';
+  final url = 'http://45.245.140.75:8000/api/v1/admin/exam-sections/architecto';
 
     final queryParams = {};
 
@@ -12479,7 +12431,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/exam-sections/architecto");
+  final url = Uri.parse("http://45.245.140.75:8000/api/v1/admin/exam-sections/architecto");
 
     final queryParams = {};
 
@@ -12617,7 +12569,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.146.33:8000/api/v1/admin/school-admins"
+    "http://45.245.140.75:8000/api/v1/admin/school-admins"
 );
 
 const headers = {
@@ -12634,7 +12586,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.146.33:8000/api/v1/admin/school-admins';
+$url = 'http://45.245.140.75:8000/api/v1/admin/school-admins';
 $response = $client-&gt;get(
     $url,
     [
@@ -12655,7 +12607,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.146.33:8000/api/v1/admin/school-admins';
+  final url = 'http://45.245.140.75:8000/api/v1/admin/school-admins';
 
     final queryParams = {};
 
@@ -12689,7 +12641,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/school-admins");
+  final url = Uri.parse("http://45.245.140.75:8000/api/v1/admin/school-admins");
 
     final queryParams = {};
 
@@ -12831,7 +12783,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.146.33:8000/api/v1/admin/school-admins"
+    "http://45.245.140.75:8000/api/v1/admin/school-admins"
 );
 
 const headers = {
@@ -12865,7 +12817,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.146.33:8000/api/v1/admin/school-admins';
+$url = 'http://45.245.140.75:8000/api/v1/admin/school-admins';
 $response = $client-&gt;post(
     $url,
     [
@@ -12901,7 +12853,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.146.33:8000/api/v1/admin/school-admins';
+  final url = 'http://45.245.140.75:8000/api/v1/admin/school-admins';
 
     final queryParams = {};
 
@@ -12949,7 +12901,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/school-admins");
+  final url = Uri.parse("http://45.245.140.75:8000/api/v1/admin/school-admins");
 
     final queryParams = {};
 
@@ -13272,7 +13224,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.146.33:8000/api/v1/admin/school-admins/architecto"
+    "http://45.245.140.75:8000/api/v1/admin/school-admins/architecto"
 );
 
 const headers = {
@@ -13289,7 +13241,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.146.33:8000/api/v1/admin/school-admins/architecto';
+$url = 'http://45.245.140.75:8000/api/v1/admin/school-admins/architecto';
 $response = $client-&gt;get(
     $url,
     [
@@ -13310,7 +13262,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.146.33:8000/api/v1/admin/school-admins/architecto';
+  final url = 'http://45.245.140.75:8000/api/v1/admin/school-admins/architecto';
 
     final queryParams = {};
 
@@ -13344,7 +13296,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/school-admins/architecto");
+  final url = Uri.parse("http://45.245.140.75:8000/api/v1/admin/school-admins/architecto");
 
     final queryParams = {};
 
@@ -13498,7 +13450,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.146.33:8000/api/v1/admin/school-admins/architecto"
+    "http://45.245.140.75:8000/api/v1/admin/school-admins/architecto"
 );
 
 const headers = {
@@ -13527,7 +13479,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.146.33:8000/api/v1/admin/school-admins/architecto';
+$url = 'http://45.245.140.75:8000/api/v1/admin/school-admins/architecto';
 $response = $client-&gt;put(
     $url,
     [
@@ -13558,7 +13510,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.146.33:8000/api/v1/admin/school-admins/architecto';
+  final url = 'http://45.245.140.75:8000/api/v1/admin/school-admins/architecto';
 
     final queryParams = {};
 
@@ -13601,7 +13553,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/school-admins/architecto");
+  final url = Uri.parse("http://45.245.140.75:8000/api/v1/admin/school-admins/architecto");
 
     final queryParams = {};
 
@@ -13880,7 +13832,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.146.33:8000/api/v1/admin/school-admins/architecto"
+    "http://45.245.140.75:8000/api/v1/admin/school-admins/architecto"
 );
 
 const headers = {
@@ -13897,7 +13849,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.146.33:8000/api/v1/admin/school-admins/architecto';
+$url = 'http://45.245.140.75:8000/api/v1/admin/school-admins/architecto';
 $response = $client-&gt;delete(
     $url,
     [
@@ -13918,7 +13870,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.146.33:8000/api/v1/admin/school-admins/architecto';
+  final url = 'http://45.245.140.75:8000/api/v1/admin/school-admins/architecto';
 
     final queryParams = {};
 
@@ -13952,7 +13904,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/school-admins/architecto");
+  final url = Uri.parse("http://45.245.140.75:8000/api/v1/admin/school-admins/architecto");
 
     final queryParams = {};
 
@@ -14090,7 +14042,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.146.33:8000/api/v1/admin/schools"
+    "http://45.245.140.75:8000/api/v1/admin/schools"
 );
 
 const headers = {
@@ -14107,7 +14059,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.146.33:8000/api/v1/admin/schools';
+$url = 'http://45.245.140.75:8000/api/v1/admin/schools';
 $response = $client-&gt;get(
     $url,
     [
@@ -14128,7 +14080,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.146.33:8000/api/v1/admin/schools';
+  final url = 'http://45.245.140.75:8000/api/v1/admin/schools';
 
     final queryParams = {};
 
@@ -14162,7 +14114,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/schools");
+  final url = Uri.parse("http://45.245.140.75:8000/api/v1/admin/schools");
 
     final queryParams = {};
 
@@ -14304,7 +14256,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.146.33:8000/api/v1/admin/schools"
+    "http://45.245.140.75:8000/api/v1/admin/schools"
 );
 
 const headers = {
@@ -14334,7 +14286,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.146.33:8000/api/v1/admin/schools';
+$url = 'http://45.245.140.75:8000/api/v1/admin/schools';
 $response = $client-&gt;post(
     $url,
     [
@@ -14366,7 +14318,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.146.33:8000/api/v1/admin/schools';
+  final url = 'http://45.245.140.75:8000/api/v1/admin/schools';
 
     final queryParams = {};
 
@@ -14410,7 +14362,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/schools");
+  final url = Uri.parse("http://45.245.140.75:8000/api/v1/admin/schools");
 
     final queryParams = {};
 
@@ -14656,7 +14608,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.146.33:8000/api/v1/admin/schools/architecto"
+    "http://45.245.140.75:8000/api/v1/admin/schools/architecto"
 );
 
 const headers = {
@@ -14673,7 +14625,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.146.33:8000/api/v1/admin/schools/architecto';
+$url = 'http://45.245.140.75:8000/api/v1/admin/schools/architecto';
 $response = $client-&gt;get(
     $url,
     [
@@ -14694,7 +14646,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.146.33:8000/api/v1/admin/schools/architecto';
+  final url = 'http://45.245.140.75:8000/api/v1/admin/schools/architecto';
 
     final queryParams = {};
 
@@ -14728,7 +14680,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/schools/architecto");
+  final url = Uri.parse("http://45.245.140.75:8000/api/v1/admin/schools/architecto");
 
     final queryParams = {};
 
@@ -14882,7 +14834,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.146.33:8000/api/v1/admin/schools/architecto"
+    "http://45.245.140.75:8000/api/v1/admin/schools/architecto"
 );
 
 const headers = {
@@ -14912,7 +14864,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.146.33:8000/api/v1/admin/schools/architecto';
+$url = 'http://45.245.140.75:8000/api/v1/admin/schools/architecto';
 $response = $client-&gt;put(
     $url,
     [
@@ -14944,7 +14896,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.146.33:8000/api/v1/admin/schools/architecto';
+  final url = 'http://45.245.140.75:8000/api/v1/admin/schools/architecto';
 
     final queryParams = {};
 
@@ -14988,7 +14940,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/schools/architecto");
+  final url = Uri.parse("http://45.245.140.75:8000/api/v1/admin/schools/architecto");
 
     final queryParams = {};
 
@@ -15250,7 +15202,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.146.33:8000/api/v1/admin/schools/architecto"
+    "http://45.245.140.75:8000/api/v1/admin/schools/architecto"
 );
 
 const headers = {
@@ -15267,7 +15219,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.146.33:8000/api/v1/admin/schools/architecto';
+$url = 'http://45.245.140.75:8000/api/v1/admin/schools/architecto';
 $response = $client-&gt;delete(
     $url,
     [
@@ -15288,7 +15240,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.146.33:8000/api/v1/admin/schools/architecto';
+  final url = 'http://45.245.140.75:8000/api/v1/admin/schools/architecto';
 
     final queryParams = {};
 
@@ -15322,7 +15274,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.146.33:8000/api/v1/admin/schools/architecto");
+  final url = Uri.parse("http://45.245.140.75:8000/api/v1/admin/schools/architecto");
 
     final queryParams = {};
 
@@ -15460,7 +15412,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.146.33:8000/api/v1/me"
+    "http://45.245.140.75:8000/api/v1/me"
 );
 
 const headers = {
@@ -15477,7 +15429,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.146.33:8000/api/v1/me';
+$url = 'http://45.245.140.75:8000/api/v1/me';
 $response = $client-&gt;get(
     $url,
     [
@@ -15498,7 +15450,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.146.33:8000/api/v1/me';
+  final url = 'http://45.245.140.75:8000/api/v1/me';
 
     final queryParams = {};
 
@@ -15532,7 +15484,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.146.33:8000/api/v1/me");
+  final url = Uri.parse("http://45.245.140.75:8000/api/v1/me");
 
     final queryParams = {};
 
@@ -15674,7 +15626,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.146.33:8000/api/v1/logout"
+    "http://45.245.140.75:8000/api/v1/logout"
 );
 
 const headers = {
@@ -15691,7 +15643,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.146.33:8000/api/v1/logout';
+$url = 'http://45.245.140.75:8000/api/v1/logout';
 $response = $client-&gt;post(
     $url,
     [
@@ -15712,7 +15664,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.146.33:8000/api/v1/logout';
+  final url = 'http://45.245.140.75:8000/api/v1/logout';
 
     final queryParams = {};
 
@@ -15746,7 +15698,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.146.33:8000/api/v1/logout");
+  final url = Uri.parse("http://45.245.140.75:8000/api/v1/logout");
 
     final queryParams = {};
 
@@ -15872,7 +15824,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.146.33:8000/api/v1/governorates"
+    "http://45.245.140.75:8000/api/v1/governorates"
 );
 
 const headers = {
@@ -15889,7 +15841,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.146.33:8000/api/v1/governorates';
+$url = 'http://45.245.140.75:8000/api/v1/governorates';
 $response = $client-&gt;get(
     $url,
     [
@@ -15910,7 +15862,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.146.33:8000/api/v1/governorates';
+  final url = 'http://45.245.140.75:8000/api/v1/governorates';
 
     final queryParams = {};
 
@@ -15944,7 +15896,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.146.33:8000/api/v1/governorates");
+  final url = Uri.parse("http://45.245.140.75:8000/api/v1/governorates");
 
     final queryParams = {};
 
@@ -16086,7 +16038,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.146.33:8000/api/v1/governorates/architecto"
+    "http://45.245.140.75:8000/api/v1/governorates/architecto"
 );
 
 const headers = {
@@ -16103,7 +16055,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.146.33:8000/api/v1/governorates/architecto';
+$url = 'http://45.245.140.75:8000/api/v1/governorates/architecto';
 $response = $client-&gt;get(
     $url,
     [
@@ -16124,7 +16076,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.146.33:8000/api/v1/governorates/architecto';
+  final url = 'http://45.245.140.75:8000/api/v1/governorates/architecto';
 
     final queryParams = {};
 
@@ -16158,7 +16110,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.146.33:8000/api/v1/governorates/architecto");
+  final url = Uri.parse("http://45.245.140.75:8000/api/v1/governorates/architecto");
 
     final queryParams = {};
 
@@ -16312,7 +16264,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="JS-example">
     <pre><code class="language-JS">const url = new URL(
-    "http://45.245.146.33:8000/api/health"
+    "http://45.245.140.75:8000/api/health"
 );
 
 const headers = {
@@ -16329,7 +16281,7 @@ fetch(url, {
 
 <div class="Laravel-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://45.245.146.33:8000/api/health';
+$url = 'http://45.245.140.75:8000/api/health';
 $response = $client-&gt;get(
     $url,
     [
@@ -16350,7 +16302,7 @@ import 'package:dio/dio.dart';
 
 void main() async {
   final dio = Dio();
-  final url = 'http://45.245.146.33:8000/api/health';
+  final url = 'http://45.245.140.75:8000/api/health';
 
     final queryParams = {};
 
@@ -16384,7 +16336,7 @@ import 'package:dio/dio.dart';
 void main() async {
   final dio = Dio();
 
-  final url = Uri.parse("http://45.245.146.33:8000/api/health");
+  final url = Uri.parse("http://45.245.140.75:8000/api/health");
 
     final queryParams = {};
 
@@ -16427,7 +16379,7 @@ access-control-allow-origin: *
 
 <code class="language-json" style="max-height: 300px;">{
     &quot;status&quot;: &quot;ok&quot;,
-    &quot;timestamp&quot;: &quot;2025-09-29T17:03:20.389315Z&quot;,
+    &quot;timestamp&quot;: &quot;2025-09-30T16:12:32.062421Z&quot;,
     &quot;version&quot;: &quot;1.0.0&quot;
 }</code>
  </pre>

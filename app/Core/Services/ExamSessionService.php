@@ -278,11 +278,11 @@ class ExamSessionService
 
             // Log session creation by teacher
             $this->logSessionEvent($session, 'session_created_by_teacher', [
-                'teacher_id' => $teacherId,
-                'exam_id' => $examId,
-                'student_id' => $studentId,
+                'teacher_id'    => $teacherId,
+                'exam_id'       => $examId,
+                'student_id'    => $studentId,
                 'creation_time' => Carbon::now(),
-                'device_info' => $sessionData['device_info'] ?? []
+                'device_info'   => $sessionData['device_info'] ?? []
             ]);
 
             return $session;
